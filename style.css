@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "Windows"; /* Choose any name for the font */
+  src: url("MS\ Sans\ Serif\ 8pt.ttf"); /* Replace with the path to your font file */
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: black;
+}
+
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0, 128, 131);
+}
+
+.bar-bottom {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.start-bar {
+  position: relative;
+  width: 100vw;
+  height: 35px;
+  background-color: rgb(192, 192, 192);
+  border-top: 3px solid rgb(217, 225, 219);
+}
+
+.start-button {
+  position: relative;
+  height: 27px;
+  width: 65px;
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  /* border-right: 2px solid rgb(20, 20, 20); */
+  /* border-bottom: 2px solid rgb(20, 20, 20);  */
+  left: 3px;
+  top: 2px;
+  cursor: pointer;
+  font-family: Windows;
+  text-shadow: 0.5px 0px black, 1.5px 0px black;
+  color: transparent;
+  letter-spacing: 1px;
+  background: url("./start_main.0.0.1455197556\ Background\ Removed.0.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
