@@ -1,7 +1,11 @@
+const recycleDiv = `<div class="active-program"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
+</div>`;
+
 const currentTimeText = document.querySelector(".current-time");
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
 const mainProgram = document.querySelector(".main-program");
+const activePrograms = document.querySelector(".active-programs");
 
 let now = new Date();
 let hours = now.getHours();
@@ -51,6 +55,7 @@ const shadowMinterDesk = document.querySelector(".shadow-minter");
 
 trashIconDesk.addEventListener("dblclick", () => {
   trashCanModals.classList.remove("hidden");
+  activePrograms.innerHTML += recycleDiv;
 });
 
 shadowMinterDesk.addEventListener("dblclick", () => {

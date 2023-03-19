@@ -70,6 +70,35 @@ body {
   user-select: none;
 }
 
+.active-programs {
+  position: absolute;
+  height: 100%;
+  min-width: 10rem;
+  left: 5rem;
+  background-color: green;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.active-program {
+  height: 85%;
+  top: 1px;
+  position: relative;
+  width: 180px;
+  border: 1px solid transparent;
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  background-color: white;
+  background: url("../img/Dotted.png");
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.2rem;
+  align-items: center;
+}
+
 .start-button {
   position: relative;
   height: 27px;
@@ -289,11 +318,21 @@ body {
 }
 
 .program-text {
+  color: black;
+  font-family: windows;
+  font-size: 12px;
+  font-weight: 300 !important;
+  user-select: none;
+  text-shadow: 0px 0px 1px black;
+}
+
+.program-row-text {
   color: white;
   font-family: windows;
   font-size: 12px;
   font-weight: 300 !important;
   user-select: none;
+  text-shadow: 0px 0px 1px black;
 }
 
 .trashcan-buttons {
