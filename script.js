@@ -1,6 +1,7 @@
 const currentTimeText = document.querySelector(".current-time");
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
+const barBottomBox = document.querySelector(".bar-bottom");
 
 let now = new Date();
 let hours = now.getHours();
@@ -24,4 +25,23 @@ console.log(timeInPMFormat); // Output: "3:30 PM" (assuming the current time is 
 startButton.addEventListener("click", () => {
   startMenuList.classList.toggle("hidden");
   startButton.classList.toggle("clicked");
+});
+
+barBottomBox.addEventListener("click", (e) => {
+  console.log(e.target);
+  const t = e.target.classList[0];
+  if (t === "start-button") return;
+  if (t === "start-img") return;
+  if (
+    t !== "nav-item-title" ||
+    t !== "nav-item" ||
+    t !== "u" ||
+    t !== "nav-icon" ||
+    t !== "fa-play" ||
+    t !== "start-img" ||
+    t !== "start-button"
+  ) {
+    startMenuList.classList.add("hidden");
+    startButton.classList.remove("clicked");
+  }
 });
