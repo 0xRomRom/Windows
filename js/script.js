@@ -1,28 +1,12 @@
+let currentPrograms = [];
+
 const recycleDiv = `<div class="active-program"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
 </div>`;
 
-const currentTimeText = document.querySelector(".current-time");
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
 const mainProgram = document.querySelector(".main-program");
 const activePrograms = document.querySelector(".active-programs");
-
-let now = new Date();
-let hours = now.getHours();
-let minutes = now.getMinutes();
-
-// Convert hours to 12-hour format
-let amOrPm = hours >= 12 ? "PM" : "AM";
-hours = hours % 12;
-hours = hours ? hours : 12; // Handle midnight (0 hours)
-
-// Add leading zero to minutes if necessary
-minutes = minutes < 10 ? "0" + minutes : minutes;
-
-// Format the time as a string in PM format
-let timeInPMFormat = hours + ":" + minutes + " " + amOrPm;
-
-currentTimeText.textContent = timeInPMFormat;
 
 //Toggle menu list
 startButton.addEventListener("click", () => {
@@ -52,12 +36,37 @@ mainProgram.addEventListener("click", (e) => {
 const trashCanModals = document.querySelector(".trash-can-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
 const shadowMinterDesk = document.querySelector(".shadow-minter");
+const closeTrashCan = document.querySelector(".clo-trash");
 
+const addActiveProgram = (divToAdd) => {
+  currentPrograms.push(divToAdd);
+  const currentState = currentPrograms.join("");
+  activePrograms.innerHTML = currentState;
+};
+
+const removeActiveProgram = (divToRemove) => {
+  const regex = new RegExp(divToRemove, "g");
+  const currentState = currentPrograms.join("");
+  currentState.replace(regex, "");
+  console.log(currentState);
+  activePrograms.innerHTML = "";
+  activePrograms.innerHTML = currentState;
+};
+
+// Open recycle bin modal
 trashIconDesk.addEventListener("dblclick", () => {
   trashCanModals.classList.remove("hidden");
-  activePrograms.innerHTML += recycleDiv;
+  addActiveProgram(recycleDiv);
 });
 
+// Close recycle bin modal
+closeTrashCan.addEventListener("click", () => {
+  trashCanModal.classList.add("hidden");
+  trashCanModal.classList.remove("enlarged");
+  removeActiveProgram(recycleDiv);
+});
+
+// Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
   alert("hi");
 });
