@@ -32,7 +32,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  border: 1px solid red;
 }
 
 .menu-list {
@@ -210,7 +209,7 @@ body {
 }
 
 .desktop-icon {
-  width: 4.8rem;
+  width: 7rem;
   height: 3rem;
   /* border: 1px solid red; */
   z-index: 30;
@@ -220,6 +219,7 @@ body {
   flex-direction: column;
   gap: 0.1rem;
   user-select: none;
+  text-align: center;
 }
 
 .trash-icon {
@@ -228,7 +228,7 @@ body {
   top: 5rem;
 }
 
-.trash-icon2 {
+.shadow-minter {
   position: absolute;
   left: 15rem;
   top: 15rem;
