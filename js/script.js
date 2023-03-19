@@ -1,7 +1,7 @@
 const currentTimeText = document.querySelector(".current-time");
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
-const barBottomBox = document.querySelector(".bar-bottom");
+const mainProgram = document.querySelector(".main-program");
 
 let now = new Date();
 let hours = now.getHours();
@@ -26,7 +26,7 @@ startButton.addEventListener("click", () => {
   startButton.classList.toggle("clicked");
 });
 
-barBottomBox.addEventListener("click", (e) => {
+mainProgram.addEventListener("click", (e) => {
   console.log(e.target);
   const t = e.target.classList[0];
   if (t === "start-button") return;
@@ -43,4 +43,16 @@ barBottomBox.addEventListener("click", (e) => {
     startMenuList.classList.add("hidden");
     startButton.classList.remove("clicked");
   }
+});
+
+const trashIconDesk = document.querySelector(".trash-icon");
+
+trashIconDesk.addEventListener("dblclick", () => {
+  alert("hi");
+});
+
+const shadowMinterDesk = document.querySelector(".shadow-minter");
+
+shadowMinterDesk.addEventListener("dblclick", () => {
+  alert("hi");
 });
