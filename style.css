@@ -10,6 +10,10 @@
   scroll-behavior: smooth;
 }
 
+.hidden {
+  display: none !important;
+}
+
 body {
   background-color: black;
 }
@@ -30,6 +34,28 @@ body {
   align-items: flex-end;
 }
 
+.menu-list {
+  position: absolute;
+  width: 165px;
+  height: 20rem;
+  background-color: rgb(195, 199, 203);
+  bottom: 34px;
+  left: 1px;
+  z-index: 10;
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(20, 20, 20);
+  border-bottom: 2px solid rgb(20, 20, 20);
+  user-select: none;
+}
+
+.win95-long {
+  position: absolute;
+  height: 100%;
+  width: 24px;
+  left: 1px;
+}
+
 .start-bar {
   position: relative;
   width: 100vw;
@@ -40,6 +66,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
+  user-select: none;
 }
 
 .start-button {
@@ -51,16 +78,32 @@ body {
   /* border-right: 2px solid rgb(20, 20, 20); */
   /* border-bottom: 2px solid rgb(20, 20, 20);  */
   left: 3px;
-  top: 2px;
+  top: 1px;
   cursor: pointer;
-  font-family: Windows;
   text-shadow: 0.5px 0px black, 1.5px 0px black;
-  color: transparent;
   letter-spacing: 1px;
-  background: url("./start_main.0.0.1455197556\ Background\ Removed.0.png");
+  /* background: url("./img/start_main.0.0.1455197556\ Background\ Removed.0.png"); */
   background-size: cover;
   background-repeat: no-repeat;
-  display: inline;
+  user-select: none;
+}
+
+.clicked {
+  border-top: 3px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(251, 250, 251);
+}
+
+.start-button:active {
+  border-top: 3px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(251, 250, 251);
+}
+
+.start-button:active .start-img {
+  width: 99%;
 }
 
 .time-box {
@@ -70,7 +113,6 @@ body {
   width: 100px;
   height: 29px;
   background-color: transparent;
-  display: inline;
   border: 1px solid black;
   border-top: 2px solid rgb(145, 145, 145);
   border-left: 2px solid rgb(145, 145, 145);
@@ -94,4 +136,8 @@ body {
   margin-right: 15px;
   /* text-shadow: 0.5px 0px black, 1.5px 0px black; */
   font-size: 13px;
+}
+
+.start-img {
+  width: 100%;
 }

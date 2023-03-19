@@ -1,4 +1,6 @@
 const currentTimeText = document.querySelector(".current-time");
+const startButton = document.querySelector(".start-button");
+const startMenuList = document.querySelector(".menu-list");
 
 let now = new Date();
 let hours = now.getHours();
@@ -17,3 +19,9 @@ let timeInPMFormat = hours + ":" + minutes + " " + amOrPm;
 
 currentTimeText.textContent = timeInPMFormat;
 console.log(timeInPMFormat); // Output: "3:30 PM" (assuming the current time is 3:30 PM)
+
+//Toggle menu list
+startButton.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  startButton.classList.toggle("clicked");
+});
