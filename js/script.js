@@ -45,13 +45,13 @@ mainProgram.addEventListener("click", (e) => {
   }
 });
 
+const trashCanModals = document.querySelector(".trash-can-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
+const shadowMinterDesk = document.querySelector(".shadow-minter");
 
 trashIconDesk.addEventListener("dblclick", () => {
-  alert("hi");
+  trashCanModals.classList.remove("hidden");
 });
-
-const shadowMinterDesk = document.querySelector(".shadow-minter");
 
 shadowMinterDesk.addEventListener("dblclick", () => {
   alert("hi");

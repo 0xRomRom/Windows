@@ -8,6 +8,7 @@
     <link href="./css/style.css" rel="stylesheet" />
     <script defer src="./js/script.js"></script>
     <script defer src="./js/dragIcons.js"></script>
+    <script defer src="./js/modalCtaButtons.js"></script>
     <script
       src="https://kit.fontawesome.com/5f3c108898.js"
       crossorigin="anonymous"
@@ -97,18 +98,21 @@
         </div>
       </div>
       <div class="center-modals">
-        <div class="trash-can-modal">
+        <div class="trash-can-modal hidden">
           <div class="program-row">
-            <img
-              src="./img/Recycle Bin.png"
-              alt="recycle bin"
-              class="mini-logo"
-            />
-            <span class="program-text">Recycle Bin</span>
+            <div class="left-block">
+              <img
+                src="./img/Recycle Bin.png"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-text">Recycle Bin</span>
+            </div>
+
             <div class="trashcan-buttons">
-              <button class="minimize"></button>
-              <button class="enlarge"></button>
-              <button class="close"></button>
+              <button class="minimize min-trash"></button>
+              <button class="enlarge enl-trash"></button>
+              <button class="close clo-trash"></button>
             </div>
           </div>
         </div>
