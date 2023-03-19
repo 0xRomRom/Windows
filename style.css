@@ -36,6 +36,10 @@ body {
   height: 35px;
   background-color: rgb(192, 192, 192);
   border-top: 3px solid rgb(217, 225, 219);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: row;
 }
 
 .start-button {
@@ -56,4 +60,38 @@ body {
   background: url("./start_main.0.0.1455197556\ Background\ Removed.0.png");
   background-size: cover;
   background-repeat: no-repeat;
+  display: inline;
+}
+
+.time-box {
+  position: relative;
+  margin-right: 3px;
+  top: 0px;
+  width: 100px;
+  height: 29px;
+  background-color: transparent;
+  display: inline;
+  border: 1px solid black;
+  border-top: 2px solid rgb(145, 145, 145);
+  border-left: 2px solid rgb(145, 145, 145);
+  border-bottom: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(251, 250, 251);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.config-logo {
+  position: relative;
+  width: 22px;
+  left: 3px;
+  top: -1px;
+}
+
+.current-time {
+  font-family: Windows;
+  margin-right: 15px;
+  /* text-shadow: 0.5px 0px black, 1.5px 0px black; */
+  font-size: 13px;
 }
