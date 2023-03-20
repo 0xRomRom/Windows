@@ -236,17 +236,21 @@ body {
 }
 
 .desktop-icon {
-  width: 7rem;
-  height: 3rem;
+  width: 6.2rem;
+  height: 3.8rem;
   /* border: 1px solid red; */
   z-index: 30;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 0.1rem;
+  gap: 0.2rem;
   user-select: none;
   text-align: center;
+}
+
+.desktop-icon:active {
+  border: 1px dotted blue;
 }
 
 .trash-icon {

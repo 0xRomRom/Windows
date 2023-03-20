@@ -1,18 +1,25 @@
 const currentTimeText = document.querySelector(".current-time");
 
-let now = new Date();
-let hours = now.getHours();
-let minutes = now.getMinutes();
+setInterval(() => {
+  calculateTime();
+}, 60000);
 
-// Convert hours to 12-hour format
-let amOrPm = hours >= 12 ? "PM" : "AM";
-hours = hours % 12;
-hours = hours ? hours : 12; // Handle midnight (0 hours)
+const calculateTime = () => {
+  let now = new Date();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
 
-// Add leading zero to minutes if necessary
-minutes = minutes < 10 ? "0" + minutes : minutes;
+  // Convert hours to 12-hour format
+  let amOrPm = hours >= 12 ? "PM" : "AM";
+  hours = hours % 12;
+  hours = hours ? hours : 12; // Handle midnight (0 hours)
 
-// Format the time as a string in PM format
-let timeInPMFormat = hours + ":" + minutes + " " + amOrPm;
+  // Add leading zero to minutes if necessary
+  minutes = minutes < 10 ? "0" + minutes : minutes;
 
-currentTimeText.textContent = timeInPMFormat;
+  // Format the time as a string in PM format
+  let timeInPMFormat = hours + ":" + minutes + " " + amOrPm;
+
+  currentTimeText.textContent = timeInPMFormat;
+};
+calculateTime();
