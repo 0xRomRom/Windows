@@ -18,7 +18,20 @@ enlargeTrashCan.addEventListener("click", () => {
 minimizeTrashCan.addEventListener("click", () => {
   const activeBin = document.querySelector(".act-bin");
   trashCanModal.classList.add("hidden");
-  console.log(activeBin);
   activeBin.classList.remove("maximized");
   activeBin.classList.add("minimized");
+});
+
+const parent = document.querySelector(".active-programs");
+parent.addEventListener("click", (event) => {
+  // Trashcan event
+  if (
+    (event.target && event.target.matches(".minimized")) ||
+    event.target.matches(".program-text")
+  ) {
+    const activeBin = document.querySelector(".act-bin");
+    trashCanModal.classList.remove("hidden");
+    activeBin.classList.add("maximized");
+    activeBin.classList.remove("minimized");
+  }
 });

@@ -15,7 +15,6 @@ startButton.addEventListener("click", () => {
 });
 
 mainProgram.addEventListener("click", (e) => {
-  console.log(e.target);
   const t = e.target.classList[0];
   if (t === "start-button") return;
   if (t === "start-img") return;
