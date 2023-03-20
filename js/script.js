@@ -1,4 +1,4 @@
-let currentPrograms = [];
+let currentPrograms = "";
 
 const recycleDiv = `<div class="active-program"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
 </div>`;
@@ -39,18 +39,18 @@ const shadowMinterDesk = document.querySelector(".shadow-minter");
 const closeTrashCan = document.querySelector(".clo-trash");
 
 const addActiveProgram = (divToAdd) => {
-  currentPrograms.push(divToAdd);
-  const currentState = currentPrograms.join("");
-  activePrograms.innerHTML = currentState;
+  let addedProgram = currentPrograms + divToAdd;
+  updateDom(addedProgram);
 };
 
 const removeActiveProgram = (divToRemove) => {
   const regex = new RegExp(divToRemove, "g");
-  const currentState = currentPrograms.join("");
-  currentState.replace(regex, "");
-  console.log(currentState);
-  activePrograms.innerHTML = "";
-  activePrograms.innerHTML = currentState;
+  const result = currentPrograms.replace(regex, "");
+  updateDom(result);
+};
+
+const updateDom = (program) => {
+  activePrograms.innerHTML = program;
 };
 
 // Open recycle bin modal
