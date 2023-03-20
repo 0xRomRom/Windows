@@ -3,6 +3,7 @@ const trashCanModal = document.querySelector(".trash-can-modal");
 const enlargeTrashCan = document.querySelector(".enl-trash");
 const minimizeTrashCan = document.querySelector(".min-trash");
 
+// Enlarge square button
 let trashCanEnlarged = false;
 
 enlargeTrashCan.addEventListener("click", () => {
@@ -15,6 +16,7 @@ enlargeTrashCan.addEventListener("click", () => {
   trashCanEnlarged = false;
 });
 
+// Minimize min button
 minimizeTrashCan.addEventListener("click", () => {
   const activeBin = document.querySelector(".act-bin");
   trashCanModal.classList.add("hidden");
@@ -22,6 +24,7 @@ minimizeTrashCan.addEventListener("click", () => {
   activeBin.classList.add("minimized");
 });
 
+// Enlarge from task bar handler
 const parent = document.querySelector(".active-programs");
 parent.addEventListener("click", (event) => {
   // Trashcan event

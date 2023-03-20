@@ -60,8 +60,8 @@ trashIconDesk.addEventListener("dblclick", () => {
 
 // Close recycle bin modal
 closeTrashCan.addEventListener("click", () => {
-  trashCanModal.classList.add("hidden");
-  trashCanModal.classList.remove("enlarged");
+  trashCanModals.classList.add("hidden");
+  trashCanModals.classList.remove("enlarged");
   removeActiveProgram(recycleDiv);
 });
 

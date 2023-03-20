@@ -319,6 +319,37 @@ body {
   user-select: none;
 }
 
+.settings-row {
+  position: relative;
+  width: 100%;
+  height: 19px;
+  border-bottom: 1px solid white;
+  font-family: Windows;
+  font-size: 13px;
+  padding-top: 1px;
+  padding-left: 1px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1px;
+}
+
+.setrow {
+  position: relative;
+  width: 31px;
+  height: 17px;
+  padding: 0.1rem;
+  padding-top: 0.2rem;
+  display: inline-block;
+  text-align: center;
+}
+
+.setrow:hover {
+  background-color: rgb(0, 0, 170);
+  color: white;
+  user-select: none;
+}
+
 .program-text {
   color: black;
   font-family: windows;
