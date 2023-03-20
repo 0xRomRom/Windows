@@ -1,6 +1,6 @@
 let currentPrograms = "";
 
-const recycleDiv = `<div class="active-program"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
+const recycleDiv = `<div class="active-program act-bin maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
 </div>`;
 
 const startButton = document.querySelector(".start-button");

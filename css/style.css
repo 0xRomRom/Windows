@@ -91,7 +91,7 @@ body {
   border-top: 2px solid black;
   border-left: 2px solid black;
   background-color: white;
-  background: url("../img/Dotted.png");
+
   background-size: cover;
   display: flex;
   justify-content: flex-start;
@@ -388,4 +388,13 @@ body {
 .enlarged {
   width: 100vw;
   height: 100vh;
+}
+
+.maximized {
+  background: url("../img/Dotted.png");
+}
+
+.minimized {
+  background-color: rgb(232, 0, 0) !important;
+  z-index: 200 !;
 }
