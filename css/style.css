@@ -468,12 +468,29 @@ body {
  background-color: white;
 }
 
+.recycle-info-row {
+  position: relative;
+  width: 99%;
+  left: 0.5%;
+  height: 20px;
+  /* background-color: cyan; */
+  display: flex;
+  gap: 5px;
+}
 
-
-/* 
+.rec-left {
+  position: relative;
+  top: 1px;
+  height: 99%;
+  width: 50%;
   border-top: 1px solid black;
   border-left: 1px solid black;
   border-right: 1px solid rgb(217, 225, 219);
   border-bottom: 1px solid rgb(217, 225, 219);
-  background-color: white;
-  */
+}
+
+.rec-right {
+  height: 100%;
+  width: 50%;
+  background-color: green;
+}
