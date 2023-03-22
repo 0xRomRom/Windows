@@ -32,13 +32,13 @@ mainProgram.addEventListener("click", (e) => {
   }
 });
 
-const trashCanModals = document.querySelector(".trash-can-modal");
+const trashCanModals = document.querySelector(".recycle-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
 const shadowMinterDesk = document.querySelector(".shadow-minter");
 const closeTrashCan = document.querySelector(".clo-trash");
 
 const addActiveProgram = (divToAdd) => {
-  let addedProgram = currentPrograms + divToAdd;
+  const addedProgram = currentPrograms + divToAdd;
   updateDom(addedProgram);
 };
 

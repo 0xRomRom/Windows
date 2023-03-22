@@ -281,7 +281,7 @@ body {
   color: white;
 }
 
-.trash-can-modal {
+.recycle-modal {
   position: absolute;
   width: 410px;
   height: 260px;
@@ -310,8 +310,10 @@ body {
 
 .program-row {
   position: relative;
-  width: 100%;
-  height: 19px;
+  width: 99%;
+  left: 0.5%;
+  top: 2px;
+  height: 18px;
   background-color: rgb(0, 0, 170);
   display: flex;
   justify-content: space-between;
@@ -322,12 +324,11 @@ body {
 .settings-row {
   position: relative;
   width: 100%;
-  height: 19px;
-  border-bottom: 1px solid white;
+  height: 23px;
   font-family: Windows;
   font-size: 13px;
   padding-top: 1px;
-  padding-left: 1px;
+  padding-left: 2px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -336,12 +337,16 @@ body {
 
 .setrow {
   position: relative;
-  width: 31px;
-  height: 17px;
+  width: 33px;
+  height: 100%;
+  margin-top: 4px;
   padding: 0.1rem;
-  padding-top: 0.2rem;
+  margin-bottom: 2px;
   display: inline-block;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .setrow:hover {
@@ -436,3 +441,39 @@ body {
   border-bottom: 1px solid black;
   cursor: pointer;
 }
+
+
+.recycle-inner-box {
+  position: relative;
+  width: 99%;
+  left: 0.5%;
+  height: 99%;
+}
+
+.recycle-wrapper {
+  position: relative;
+  width: 100%;
+  height: calc(100% -  20px);
+}
+
+.recycle-inner {
+ position: relative;
+ width: 99%;
+ left: 0.5%;
+ min-height: calc(100% -  42px);
+ border-top: 1px solid black;
+ border-left: 1px solid black;
+ border-right: 1px solid rgb(217, 225, 219);
+ border-bottom: 1px solid rgb(217, 225, 219);
+ background-color: white;
+}
+
+
+
+/* 
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid rgb(217, 225, 219);
+  border-bottom: 1px solid rgb(217, 225, 219);
+  background-color: white;
+  */

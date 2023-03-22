@@ -1,4 +1,4 @@
-const trashCanModal = document.querySelector(".trash-can-modal");
+const trashCanModal = document.querySelector(".recycle-modal");
 
 const enlargeTrashCan = document.querySelector(".enl-trash");
 const minimizeTrashCan = document.querySelector(".min-trash");
