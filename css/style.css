@@ -460,7 +460,7 @@ body {
  position: relative;
  width: 99%;
  left: 0.5%;
- min-height: calc(100% -  42px);
+ min-height: calc(100% -  45px);
  border-top: 1px solid black;
  border-left: 1px solid black;
  border-right: 1px solid rgb(217, 225, 219);
@@ -480,11 +480,11 @@ body {
 
 .rec-left {
   position: relative;
-  top: 1px;
-  height: 99%;
+  top: 3px;
+  height: 17px;
   width: 50%;
-  border-top: 1px solid black;
-  border-left: 1px solid black;
+  border-top: 1px solid rgb(23, 22, 22);
+  border-left: 1px solid rgb(23, 22, 22);
   border-right: 1px solid rgb(217, 225, 219);
   border-bottom: 1px solid rgb(217, 225, 219);
 }
