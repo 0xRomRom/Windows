@@ -323,12 +323,13 @@ body {
 
 .settings-row {
   position: relative;
-  width: 100%;
+  width: 99%;
+  left: 0.5%;
   height: 23px;
   font-family: Windows;
   font-size: 13px;
   padding-top: 1px;
-  padding-left: 2px;
+  padding-left: px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -468,6 +469,13 @@ body {
  background-color: white;
 }
 
+.recycle-meta-info {
+  height: 18px;
+  width: 100%;
+  /* border-bottom: 1px solid black; */
+  display: flex;
+}
+
 .recycle-info-row {
   position: relative;
   width: 99%;
@@ -475,22 +483,74 @@ body {
   height: 20px;
   /* background-color: cyan; */
   display: flex;
-  gap: 5px;
+  gap: 2px;
 }
 
 .rec-left {
   position: relative;
   top: 3px;
   height: 17px;
-  width: 50%;
-  border-top: 1px solid rgb(23, 22, 22);
-  border-left: 1px solid rgb(23, 22, 22);
+  width: 40%;
+  border-top: 1px solid rgb(112, 105, 105);
+  border-left: 1px solid rgb(112, 105, 105);
   border-right: 1px solid rgb(217, 225, 219);
   border-bottom: 1px solid rgb(217, 225, 219);
 }
 
 .rec-right {
-  height: 100%;
-  width: 50%;
-  background-color: green;
+  position: relative;
+  top: 3px;
+  height: 17px;
+  width: 60%;
+  border-top: 1px solid rgb(112, 105, 105);
+  border-left: 1px solid rgb(112, 105, 105);
+  border-right: 1px solid rgb(217, 225, 219);
+  border-bottom: 1px solid rgb(217, 225, 219);
+}
+
+.objects-info {
+  position: relative;
+  font-family: Windows;
+  font-size: 11px;
+  bottom: 2px;
+  left: 4px;
+}
+
+.bytes-info {
+  position: relative;
+  font-family: Windows;
+  font-size: 11px;
+  bottom: 2px;
+  left: 4px;
+}
+
+.name-block {
+   position: relative;
+   height: 100%;
+   width: 35%;
+   background-color: rgb(192, 192, 192);
+   border-top: 1px solid rgb(255, 255, 255);
+   border-left: 1px solid rgb(255, 255, 255);
+   border-right: 1px solid black;
+   border-bottom: 1px solid black;
+}
+
+.location-block {
+   position: relative;
+   height: 100%;
+   width: 35%;
+   background-color: rgb(192, 192, 192);
+   border-top: 1px solid rgb(255, 255, 255);
+   border-left: 1px solid rgb(255, 255, 255);
+   border-right: 1px solid black;
+   border-bottom: 1px solid black;
+}
+
+.meta-text {
+  font-family: Windows;
+  font-size: 11px;
+  position: relative;
+  left: 5px;
+  bottom: 2px;
+  user-select: none;
 }
