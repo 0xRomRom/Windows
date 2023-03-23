@@ -2,7 +2,7 @@ const currentTimeText = document.querySelector(".current-time");
 
 setInterval(() => {
   calculateTime();
-}, 60000);
+}, 3000);
 
 const calculateTime = () => {
   let now = new Date();
