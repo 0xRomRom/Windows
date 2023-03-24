@@ -93,6 +93,9 @@ programsDropMenu.addEventListener('mouseover', () => {
 });
 programsHover.addEventListener('mouseover', () => {
   programsDropMenu.classList.remove('hidden');
+  documentsDropMenu.classList.add('hidden');
+  mintInfoMenu.classList.add('hidden');
+  socialsMenu.classList.add('hidden');
 });
 
 programsHover.addEventListener('mouseleave', () => {
@@ -107,6 +110,9 @@ documentsDropMenu.addEventListener('mouseover', () => {
 
 documentsHover.addEventListener('mouseover', () => {
   documentsDropMenu.classList.remove('hidden');
+  programsDropMenu.classList.add('hidden');
+  mintInfoMenu.classList.add('hidden');
+  socialsMenu.classList.add('hidden');
 });
 
 documentsHover.addEventListener('mouseleave', () => {
@@ -121,6 +127,9 @@ mintInfoMenu.addEventListener('mouseover', () => {
 
 mintInfoHover.addEventListener('mouseover', () => {
   mintInfoMenu.classList.remove('hidden');
+  programsDropMenu.classList.add('hidden');
+  documentsDropMenu.classList.add('hidden');
+  socialsMenu.classList.add('hidden');
 });
 
 mintInfoHover.addEventListener('mouseleave', () => {
@@ -135,6 +144,9 @@ socialsMenu.addEventListener('mouseover', () => {
 
 socialsHover.addEventListener('mouseover', () => {
   socialsMenu.classList.remove('hidden');
+  mintInfoMenu.classList.add('hidden');
+  documentsDropMenu.classList.add('hidden');
+  programsDropMenu.classList.add('hidden');
 });
 
 socialsHover.addEventListener('mouseleave', () => {
