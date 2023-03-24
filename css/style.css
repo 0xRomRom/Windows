@@ -292,6 +292,17 @@ body {
   border-left: 1px solid rgb(240, 240, 240);
 }
 
+.shadow-minter-modal {
+  position: absolute;
+  width: 410px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
 .center-modals {
   position: absolute;
   width: 100vw;
@@ -618,3 +629,5 @@ body {
   user-select: none;
   z-index: 50 !important;
 }
+
+

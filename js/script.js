@@ -38,8 +38,11 @@ mainProgram.addEventListener("click", (e) => {
 
 const trashCanModals = document.querySelector(".recycle-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
-const shadowMinterDesk = document.querySelector(".shadow-minter");
 const closeTrashCan = document.querySelector(".clo-trash");
+
+const shadowMinterModal = document.querySelector(".shadow-minter-modal");
+const shadowMinterDesk = document.querySelector(".shadow-minter");
+const closeShadowMinter = document.querySelector(".clo-shadow");
 
 const addActiveProgram = (divToAdd) => {
   const addedProgram = currentPrograms + divToAdd;
@@ -71,7 +74,12 @@ closeTrashCan.addEventListener("click", () => {
 
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
-  alert("hi");
+  shadowMinterModal.classList.remove('hidden');
+});
+
+closeShadowMinter.addEventListener('click', () => {
+  shadowMinterModal.classList.add('hidden');
+  shadowMinterModal.classList.remove('enlarged');
 });
 
 
