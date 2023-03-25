@@ -60,10 +60,14 @@ const removeActiveProgram = (divToRemove) => {
   activePrograms.innerHTML = result;
 };
 
+let binActive = false;
+
 // Open recycle bin modal
 trashIconDesk.addEventListener("dblclick", () => {
   trashCanModals.classList.remove("hidden");
-  addActiveProgram(recycleDiv);
+  if (!binActive) {
+    addActiveProgram(recycleDiv);
+  }
 });
 
 // Close recycle bin modal
@@ -71,18 +75,24 @@ closeTrashCan.addEventListener("click", () => {
   trashCanModals.classList.add("hidden");
   trashCanModals.classList.remove("enlarged");
   removeActiveProgram(recycleDiv);
+  binActive = false;
 });
+
+let shadowActive = false;
 
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
   shadowMinterModal.classList.remove("hidden");
-  addActiveProgram(shadowDiv);
+  if (!shadowActive) {
+    addActiveProgram(shadowDiv);
+  }
 });
 
 closeShadowMinter.addEventListener("click", () => {
   shadowMinterModal.classList.add("hidden");
   shadowMinterModal.classList.remove("enlarged");
   removeActiveProgram(shadowDiv);
+  shadowActive = false;
 });
 
 // Hover to display programs
