@@ -3,6 +3,9 @@ let currentPrograms = "";
 const recycleDiv = `<div class="active-program act-bin maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
 </div>`;
 
+const shadowDiv = `<div class="active-program act-shadow maximized"><img src="./img/Shadow Minter.png" alt="shadow minter" class="mini-logo"/><span class="program-text">Shadow Minter v.032</span>
+</div>`;
+
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
 const mainProgram = document.querySelector(".main-program");
@@ -29,10 +32,10 @@ mainProgram.addEventListener("click", (e) => {
   ) {
     startMenuList.classList.add("hidden");
     startButton.classList.remove("clicked");
-    programsDropMenu.classList.add('hidden');
-    documentsDropMenu.classList.add('hidden');
-    mintInfoMenu.classList.add('hidden');
-    socialsMenu.classList.add('hidden');
+    programsDropMenu.classList.add("hidden");
+    documentsDropMenu.classList.add("hidden");
+    mintInfoMenu.classList.add("hidden");
+    socialsMenu.classList.add("hidden");
   }
 });
 
@@ -46,17 +49,15 @@ const closeShadowMinter = document.querySelector(".clo-shadow");
 
 const addActiveProgram = (divToAdd) => {
   const addedProgram = currentPrograms + divToAdd;
-  updateDom(addedProgram);
+  currentPrograms = addedProgram;
+  activePrograms.innerHTML = addedProgram;
 };
 
 const removeActiveProgram = (divToRemove) => {
   const regex = new RegExp(divToRemove, "g");
   const result = currentPrograms.replace(regex, "");
-  updateDom(result);
-};
-
-const updateDom = (program) => {
-  activePrograms.innerHTML = program;
+  currentPrograms = result;
+  activePrograms.innerHTML = result;
 };
 
 // Open recycle bin modal
@@ -74,89 +75,90 @@ closeTrashCan.addEventListener("click", () => {
 
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
-  shadowMinterModal.classList.remove('hidden');
+  shadowMinterModal.classList.remove("hidden");
+  addActiveProgram(shadowDiv);
 });
 
-closeShadowMinter.addEventListener('click', () => {
-  shadowMinterModal.classList.add('hidden');
-  shadowMinterModal.classList.remove('enlarged');
+closeShadowMinter.addEventListener("click", () => {
+  shadowMinterModal.classList.add("hidden");
+  shadowMinterModal.classList.remove("enlarged");
+  removeActiveProgram(shadowDiv);
 });
-
 
 // Hover to display programs
 
-const programsHover = document.querySelector('.d1');
-const documentsHover = document.querySelector('.d2');
-const mintInfoHover = document.querySelector('.d3');
-const socialsHover = document.querySelector('.d4');
+const programsHover = document.querySelector(".d1");
+const documentsHover = document.querySelector(".d2");
+const mintInfoHover = document.querySelector(".d3");
+const socialsHover = document.querySelector(".d4");
 
-const programsDropMenu = document.querySelector('.drop-1');
-const documentsDropMenu = document.querySelector('.drop-2');
-const mintInfoMenu = document.querySelector('.drop-3');
-const socialsMenu = document.querySelector('.drop-4');
+const programsDropMenu = document.querySelector(".drop-1");
+const documentsDropMenu = document.querySelector(".drop-2");
+const mintInfoMenu = document.querySelector(".drop-3");
+const socialsMenu = document.querySelector(".drop-4");
 
 // #1
-programsDropMenu.addEventListener('mouseover', () => {
-  programsDropMenu.classList.remove('hidden');
+programsDropMenu.addEventListener("mouseover", () => {
+  programsDropMenu.classList.remove("hidden");
 });
-programsHover.addEventListener('mouseover', () => {
-  programsDropMenu.classList.remove('hidden');
-  documentsDropMenu.classList.add('hidden');
-  mintInfoMenu.classList.add('hidden');
-  socialsMenu.classList.add('hidden');
+programsHover.addEventListener("mouseover", () => {
+  programsDropMenu.classList.remove("hidden");
+  documentsDropMenu.classList.add("hidden");
+  mintInfoMenu.classList.add("hidden");
+  socialsMenu.classList.add("hidden");
 });
 
-programsHover.addEventListener('mouseleave', () => {
-  programsDropMenu.classList.add('hidden');
+programsHover.addEventListener("mouseleave", () => {
+  programsDropMenu.classList.add("hidden");
 });
 
 // #2
 
-documentsDropMenu.addEventListener('mouseover', () => {
-  documentsDropMenu.classList.remove('hidden');
+documentsDropMenu.addEventListener("mouseover", () => {
+  documentsDropMenu.classList.remove("hidden");
 });
 
-documentsHover.addEventListener('mouseover', () => {
-  documentsDropMenu.classList.remove('hidden');
-  programsDropMenu.classList.add('hidden');
-  mintInfoMenu.classList.add('hidden');
-  socialsMenu.classList.add('hidden');
+documentsHover.addEventListener("mouseover", () => {
+  documentsDropMenu.classList.remove("hidden");
+  programsDropMenu.classList.add("hidden");
+  mintInfoMenu.classList.add("hidden");
+  socialsMenu.classList.add("hidden");
 });
 
-documentsHover.addEventListener('mouseleave', () => {
-  documentsDropMenu.classList.add('hidden');
+documentsHover.addEventListener("mouseleave", () => {
+  documentsDropMenu.classList.add("hidden");
 });
 
 // #3
 
-mintInfoMenu.addEventListener('mouseover', () => {
-  mintInfoMenu.classList.remove('hidden');
+mintInfoMenu.addEventListener("mouseover", () => {
+  mintInfoMenu.classList.remove("hidden");
 });
 
-mintInfoHover.addEventListener('mouseover', () => {
-  mintInfoMenu.classList.remove('hidden');
-  programsDropMenu.classList.add('hidden');
-  documentsDropMenu.classList.add('hidden');
-  socialsMenu.classList.add('hidden');
+mintInfoHover.addEventListener("mouseover", () => {
+  mintInfoMenu.classList.remove("hidden");
+  programsDropMenu.classList.add("hidden");
+  documentsDropMenu.classList.add("hidden");
+  socialsMenu.classList.add("hidden");
 });
 
-mintInfoHover.addEventListener('mouseleave', () => {
-  mintInfoMenu.classList.add('hidden');
+mintInfoHover.addEventListener("mouseleave", () => {
+  mintInfoMenu.classList.add("hidden");
 });
 
 // #4
 
-socialsMenu.addEventListener('mouseover', () => {
-  socialsMenu.classList.remove('hidden');
+socialsMenu.addEventListener("mouseover", () => {
+  socialsMenu.classList.remove("hidden");
 });
 
-socialsHover.addEventListener('mouseover', () => {
-  socialsMenu.classList.remove('hidden');
-  mintInfoMenu.classList.add('hidden');
-  documentsDropMenu.classList.add('hidden');
-  programsDropMenu.classList.add('hidden');
+socialsHover.addEventListener("mouseover", () => {
+  socialsMenu.classList.remove("hidden");
+  mintInfoMenu.classList.add("hidden");
+  documentsDropMenu.classList.add("hidden");
+  programsDropMenu.classList.add("hidden");
 });
 
-socialsHover.addEventListener('mouseleave', () => {
-  socialsMenu.classList.add('hidden');
+socialsHover.addEventListener("mouseleave", () => {
+  socialsMenu.classList.add("hidden");
 });
