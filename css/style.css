@@ -628,3 +628,52 @@ body {
   user-select: none;
   z-index: 50 !important;
 }
+
+/* Terminal */
+
+.terminal {
+  position: relative;
+  width: 99%;
+  left: 0.5;
+  height: 99%;
+  top: 3px;
+  background-color: black;
+  color: white;
+  font-family: monospace;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.terminal-body {
+  height: calc(100% - 20px);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.terminal-prompt {
+  display: flex;
+}
+
+.terminal-prompt-user {
+  color: #32cd32;
+}
+
+.terminal-prompt-path {
+  color: #ff6347;
+}
+
+.terminal-input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 14px;
+}
+
+.terminal-output {
+  margin-top: 10px;
+  overflow-y: auto;
+  height: calc(100% - 20px - 25px);
+}
