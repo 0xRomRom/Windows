@@ -1,9 +1,12 @@
 let currentPrograms = "";
 
-const recycleDiv = `<div class="active-program act-bin maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo"/><span class="program-text">Recycle Bin</span>
+const recycleDiv = `<div class="act-bin active-program maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo"/><span class="act-bin program-text">Recycle Bin</span>
 </div>`;
 
-const shadowDiv = `<div class="active-program act-shadow maximized"><img src="./img/Shadow Minter.png" alt="shadow minter" class="mini-logo"/><span class="program-text">Shadow Minter v.032</span>
+const shadowDiv = `<div class="act-shadow active-program maximized"><img src="./img/Shadow Minter.png" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Shadow Minter v.032</span>
+</div>`;
+
+const terminalDiv = `<div class="act-terminal active-program maximized"><img src="./img/Terminal.jpg" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Terminal</span>
 </div>`;
 
 const startButton = document.querySelector(".start-button");
@@ -47,9 +50,15 @@ const shadowMinterModal = document.querySelector(".shadow-minter-modal");
 const shadowMinterDesk = document.querySelector(".shadow-minter");
 const closeShadowMinter = document.querySelector(".clo-shadow");
 
+const terminalModals = document.querySelector(".terminal-modal");
+const terminalDesk = document.querySelector(".desk-terminal");
+const closeTerminal = document.querySelector(".clo-shadow");
+
 const addActiveProgram = (divToAdd) => {
-  const addedProgram = currentPrograms + divToAdd;
+  const innerPrograms = activePrograms.innerHTML;
+  const addedProgram = innerPrograms + divToAdd;
   currentPrograms = addedProgram;
+  activePrograms.innerHTML = "";
   activePrograms.innerHTML = addedProgram;
 };
 
@@ -57,6 +66,7 @@ const removeActiveProgram = (divToRemove) => {
   const regex = new RegExp(divToRemove, "g");
   const result = currentPrograms.replace(regex, "");
   currentPrograms = result;
+  activePrograms.innerHTML = "";
   activePrograms.innerHTML = result;
 };
 
@@ -64,9 +74,10 @@ let binActive = false;
 
 // Open recycle bin modal
 trashIconDesk.addEventListener("dblclick", () => {
-  trashCanModals.classList.remove("hidden");
   if (!binActive) {
+    trashCanModals.classList.remove("hidden");
     addActiveProgram(recycleDiv);
+    binActive = true;
   }
 });
 
@@ -82,9 +93,10 @@ let shadowActive = false;
 
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
-  shadowMinterModal.classList.remove("hidden");
   if (!shadowActive) {
+    shadowMinterModal.classList.remove("hidden");
     addActiveProgram(shadowDiv);
+    shadowActive = true;
   }
 });
 
@@ -93,6 +105,24 @@ closeShadowMinter.addEventListener("click", () => {
   shadowMinterModal.classList.remove("enlarged");
   removeActiveProgram(shadowDiv);
   shadowActive = false;
+});
+
+let terminalActive = false;
+
+// Open terminal modal
+terminalDesk.addEventListener("dblclick", () => {
+  if (!terminalActive) {
+    terminalModals.classList.remove("hidden");
+    addActiveProgram(terminalDiv);
+    terminalActive = true;
+  }
+});
+
+closeTerminal.addEventListener("click", () => {
+  terminalModals.classList.add("hidden");
+  terminalModals.classList.remove("enlarged");
+  removeActiveProgram(terminalDiv);
+  terminalActive = false;
 });
 
 // Hover to display programs

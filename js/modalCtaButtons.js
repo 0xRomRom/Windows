@@ -6,8 +6,13 @@ const shadowMintModal = document.querySelector(".shadow-minter-modal");
 const enlargeShadowMinter = document.querySelector(".enl-shadow");
 const minimizeShadowMinter = document.querySelector(".min-shadow");
 
+const terminalModal = document.querySelector(".terminal-modal");
+const enlargeTerminal = document.querySelector(".enl-terminal");
+const minimizeTerminal = document.querySelector(".min-terminal");
+
 let trashCanEnlarged = false;
 let shadowMinterEnlarged = false;
+let terminalEnlarged = false;
 
 // Recycle Modal \\
 
@@ -34,14 +39,22 @@ minimizeTrashCan.addEventListener("click", () => {
 const parent = document.querySelector(".active-programs");
 parent.addEventListener("click", (event) => {
   // Trashcan event
-  if (
-    (event.target && event.target.matches(".minimized")) ||
-    event.target.matches(".program-text")
-  ) {
+  console.log(event)
+  if (event.target.classList[0] === "act-bin")
+   {
     const activeBin = document.querySelector(".act-bin");
-    trashCanModal.classList.remove("hidden");
     activeBin.classList.add("maximized");
     activeBin.classList.remove("minimized");
+    trashCanModal.classList.remove("hidden");
+  }
+
+  // Shadow Minter event
+  if (event.target.classList[0] === "act-shadow")
+   {
+    const activeShadows = document.querySelector(".act-shadow");
+    activeShadows.classList.add("maximized");
+    activeShadows.classList.remove("minimized");
+    shadowMinterModal.classList.remove("hidden");
   }
 });
 
@@ -56,4 +69,33 @@ enlargeShadowMinter.addEventListener("click", () => {
   }
   shadowMintModal.classList.remove("enlarged");
   shadowMinterEnlarged = false;
+});
+
+// Minimize min button
+minimizeShadowMinter.addEventListener("click", () => {
+  const activeShadow = document.querySelector(".act-shadow");
+  shadowMintModal.classList.add("hidden");
+  activeShadow.classList.add("minimized");
+  activeShadow.classList.remove("maximized");
+});
+
+// Terminal Modal \\
+
+// Enlarge shadow minter
+enlargeTerminal.addEventListener("click", () => {
+  if (!terminalEnlarged) {
+    terminalModal.classList.add("enlarged");
+    terminalEnlarged = true;
+    return;
+  }
+  terminalModal.classList.remove("enlarged");
+  terminalEnlarged = false;
+});
+
+// Minimize min button
+minimizeTerminal.addEventListener("click", () => {
+  const activeTerminal = document.querySelector(".act-shadow");
+  terminalModal.classList.add("hidden");
+  activeTerminal.classList.add("minimized");
+  activeTerminal.classList.remove("maximized");
 });

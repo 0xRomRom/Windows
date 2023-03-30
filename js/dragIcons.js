@@ -54,3 +54,6 @@ makeElementDraggable(trashIcon);
 
 const shadowMinter = document.querySelector(".shadow-minter");
 makeElementDraggable(shadowMinter);
+
+const desktopTerminalIcon = document.querySelector(".desk-terminal");
+makeElementDraggable(desktopTerminalIcon);

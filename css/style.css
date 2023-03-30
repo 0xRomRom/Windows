@@ -265,6 +265,12 @@ body {
   top: 15rem;
 }
 
+.desk-terminal {
+  position: absolute;
+  left: 25rem;
+  top: 15rem;
+}
+
 .desktop-logo {
   width: 30px;
   user-select: none;
@@ -293,6 +299,17 @@ body {
 }
 
 .shadow-minter-modal {
+  position: absolute;
+  width: 410px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
+.terminal-modal {
   position: absolute;
   width: 410px;
   height: 400px;
