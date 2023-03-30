@@ -18,9 +18,20 @@ terminalInput.addEventListener("keydown", function (e) {
     const command = e.target.value;
     e.target.value = "";
 
+    if (command === 'dn') {
+        const output = document.createElement("div");
+    output.innerHTML = prePend;
+    // output.innerHTML = prePend + "Unknown command";
+    output.textContent = "Unknown command";
+    terminalOutput.insertAdjacentElement("beforeend", output);
+    return; 
+    }
+
     const output = document.createElement("div");
     output.innerHTML = prePend + command;
 
     terminalOutput.insertAdjacentElement("beforeend", output);
   }
 });
+
+
