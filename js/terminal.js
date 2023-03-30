@@ -17,14 +17,23 @@ terminalInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     const command = e.target.value;
     e.target.value = "";
+    if (command === '' || command === " ") return;
 
+    if (command !== 'dn') {
+        const output = document.createElement("div");
+        output.style.color = 'red';
+        output.innerHTML = prePend;
+        output.textContent = "Unknown command: " + command;
+        terminalOutput.insertAdjacentElement("beforeend", output);
+        return; 
+    }
     if (command === 'dn') {
         const output = document.createElement("div");
-    output.innerHTML = prePend;
-    // output.innerHTML = prePend + "Unknown command";
-    output.textContent = "Unknown command";
-    terminalOutput.insertAdjacentElement("beforeend", output);
-    return; 
+        output.style.color = 'green';
+        output.innerHTML = prePend;
+        output.textContent = "Suck deez nutsssss";
+        terminalOutput.insertAdjacentElement("beforeend", output);
+        return; 
     }
 
     const output = document.createElement("div");
