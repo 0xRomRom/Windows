@@ -11,6 +11,7 @@
     <script defer src="./js/dragIcons.js"></script>
     <script defer src="./js/modalCtaButtons.js"></script>
     <script defer src="./js/clock.js"></script>
+    <script defer src="./js/terminal.js"></script>
     <script
       src="https://kit.fontawesome.com/5f3c108898.js"
       crossorigin="anonymous"
@@ -177,7 +178,7 @@
         </div>
 
         <!-- Terminal Modal -->
-        <div class="terminal-modal hidden">
+        <div class="terminal-modal">
           <div class="recycle-wrapper">
             <div class="program-row">
               <div class="left-block">
@@ -198,11 +199,13 @@
             <div class="terminal">
               <div class="terminal-body">
                 <div class="terminal-prompt">
-                  <span class="terminal-prompt-user">user@localhost:</span>
-                  <span class="terminal-prompt-path">~$</span>
+                  <div class="terminal-flex">
+                  <span class="terminal-prompt-user">0x398fa</span>
+                  <span class="terminal-prompt-path">~ $</span>
                   <input type="text" class="terminal-input" />
+                  </div>
+                  <div class="terminal-output"></div>
                 </div>
-                <div class="terminal-output"></div>
               </div>
             </div>
           </div>
