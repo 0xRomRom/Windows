@@ -3,11 +3,17 @@ let currentPrograms = "";
 const recycleDiv = `<div class="act-bin active-program maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo"/><span class="act-bin program-text">Recycle Bin</span>
 </div>`;
 
+
+
 const shadowDiv = `<div class="act-shadow active-program maximized"><img src="./img/Shadow Minter.png" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Shadow Minter v.032</span>
 </div>`;
 
-const terminalDiv = `<div class="act-terminal active-program maximized"><img src="./img/Terminal.jpg" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Terminal</span>
+
+
+const terminalDiv = `<div class="act-terminal active-program maximized"><img src="./img/Terminal.jpg" alt="shadow minter" class="act-terminal mini-logo"/><span class="act-terminal program-text">Terminal</span>
 </div>`;
+
+
 
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
@@ -52,7 +58,9 @@ const closeShadowMinter = document.querySelector(".clo-shadow");
 
 const terminalModals = document.querySelector(".terminal-modal");
 const terminalDesk = document.querySelector(".desk-terminal");
-const closeTerminal = document.querySelector(".clo-shadow");
+const closeTerminal = document.querySelector(".clo-terminal");
+
+let activeProgramCount = 0;
 
 const addActiveProgram = (divToAdd) => {
   const innerPrograms = activePrograms.innerHTML;
@@ -60,14 +68,19 @@ const addActiveProgram = (divToAdd) => {
   currentPrograms = addedProgram;
   activePrograms.innerHTML = "";
   activePrograms.innerHTML = addedProgram;
+  activeProgramCount++;
 };
 
 const removeActiveProgram = (divToRemove) => {
   const regex = new RegExp(divToRemove, "g");
   const result = currentPrograms.replace(regex, "");
   currentPrograms = result;
+  activeProgramCount--;
   activePrograms.innerHTML = "";
-  activePrograms.innerHTML = result;
+  activePrograms.innerHTML = currentPrograms;
+  if(activeProgramCount === 0) {
+    activePrograms.innerHTML = "";
+  }
 };
 
 let binActive = false;

@@ -56,6 +56,15 @@ parent.addEventListener("click", (event) => {
     activeShadows.classList.remove("minimized");
     shadowMinterModal.classList.remove("hidden");
   }
+
+  // Terminal event
+  if (event.target.classList[0] === "act-terminal")
+   {
+    const activeTerminals = document.querySelector(".act-terminal");
+    activeTerminals.classList.add("maximized");
+    activeTerminals.classList.remove("minimized");
+    terminalModal.classList.remove("hidden");
+  }
 });
 
 // Shadow Minter Modal \\
@@ -81,7 +90,7 @@ minimizeShadowMinter.addEventListener("click", () => {
 
 // Terminal Modal \\
 
-// Enlarge shadow minter
+// Enlarge terminal
 enlargeTerminal.addEventListener("click", () => {
   if (!terminalEnlarged) {
     terminalModal.classList.add("enlarged");
@@ -94,7 +103,7 @@ enlargeTerminal.addEventListener("click", () => {
 
 // Minimize min button
 minimizeTerminal.addEventListener("click", () => {
-  const activeTerminal = document.querySelector(".act-shadow");
+  const activeTerminal = document.querySelector(".act-terminal");
   terminalModal.classList.add("hidden");
   activeTerminal.classList.add("minimized");
   activeTerminal.classList.remove("maximized");
