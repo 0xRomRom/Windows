@@ -127,12 +127,13 @@ terminalDesk.addEventListener("dblclick", () => {
 });
 
 startmenuRun.addEventListener("click", () => {
+  startMenuList.classList.add("hidden");
+  startButton.classList.remove("clicked");
   if (!terminalActive) {
     terminalModals.classList.remove("hidden");
     addActiveProgram(terminalDiv);
     terminalActive = true;
-    startMenuList.classList.add("hidden");
-    startButton.classList.remove("clicked");
+ 
   }
 });
 
