@@ -28,7 +28,7 @@ body {
 .main-program {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -454,7 +454,8 @@ body {
 
 .enlarged {
   width: 100vw;
-  height: 100vh;
+  top: 0;
+  height: calc(100vh - 35px);
 }
 
 .maximized {
