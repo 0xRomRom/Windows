@@ -19,14 +19,6 @@ terminalInput.addEventListener("keydown", function (e) {
     e.target.value = "";
     if (command === '' || command === " ") return;
 
-    if (command !== 'dn') {
-        const output = document.createElement("div");
-        output.style.color = 'red';
-        output.innerHTML = prePend;
-        output.textContent = "Unknown command: " + command;
-        terminalOutput.insertAdjacentElement("beforeend", output);
-        return; 
-    }
     if (command === 'dn') {
         const output = document.createElement("div");
         output.style.color = 'green';
@@ -35,11 +27,26 @@ terminalInput.addEventListener("keydown", function (e) {
         terminalOutput.insertAdjacentElement("beforeend", output);
         return; 
     }
+    
+    if (command === 'funsu') {
+        const output = document.createElement("div");
+        
+        output.innerHTML = prePend;
+        output.textContent = command;
+        
+        output.style.color = 'red';
+        output.innerHTML = prePend;
+        output.textContent = "Funsu is gonu";
+        terminalOutput.insertAdjacentElement("beforeend", output);
+        return; 
+    }
 
     const output = document.createElement("div");
-    output.innerHTML = prePend + command;
-
+    output.style.color = 'red';
+    output.innerHTML = prePend;
+    output.textContent = "Unknown command: " + command;
     terminalOutput.insertAdjacentElement("beforeend", output);
+    return; 
   }
 });
 
