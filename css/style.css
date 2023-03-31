@@ -608,9 +608,9 @@ body {
 .drop-2 {
   position: absolute;
   width: 185px;
-  height: 100px;
+  height: 78px;
   background-color: rgb(195, 199, 203);
-  bottom: 125px;
+  bottom: 147px;
   left: 179px;
   z-index: 10;
   border-top: 2px solid rgb(251, 250, 251);
