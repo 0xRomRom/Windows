@@ -3,17 +3,11 @@ let currentPrograms = "";
 const recycleDiv = `<div class="act-bin active-program maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo"/><span class="act-bin program-text">Recycle Bin</span>
 </div>`;
 
-
-
 const shadowDiv = `<div class="act-shadow active-program maximized"><img src="./img/Shadow Minter.png" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Shadow Minter v.032</span>
 </div>`;
 
-
-
 const terminalDiv = `<div class="act-terminal active-program maximized"><img src="./img/Terminal.jpg" alt="shadow minter" class="act-terminal mini-logo"/><span class="act-terminal program-text">Terminal</span>
 </div>`;
-
-
 
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
@@ -59,6 +53,7 @@ const closeShadowMinter = document.querySelector(".clo-shadow");
 const terminalModals = document.querySelector(".terminal-modal");
 const terminalDesk = document.querySelector(".desk-terminal");
 const closeTerminal = document.querySelector(".clo-terminal");
+const startmenuRun = document.querySelector(".run");
 
 let activeProgramCount = 0;
 
@@ -128,6 +123,16 @@ terminalDesk.addEventListener("dblclick", () => {
     terminalModals.classList.remove("hidden");
     addActiveProgram(terminalDiv);
     terminalActive = true;
+  }
+});
+
+startmenuRun.addEventListener("click", () => {
+  if (!terminalActive) {
+    terminalModals.classList.remove("hidden");
+    addActiveProgram(terminalDiv);
+    terminalActive = true;
+    startMenuList.classList.add("hidden");
+    startButton.classList.remove("clicked");
   }
 });
 
