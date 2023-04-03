@@ -315,13 +315,49 @@ body {
   border-left: 1px solid rgb(240, 240, 240);
 }
 
-.minter-inner {
+.status-bar{
+  position: relative;
+  height: 20px;
+  width: 100%;
+  /* background-color: red; */
+  border: 1px solid black;
+}
+
+.status-text {
+  text-align: center;
+  display: block;
+  font-family: Windows;
+  font-size: 13px;
+  margin-top: 0.3rem;
+}
+
+.modals-wrapper {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 98.5%;
-  top: 1.25%;
-  background-color: green;
+  height: 100%;
+}
+
+.minter-inner-1 {
+  position: relative;
+  width: 99%;
+  left: 0.5%;
+  height: 90%;
+  top: 0%;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.minter-inner-2 {
+  position: relative;
+  width: 99%;
+  left: 0.5%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .terminal-modal {
@@ -765,4 +801,12 @@ body {
 
 .a-clean {
   text-decoration: none !important;
+}
+
+.connect-metamask {
+  border-top: 2px solid #FBFAFB;
+  border-left: 2px solid #FBFAFB;
+  background-color: #C5C5C5;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
 }

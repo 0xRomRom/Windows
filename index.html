@@ -12,6 +12,8 @@
     <script defer src="./js/modalCtaButtons.js"></script>
     <script defer src="./js/clock.js"></script>
     <script defer src="./js/terminal.js"></script>
+    <script defer src="./js/shadowMinter.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script
       src="https://kit.fontawesome.com/5f3c108898.js"
       crossorigin="anonymous"
@@ -227,7 +229,17 @@
                 <button class="close clo-shadow"></button>
               </div>
             </div>
-            <div class="minter-inner"></div>
+            <div class="modals-wrapper">
+              <div class="minter-inner-2 hidden">
+                <span class="connected-wallet"></span>
+              </div>
+              <div class="minter-inner-1">
+                <button class="connect-metamask">Connect wallet</button>
+              </div>
+              <div class="status-bar"></div>
+              <span class="status-text">Program: Authenticating</span>
+            </div>
+
           </div>
         </div>
 
