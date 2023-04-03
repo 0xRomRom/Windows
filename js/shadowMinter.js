@@ -39,3 +39,17 @@ const connectToMetamask = async () => {
 }
 connectMetamask.addEventListener("click", connectToMetamask);
 
+
+const statusBar = document.querySelector('.status-bar');
+
+const incrementStatusBar = (count) => {
+    let added = 0;
+    const statusIncrementer = setInterval(() => {
+        statusBar.innerHTML += `<div class="stat-block"></div>`;
+        added++;
+        if(added === count) {
+            clearInterval(statusIncrementer);
+        }
+    }, 500);
+};
+incrementStatusBar(10);

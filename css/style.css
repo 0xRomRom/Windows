@@ -321,6 +321,16 @@ body {
   width: 100%;
   /* background-color: red; */
   border: 1px solid black;
+  display: flex;
+}
+
+.stat-block {
+  position: relative;
+  width: 11px;
+  height: 92%;
+  top: 7%;
+  background-color: #19286C;
+  margin-left: 1px;
 }
 
 .status-text {
