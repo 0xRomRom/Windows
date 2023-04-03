@@ -315,6 +315,15 @@ body {
   border-left: 1px solid rgb(240, 240, 240);
 }
 
+.minter-inner {
+  position: relative;
+  width: 99%;
+  left: 0.5%;
+  height: 98.5%;
+  top: 1.25%;
+  background-color: green;
+}
+
 .terminal-modal {
   position: absolute;
   width: 510px;
@@ -592,9 +601,9 @@ body {
 .drop-1 {
   position: absolute;
   width: 185px;
-  height: 100px;
+  height: 78px;
   background-color: rgb(195, 199, 203);
-  bottom: 167px;
+  bottom: 189px;
   left: 179px;
   z-index: 10;
   border-top: 2px solid rgb(251, 250, 251);

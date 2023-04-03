@@ -7,12 +7,6 @@ const prePend = `<span class="terminal-prompt-user">0x398fa</span>
 <span class="terminal-prompt-path">~ $</span>`;
 
 
-
-
-
-
-
-
 terminalInput.addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     const command = e.target.value;
