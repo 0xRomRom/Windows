@@ -15,6 +15,7 @@ const connectToMetamask = async () => {
     if (window.ethereum) {
         alert("eth!");
         //Request current user
+      
         await window.ethereum.send("eth_requestAccounts");
         
         //Initialize web3 class
@@ -30,6 +31,7 @@ const connectToMetamask = async () => {
         modal1.classList.add("hidden");
         modal2.classList.remove("hidden");
         connectUserWallet.textContent = account;
+        incrementStatusBar(11);
         
         //Instantiate contract instance
         contractInstance = new web3.eth.Contract(ABI, CONTRACT);
@@ -40,16 +42,25 @@ const connectToMetamask = async () => {
 connectMetamask.addEventListener("click", connectToMetamask);
 
 
-const statusBar = document.querySelector('.status-bar');
+//Progress bar
+let shadowFirstTimeOpened = false;
+const shadowMinterDeskIcon = document.querySelector(".shadow-minter");
+shadowMinterDeskIcon.addEventListener('dblclick', () => {
+    if(!shadowFirstTimeOpened) {
+        shadowFirstTimeOpened = true;
+        incrementStatusBar(11);
+      }
+})
 
-const incrementStatusBar = (count) => {
+
+const statusBar = document.querySelector('.status-bar');
+const incrementStatusBar = (bars) => {
     let added = 0;
     const statusIncrementer = setInterval(() => {
         statusBar.innerHTML += `<div class="stat-block"></div>`;
         added++;
-        if(added === count) {
+        if(added === bars) {
             clearInterval(statusIncrementer);
         }
     }, 500);
 };
-incrementStatusBar(10);

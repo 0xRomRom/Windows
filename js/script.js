@@ -221,3 +221,5 @@ socialsHover.addEventListener("mouseover", () => {
 socialsHover.addEventListener("mouseleave", () => {
   socialsMenu.classList.add("hidden");
 });
+
+
