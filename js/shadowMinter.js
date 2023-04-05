@@ -49,6 +49,7 @@ shadowMinterDeskIcon.addEventListener('dblclick', () => {
     if(!shadowFirstTimeOpened) {
         shadowFirstTimeOpened = true;
         incrementStatusBar(11);
+        updateStatusText(statussesAray)
       }
 })
 
@@ -64,3 +65,19 @@ const incrementStatusBar = (bars) => {
         }
     }, 500);
 };
+
+const statussesAray = ["Program: Parsing", "Program: Fetching", "Program: Encoding parameters", "Program: Authenticating"]
+
+const programStatusText = document.querySelector('.status-text');
+
+const updateStatusText = (arrays) => {
+    let arrLen = arrays.length;
+    let added = 0;
+    const textUpdater = setInterval(() => {
+        programStatusText.textContent = arrays[added]
+        added++
+        if (added === arrLen) {
+            clearInterval(textUpdater);
+        }
+    }, 1000)
+}
