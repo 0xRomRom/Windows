@@ -366,9 +366,36 @@ body {
   width: 99%;
   left: 0.5%;
   height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+}
+
+.border-wrap {
+  border-left: 1px solid #868A8E;
+  border-top: 1px solid #868A8E;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+  position: absolute;
+  width: 95%;
+  left: 2.5%;
+  height: 5rem;
+  top: 1rem;
+}
+
+.minter-user-info { 
+  position: relative;
+  height: 5rem;
+  border-left: 1px solid #FFFFFF;
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #868A8E;
+  border-bottom: 1px solid #868A8E;
+}
+
+.minter-info-box {
+  font-family: Windows;
+  font-size: 13px;
+  background-color: #C3C7CB;
+  position: absolute;
+  top: -6px;
+  left: 5px;
 }
 
 .terminal-modal {

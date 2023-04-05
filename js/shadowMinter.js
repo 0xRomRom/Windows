@@ -13,7 +13,6 @@ const CONTRACT = "0xac084F5db68ee0Ba80AeCA734DA9AFD128F864d7";
 const connectToMetamask = async () => {
     //Check if metamask is installed
     if (window.ethereum) {
-        alert("eth!");
         //Request current user
       
         await window.ethereum.send("eth_requestAccounts");
@@ -32,6 +31,7 @@ const connectToMetamask = async () => {
         modal2.classList.remove("hidden");
         connectUserWallet.textContent = account;
         incrementStatusBar(11);
+        updateStatusText(statussesArray2);
         
         //Instantiate contract instance
         contractInstance = new web3.eth.Contract(ABI, CONTRACT);
@@ -48,11 +48,13 @@ const shadowMinterDeskIcon = document.querySelector(".shadow-minter");
 shadowMinterDeskIcon.addEventListener('dblclick', () => {
     if(!shadowFirstTimeOpened) {
         connectMetamask.disabled = true;
+        connectMetamask.style.cursor = 'default';
         shadowFirstTimeOpened = true;
         incrementStatusBar(11);
-        updateStatusText(statussesAray);
+        updateStatusText(statussesArray1);
         setTimeout(() => {
             connectMetamask.disabled = false;
+            connectMetamask.style.cursor = 'pointer';
         }, 5000)
       }
 })
@@ -70,7 +72,8 @@ const incrementStatusBar = (bars) => {
     }, 500);
 };
 
-const statussesAray = ["Program: Parsing", "Program: Fetching", "Program: Encoding parameters", "Program: Authenticating"]
+const statussesArray1 = ["Program: Parsing", "Program: Fetching", "Program: Encoding Parameters", "Program: Authenticating"]
+const statussesArray2 = ["Program: Initializing Web3", "Program: Hashing Bytes32", "Program: Asynchronous Configuration","Program: Asynchronous Configuration", "Program: Prepairing Mint Client"]
 
 const programStatusText = document.querySelector('.status-text');
 
