@@ -47,9 +47,13 @@ let shadowFirstTimeOpened = false;
 const shadowMinterDeskIcon = document.querySelector(".shadow-minter");
 shadowMinterDeskIcon.addEventListener('dblclick', () => {
     if(!shadowFirstTimeOpened) {
+        connectMetamask.disabled = true;
         shadowFirstTimeOpened = true;
         incrementStatusBar(11);
-        updateStatusText(statussesAray)
+        updateStatusText(statussesAray);
+        setTimeout(() => {
+            connectMetamask.disabled = false;
+        }, 5000)
       }
 })
 
