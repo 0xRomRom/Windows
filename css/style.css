@@ -403,7 +403,7 @@ body {
   font-size: 13px;
   position: relative;
   left: 0.3rem;
-  top: 0.5rem;
+  top: 0.7rem;
   display: inline;
 }
 
@@ -412,7 +412,16 @@ body {
   font-family: Windows;
   font-size: 13px;
   left: 0.3rem;
-  top: 2rem;
+  top: 2.2rem;
+  display: inline;
+}
+
+.bytes32-text {
+  position: absolute;
+  font-family: Windows;
+  font-size: 13px;
+  left: 0.3rem;
+  top: 3.5rem;
   display: inline;
 }
 

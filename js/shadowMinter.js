@@ -1,13 +1,16 @@
 // import contractABI from "./abi.js";
 
+const keccak256 = require('keccak256');
+
 const connectMetamask = document.querySelector(".connect-metamask");
 const connectUserWallet = document.querySelector(".connected-wallet");
 const modal1 = document.querySelector(".minter-inner-1");
 const modal2 = document.querySelector(".minter-inner-2");
+const bytes32Text = document.querySelector(".bytes32-text");
 
 let account;
 let contractInstance;
-// const ABI = contractABI;
+const ABI = contractABI;
 const CONTRACT = "0xac084F5db68ee0Ba80AeCA734DA9AFD128F864d7";
 
 const connectToMetamask = async () => {
@@ -32,6 +35,7 @@ const connectToMetamask = async () => {
         connectUserWallet.innerHTML = "Wallet ID: " + account;
         incrementStatusBar(11);
         updateStatusText(statussesArray2);
+        bytes32Text.innerHTML = `Bytes32: `+ keccak256(account).toString('hex').slice(0, 42) + `...`;
         
         //Instantiate contract instance
         contractInstance = new web3.eth.Contract(ABI, CONTRACT);
@@ -76,7 +80,7 @@ const statussesArray1 = ["Program: Parsing", "Program: Fetching", "Program: Enco
 const statussesArray2 = ["Program: Initializing Web3", "Program: Hashing Bytes32", "Program: Asynchronous Configuration","Program: Asynchronous Configuration", "Program: Prepairing Mint Client"]
 
 const programStatusText = document.querySelector('.status-text');
-const blockTimestampText = document.querySelector('.block-timestamp');
+
 
 const updateStatusText = (arrays) => {
     let arrLen = arrays.length;
@@ -90,8 +94,3 @@ const updateStatusText = (arrays) => {
     }, 1000)
 }
 
-// Block timestamp
-import Web3 from 'Web3';
-var web3 = new Web3('https://mainnet.infura.io');
-web3.eth.getBlockNumber()
-.then(console.log);
