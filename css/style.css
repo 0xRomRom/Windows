@@ -425,6 +425,33 @@ body {
   display: inline;
 }
 
+.eligible-text {
+  position: absolute;
+  font-family: Windows;
+  font-size: 13px;
+  left: 16rem;
+  top: 0.9rem;
+  display: inline;
+}
+
+.gmi-text {
+  position: absolute;
+  font-family: Windows;
+  font-size: 13px;
+  left: 16rem;
+  top: 2.2rem;
+  display: inline;
+}
+
+.early-text {
+  position: absolute;
+  font-family: Windows;
+  font-size: 13px;
+  left: 16rem;
+  top: 3.5rem;
+  display: inline;
+}
+
 .terminal-modal {
   position: absolute;
   width: 510px;

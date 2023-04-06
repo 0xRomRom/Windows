@@ -1,3 +1,6 @@
+require('dotenv').config();
+
+
 let currentPrograms = "";
 
 const recycleDiv = `<div class="act-bin active-program maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo"/><span class="act-bin program-text">Recycle Bin</span>

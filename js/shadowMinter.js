@@ -10,7 +10,7 @@ const bytes32Text = document.querySelector(".bytes32-text");
 
 let account;
 let contractInstance;
-const ABI = contractABI;
+// const ABI = contractABI;
 const CONTRACT = "0xac084F5db68ee0Ba80AeCA734DA9AFD128F864d7";
 
 const connectToMetamask = async () => {
@@ -32,13 +32,13 @@ const connectToMetamask = async () => {
         //Display user wallet
         modal1.classList.add("hidden");
         modal2.classList.remove("hidden");
-        connectUserWallet.innerHTML = "Wallet ID: " + account;
+        connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 22);
         incrementStatusBar(11);
         updateStatusText(statussesArray2);
-        bytes32Text.innerHTML = `Bytes32: `+ keccak256(account).toString('hex').slice(0, 42) + `...`;
+        bytes32Text.innerHTML = `Bytes32: `+ keccak256(account).toString('hex').slice(0, 23) + `...`;
         
         //Instantiate contract instance
-        contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+        // contractInstance = new web3.eth.Contract(ABI, CONTRACT);
     } else {
         alert('No metamask installed!')
     }
