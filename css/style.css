@@ -931,19 +931,18 @@ body {
 }
 
 .mint-button {
-  position: relative;
+  position: absolute;
   height: 27px;
   width: 85px;
   border-top: 2px solid rgb(251, 250, 251);
   border-left: 2px solid rgb(251, 250, 251);
   border-right: 2px solid rgb(20, 20, 20);
-  border-bottom: 2px solid rgb(20, 20, 20); 
-  left: 5rem;
-  top: 4rem;
+  border-bottom: 2px solid rgb(20, 20, 20);
+  left: 13rem;
+  top: 10.5rem;
   cursor: pointer;
   text-shadow: 0.5px 0px black, 0.5px 0px black;
   letter-spacing: 1px;
-  /* background: url("./img/start_main.0.0.1455197556\ Background\ Removed.0.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   user-select: none;
@@ -951,10 +950,48 @@ body {
   font-size: 13px;
 }
 
-
 .mint-button:active {
   border-top: 2px solid black;
   border-left: 2px solid black;
   border-right: 2px solid rgb(251, 250, 251);
   border-bottom: 2px solid rgb(251, 250, 251);
+}
+
+.mint-config-box {
+  position: absolute;
+  width: 13rem;
+  height: 9rem;
+  left: 10rem;
+  top: 0.8rem;
+  /* border: 1px solid red; */
+}
+
+
+.mint-counter {
+font-family: Windows;
+font-size: 20px;
+position: absolute;
+left: 4.8rem;
+}
+
+.btn-stl {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  font-family: Windows;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.min {
+  top: -0.3rem;
+  left: 2rem;
+}
+
+.plus {
+  top: -0.3rem;
+  left: 9rem;
 }
