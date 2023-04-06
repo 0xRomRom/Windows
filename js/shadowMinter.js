@@ -15,6 +15,11 @@ const CONTRACT = "0xac084F5db68ee0Ba80AeCA734DA9AFD128F864d7";
 
 const connectToMetamask = async () => {
     //Check if metamask is installed
+    if (!window.ethereum) {
+        alert('Install Metamask to continue. Visit https://metamask.io');
+        return;
+     }
+
     if (window.ethereum) {
         //Request current user
       
@@ -32,16 +37,14 @@ const connectToMetamask = async () => {
         //Display user wallet
         modal1.classList.add("hidden");
         modal2.classList.remove("hidden");
-        connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 22);
+        connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 22) + `...`;
         incrementStatusBar(11);
         updateStatusText(statussesArray2);
         bytes32Text.innerHTML = `Bytes32: `+ keccak256(account).toString('hex').slice(0, 23) + `...`;
         
         //Instantiate contract instance
         // contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-    } else {
-        alert('No metamask installed!')
-    }
+    } 
 }
 connectMetamask.addEventListener("click", connectToMetamask);
 
