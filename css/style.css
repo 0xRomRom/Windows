@@ -376,7 +376,7 @@ body {
   position: absolute;
   width: 95%;
   left: 2.5%;
-  height: 5rem;
+  height: 5.15rem;
   top: 1rem;
 }
 
@@ -394,8 +394,26 @@ body {
   font-size: 13px;
   background-color: #C3C7CB;
   position: absolute;
-  top: -6px;
+  top: -7px;
   left: 5px;
+}
+
+.connected-wallet {
+  font-family: Windows;
+  font-size: 13px;
+  position: relative;
+  left: 0.3rem;
+  top: 0.5rem;
+  display: inline;
+}
+
+.block-timestamp {
+  position: absolute;
+  font-family: Windows;
+  font-size: 13px;
+  left: 0.3rem;
+  top: 2rem;
+  display: inline;
 }
 
 .terminal-modal {
