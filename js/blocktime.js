@@ -14,7 +14,6 @@ const blockTimestampText = document.querySelector('.block-timestamp');
 
 async function fetchTimeStamp () {
   const latestBlock = await alchemy.core.getBlockNumber();
-  console.log(latestBlock);
   blockTimestampText.innerHTML = `Block Timestamp: ` + latestBlock + ` (since Vitalik)`;
 }
 fetchTimeStamp();

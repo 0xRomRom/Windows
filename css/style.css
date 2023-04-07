@@ -930,16 +930,23 @@ body {
   cursor: pointer;
 }
 
+.center-btn {
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  top: 4.75rem;
+}
+
 .mint-button {
-  position: absolute;
+  position: relative;
   height: 27px;
   width: 85px;
   border-top: 2px solid rgb(251, 250, 251);
   border-left: 2px solid rgb(251, 250, 251);
   border-right: 2px solid rgb(20, 20, 20);
   border-bottom: 2px solid rgb(20, 20, 20);
-  left: 13rem;
-  top: 10.5rem;
   cursor: pointer;
   text-shadow: 0.5px 0px black, 0.5px 0px black;
   letter-spacing: 1px;
@@ -959,19 +966,62 @@ body {
 
 .mint-config-box {
   position: absolute;
-  width: 13rem;
-  height: 9rem;
-  left: 10rem;
-  top: 0.8rem;
-  /* border: 1px solid red; */
+  width: 15rem;
+  height: 11rem;
+  left: 9rem;
+  top: 0.7rem;
 }
 
+.total-hr {
+  color:black;
+  background-color: black;
+  height: 3px;
+  width: 100%;
+  top: 6rem;
+  position: absolute;
+}
+
+.total-hr2 {
+  color:black;
+  background-color: black;
+  height: 3px;
+  width: 100%;
+  top: 1.2rem;
+  position: absolute;
+}
+
+.nft-mint-price {
+  font-family: Windows;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+}
+
+.total-mint-price {
+  font-family: Windows;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  position: relative;
+  top: 3.25rem;
+}
+
+.mint-btn-row {
+  position: relative;
+  width: 100%;
+  height: 2rem;
+  top: 1.5rem;
+  /* border: 1px solid blue; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
 
 .mint-counter {
-font-family: Windows;
-font-size: 20px;
-position: absolute;
-left: 4.8rem;
+  font-family: Windows;
+  font-size: 20px;
+  position: relative;
 }
 
 .btn-stl {
@@ -983,15 +1033,38 @@ left: 4.8rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  cursor: pointer;
 }
 
 .min {
-  top: -0.3rem;
-  left: 2rem;
+  user-select: none;
+  position: relative;
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(20, 20, 20);
+  border-bottom: 2px solid rgb(20, 20, 20);
+}
+
+.min:active {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(251, 250, 251);
 }
 
 .plus {
-  top: -0.3rem;
-  left: 9rem;
+  user-select: none;
+  position: relative;
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(20, 20, 20);
+  border-bottom: 2px solid rgb(20, 20, 20);
+}
+
+
+.plus:active {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(251, 250, 251);
 }
