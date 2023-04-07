@@ -48,7 +48,6 @@ function makeElementDraggable(element) {
   }
 }
 
-// Usage example:
 const trashIcon = document.querySelector(".trash-icon");
 makeElementDraggable(trashIcon);
 

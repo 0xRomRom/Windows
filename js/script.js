@@ -45,10 +45,7 @@ const terminalDesk = document.querySelector(".desk-terminal");
 const closeTerminal = document.querySelector(".clo-terminal");
 const startmenuRun = document.querySelector(".run");
 
-
-
 let binActive = false;
-
 
 const trashBar = document.querySelector('.act-bin');
 // Open recycle bin modal
@@ -70,7 +67,6 @@ closeTrashCan.addEventListener("click", () => {
 
 let shadowActive = false;
 
-
 const shadowBar = document.querySelector('.act-shadow');
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
@@ -89,7 +85,6 @@ closeShadowMinter.addEventListener("click", () => {
 });
 
 let terminalActive = false;
-
 
 const terminalInputField = document.querySelector(".terminal-input");
 const terminalBar = document.querySelector('.act-terminal');

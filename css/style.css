@@ -323,6 +323,7 @@ body {
   /* background-color: red; */
   border: 1px solid black;
   display: flex;
+  margin-top: 5px;
 }
 
 .stat-block {
@@ -339,21 +340,26 @@ body {
   display: block;
   font-family: Windows;
   font-size: 13px;
-  margin-top: 0.3rem;
+  position: relative;
+  margin: 0.2rem 0;
 }
 
 .modals-wrapper {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 100%;
+  height: 99%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: red; */
+  gap: 1px;
 }
 
 .minter-inner-1 {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 90%;
+  height: 20.5rem;
   top: 0%;
   /* background-color: green; */
   display: flex;
@@ -365,14 +371,14 @@ body {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 90%;
+  height: 21rem;
 }
 
 .minter-inner-3 {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 90%;
+  height: 21rem;
   /* background-color: green; */
   display: flex;
   justify-content: center;
