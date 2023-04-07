@@ -83,11 +83,14 @@ const removeActiveProgram = (divToRemove) => {
 
 let binActive = false;
 
+
+const trashBar = document.querySelector('.act-bin');
 // Open recycle bin modal
 trashIconDesk.addEventListener("dblclick", () => {
   if (!binActive) {
     trashCanModals.classList.remove("hidden");
-    addActiveProgram(recycleDiv);
+    // addActiveProgram(recycleDiv);
+    trashBar.classList.remove('hidden');
     binActive = true;
   }
 });
@@ -96,17 +99,21 @@ trashIconDesk.addEventListener("dblclick", () => {
 closeTrashCan.addEventListener("click", () => {
   trashCanModals.classList.add("hidden");
   trashCanModals.classList.remove("enlarged");
-  removeActiveProgram(recycleDiv);
+  // removeActiveProgram(recycleDiv);
+  trashBar.classList.add('hidden');
   binActive = false;
 });
 
 let shadowActive = false;
 
+
+const shadowBar = document.querySelector('.act-shadow');
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
   if (!shadowActive) {
     shadowMinterModal.classList.remove("hidden");
-    addActiveProgram(shadowDiv);
+    // addActiveProgram(shadowDiv);
+    shadowBar.classList.remove('hidden');
     shadowActive = true;
   }
 });
@@ -114,17 +121,20 @@ shadowMinterDesk.addEventListener("dblclick", () => {
 closeShadowMinter.addEventListener("click", () => {
   shadowMinterModal.classList.add("hidden");
   shadowMinterModal.classList.remove("enlarged");
-  removeActiveProgram(shadowDiv);
+  // removeActiveProgram(shadowDiv);
+  shadowBar.classList.add('hidden');
   shadowActive = false;
 });
 
 let terminalActive = false;
 
+const terminalBar = document.querySelector('.act-terminal');
 // Open terminal modal
 terminalDesk.addEventListener("dblclick", () => {
   if (!terminalActive) {
     terminalModals.classList.remove("hidden");
-    addActiveProgram(terminalDiv);
+    // addActiveProgram(terminalDiv);
+    terminalBar.classList.remove("hidden");
     terminalActive = true;
   }
 });
@@ -134,7 +144,8 @@ startmenuRun.addEventListener("click", () => {
   startButton.classList.remove("clicked");
   if (!terminalActive) {
     terminalModals.classList.remove("hidden");
-    addActiveProgram(terminalDiv);
+    // addActiveProgram(terminalDiv);
+
     terminalActive = true;
  
   }
@@ -143,7 +154,8 @@ startmenuRun.addEventListener("click", () => {
 closeTerminal.addEventListener("click", () => {
   terminalModals.classList.add("hidden");
   terminalModals.classList.remove("enlarged");
-  removeActiveProgram(terminalDiv);
+  // removeActiveProgram(terminalDiv);
+  terminalBar.classList.add("hidden");
   terminalActive = false;
 });
 

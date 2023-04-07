@@ -134,11 +134,11 @@ const incrementMintCount = document.querySelector(".plus");
 const decrementMintCount = document.querySelector(".min");
 
 incrementMintCount.addEventListener("click", () => {
-  if (mintCount === 5) return;
+  if (mintCount === 3) return;
   mintCount++;
   decrementMintCount.disabled = false;
   mintCountText.innerHTML = `Mint: ` + mintCount;
-  if (mintCount === 5) {
+  if (mintCount === 3) {
     incrementMintCount.disabled = true;
   }
   totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(usdPricePerNft * mintCount).toFixed(2)}$USD )`;
@@ -151,7 +151,7 @@ decrementMintCount.addEventListener("click", () => {
   if (mintCount === 1) {
     decrementMintCount.disabled = true;
   }
-  if (mintCount < 5) {
+  if (mintCount < 3) {
     incrementMintCount.disabled = false;
   }
   totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(usdPricePerNft * mintCount).toFixed(2)}$USD )`;
