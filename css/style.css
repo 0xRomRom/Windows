@@ -368,6 +368,22 @@ body {
   height: 90%;
 }
 
+.minter-inner-3 {
+  position: relative;
+  width: 99%;
+  left: 0.5%;
+  height: 90%;
+  /* background-color: green; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.success-mint {
+  font-family: Windows;
+  font-size: 18px;
+}
+
 .border-wrap {
   border-left: 1px solid #868a8e;
   border-top: 1px solid #868a8e;
@@ -842,6 +858,7 @@ body {
 .terminal-prompt {
   display: flex;
   flex-direction: column-reverse;
+  gap: 0.5rem;
 }
 
 .terminal-prompt-user {
@@ -864,6 +881,12 @@ body {
   position: relative;
   left: -4px;
   /* background-color: gray; */
+}
+
+.redirect-socials {
+  display: flex;
+  gap: 0.4rem;
+  color: rgb(189, 22, 189);
 }
 
 .terminal-output {

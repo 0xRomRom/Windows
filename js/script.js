@@ -1,21 +1,8 @@
 require('dotenv').config();
 
-
-let currentPrograms = "";
-
-const recycleDiv = `<div class="act-bin active-program maximized"><img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo"/><span class="act-bin program-text">Recycle Bin</span>
-</div>`;
-
-const shadowDiv = `<div class="act-shadow active-program maximized"><img src="./img/Shadow Minter.png" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Shadow Minter v.032</span>
-</div>`;
-
-const terminalDiv = `<div class="act-terminal active-program maximized"><img src="./img/Terminal.jpg" alt="shadow minter" class="act-terminal mini-logo"/><span class="act-terminal program-text">Terminal</span>
-</div>`;
-
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
 const mainProgram = document.querySelector(".main-program");
-const activePrograms = document.querySelector(".active-programs");
 
 //Toggle menu list
 startButton.addEventListener("click", () => {
@@ -58,28 +45,7 @@ const terminalDesk = document.querySelector(".desk-terminal");
 const closeTerminal = document.querySelector(".clo-terminal");
 const startmenuRun = document.querySelector(".run");
 
-let activeProgramCount = 0;
 
-const addActiveProgram = (divToAdd) => {
-  const innerPrograms = activePrograms.innerHTML;
-  const addedProgram = innerPrograms + divToAdd;
-  currentPrograms = addedProgram;
-  activePrograms.innerHTML = "";
-  activePrograms.innerHTML = addedProgram;
-  activeProgramCount++;
-};
-
-const removeActiveProgram = (divToRemove) => {
-  const regex = new RegExp(divToRemove, "g");
-  const result = currentPrograms.replace(regex, "");
-  currentPrograms = result;
-  activeProgramCount--;
-  activePrograms.innerHTML = "";
-  activePrograms.innerHTML = currentPrograms;
-  if(activeProgramCount === 0) {
-    activePrograms.innerHTML = "";
-  }
-};
 
 let binActive = false;
 
@@ -89,7 +55,6 @@ const trashBar = document.querySelector('.act-bin');
 trashIconDesk.addEventListener("dblclick", () => {
   if (!binActive) {
     trashCanModals.classList.remove("hidden");
-    // addActiveProgram(recycleDiv);
     trashBar.classList.remove('hidden');
     binActive = true;
   }
@@ -99,7 +64,6 @@ trashIconDesk.addEventListener("dblclick", () => {
 closeTrashCan.addEventListener("click", () => {
   trashCanModals.classList.add("hidden");
   trashCanModals.classList.remove("enlarged");
-  // removeActiveProgram(recycleDiv);
   trashBar.classList.add('hidden');
   binActive = false;
 });
@@ -112,7 +76,6 @@ const shadowBar = document.querySelector('.act-shadow');
 shadowMinterDesk.addEventListener("dblclick", () => {
   if (!shadowActive) {
     shadowMinterModal.classList.remove("hidden");
-    // addActiveProgram(shadowDiv);
     shadowBar.classList.remove('hidden');
     shadowActive = true;
   }
@@ -121,20 +84,22 @@ shadowMinterDesk.addEventListener("dblclick", () => {
 closeShadowMinter.addEventListener("click", () => {
   shadowMinterModal.classList.add("hidden");
   shadowMinterModal.classList.remove("enlarged");
-  // removeActiveProgram(shadowDiv);
   shadowBar.classList.add('hidden');
   shadowActive = false;
 });
 
 let terminalActive = false;
 
+
+const terminalInputField = document.querySelector(".terminal-input");
 const terminalBar = document.querySelector('.act-terminal');
 // Open terminal modal
 terminalDesk.addEventListener("dblclick", () => {
   if (!terminalActive) {
+    
     terminalModals.classList.remove("hidden");
-    // addActiveProgram(terminalDiv);
     terminalBar.classList.remove("hidden");
+    terminalInputField.focus();
     terminalActive = true;
   }
 });
@@ -144,17 +109,13 @@ startmenuRun.addEventListener("click", () => {
   startButton.classList.remove("clicked");
   if (!terminalActive) {
     terminalModals.classList.remove("hidden");
-    // addActiveProgram(terminalDiv);
-
     terminalActive = true;
- 
   }
 });
 
 closeTerminal.addEventListener("click", () => {
   terminalModals.classList.add("hidden");
   terminalModals.classList.remove("enlarged");
-  // removeActiveProgram(terminalDiv);
   terminalBar.classList.add("hidden");
   terminalActive = false;
 });

@@ -1,12 +1,12 @@
 // import contractABI from "./abi.js";
 
-const { min } = require("bn.js");
 const keccak256 = require("keccak256");
 
 const connectMetamask = document.querySelector(".connect-metamask");
 const connectUserWallet = document.querySelector(".connected-wallet");
 const modal1 = document.querySelector(".minter-inner-1");
 const modal2 = document.querySelector(".minter-inner-2");
+const modal3 = document.querySelector(".minter-inner-3");
 const bytes32Text = document.querySelector(".bytes32-text");
 
 let account;
@@ -38,13 +38,15 @@ const connectToMetamask = async () => {
     //Display user wallet
     modal1.classList.add("hidden");
     modal2.classList.remove("hidden");
-    connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 22) + `...`;
+    connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 25) + `...`;
     bytes32Text.innerHTML =
-      `Bytes32: ` + keccak256(account).toString("hex").slice(0, 23) + `...`;
+      `Bytes32: ` + keccak256(account).toString("hex").slice(0, 26) + `...`;
 
     incrementStatusBar(11);
     updateStatusText(statussesArray2);
-
+    setTimeout(() => {
+      mintButton.disabled = false;
+    }, 5500);
     //Instantiate contract instance
     // contractInstance = new web3.eth.Contract(ABI, CONTRACT);
   }
@@ -93,6 +95,13 @@ const statussesArray2 = [
   "Program: Asynchronous Configuration",
   "Program: Prepairing Mint Client",
 ];
+const statussesArray3 = [
+  "Program: Launching terminal",
+  "Program: Launching terminal.",
+  "Program: Launching terminal..",
+  "Program: Launching terminal...",
+  "Program: Launching terminal....",
+];
 
 const programStatusText = document.querySelector(".status-text");
 const updateStatusText = (arrays) => {
@@ -107,7 +116,6 @@ const updateStatusText = (arrays) => {
   }, 1000);
 };
 
-
 // Get ETH price
 let mintCount = 1;
 let ethPrice = 0;
@@ -115,17 +123,22 @@ const ethMintPrice = 0.001; //ETH
 let usdPricePerNft = 0;
 
 const ethPriceFetcher = async () => {
-    const fetcher = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`);
-    const result = await fetcher.json();
-    ethPrice = +result.ethereum.usd.toFixed(0);
-    usdPricePerNft = ethPrice / 100;
-    totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${usdPricePerNft * mintCount}$USD )`;
-    nftMintPrice.innerHTML = `Mint Price: ${ethMintPrice * mintCount} ETH ( ${usdPricePerNft * mintCount}$USD )`;
+  const fetcher = await fetch(
+    `https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd`
+  );
+  const result = await fetcher.json();
+  ethPrice = +result.ethereum.usd.toFixed(0);
+  usdPricePerNft = ethPrice / 100;
+  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${
+    usdPricePerNft * mintCount
+  }$USD )`;
+  nftMintPrice.innerHTML = `Mint Price: ${ethMintPrice * mintCount} ETH ( ${
+    usdPricePerNft * mintCount
+  }$USD )`;
 };
 ethPriceFetcher();
 
 // Mint config
-
 
 const nftMintPrice = document.querySelector(".nft-mint-price");
 const mintCountText = document.querySelector(".mint-counter");
@@ -141,7 +154,9 @@ incrementMintCount.addEventListener("click", () => {
   if (mintCount === 3) {
     incrementMintCount.disabled = true;
   }
-  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(usdPricePerNft * mintCount).toFixed(2)}$USD )`;
+  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
+    usdPricePerNft * mintCount
+  ).toFixed(2)}$USD )`;
 });
 
 decrementMintCount.addEventListener("click", () => {
@@ -154,5 +169,56 @@ decrementMintCount.addEventListener("click", () => {
   if (mintCount < 3) {
     incrementMintCount.disabled = false;
   }
-  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(usdPricePerNft * mintCount).toFixed(2)}$USD )`;
+  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
+    usdPricePerNft * mintCount
+  ).toFixed(2)}$USD )`;
 });
+
+// Mint
+const mintButton = document.querySelector(".mint-button");
+const terminalMenuBar = document.querySelector(".act-terminal");
+const terminalModall = document.querySelector(".terminal-modal");
+
+const shadowBars = document.querySelector(".act-shadow");
+const shadowMinterModals = document.querySelector(".shadow-minter-modal");
+const terminalOutputs = document.querySelector(".terminal-output");
+const terminalInputs = document.querySelector(".terminal-input");
+const redirectSocialsBox = document.querySelector(".redirect-socials");
+
+mintButton.addEventListener("click", () => {
+  modal2.classList.add("hidden");
+  modal3.classList.remove("hidden");
+
+  incrementStatusBar(11);
+  updateStatusText(statussesArray3);
+
+  setTimeout(() => {
+    shadowMinterModals.classList.add("hidden");
+    shadowBars.classList.add("hidden");
+    shadowMinterModals.classList.remove("enlarged");
+  }, 6000);
+
+  setTimeout(() => {
+    terminalMenuBar.classList.remove("hidden");
+    terminalModall.classList.remove("hidden");
+    terminalInputs.focus();
+  }, 7500);
+
+  setTimeout(() => {
+    const output = document.createElement("div");
+    output.style.color = "green";
+    output.innerHTML = "= Congratulations on becoming one of the =" + `<br>` + "= early few holders of Shadow Degens. =" + `<br>` + `= This journey just got started so buckle up =` + `<br>` +  "= and get ready to join the community! =";
+    terminalOutputs.insertAdjacentElement("beforeend", output);
+  }, 8500);
+
+  setTimeout(() => {
+    redirectSocialsBox.classList.remove('hidden');
+  }, 14000);
+
+  setTimeout(() => {
+    redirectSocialsBox.classList.add('hidden');
+    window.location.href='https://twitter.com/intent/tweet?text=I%20just%20minted%20Shadow%20Degen%20%23334%20LFG!%20%40ShadowDegenerates';
+  }, 20000);
+});
+
+

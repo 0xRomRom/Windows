@@ -45,3 +45,20 @@ terminalInput.addEventListener("keydown", function (e) {
 });
 
 
+const spinner = document.querySelector(".spinner");
+
+
+const rotateSpinner = () => {
+  let index = 0;
+  setInterval(() => {
+    if(index === 8) {
+      index = 0;
+    }
+    spinner.innerHTML = spinElements[index];
+    index++;
+  }, 100);
+};
+rotateSpinner();
+
+
+const spinElements = ["|", "/", "-", "\\", "|", "/", "-", "\\", "|"];
