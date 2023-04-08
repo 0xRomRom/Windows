@@ -329,8 +329,8 @@ body {
 .stat-block {
   position: relative;
   width: 11px;
-  height: 92%;
-  top: 7%;
+  height: 16px;
+  top: 1px;
   background-color: #19286c;
   margin-left: 1px;
 }
@@ -875,6 +875,12 @@ body {
   color: #ff6347;
 }
 
+.terminal-flex {
+  display: flex;
+  gap: 0.8rem;
+  /* background-color: green; */
+}
+
 .terminal-input {
   background-color: transparent;
   border: none;
@@ -883,7 +889,7 @@ body {
   flex-grow: 1;
   font-family: monospace;
   font-size: 13px;
-  width: 24.5rem;
+  width: 23rem;
   position: relative;
   left: -4px;
   /* background-color: gray; */
@@ -1002,7 +1008,7 @@ body {
 }
 
 .total-hr {
-  color:black;
+  color: black;
   background-color: black;
   height: 3px;
   width: 100%;
@@ -1011,7 +1017,7 @@ body {
 }
 
 .total-hr2 {
-  color:black;
+  color: black;
   background-color: black;
   height: 3px;
   width: 100%;
@@ -1090,11 +1096,9 @@ body {
   border-bottom: 2px solid rgb(20, 20, 20);
 }
 
-
 .plus:active {
   border-top: 2px solid black;
   border-left: 2px solid black;
   border-right: 2px solid rgb(251, 250, 251);
   border-bottom: 2px solid rgb(251, 250, 251);
 }
-
