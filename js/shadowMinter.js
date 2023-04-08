@@ -119,7 +119,7 @@ const updateStatusText = (arrays) => {
 // Get ETH price
 let mintCount = 1;
 let ethPrice = 0;
-const ethMintPrice = 0.001; //ETH
+const ethMintPrice = 0.022; //ETH
 let usdPricePerNft = 0;
 
 const ethPriceFetcher = async () => {
@@ -128,13 +128,13 @@ const ethPriceFetcher = async () => {
   );
   const result = await fetcher.json();
   ethPrice = +result.ethereum.usd.toFixed(0);
-  usdPricePerNft = ethPrice / 100;
-  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${
+  usdPricePerNft = ethPrice / 45.5;
+  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
     usdPricePerNft * mintCount
-  }$USD )`;
-  nftMintPrice.innerHTML = `Mint Price: ${ethMintPrice * mintCount} ETH ( ${
+  ).toFixed(2)}$USD )`;
+  nftMintPrice.innerHTML = `Mint Price: ${ethMintPrice * mintCount} ETH ( ${(
     usdPricePerNft * mintCount
-  }$USD )`;
+  ).toFixed(2)}$USD )`;
 };
 ethPriceFetcher();
 
@@ -147,11 +147,11 @@ const incrementMintCount = document.querySelector(".plus");
 const decrementMintCount = document.querySelector(".min");
 
 incrementMintCount.addEventListener("click", () => {
-  if (mintCount === 3) return;
+  if (mintCount === 2) return;
   mintCount++;
   decrementMintCount.disabled = false;
   mintCountText.innerHTML = `Mint: ` + mintCount;
-  if (mintCount === 3) {
+  if (mintCount === 2) {
     incrementMintCount.disabled = true;
   }
   totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
@@ -166,7 +166,7 @@ decrementMintCount.addEventListener("click", () => {
   if (mintCount === 1) {
     decrementMintCount.disabled = true;
   }
-  if (mintCount < 3) {
+  if (mintCount < 2) {
     incrementMintCount.disabled = false;
   }
   totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
@@ -207,18 +207,24 @@ mintButton.addEventListener("click", () => {
   setTimeout(() => {
     const output = document.createElement("div");
     output.style.color = "green";
-    output.innerHTML = "= Congratulations on becoming one of the =" + `<br>` + "= early few holders of Shadow Degens. =" + `<br>` + `= This journey just got started so buckle up =` + `<br>` +  "= and get ready to join the community! =";
+    output.innerHTML =
+      "= Congratulations on becoming one of the =" +
+      `<br>` +
+      "= early few holders of Shadow Degens. =" +
+      `<br>` +
+      `= This journey just got started so buckle up =` +
+      `<br>` +
+      "= and get ready to join the community! =";
     terminalOutputs.insertAdjacentElement("beforeend", output);
   }, 8500);
 
   setTimeout(() => {
-    redirectSocialsBox.classList.remove('hidden');
+    redirectSocialsBox.classList.remove("hidden");
   }, 14000);
 
   setTimeout(() => {
-    redirectSocialsBox.classList.add('hidden');
-    window.location.href='https://twitter.com/intent/tweet?text=I%20just%20minted%20Shadow%20Degen%20%23334%20LFG!%20%40ShadowDegenerates';
+    redirectSocialsBox.classList.add("hidden");
+    window.location.href =
+      "https://twitter.com/intent/tweet?text=I%20just%20minted%20Shadow%20Degen%20%23334%20LFG!%20%40ShadowDegenerates";
   }, 20000);
 });
-
-

@@ -2,7 +2,7 @@ const terminalInput = document.querySelector(".terminal-input");
 const terminalOutput = document.querySelector(".terminal-output");
 const terminalBody = document.querySelector(".terminal-body");
 terminalBody.addEventListener("click", () => {
-  terminalInput.focus();
+  terminalInput.focus();``
 });
 
 const prePend = `<span class="terminal-prompt-user">0x398fa</span>
