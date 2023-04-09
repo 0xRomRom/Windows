@@ -716,11 +716,11 @@ const terminalInputs = document.querySelector(".terminal-input");
 const redirectSocialsBox = document.querySelector(".redirect-socials");
 
 mintButton.addEventListener("click", async () => {
-  let value;
-  value = await contractInstance.methods.CURRENT_SUPPLY().call();
-  alert(value);
-
-  // (1000000000000000 * mintCount).toString()
+  let currentlyMinted;
+  currentlyMinted = await contractInstance.methods.CURRENT_SUPPLY().call();
+  if (+currentlyMinted === 2222) {
+    alert("Mint concluded. Visit OpenSea to purchase a Sicarius!");
+  }
 
   try {
     await contractInstance.methods.mint(mintCount).send({
@@ -756,7 +756,7 @@ mintButton.addEventListener("click", async () => {
     output.innerHTML =
       "= Congratulations on becoming one of the =" +
       `<br>` +
-      "= early few holders of Shadow Degens. =" +
+      "= early few holders of Sicarius. =" +
       `<br>` +
       `= This journey just got started so buckle up =` +
       `<br>` +
@@ -771,6 +771,6 @@ mintButton.addEventListener("click", async () => {
   setTimeout(() => {
     redirectSocialsBox.classList.add("hidden");
     window.location.href =
-      "https://twitter.com/intent/tweet?text=I%20just%20minted%20Shadow%20Degen%20%23334%20LFG!%20%40ShadowDegenerates";
+      "https://twitter.com/intent/tweet?text=I+just+minted+Sicarius+%23311+LFG!+%40Sicarius";
   }, 20000);
 });
