@@ -732,6 +732,16 @@ mintButton.addEventListener("click", async () => {
     console.log(err);
   }
 
+
+  let queryString = '';
+
+  if(mintCount === 1) {
+	queryString = currentlyMinted + 1;
+  }
+  if(mintCount === 2) {
+	queryString === `${mintCount + 1}+%2B+%23${mintCount + 2}`
+  }
+
   modal2.classList.add("hidden");
   modal3.classList.remove("hidden");
 
@@ -771,6 +781,9 @@ mintButton.addEventListener("click", async () => {
   setTimeout(() => {
     redirectSocialsBox.classList.add("hidden");
     window.location.href =
-      "https://twitter.com/intent/tweet?text=I+just+minted+Sicarius+%23311+LFG!+%40Sicarius";
+      `https://twitter.com/intent/tweet?text=I+just+minted+Sicarius+%23${queryString}+LFG!+%40Sicarius`;
   }, 20000);
 });
+
+
+https://twitter.com/intent/tweet?text=I+just+minted+Sicarius+%23311+%2B+%23312+LFG!+%40Sicarius
