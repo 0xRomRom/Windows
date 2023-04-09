@@ -537,7 +537,7 @@ const ABI = [
     type: "function",
   },
 ];
-const CONTRACT = "0x84C6fA9Dafd19E7b7860690df2f1f7426270c78D";
+const CONTRACT = "0xbF6Faa9cCDA5EABb87373e7e5c7050D4149F622D";
 
 const connectToMetamask = async () => {
   //Check if metamask is installed
@@ -732,14 +732,19 @@ mintButton.addEventListener("click", async () => {
     console.log(err);
   }
 
+  let queryString = "";
 
-  let queryString = '';
-
-  if(mintCount === 1) {
-	queryString = currentlyMinted + 1;
+  if (mintCount === 1) {
+    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${
+      +currentlyMinted + 1
+    }%20LFG!%20%40Sicarius`;
   }
-  if(mintCount === 2) {
-	queryString === `${mintCount + 1}+%2B+%23${mintCount + 2}`
+  if (mintCount === 2) {
+    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${(
+      mintCount + 1
+    ).toString()}%20%26%20%23${(
+      mintCount + 2
+    ).toString()}%20LFG!%20%40Sicarius`;
   }
 
   modal2.classList.add("hidden");
@@ -780,10 +785,6 @@ mintButton.addEventListener("click", async () => {
 
   setTimeout(() => {
     redirectSocialsBox.classList.add("hidden");
-    window.location.href =
-      `https://twitter.com/intent/tweet?text=I+just+minted+Sicarius+%23${queryString}+LFG!+%40Sicarius`;
+    window.location.href = queryString;
   }, 20000);
 });
-
-
-https://twitter.com/intent/tweet?text=I+just+minted+Sicarius+%23311+%2B+%23312+LFG!+%40Sicarius
