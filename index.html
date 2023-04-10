@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shadow Degens</title>
+    <title>Sicarius</title>
     <link rel="icon" type="image/x-icon" href="/img/Shadow Minter.ico" />
     <link href="./css/style.css" rel="stylesheet" />
     <script type="module" src="./js/script.js"></script>
@@ -12,6 +12,7 @@
     <script type="module" src="./js/modalCtaButtons.js"></script>
     <script type="module" src="./js/clock.js"></script>
     <script type="module" src="./js/terminal.js"></script>
+    <script type="module" src="./js/abi.js"></script>
     <script type="module" src="./js/shadowMinter.js"></script>
     <script type="module" src="./js/blocktime.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
@@ -248,7 +249,7 @@
         </div>
 
         <!-- Shadow Minter Modal-->
-        <div class="shadow-minter-modal hidden">
+        <div class="shadow-minter-modal">
           <div class="recycle-wrapper">
             <div class="program-row">
               <div class="left-block">
@@ -267,40 +268,53 @@
             </div>
 
             <div class="modals-wrapper">
-
-              <div class="minter-inner-1">
+              <div class="minter-inner-1 hidden">
                 <button class="connect-metamask">Connect wallet</button>
               </div>
 
-              <div class="minter-inner-2 hidden">
+              <div class="minter-inner-2">
                 <div class="border-wrap">
                   <div class="minter-user-info">
                     <span class="minter-info-box"><u>Minter Info</u></span>
-                    <span class="connected-wallet">Minter ID: 12343214314</span>
-                    <span class="block-timestamp"
-                      >Block Timestamp: 16991208</span
-                    >
-                    <span class="bytes32-text">Bytes32: </span>
-                    <span class="eligible-text">Eligible: True </span>
-                    <span class="gmi-text">GMI: True </span>
-                    <span class="early-text">Early: True </span>
+                    <div class="minter-box-left">
+                      <span class="connected-wallet"
+                        >Minter ID: 12343214314</span
+                      >
+                      <span class="block-timestamp"
+                        >Block Timestamp: 16991208</span
+                      >
+                      <span class="bytes32-text">Bytes32: </span>
+                    </div>
+                    <div class="minter-box-right">
+                      <span class="eligible-text">Eligible: True </span>
+                      <span class="gmi-text">GMI: True </span>
+                      <span class="early-text">Early: True </span>
+                    </div>
                   </div>
                 </div>
 
                 <div class="border-wrap2">
                   <div class="minter-action-box">
                     <span class="minter-info-box"><u>Execution</u></span>
-                    <img src="./img/art-gif.gif" alt="Pixel art gif image" class="mint-gif">
+                    <img
+                      src="./img/art-gif.gif"
+                      alt="Pixel art gif image"
+                      class="mint-gif"
+                    />
                     <div class="mint-config-box">
-                      <span class="nft-mint-price">Mint Price: 0.001ETH ( 23$USD )</span>
+                      <span class="nft-mint-price"
+                        >Mint Price: 0.001ETH ( 23$USD )</span
+                      >
                       <div class="mint-btn-row">
                         <button class="btn-stl min" disabled>-</button>
                         <span class="mint-counter">Mint: 1</span>
                         <button class="btn-stl plus">+</button>
                       </div>
-                      <hr class="total-hr">
-                      <hr class="total-hr2">
-                      <span class="total-mint-price">Total: 0.001ETH ( 23$USD )</span>
+                      <hr class="total-hr" />
+                      <hr class="total-hr2" />
+                      <span class="total-mint-price"
+                        >Total: 0.001ETH ( 23$USD )</span
+                      >
                       <div class="center-btn">
                         <button class="mint-button">Mint</button>
                       </div>
@@ -310,7 +324,9 @@
               </div>
 
               <div class="minter-inner-3 hidden">
-                <span class="success-mint">Mint Successful, please stand by </span>
+                <span class="success-mint"
+                  >Mint Successful, please stand by
+                </span>
               </div>
 
               <div class="status-bar"></div>
@@ -395,11 +411,26 @@
           </button>
 
           <div class="active-programs">
-            <div class="act-shadow active-program maximized hidden"><img src="./img/Shadow Minter.png" alt="shadow minter" class="act-shadow mini-logo"/><span class="act-shadow program-text">Shadow Minter v.032</span>
+            <div class="act-shadow active-program maximized hidden">
+              <img
+                src="./img/Shadow Minter.png"
+                alt="shadow minter"
+                class="act-shadow mini-logo"
+              /><span class="act-shadow program-text">Shadow Minter v.032</span>
             </div>
-            <div class="act-bin active-program maximized hidden"><img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo"/><span class="act-bin program-text">Recycle Bin</span>
+            <div class="act-bin active-program maximized hidden">
+              <img
+                src="./img/Recycle Bin.png"
+                alt="recycle bin"
+                class="act-bin mini-logo"
+              /><span class="act-bin program-text">Recycle Bin</span>
             </div>
-            <div class="act-terminal active-program maximized hidden"><img src="./img/Terminal.jpg" alt="shadow minter" class="act-terminal mini-logo"/><span class="act-terminal program-text">Terminal</span>
+            <div class="act-terminal active-program maximized hidden">
+              <img
+                src="./img/Terminal.jpg"
+                alt="shadow minter"
+                class="act-terminal mini-logo"
+              /><span class="act-terminal program-text">Terminal</span>
             </div>
           </div>
 

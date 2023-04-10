@@ -412,6 +412,26 @@ body {
   border-bottom: 1px solid #868a8e;
 }
 
+.minter-box-left {
+  position: absolute;
+  width: 15rem;
+  height: 4rem;
+  top: 0.8rem;
+  left: 0.4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.minter-box-right {
+  position: absolute;
+  width: 10rem;
+  left: 16rem;
+  height: 4rem;
+  top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+}
+
 .minter-action-box {
   position: relative;
   height: 13rem;
@@ -445,55 +465,31 @@ body {
 .connected-wallet {
   font-family: Windows;
   font-size: 13px;
-  position: relative;
-  left: 0.3rem;
-  top: 0.7rem;
-  display: inline;
 }
 
 .block-timestamp {
-  position: absolute;
   font-family: Windows;
   font-size: 13px;
-  left: 0.3rem;
-  top: 2.2rem;
-  display: inline;
 }
 
 .bytes32-text {
-  position: absolute;
   font-family: Windows;
   font-size: 13px;
-  left: 0.3rem;
-  top: 3.5rem;
-  display: inline;
 }
 
 .eligible-text {
-  position: absolute;
   font-family: Windows;
   font-size: 13px;
-  left: 17rem;
-  top: 0.9rem;
-  display: inline;
 }
 
 .gmi-text {
-  position: absolute;
   font-family: Windows;
   font-size: 13px;
-  left: 17rem;
-  top: 2.2rem;
-  display: inline;
 }
 
 .early-text {
-  position: absolute;
   font-family: Windows;
   font-size: 13px;
-  left: 17rem;
-  top: 3.5rem;
-  display: inline;
 }
 
 .mint-gif {
