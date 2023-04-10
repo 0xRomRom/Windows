@@ -8,11 +8,35 @@ const modal1 = document.querySelector(".minter-inner-1");
 const modal2 = document.querySelector(".minter-inner-2");
 const modal3 = document.querySelector(".minter-inner-3");
 const bytes32Text = document.querySelector(".bytes32-text");
+const currentlyMintedCount = document.querySelector(".currently-minted");
+
+const CONTRACT = "0x417C4dE1Bb2687A0E063390710485B657F4b72d7";
 
 let account;
 let contractInstance;
+window.onload = async () => {
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum);
+    contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+    console.log(contractInstance);
 
-const CONTRACT = "0x1E9E27421461517f1FA9099719e7d0555a557bE6";
+    const currentlyMinted = await contractInstance.methods
+      .CURRENT_SUPPLY()
+      .call();
+
+    currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
+  }
+};
+
+const updateCircSupply = async () => {
+  setInterval(async () => {
+    const currentlyMinted = await contractInstance.methods
+      .CURRENT_SUPPLY()
+      .call();
+
+    currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
+  }, 2000);
+};
 
 const connectToMetamask = async () => {
   //Check if metamask is installed
@@ -49,11 +73,12 @@ const connectToMetamask = async () => {
     }, 5500);
     // Instantiate contract instance
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-    console.log(contractInstance);
 
     let value;
     value = await contractInstance.methods.userMintedCount(account).call();
     console.log(value);
+
+    updateCircSupply();
   }
 };
 connectMetamask.addEventListener("click", connectToMetamask);
@@ -144,7 +169,6 @@ const ethPriceFetcher = async () => {
 ethPriceFetcher();
 
 // Mint config
-
 const nftMintPrice = document.querySelector(".nft-mint-price");
 const mintCountText = document.querySelector(".mint-counter");
 const totalMintPrice = document.querySelector(".total-mint-price");
@@ -222,18 +246,19 @@ mintButton.addEventListener("click", async () => {
 
   if (+currentlyMinted === 2222) {
     alert("Mint concluded. Visit OpenSea to purchase a Sicarius!");
+    return;
   }
   rotateSpinner();
 
-  //   try {
-  //     await contractInstance.methods.mint(mintCount).send({
-  //       from: account,
-  //       value: (1000000000000000 * mintCount).toString(),
-  //       gas: 300000,
-  //     });
-  //   } catch (err) {
-  //     error = true;
-  //   }
+  try {
+    await contractInstance.methods.mint(mintCount).send({
+      from: account,
+      value: (1000000000000000 * mintCount).toString(),
+      gas: 300000,
+    });
+  } catch (err) {
+    error = true;
+  }
 
   if (error) {
     return;

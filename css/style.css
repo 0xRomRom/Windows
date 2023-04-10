@@ -1108,3 +1108,16 @@ body {
   border-right: 2px solid rgb(251, 250, 251);
   border-bottom: 2px solid rgb(251, 250, 251);
 }
+
+.cur-minted-box {
+  position: absolute;
+  width: 8.3rem;
+  height: 3rem;
+  top: 8.5rem;
+  /* border: 1px solid red; */
+  font-family: Windows;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
