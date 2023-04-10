@@ -11,7 +11,7 @@ const modal3 = document.querySelector(".minter-inner-3");
 const bytes32Text = document.querySelector(".bytes32-text");
 const currentlyMintedCount = document.querySelector(".currently-minted");
 
-const CONTRACT = "0xFC55C39812B8195d8C9b039A635d9d7B8FE9B6A2";
+const CONTRACT = "0x0FdA45Aa7b4d96c0e96D995568504a44C725940b";
 
 let account;
 let contractInstance;
@@ -87,10 +87,12 @@ const connectToMetamask = async () => {
     setTimeout(() => {
       if (+value === 0) {
         mintButton.disabled = false;
+        mintButton.classList.add("win-stl");
       }
 
       if (+value === 1) {
         mintButton.disabled = false;
+        mintButton.classList.add("win-stl");
       }
       if (+value === 2) {
         incrementMintCount.disabled = true;
