@@ -22,7 +22,7 @@ contract Sicarius is ERC721, Ownable {
         // MINT_PRICE = 10000000000000000 wei; //0.01Eth
         MINT_PRICE = 1000000000000000 wei; //0.001Eth
         TOTAL_SUPPLY = 2222;
-        baseUri = "ipfs://bafybeihxzfcicvxmzsg4ym7uw7pptv5p7erhinfzgax7sqqi3doqahwffu/";
+        baseUri = "ipfs://bafybeibiupvktahrdkwkipj2myrxp7tt2hmxris3h7ztdir6rnd3vlbozu/";
     }
 
 
@@ -35,7 +35,7 @@ contract Sicarius is ERC721, Ownable {
 
         userMintedAmount[msg.sender] += _amount;
 
-        for (uint i = 1; i < _amount + 1; i++) {
+        for (uint i = 0; i < _amount; i++) {
             _safeMint(msg.sender, CURRENT_SUPPLY + 1);
             tokenURI(CURRENT_SUPPLY + 1);
             CURRENT_SUPPLY++;

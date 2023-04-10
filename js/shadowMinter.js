@@ -10,10 +10,11 @@ const modal3 = document.querySelector(".minter-inner-3");
 const bytes32Text = document.querySelector(".bytes32-text");
 const currentlyMintedCount = document.querySelector(".currently-minted");
 
-const CONTRACT = "0x417C4dE1Bb2687A0E063390710485B657F4b72d7";
+const CONTRACT = "0xFC55C39812B8195d8C9b039A635d9d7B8FE9B6A2";
 
 let account;
 let contractInstance;
+let currMintCount;
 window.onload = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
@@ -33,6 +34,7 @@ const updateCircSupply = async () => {
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
+    currMintCount = currentlyMinted;
 
     currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
   }, 2000);
@@ -240,11 +242,7 @@ mintButton.addEventListener("click", async () => {
   programStatusText.classList.add("hidden");
   statusText2.classList.remove("hidden");
 
-  const currentlyMinted = await contractInstance.methods
-    .CURRENT_SUPPLY()
-    .call();
-
-  if (+currentlyMinted === 2222) {
+  if (currMintCount === 2222) {
     alert("Mint concluded. Visit OpenSea to purchase a Sicarius!");
     return;
   }
@@ -266,23 +264,8 @@ mintButton.addEventListener("click", async () => {
 
   error = false;
   programStatusText.classList.remove("hidden");
-  programStatusText.innerHTML = "Program: Laumching Terminal";
+  programStatusText.innerHTML = "Program: Launching Terminal";
   statusText2.classList.add("hidden");
-
-  let queryString = "";
-
-  if (mintCount === 1) {
-    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${
-      +currentlyMinted + 1
-    }%20LFG!%20%40Sicarius`;
-  }
-  if (mintCount === 2) {
-    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${(
-      +currentlyMinted + 1
-    ).toString()}%20%26%20%23${(
-      +currentlyMinted + 2
-    ).toString()}%20LFG!%20%40Sicarius`;
-  }
 
   modal2.classList.add("hidden");
   modal3.classList.remove("hidden");
@@ -309,11 +292,11 @@ mintButton.addEventListener("click", async () => {
       "==========================================" +
       "<br>" +
       "Congratulations on becoming one of the" +
-      `<br>` +
+      "<br>" +
       "early few holders of Sicarius." +
-      `<br>` +
-      `This journey just got started so buckle up` +
-      `<br>` +
+      "<br>" +
+      "This journey just got started so buckle up" +
+      "<br>" +
       "and get ready to join the community!" +
       "<br>" +
       "==========================================";
@@ -323,6 +306,19 @@ mintButton.addEventListener("click", async () => {
   setTimeout(() => {
     redirectSocialsBox.classList.remove("hidden");
   }, 14000);
+
+  let currentlyMinted = await contractInstance.methods.CURRENT_SUPPLY().call();
+
+  let queryString = "";
+
+  if (mintCount === 1) {
+    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${+currentlyMinted}%20LFG!%20%40Sicarius`;
+  }
+  if (mintCount === 2) {
+    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${
+      +currentlyMinted - 1
+    }%20%26%20%23${+currentlyMinted}%20LFG!%20%40Sicarius`;
+  }
 
   setTimeout(() => {
     redirectSocialsBox.classList.add("hidden");
