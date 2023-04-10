@@ -6,9 +6,32 @@ const mainProgram = document.querySelector(".main-program");
 
 //Open Roadmap
 const menuRoadmap = document.querySelector(".menu-roadmap");
+const closeRoadmap = document.querySelector(".clo-roadmap");
+const roadmapModal = document.querySelector(".roadmap-modal");
+
 menuRoadmap.addEventListener("click", () => {
   startMenuList.classList.toggle("hidden");
   roadmapModal.classList.remove("hidden");
+  startButton.classList.toggle("clicked");
+  documentsDropMenu.classList.add("hidden");
+});
+
+closeRoadmap.addEventListener("click", () => {
+  roadmapModal.classList.add("hidden");
+});
+
+//Open Team
+const menuTeam = document.querySelector(".menu-team");
+const closeTeam = document.querySelector(".clo-team");
+const teamModal = document.querySelector(".team-modal");
+
+closeTeam.addEventListener("click", () => {
+  teamModal.classList.add("hidden");
+});
+
+menuTeam.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  teamModal.classList.remove("hidden");
   startButton.classList.toggle("clicked");
   documentsDropMenu.classList.add("hidden");
 });
@@ -40,9 +63,6 @@ mainProgram.addEventListener("click", (e) => {
     socialsMenu.classList.add("hidden");
   }
 });
-
-const closeRoadmap = document.querySelector(".clo-roadmap");
-const roadmapModal = document.querySelector(".roadmap-modal");
 
 const trashCanModals = document.querySelector(".recycle-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
@@ -124,10 +144,6 @@ closeTerminal.addEventListener("click", () => {
   terminalModals.classList.remove("enlarged");
   terminalBar.classList.add("hidden");
   terminalActive = false;
-});
-
-closeRoadmap.addEventListener("click", () => {
-  roadmapModal.classList.add("hidden");
 });
 
 // Hover to display programs

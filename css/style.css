@@ -545,7 +545,32 @@ body {
   width: 100%;
   top: 0.6rem;
   height: 22.5rem;
-  /* border: 1px solid red; */
+}
+
+.team-cont {
+  position: absolute;
+  width: 100%;
+  top: 1.5rem;
+  height: 22.5rem;
+  display: flex;
+}
+
+.team-member {
+  width: 50%;
+  height: 100%;
+}
+
+.team-member-img {
+  width: 100%;
+  padding: 0.75rem;
+}
+
+.team-title {
+  font-family: Windows;
+  text-align: center;
+  font-size: 17px;
+  top: -0.75rem;
+  position: relative;
 }
 
 .roadmap-text-box {
