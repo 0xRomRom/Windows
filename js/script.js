@@ -1,8 +1,17 @@
-require('dotenv').config();
+require("dotenv").config();
 
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
 const mainProgram = document.querySelector(".main-program");
+
+//Open Roadmap
+const menuRoadmap = document.querySelector(".menu-roadmap");
+menuRoadmap.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  roadmapModal.classList.remove("hidden");
+  startButton.classList.toggle("clicked");
+  documentsDropMenu.classList.add("hidden");
+});
 
 //Toggle menu list
 startButton.addEventListener("click", () => {
@@ -32,6 +41,9 @@ mainProgram.addEventListener("click", (e) => {
   }
 });
 
+const closeRoadmap = document.querySelector(".clo-roadmap");
+const roadmapModal = document.querySelector(".roadmap-modal");
+
 const trashCanModals = document.querySelector(".recycle-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
 const closeTrashCan = document.querySelector(".clo-trash");
@@ -47,12 +59,12 @@ const startmenuRun = document.querySelector(".run");
 
 let binActive = false;
 
-const trashBar = document.querySelector('.act-bin');
+const trashBar = document.querySelector(".act-bin");
 // Open recycle bin modal
 trashIconDesk.addEventListener("dblclick", () => {
   if (!binActive) {
     trashCanModals.classList.remove("hidden");
-    trashBar.classList.remove('hidden');
+    trashBar.classList.remove("hidden");
     binActive = true;
   }
 });
@@ -61,18 +73,18 @@ trashIconDesk.addEventListener("dblclick", () => {
 closeTrashCan.addEventListener("click", () => {
   trashCanModals.classList.add("hidden");
   trashCanModals.classList.remove("enlarged");
-  trashBar.classList.add('hidden');
+  trashBar.classList.add("hidden");
   binActive = false;
 });
 
 let shadowActive = false;
 
-const shadowBar = document.querySelector('.act-shadow');
+const shadowBar = document.querySelector(".act-shadow");
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
   if (!shadowActive) {
     shadowMinterModal.classList.remove("hidden");
-    shadowBar.classList.remove('hidden');
+    shadowBar.classList.remove("hidden");
     shadowActive = true;
   }
 });
@@ -80,18 +92,17 @@ shadowMinterDesk.addEventListener("dblclick", () => {
 closeShadowMinter.addEventListener("click", () => {
   shadowMinterModal.classList.add("hidden");
   shadowMinterModal.classList.remove("enlarged");
-  shadowBar.classList.add('hidden');
+  shadowBar.classList.add("hidden");
   shadowActive = false;
 });
 
 let terminalActive = false;
 
 const terminalInputField = document.querySelector(".terminal-input");
-const terminalBar = document.querySelector('.act-terminal');
+const terminalBar = document.querySelector(".act-terminal");
 // Open terminal modal
 terminalDesk.addEventListener("dblclick", () => {
   if (!terminalActive) {
-    
     terminalModals.classList.remove("hidden");
     terminalBar.classList.remove("hidden");
     terminalInputField.focus();
@@ -113,6 +124,10 @@ closeTerminal.addEventListener("click", () => {
   terminalModals.classList.remove("enlarged");
   terminalBar.classList.add("hidden");
   terminalActive = false;
+});
+
+closeRoadmap.addEventListener("click", () => {
+  roadmapModal.classList.add("hidden");
 });
 
 // Hover to display programs
@@ -192,5 +207,3 @@ socialsHover.addEventListener("mouseover", () => {
 socialsHover.addEventListener("mouseleave", () => {
   socialsMenu.classList.add("hidden");
 });
-
-

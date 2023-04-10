@@ -518,6 +518,64 @@ body {
   border-left: 1px solid rgb(240, 240, 240);
 }
 
+.roadmap-modal {
+  position: absolute;
+  width: 510px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
+.team-modal {
+  position: absolute;
+  width: 510px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
+.roadmap-cont {
+  position: absolute;
+  width: 100%;
+  top: 0.6rem;
+  height: 22.5rem;
+  /* border: 1px solid red; */
+}
+
+.roadmap-text-box {
+  position: absolute;
+  left: 7rem;
+  top: 2.3rem;
+  width: 18rem;
+  height: 20rem;
+  z-index: 20;
+  font-family: Windows;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 30px;
+  padding-left: 4rem;
+  user-select: none;
+}
+
+.purple {
+  color: rgb(236, 10, 236) !important;
+}
+
+.roadmap-img {
+  position: absolute;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+}
+
 .center-modals {
   position: absolute;
   width: 100vw;
@@ -546,6 +604,7 @@ body {
   justify-content: space-between;
   align-items: center;
   user-select: none;
+  z-index: 100;
 }
 
 .settings-row {
@@ -604,6 +663,15 @@ body {
 .trashcan-buttons {
   position: relative;
   width: 3.25rem;
+  height: 100%;
+  margin-right: 0.1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.trashcan-button {
+  position: relative;
+  width: 1.1rem;
   height: 100%;
   margin-right: 0.1rem;
   display: flex;
