@@ -984,21 +984,24 @@ body {
   position: relative;
   height: 27px;
   width: 85px;
-  border-top: 2px solid rgb(251, 250, 251);
-  border-left: 2px solid rgb(251, 250, 251);
-  border-right: 2px solid rgb(20, 20, 20);
-  border-bottom: 2px solid rgb(20, 20, 20);
+  font-family: Windows;
+  font-size: 13px;
+}
+
+.win-stl {
   cursor: pointer;
   text-shadow: 0.5px 0px black, 0.5px 0px black;
   letter-spacing: 1px;
   background-size: cover;
   background-repeat: no-repeat;
   user-select: none;
-  font-family: Windows;
-  font-size: 13px;
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(20, 20, 20);
+  border-bottom: 2px solid rgb(20, 20, 20);
 }
 
-.mint-button:active {
+.win-stl:active {
   border-top: 2px solid black;
   border-left: 2px solid black;
   border-right: 2px solid rgb(251, 250, 251);

@@ -2,6 +2,7 @@ import ABI from "./abi.js";
 
 import keccak256 from "keccak256";
 
+const mintButton = document.querySelector(".mint-button");
 const connectMetamask = document.querySelector(".connect-metamask");
 const connectUserWallet = document.querySelector(".connected-wallet");
 const modal1 = document.querySelector(".minter-inner-1");
@@ -19,7 +20,6 @@ window.onload = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-    console.log(contractInstance);
 
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
@@ -35,7 +35,6 @@ const updateCircSupply = async () => {
       .CURRENT_SUPPLY()
       .call();
     currMintCount = currentlyMinted;
-
     currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
   }, 2000);
 };
@@ -61,6 +60,19 @@ const connectToMetamask = async () => {
     //Select first account
     account = accounts[0];
 
+    let value;
+    value = await contractInstance.methods.userMintedCount(account).call();
+    console.log(value);
+
+    if (+value === 1) {
+      incrementMintCount.disabled = true;
+    }
+    if (+value === 2) {
+      incrementMintCount.disabled = true;
+      mintButton.disabled = true;
+      mintButton.classList.remove("win-stl");
+    }
+
     //Display user wallet
     modal1.classList.add("hidden");
     modal2.classList.remove("hidden");
@@ -70,15 +82,9 @@ const connectToMetamask = async () => {
 
     incrementStatusBar(11);
     updateStatusText(statussesArray2);
-    setTimeout(() => {
-      mintButton.disabled = false;
-    }, 5500);
+
     // Instantiate contract instance
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-
-    let value;
-    value = await contractInstance.methods.userMintedCount(account).call();
-    console.log(value);
 
     updateCircSupply();
   }
@@ -206,7 +212,7 @@ decrementMintCount.addEventListener("click", () => {
 });
 
 // Mint
-const mintButton = document.querySelector(".mint-button");
+
 const terminalMenuBar = document.querySelector(".act-terminal");
 const terminalModall = document.querySelector(".terminal-modal");
 
