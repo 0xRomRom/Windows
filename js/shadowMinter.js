@@ -60,19 +60,6 @@ const connectToMetamask = async () => {
     //Select first account
     account = accounts[0];
 
-    let value;
-    value = await contractInstance.methods.userMintedCount(account).call();
-    console.log(value);
-
-    if (+value === 1) {
-      incrementMintCount.disabled = true;
-    }
-    if (+value === 2) {
-      incrementMintCount.disabled = true;
-      mintButton.disabled = true;
-      mintButton.classList.remove("win-stl");
-    }
-
     //Display user wallet
     modal1.classList.add("hidden");
     modal2.classList.remove("hidden");
@@ -80,12 +67,39 @@ const connectToMetamask = async () => {
     bytes32Text.innerHTML =
       `Bytes32: ` + keccak256(account).toString("hex").slice(0, 26) + `...`;
 
+    //Handle UI updates
     incrementStatusBar(11);
     updateStatusText(statussesArray2);
+    mintButton.disabled = true;
+    mintButton.classList.remove("win-stl");
 
-    // Instantiate contract instance
-    contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+    //Disable mint UI when user has already minted
+    let value;
+    value = await contractInstance.methods.userMintedCount(account).call();
+    console.log(value);
 
+    if (+value === 2) {
+      incrementMintCount.disabled = true;
+      mintButton.disabled = true;
+      mintButton.classList.remove("win-stl");
+    }
+
+    setTimeout(() => {
+      if (+value === 0) {
+        mintButton.disabled = false;
+      }
+
+      if (+value === 1) {
+        mintButton.disabled = false;
+      }
+      if (+value === 2) {
+        incrementMintCount.disabled = true;
+        mintButton.disabled = true;
+        mintButton.classList.remove("win-stl");
+      }
+    }, 6000);
+
+    //Call current circ supply interval fetcher
     updateCircSupply();
   }
 };
