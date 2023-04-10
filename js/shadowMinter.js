@@ -225,16 +225,15 @@ mintButton.addEventListener("click", async () => {
   }
   rotateSpinner();
 
-  try {
-    await contractInstance.methods.mint(mintCount).send({
-      from: account,
-      value: (1000000000000000 * mintCount).toString(),
-      gas: 300000,
-    });
-  } catch (err) {
-    console.log(err);
-    error = true;
-  }
+  //   try {
+  //     await contractInstance.methods.mint(mintCount).send({
+  //       from: account,
+  //       value: (1000000000000000 * mintCount).toString(),
+  //       gas: 300000,
+  //     });
+  //   } catch (err) {
+  //     error = true;
+  //   }
 
   if (error) {
     return;
@@ -282,13 +281,17 @@ mintButton.addEventListener("click", async () => {
     const output = document.createElement("div");
     output.style.color = "green";
     output.innerHTML =
-      "= Congratulations on becoming one of the =" +
+      "==========================================" +
+      "<br>" +
+      "Congratulations on becoming one of the" +
       `<br>` +
-      "= early few holders of Sicarius. =" +
+      "early few holders of Sicarius." +
       `<br>` +
-      `= This journey just got started so buckle up =` +
+      `This journey just got started so buckle up` +
       `<br>` +
-      "= and get ready to join the community! =";
+      "and get ready to join the community!" +
+      "<br>" +
+      "==========================================";
     terminalOutputs.insertAdjacentElement("beforeend", output);
   }, 8500);
 
