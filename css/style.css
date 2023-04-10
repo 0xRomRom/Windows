@@ -532,7 +532,7 @@ body {
 .team-modal {
   position: absolute;
   width: 510px;
-  height: 400px;
+  height: 310px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
   box-shadow: 1px 1px 2px black;
@@ -966,8 +966,16 @@ body {
   gap: 0.5rem;
 }
 
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
 .terminal-prompt-user {
-  color: #32cd32;
+  color: green;
 }
 
 .terminal-prompt-path {
