@@ -189,31 +189,41 @@ const shadowMinterModals = document.querySelector(".shadow-minter-modal");
 const terminalOutputs = document.querySelector(".terminal-output");
 const terminalInputs = document.querySelector(".terminal-input");
 const redirectSocialsBox = document.querySelector(".redirect-socials");
-const statusText = document.querySelector(".status-text");
+const statusText2 = document.querySelector(".status-text2");
+
+let error = false;
 
 const rotateSpinner = () => {
   let index = 0;
-  setInterval(() => {
+
+  const rotater = setInterval(() => {
     if (index === 8) {
       index = 0;
     }
-    statusText.innerHTML = `Program: Minting ${spinElements[index]}`;
+    statusText2.innerHTML = `Program: Minting ${spinElements[index]}`;
     index++;
+    if (error) {
+      clearInterval(rotater);
+      statusText2.innerHTML = `Program: Failed To Mint`;
+    }
   }, 100);
 };
 
 const spinElements = ["|", "/", "-", "\\", "|", "/", "-", "\\", "|"];
 
 mintButton.addEventListener("click", async () => {
+  error = false;
+  programStatusText.classList.add("hidden");
+  statusText2.classList.remove("hidden");
+
   const currentlyMinted = await contractInstance.methods
     .CURRENT_SUPPLY()
     .call();
 
-  let error = false;
-
   if (+currentlyMinted === 2222) {
     alert("Mint concluded. Visit OpenSea to purchase a Sicarius!");
   }
+  rotateSpinner();
 
   try {
     await contractInstance.methods.mint(mintCount).send({
@@ -221,13 +231,19 @@ mintButton.addEventListener("click", async () => {
       value: (1000000000000000 * mintCount).toString(),
       gas: 300000,
     });
-    rotateSpinner();
   } catch (err) {
     console.log(err);
     error = true;
   }
 
-  if (error) return;
+  if (error) {
+    return;
+  }
+
+  error = false;
+  programStatusText.classList.remove("hidden");
+  programStatusText.innerHTML = "Program: Laumching Terminal";
+  statusText2.classList.add("hidden");
 
   let queryString = "";
 

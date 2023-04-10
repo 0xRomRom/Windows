@@ -344,6 +344,14 @@ body {
   position: relative;
   margin: 0.2rem 0;
 }
+.status-text2 {
+  text-align: center;
+  display: block;
+  font-family: Windows;
+  font-size: 13px;
+  position: relative;
+  margin: 0.2rem 0;
+}
 
 .modals-wrapper {
   position: relative;
@@ -464,17 +472,17 @@ body {
 
 .connected-wallet {
   font-family: Windows;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .block-timestamp {
   font-family: Windows;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .bytes32-text {
   font-family: Windows;
-  font-size: 13px;
+  font-size: 12px;
 }
 
 .eligible-text {
