@@ -1,8 +1,24 @@
 require("dotenv").config();
 
+const programsHover = document.querySelector(".d1");
+const documentsHover = document.querySelector(".d2");
+const mintInfoHover = document.querySelector(".d3");
+const socialsHover = document.querySelector(".d4");
+
+const programsDropMenu = document.querySelector(".drop-1");
+const documentsDropMenu = document.querySelector(".drop-2");
+const mintInfoMenu = document.querySelector(".drop-3");
+const socialsMenu = document.querySelector(".drop-4");
+
 const startButton = document.querySelector(".start-button");
 const startMenuList = document.querySelector(".menu-list");
 const mainProgram = document.querySelector(".main-program");
+
+//Toggle menu list
+startButton.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  startButton.classList.toggle("clicked");
+});
 
 //Open Roadmap
 const menuRoadmap = document.querySelector(".menu-roadmap");
@@ -36,10 +52,20 @@ menuTeam.addEventListener("click", () => {
   documentsDropMenu.classList.add("hidden");
 });
 
-//Toggle menu list
-startButton.addEventListener("click", () => {
+//Open whitelist
+const menuWhitelist = document.querySelector(".menu-whitelist");
+const closeWhitelist = document.querySelector(".clo-whitelist");
+const whitelistModal = document.querySelector(".whitelist-modal");
+
+closeWhitelist.addEventListener("click", () => {
+  whitelistModal.classList.add("hidden");
+});
+
+menuWhitelist.addEventListener("click", () => {
   startMenuList.classList.toggle("hidden");
+  whitelistModal.classList.remove("hidden");
   startButton.classList.toggle("clicked");
+  mintInfoMenu.classList.add("hidden");
 });
 
 mainProgram.addEventListener("click", (e) => {
@@ -147,16 +173,6 @@ closeTerminal.addEventListener("click", () => {
 });
 
 // Hover to display programs
-
-const programsHover = document.querySelector(".d1");
-const documentsHover = document.querySelector(".d2");
-const mintInfoHover = document.querySelector(".d3");
-const socialsHover = document.querySelector(".d4");
-
-const programsDropMenu = document.querySelector(".drop-1");
-const documentsDropMenu = document.querySelector(".drop-2");
-const mintInfoMenu = document.querySelector(".drop-3");
-const socialsMenu = document.querySelector(".drop-4");
 
 // #1
 programsDropMenu.addEventListener("mouseover", () => {
