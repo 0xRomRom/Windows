@@ -637,7 +637,7 @@ body {
   font-family: Windows;
   text-align: center;
   font-size: 17px;
-  top: -0.75rem;
+  top: -1rem;
   position: relative;
 }
 
@@ -1014,7 +1014,7 @@ body {
   position: relative;
   width: 99%;
   left: 0.5;
-  height: 99%;
+  height: 373px;
   top: 3px;
   background-color: black;
   color: white;
@@ -1023,8 +1023,12 @@ body {
   overflow: hidden;
 }
 
+.term-row {
+  margin-left: 3px;
+}
+
 .terminal-body {
-  height: calc(100% - 20px);
+  height: 270px;
   padding: 10px;
   box-sizing: border-box;
 }
