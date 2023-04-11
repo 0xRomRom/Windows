@@ -551,6 +551,52 @@ body {
   border-left: 1px solid rgb(240, 240, 240);
 }
 
+.faq-textbox {
+  position: absolute;
+  width: 95%;
+  left: 2.5%;
+  top: 1.7rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.5rem;
+}
+
+.question {
+  font-family: Windows;
+  font-weight: bold;
+  font-size: 17px;
+  text-decoration: underline;
+}
+
+.answer {
+  font-family: Windows;
+}
+
+.question {
+  font-family: Windows;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.faq-hr {
+  width: 90%;
+  left: 5%;
+  height: 1px solid black;
+  margin: 0.5rem 0rem;
+}
+
+.faq-modal {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
 .whitelist-span {
   font-family: Windows;
   width: 100%;
@@ -641,7 +687,7 @@ body {
 }
 
 .program-row {
-  position: relative;
+  position: sticky;
   width: 99%;
   left: 0.5%;
   top: 2px;
@@ -797,6 +843,7 @@ body {
   position: relative;
   width: 100%;
   height: calc(100% - 20px);
+  overflow-y: scroll;
 }
 
 .recycle-inner {

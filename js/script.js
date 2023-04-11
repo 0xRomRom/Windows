@@ -68,6 +68,22 @@ menuWhitelist.addEventListener("click", () => {
   mintInfoMenu.classList.add("hidden");
 });
 
+//Open faq
+const menuFAQ = document.querySelector(".menu-faq");
+const closeFAQ = document.querySelector(".clo-faq");
+const faqModal = document.querySelector(".faq-modal");
+
+closeFAQ.addEventListener("click", () => {
+  faqModal.classList.add("hidden");
+});
+
+menuFAQ.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  faqModal.classList.remove("hidden");
+  startButton.classList.toggle("clicked");
+  mintInfoMenu.classList.add("hidden");
+});
+
 mainProgram.addEventListener("click", (e) => {
   const t = e.target.classList[0];
   if (t === "start-button") return;
