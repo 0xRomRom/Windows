@@ -84,6 +84,22 @@ menuFAQ.addEventListener("click", () => {
   mintInfoMenu.classList.add("hidden");
 });
 
+//Open gallery
+const menuGallery = document.querySelector(".menu-gallery");
+const closeGallery = document.querySelector(".clo-gallery");
+const galleryModal = document.querySelector(".gallery-modal");
+
+closeGallery.addEventListener("click", () => {
+  galleryModal.classList.add("hidden");
+});
+
+menuGallery.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  galleryModal.classList.remove("hidden");
+  startButton.classList.toggle("clicked");
+  programsDropMenu.classList.add("hidden");
+});
+
 mainProgram.addEventListener("click", (e) => {
   const t = e.target.classList[0];
   if (t === "start-button") return;
