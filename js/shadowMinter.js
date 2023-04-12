@@ -99,6 +99,9 @@ const connectToMetamask = async () => {
         mintButton.disabled = true;
         mintButton.classList.remove("win-stl");
       }
+      //###
+      mintButton.disabled = true;
+      mintButton.classList.remove("win-stl");
     }, 6000);
 
     //Call current circ supply interval fetcher
