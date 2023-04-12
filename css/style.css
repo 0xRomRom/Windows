@@ -843,7 +843,6 @@ body {
   position: relative;
   width: 100%;
   height: calc(100% - 20px);
-  overflow-y: scroll;
 }
 
 .recycle-inner {
@@ -1131,6 +1130,7 @@ body {
   font-family: Windows;
   font-size: 13px;
   font-weight: bold;
+  color: black;
 }
 
 .a-clean {

@@ -1,604 +1,494 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sicarius innocens</title>
-    <link rel="icon" type="image/x-icon" href="/img/Shadow Minter.ico" />
-    <link href="./css/style.css" rel="stylesheet" />
-    <script type="module" src="./js/script.js"></script>
-    <script type="module" src="./js/dragIcons.js"></script>
-    <script type="module" src="./js/modalCtaButtons.js"></script>
-    <script type="module" src="./js/clock.js"></script>
-    <script type="module" src="./js/terminal.js"></script>
-    <script type="module" src="./js/abi.js"></script>
-    <script type="module" src="./js/shadowMinter.js"></script>
-    <script type="module" src="./js/blocktime.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.2.3/ethers.umd.min.js"></script>
-    <script
-      src="https://kit.fontawesome.com/5f3c108898.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div class="app">
-      <!--Windows nav menu-->
-      <div class="menu-list hidden">
-        <img src="./img/windows95 bar.png" class="win95-long" />
-        <div class="start-nav-list">
-          <div class="nav-item d1">
-            <div class="arrow-box">
-              <i class="fa-solid fa-play"></i>
-            </div>
-            <img
-              src="./img/Programs.png"
-              alt="turn computer off"
-              class="nav-icon ico-sml"
-            />
-            <span class="nav-item-title">Programs</span>
-          </div>
 
-          <div class="nav-item d2">
-            <div class="arrow-box">
-              <i class="fa-solid fa-play"></i>
-            </div>
-            <img
-              src="./img/Documents.png"
-              alt="turn computer off"
-              class="nav-icon"
-            />
-            <span class="nav-item-title">Documents</span>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sicarius innocens</title>
+  <link rel="icon" type="image/x-icon" href="/img/Shadow Minter.ico" />
+  <link href="./css/style.css" rel="stylesheet" />
+  <script type="module" src="./js/script.js"></script>
+  <script type="module" src="./js/dragIcons.js"></script>
+  <script type="module" src="./js/modalCtaButtons.js"></script>
+  <script type="module" src="./js/clock.js"></script>
+  <script type="module" src="./js/terminal.js"></script>
+  <script type="module" src="./js/abi.js"></script>
+  <script type="module" src="./js/shadowMinter.js"></script>
+  <script type="module" src="./js/blocktime.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.2.3/ethers.umd.min.js"></script>
+  <script src="https://kit.fontawesome.com/5f3c108898.js" crossorigin="anonymous"></script>
+</head>
 
-          <div class="nav-item d3">
-            <div class="arrow-box">
-              <i class="fa-solid fa-play"></i>
-            </div>
-            <img
-              src="./img/Mint Info.png"
-              alt="turn computer off"
-              class="nav-icon ico-sml"
-            />
-            <span class="nav-item-title">Mint Info</span>
+<body>
+  <div class="app">
+    <!--Windows nav menu-->
+    <div class="menu-list hidden">
+      <img src="./img/windows95 bar.png" class="win95-long" />
+      <div class="start-nav-list">
+        <div class="nav-item d1">
+          <div class="arrow-box">
+            <i class="fa-solid fa-play"></i>
           </div>
-
-          <div class="nav-item d4">
-            <div class="arrow-box">
-              <i class="fa-solid fa-play"></i>
-            </div>
-            <img
-              src="./img/Socials.png"
-              alt="turn computer off"
-              class="nav-icon ico-sml"
-            />
-            <span class="nav-item-title">Socials</span>
-          </div>
-
-          <div class="nav-item">
-            <img
-              src="./img/Help Book.png"
-              alt="turn computer off"
-              class="nav-icon ico-sml"
-            />
-            <span class="nav-item-title">Help</span>
-          </div>
-
-          <div class="nav-item run">
-            <img
-              src="./img/Program Wait.png"
-              alt="turn computer off"
-              class="nav-icon ico-sml"
-            />
-            <span class="nav-item-title">Run...</span>
-          </div>
-
-          <div class="border"></div>
-          <div class="nav-item">
-            <img
-              src="./img/Shut Down.png"
-              alt="turn computer off"
-              class="nav-icon"
-            />
-            <span class="nav-item-title">Sh<u class="u">u</u>t Down...</span>
-          </div>
+          <img src="./img/Programs.png" alt="turn computer off" class="nav-icon ico-sml" />
+          <span class="nav-item-title">Programs</span>
         </div>
 
-        <div class="drop-1 hidden">hi</div>
-        <div class="drop-2 hidden">
-          <div class="menu-roadmap inner-program">
-            <div class="program-logo">
-              <img
-                src="./img/Roadmap.png"
-                alt="Discord logo"
-                class="program-img"
-              />
-            </div>
-            <span class="program-title">Road Map</span>
-            <div class="arrow-box2">
-              <i class="fa-solid fa-play"></i>
-            </div>
+        <div class="nav-item d2">
+          <div class="arrow-box">
+            <i class="fa-solid fa-play"></i>
           </div>
-
-          <div class="menu-team inner-program">
-            <div class="program-logo">
-              <img
-                src="./img/Team.png"
-                alt="Discord logo"
-                class="program-img"
-              />
-            </div>
-            <span class="program-title">Team info</span>
-            <div class="arrow-box2">
-              <i class="fa-solid fa-play"></i>
-            </div>
-          </div>
+          <img src="./img/Documents.png" alt="turn computer off" class="nav-icon" />
+          <span class="nav-item-title">Documents</span>
         </div>
-        <div class="drop-3 hidden">
-          <div class="menu-faq inner-program">
-            <div class="program-logo">
-              <img
-                src="./img/Pickaxe.png"
-                alt="Discord logo"
-                class="program-img"
-              />
-            </div>
-            <span class="program-title">Mint FAQ</span>
-            <div class="arrow-box2">
-              <i class="fa-solid fa-play"></i>
-            </div>
-          </div>
 
-          <div class="menu-whitelist inner-program">
-            <div class="program-logo">
-              <img src="./img/Info.png" alt="Info logo" class="program-img" />
-            </div>
-            <span class="program-title">How to whitelist</span>
-            <div class="arrow-box2">
-              <i class="fa-solid fa-play"></i>
-            </div>
+        <div class="nav-item d3">
+          <div class="arrow-box">
+            <i class="fa-solid fa-play"></i>
           </div>
+          <img src="./img/Mint Info.png" alt="turn computer off" class="nav-icon ico-sml" />
+          <span class="nav-item-title">Mint Info</span>
         </div>
-        <div class="drop-4 hidden">
-          <a href="" class="a-clean">
-            <div class="inner-program">
-              <div class="program-logo">
-                <img
-                  src="./img/Discord.png"
-                  alt="Discord logo"
-                  class="program-img"
-                />
-              </div>
-              <span class="program-title">Discord</span>
-              <div class="arrow-box2">
-                <i class="fa-solid fa-play"></i>
-              </div>
-            </div>
-          </a>
 
-          <a href="" class="a-clean">
-            <div class="inner-program">
-              <div class="program-logo">
-                <img
-                  src="./img/Twitter.webp"
-                  alt="Discord logo"
-                  class="program-img"
-                />
-              </div>
-              <span class="program-title">Twitter</span>
-              <div class="arrow-box2">
-                <i class="fa-solid fa-play"></i>
-              </div>
-            </div>
-          </a>
+        <div class="nav-item d4">
+          <div class="arrow-box">
+            <i class="fa-solid fa-play"></i>
+          </div>
+          <img src="./img/Socials.png" alt="turn computer off" class="nav-icon ico-sml" />
+          <span class="nav-item-title">Socials</span>
+        </div>
+
+        <div class="nav-item">
+          <img src="./img/Help Book.png" alt="turn computer off" class="nav-icon ico-sml" />
+          <span class="nav-item-title">Help</span>
+        </div>
+
+        <div class="nav-item run">
+          <img src="./img/Program Wait.png" alt="turn computer off" class="nav-icon ico-sml" />
+          <span class="nav-item-title">Run...</span>
+        </div>
+
+        <div class="border"></div>
+        <div class="nav-item">
+          <img src="./img/Shut Down.png" alt="turn computer off" class="nav-icon" />
+          <span class="nav-item-title">Sh<u class="u">u</u>t Down...</span>
         </div>
       </div>
 
-      <div class="center-modals">
-        <!-- FAQ Modal -->
-        <div class="faq-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img
-                  src="./img/Pickaxe.png"
-                  alt="recycle bin"
-                  class="mini-logo"
-                />
-                <span class="program-row-text">Mint FAQ</span>
-              </div>
-              <div class="trashcan-button">
-                <button class="close clo-faq"></button>
-              </div>
-            </div>
-            <div class="faq-textbox">
-              <span class="question">Total supply?</span>
-              <span class="answer">2222</span>
-              <hr / class="faq-hr">
-              <span class="question">Royalties?</span>
-              <span class="answer">2.22%</span>
-              <hr / class="faq-hr">
-              <span class="question">Mint date?</span>
-              <span class="answer">T.B.A.</span>
-              <hr / class="faq-hr">
-              <span class="question">Mint price?</span>
-              <span class="answer">T.B.A.</span>
-              <hr / class="faq-hr">
-              <span class="question">Mint cap per wallet?</span>
-              <span class="answer">Max 2/wallet</span>
-              <hr / class="faq-hr">
-              <span class="question">How much does team pre-mint?</span>
-              <span class="answer">0</span>
-              <hr / class="faq-hr">
-              <span class="question">What will royalties be used for?</span>
-              <span class="answer">Strippers & Cocaine</span>
-              <hr / class="faq-hr">
-              <span class="question">What network?</span>
-              <span class="answer">Ethereum</span>
-              <hr / class="faq-hr">
-              <span class="question">What utility sir?</span>
-              <span class="answer">No false promises here</span>
-              <hr / class="faq-hr">
-              <span class="question">Aftermarkets?</span>
-              <span class="answer">OpenSea & more</span>
-              <hr / class="faq-hr">
-              <span class="question">What if I mint more than 2?</span>
-              <span class="answer">mi familia</span>
-              <hr / class="faq-hr">
-              <span class="question">Why is the art so pixelated?</span>
-              <span class="answer">We work with COBOL on a 80's mainframe</span>
-              <hr / class="faq-hr">
-              <span class="question">Burn/Stake plans?</span>
-              <span class="answer">The future will tell</span>
-              <hr / class="faq-hr">
-              <span class="question">What is Sicarius?</span>
-              <span class="answer">A gang of 'innocent' Latin assassins</span>
-              <hr / class="faq-hr">
-              <span class="question"
-                >Will my frens think my new pfp is based?</span
-              >
-              <span class="answer">fuck yes</span>
-              <hr / class="faq-hr">
-              <span class="question">Am I gonna make it?</span>
-              <span class="answer">yes</span>
-              <hr / class="faq-hr">
-            </div>
+      <div class="drop-1 hidden">
+        <div class="menu-roadmap inner-program">
+          <div class="program-logo">
+            <img src="./img/Gallery.png" alt="NFT Gallery" class="program-img" />
+          </div>
+          <span class="program-title">NFT Gallery</span>
+          <div class="arrow-box2">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+      </div>
+      <div class="drop-2 hidden">
+        <div class="menu-roadmap inner-program">
+          <div class="program-logo">
+            <img src="./img/Roadmap.png" alt="Roadmap" class="program-img" />
+          </div>
+          <span class="program-title">Road Map</span>
+          <div class="arrow-box2">
+            <i class="fa-solid fa-play"></i>
           </div>
         </div>
 
-        <!-- Whitelist Modal -->
-        <div class="whitelist-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img src="./img/Info.png" alt="recycle bin" class="mini-logo" />
-                <span class="program-row-text">How To Whitelist</span>
-              </div>
-              <div class="trashcan-button">
-                <button class="close clo-whitelist"></button>
-              </div>
-            </div>
-            <span class="whitelist-span"
-              >We don't believe in whitelists,<br />
-              everyone gets a fair chance.</span
-            >
+        <div class="menu-team inner-program">
+          <div class="program-logo">
+            <img src="./img/Team.png" alt="Team logo" class="program-img" />
+          </div>
+          <span class="program-title">Team info</span>
+          <div class="arrow-box2">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+      </div>
+      <div class="drop-3 hidden">
+        <div class="menu-faq inner-program">
+          <div class="program-logo">
+            <img src="./img/Pickaxe.png" alt="Faq logo" class="program-img" />
+          </div>
+          <span class="program-title">Mint FAQ</span>
+          <div class="arrow-box2">
+            <i class="fa-solid fa-play"></i>
           </div>
         </div>
 
-        <!-- Team Modal -->
-        <div class="team-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img src="./img/Team.png" alt="recycle bin" class="mini-logo" />
-                <span class="program-row-text">Team</span>
-              </div>
-              <div class="trashcan-button">
-                <button class="close clo-team"></button>
-              </div>
-            </div>
-            <div class="team-cont">
-              <div class="team-member">
-                <img
-                  class="team-member-img"
-                  src="./img/Benji.png"
-                  alt="Benji Bytecode"
-                />
-                <h2 class="team-title">Benji Bytecode</h2>
-              </div>
-
-              <div class="team-member">
-                <img
-                  class="team-member-img"
-                  src="./img/Sicari.png"
-                  alt="Benji Bytecode"
-                />
-                <h2 class="team-title">Mr. WAGMI</h2>
-              </div>
-            </div>
+        <div class="menu-whitelist inner-program">
+          <div class="program-logo">
+            <img src="./img/Info.png" alt="Info logo" class="program-img" />
+          </div>
+          <span class="program-title">How to whitelist</span>
+          <div class="arrow-box2">
+            <i class="fa-solid fa-play"></i>
           </div>
         </div>
-
-        <!-- Road Map Modal -->
-        <div class="roadmap-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img
-                  src="./img/Roadmap.png"
-                  alt="recycle bin"
-                  class="mini-logo"
-                />
-                <span class="program-row-text">Roadmap</span>
-              </div>
-              <div class="trashcan-button">
-                <button class="close clo-roadmap"></button>
-              </div>
+      </div>
+      <div class="drop-4 hidden">
+        <a href="" class="a-clean">
+          <div class="inner-program">
+            <div class="program-logo">
+              <img src="./img/Discord.png" alt="Discord logo" class="program-img" />
             </div>
-            <div class="roadmap-cont">
-              <div class="roadmap-text-box">
-                <span>Phase I: Mint</span>
-                <span>Phase II: ???</span>
-                <span>Phase III: <span class="purple">???</span></span>
-                <span>Phase IV: ???</span>
-                <span>Phase V: ???</span>
-              </div>
-
-              <img
-                src="./img/scroll-nobg.png"
-                alt="Image of chart"
-                class="roadmap-img"
-              />
+            <span class="program-title">Discord</span>
+            <div class="arrow-box2">
+              <i class="fa-solid fa-play"></i>
             </div>
           </div>
-        </div>
+        </a>
 
-        <!-- Recycle Bin Modal -->
-        <div class="recycle-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img
-                  src="./img/Recycle Bin.png"
-                  alt="recycle bin"
-                  class="mini-logo"
-                />
-                <span class="program-row-text">Recycle Bin</span>
-              </div>
-              <div class="trashcan-buttons">
-                <button class="minimize min-trash"></button>
-                <button class="enlarge enl-trash"></button>
-                <button class="close clo-trash"></button>
-              </div>
+        <a href="" class="a-clean">
+          <div class="inner-program">
+            <div class="program-logo">
+              <img src="./img/Twitter.webp" alt="Discord logo" class="program-img" />
             </div>
-            <div class="settings-row">
-              <span class="setrow set-1"><u>F</u>ile</span>
-              <span class="setrow set-2"><u>E</u>dit</span>
-              <span class="setrow set-3"><u>V</u>iew</span>
-              <span class="setrow set-4"><u>H</u>elp</span>
-            </div>
-            <div class="recycle-inner">
-              <div class="recycle-meta-info">
-                <div class="name-block">
-                  <span class="meta-text">Name</span>
-                </div>
-                <div class="location-block">
-                  <span class="meta-text">Type</span>
-                </div>
-                <div class="location-block">
-                  <span class="meta-text">Date Deleted</span>
-                </div>
-              </div>
-            </div>
-            <div class="recycle-info-row">
-              <div class="rec-left">
-                <span class="objects-info">0 object(s)</span>
-              </div>
-              <div class="rec-right">
-                <span class="bytes-info">0 bytes</span>
-              </div>
+            <span class="program-title">Twitter</span>
+            <div class="arrow-box2">
+              <i class="fa-solid fa-play"></i>
             </div>
           </div>
-        </div>
+        </a>
+      </div>
+    </div>
 
-        <!-- Shadow Minter Modal-->
-        <div class="shadow-minter-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img
-                  src="./img/Shadow Minter.png"
-                  alt="recycle bin"
-                  class="mini-logo"
-                />
-                <span class="program-row-text">Shadow Minter v0.32</span>
-              </div>
-              <div class="trashcan-buttons">
-                <button class="minimize min-shadow"></button>
-                <button class="enlarge enl-shadow"></button>
-                <button class="close clo-shadow"></button>
-              </div>
-            </div>
-
-            <div class="modals-wrapper">
-              <div class="minter-inner-1">
-                <button class="connect-metamask">Connect wallet</button>
-              </div>
-
-              <div class="minter-inner-2 hidden">
-                <div class="border-wrap">
-                  <div class="minter-user-info">
-                    <span class="minter-info-box"><u>Minter Info</u></span>
-                    <div class="minter-box-left">
-                      <span class="connected-wallet">Minter ID: Unknown</span>
-                      <span class="block-timestamp"
-                        >Block Timestamp: Unknown</span
-                      >
-                      <span class="bytes32-text">Bytes32: </span>
-                    </div>
-                    <div class="minter-box-right">
-                      <span class="eligible-text">Eligible: True </span>
-                      <span class="gmi-text">GMI: True </span>
-                      <span class="early-text">Early: True </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="border-wrap2">
-                  <div class="minter-action-box">
-                    <span class="minter-info-box"><u>Execution</u></span>
-                    <img
-                      src="./img/art-gif.gif"
-                      alt="Pixel art gif image"
-                      class="mint-gif"
-                    />
-                    <div class="mint-config-box">
-                      <span class="nft-mint-price"
-                        >Mint Price: 0.001ETH ( 23$USD )</span
-                      >
-                      <div class="mint-btn-row">
-                        <button class="btn-stl min" disabled>-</button>
-                        <span class="mint-counter">Mint: 1</span>
-                        <button class="btn-stl plus">+</button>
-                      </div>
-                      <hr class="total-hr" />
-                      <hr class="total-hr2" />
-                      <span class="total-mint-price"
-                        >Total: 0.001ETH ( 23$USD )</span
-                      >
-                      <div class="center-btn">
-                        <button class="mint-button win-stl">Mint</button>
-                      </div>
-                    </div>
-                    <div class="cur-minted-box">
-                      <span>Currently Minted:</span>
-                      <span class="currently-minted">[0/2222]</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="minter-inner-3 hidden">
-                <span class="success-mint"
-                  >Mint Successful, please stand by
-                </span>
-              </div>
-
-              <div class="status-bar"></div>
-              <span class="status-text">Program: Downloading</span>
-              <span class="status-text2 hidden">Program: Downloading</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Terminal Modal -->
-        <div class="terminal-modal hidden">
-          <div class="term-row program-row">
+    <div class="center-modals">
+      <!-- FAQ Modal -->
+      <div class="faq-modal hidden">
+        <div class="recycle-wrapper">
+          <div class="program-row">
             <div class="left-block">
-              <img
-                src="./img/Terminal.jpg"
-                alt="recycle bin"
-                class="mini-logo"
-              />
-              <span class="program-row-text">Terminal</span>
+              <img src="./img/Pickaxe.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">Mint FAQ</span>
+            </div>
+            <div class="trashcan-button">
+              <button class="close clo-faq"></button>
+            </div>
+          </div>
+          <div class="faq-textbox">
+            <span class="question">Total supply?</span>
+            <span class="answer">2222</span>
+            <hr / class="faq-hr">
+            <span class="question">Royalties?</span>
+            <span class="answer">2.22%</span>
+            <hr / class="faq-hr">
+            <span class="question">Mint date?</span>
+            <span class="answer">T.B.A.</span>
+            <hr / class="faq-hr">
+            <span class="question">Mint price?</span>
+            <span class="answer">T.B.A.</span>
+            <hr / class="faq-hr">
+            <span class="question">Mint cap per wallet?</span>
+            <span class="answer">Max 2/wallet</span>
+            <hr / class="faq-hr">
+            <span class="question">How much does team pre-mint?</span>
+            <span class="answer">0</span>
+            <hr / class="faq-hr">
+            <span class="question">What will royalties be used for?</span>
+            <span class="answer">Strippers & Cocaine</span>
+            <hr / class="faq-hr">
+            <span class="question">What network?</span>
+            <span class="answer">Ethereum</span>
+            <hr / class="faq-hr">
+            <span class="question">What utility sir?</span>
+            <span class="answer">No false promises here</span>
+            <hr / class="faq-hr">
+            <span class="question">Aftermarkets?</span>
+            <span class="answer">OpenSea & more</span>
+            <hr / class="faq-hr">
+            <span class="question">What if I mint more than 2?</span>
+            <span class="answer">mi familia</span>
+            <hr / class="faq-hr">
+            <span class="question">Why is the art so pixelated?</span>
+            <span class="answer">We work with COBOL on a 80's mainframe</span>
+            <hr / class="faq-hr">
+            <span class="question">Burn/Stake plans?</span>
+            <span class="answer">The future will tell</span>
+            <hr / class="faq-hr">
+            <span class="question">What is Sicarius?</span>
+            <span class="answer">A gang of 'innocent' Latin assassins</span>
+            <hr / class="faq-hr">
+            <span class="question">Will my frens think my new pfp is based?</span>
+            <span class="answer">fuck yes</span>
+            <hr / class="faq-hr">
+            <span class="question">Am I gonna make it?</span>
+            <span class="answer">yes</span>
+            <hr / class="faq-hr">
+          </div>
+        </div>
+      </div>
+
+      <!-- Whitelist Modal -->
+      <div class="whitelist-modal hidden">
+        <div class="recycle-wrapper">
+          <div class="program-row">
+            <div class="left-block">
+              <img src="./img/Info.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">How To Whitelist</span>
+            </div>
+            <div class="trashcan-button">
+              <button class="close clo-whitelist"></button>
+            </div>
+          </div>
+          <span class="whitelist-span">We don't believe in whitelists,<br />
+            everyone gets a fair chance.</span>
+        </div>
+      </div>
+
+      <!-- Team Modal -->
+      <div class="team-modal hidden">
+        <div class="recycle-wrapper">
+          <div class="program-row">
+            <div class="left-block">
+              <img src="./img/Team.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">Team</span>
+            </div>
+            <div class="trashcan-button">
+              <button class="close clo-team"></button>
+            </div>
+          </div>
+          <div class="team-cont">
+            <div class="team-member">
+              <img class="team-member-img" src="./img/Benji.png" alt="Benji Bytecode" />
+              <h2 class="team-title">Benji Bytecode</h2>
+            </div>
+
+            <div class="team-member">
+              <img class="team-member-img" src="./img/Sicari.png" alt="Benji Bytecode" />
+              <h2 class="team-title">Mr. WAGMI</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Road Map Modal -->
+      <div class="roadmap-modal hidden">
+        <div class="recycle-wrapper">
+          <div class="program-row">
+            <div class="left-block">
+              <img src="./img/Roadmap.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">Roadmap</span>
+            </div>
+            <div class="trashcan-button">
+              <button class="close clo-roadmap"></button>
+            </div>
+          </div>
+          <div class="roadmap-cont">
+            <div class="roadmap-text-box">
+              <span>Phase I: Mint</span>
+              <span>Phase II: ???</span>
+              <span>Phase III: <span class="purple">???</span></span>
+              <span>Phase IV: ???</span>
+              <span>Phase V: ???</span>
+            </div>
+
+            <img src="./img/scroll-nobg.png" alt="Image of chart" class="roadmap-img" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Recycle Bin Modal -->
+      <div class="recycle-modal hidden">
+        <div class="recycle-wrapper">
+          <div class="program-row">
+            <div class="left-block">
+              <img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">Recycle Bin</span>
             </div>
             <div class="trashcan-buttons">
-              <button class="minimize min-terminal"></button>
-              <button class="enlarge enl-terminal"></button>
-              <button class="close clo-terminal"></button>
+              <button class="minimize min-trash"></button>
+              <button class="enlarge enl-trash"></button>
+              <button class="close clo-trash"></button>
             </div>
           </div>
-
-          <div class="terminal">
-            <div class="terminal-body">
-              <div class="terminal-prompt">
-                <div class="terminal-flex">
-                  <span class="terminal-prompt-user">0x398fa</span>
-                  <span class="terminal-prompt-path">~ $</span>
-                  <input type="text" class="terminal-input" />
-                </div>
-                <div class="redirect-socials hidden">
-                  <span>Speading love...</span>
-                  <span class="spinner"></span>
-                </div>
-                <div class="terminal-output"></div>
+          <div class="settings-row">
+            <span class="setrow set-1"><u>F</u>ile</span>
+            <span class="setrow set-2"><u>E</u>dit</span>
+            <span class="setrow set-3"><u>V</u>iew</span>
+            <span class="setrow set-4"><u>H</u>elp</span>
+          </div>
+          <div class="recycle-inner">
+            <div class="recycle-meta-info">
+              <div class="name-block">
+                <span class="meta-text">Name</span>
               </div>
+              <div class="location-block">
+                <span class="meta-text">Type</span>
+              </div>
+              <div class="location-block">
+                <span class="meta-text">Date Deleted</span>
+              </div>
+            </div>
+          </div>
+          <div class="recycle-info-row">
+            <div class="rec-left">
+              <span class="objects-info">0 object(s)</span>
+            </div>
+            <div class="rec-right">
+              <span class="bytes-info">0 bytes</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="main-program">
-        <!-- Trash Can -->
-        <div class="desktop-icon trash-icon">
-          <img
-            src="./img/Recycle Bin.png"
-            alt="recycle bin"
-            class="desktop-logo"
-          />
-          <span class="icon-text">Recycle Bin</span>
-        </div>
-
-        <!-- Shadow Minter -->
-        <div class="desktop-icon shadow-minter">
-          <img
-            src="./img/Shadow Minter.png"
-            alt="recycle bin"
-            class="desktop-logo"
-          />
-          <span class="icon-text">Shadow Minter v0.32</span>
-        </div>
-
-        <!-- Terminal -->
-        <div class="desktop-icon desk-terminal">
-          <img
-            src="./img/Terminal.jpg"
-            alt="recycle bin"
-            class="desktop-logo"
-          />
-          <span class="icon-text">Terminal</span>
-        </div>
-
-        <div class="start-bar">
-          <button class="start-button">
-            <img src="./img/Start Main.png" class="start-img" />
-          </button>
-
-          <div class="active-programs">
-            <div class="act-shadow active-program maximized hidden">
-              <img
-                src="./img/Shadow Minter.png"
-                alt="shadow minter"
-                class="act-shadow mini-logo"
-              /><span class="act-shadow program-text">Shadow Minter v.032</span>
+      <!-- Shadow Minter Modal-->
+      <div class="shadow-minter-modal hidden">
+        <div class="recycle-wrapper">
+          <div class="program-row">
+            <div class="left-block">
+              <img src="./img/Shadow Minter.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">Shadow Minter v0.32</span>
             </div>
-            <div class="act-bin active-program maximized hidden">
-              <img
-                src="./img/Recycle Bin.png"
-                alt="recycle bin"
-                class="act-bin mini-logo"
-              /><span class="act-bin program-text">Recycle Bin</span>
-            </div>
-            <div class="act-terminal active-program maximized hidden">
-              <img
-                src="./img/Terminal.jpg"
-                alt="shadow minter"
-                class="act-terminal mini-logo"
-              /><span class="act-terminal program-text">Terminal</span>
+            <div class="trashcan-buttons">
+              <button class="minimize min-shadow"></button>
+              <button class="enlarge enl-shadow"></button>
+              <button class="close clo-shadow"></button>
             </div>
           </div>
 
-          <div class="time-box">
-            <img
-              src="./img/devices_alpha.png"
-              alt="config logo"
-              class="config-logo"
-            />
-            <span class="current-time"></span>
+          <div class="modals-wrapper">
+            <div class="minter-inner-1">
+              <button class="connect-metamask">Connect wallet</button>
+            </div>
+
+            <div class="minter-inner-2 hidden">
+              <div class="border-wrap">
+                <div class="minter-user-info">
+                  <span class="minter-info-box"><u>Minter Info</u></span>
+                  <div class="minter-box-left">
+                    <span class="connected-wallet">Minter ID: Unknown</span>
+                    <span class="block-timestamp">Block Timestamp: Unknown</span>
+                    <span class="bytes32-text">Bytes32: </span>
+                  </div>
+                  <div class="minter-box-right">
+                    <span class="eligible-text">Eligible: True </span>
+                    <span class="gmi-text">GMI: True </span>
+                    <span class="early-text">Early: True </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border-wrap2">
+                <div class="minter-action-box">
+                  <span class="minter-info-box"><u>Execution</u></span>
+                  <img src="./img/art-gif.gif" alt="Pixel art gif image" class="mint-gif" />
+                  <div class="mint-config-box">
+                    <span class="nft-mint-price">Mint Price: 0.001ETH ( 23$USD )</span>
+                    <div class="mint-btn-row">
+                      <button class="btn-stl min" disabled>-</button>
+                      <span class="mint-counter">Mint: 1</span>
+                      <button class="btn-stl plus">+</button>
+                    </div>
+                    <hr class="total-hr" />
+                    <hr class="total-hr2" />
+                    <span class="total-mint-price">Total: 0.001ETH ( 23$USD )</span>
+                    <div class="center-btn">
+                      <button class="mint-button win-stl">Mint</button>
+                    </div>
+                  </div>
+                  <div class="cur-minted-box">
+                    <span>Currently Minted:</span>
+                    <span class="currently-minted">[0/2222]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="minter-inner-3 hidden">
+              <span class="success-mint">Mint Successful, please stand by
+              </span>
+            </div>
+
+            <div class="status-bar"></div>
+            <span class="status-text">Program: Downloading</span>
+            <span class="status-text2 hidden">Program: Downloading</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Terminal Modal -->
+      <div class="terminal-modal hidden">
+        <div class="term-row program-row">
+          <div class="left-block">
+            <img src="./img/Terminal.jpg" alt="recycle bin" class="mini-logo" />
+            <span class="program-row-text">Terminal</span>
+          </div>
+          <div class="trashcan-buttons">
+            <button class="minimize min-terminal"></button>
+            <button class="enlarge enl-terminal"></button>
+            <button class="close clo-terminal"></button>
+          </div>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal-body">
+            <div class="terminal-prompt">
+              <div class="terminal-flex">
+                <span class="terminal-prompt-user">0x398fa</span>
+                <span class="terminal-prompt-path">~ $</span>
+                <input type="text" class="terminal-input" />
+              </div>
+              <div class="redirect-socials hidden">
+                <span>Speading love...</span>
+                <span class="spinner"></span>
+              </div>
+              <div class="terminal-output"></div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </body>
+
+    <div class="main-program">
+      <!-- Trash Can -->
+      <div class="desktop-icon trash-icon">
+        <img src="./img/Recycle Bin.png" alt="recycle bin" class="desktop-logo" />
+        <span class="icon-text">Recycle Bin</span>
+      </div>
+
+      <!-- Shadow Minter -->
+      <div class="desktop-icon shadow-minter">
+        <img src="./img/Shadow Minter.png" alt="recycle bin" class="desktop-logo" />
+        <span class="icon-text">Shadow Minter v0.32</span>
+      </div>
+
+      <!-- Terminal -->
+      <div class="desktop-icon desk-terminal">
+        <img src="./img/Terminal.jpg" alt="recycle bin" class="desktop-logo" />
+        <span class="icon-text">Terminal</span>
+      </div>
+
+      <div class="start-bar">
+        <button class="start-button">
+          <img src="./img/Start Main.png" class="start-img" />
+        </button>
+
+        <div class="active-programs">
+          <div class="act-shadow active-program maximized hidden">
+            <img src="./img/Shadow Minter.png" alt="shadow minter" class="act-shadow mini-logo" /><span
+              class="act-shadow program-text">Shadow Minter v.032</span>
+          </div>
+          <div class="act-bin active-program maximized hidden">
+            <img src="./img/Recycle Bin.png" alt="recycle bin" class="act-bin mini-logo" /><span
+              class="act-bin program-text">Recycle Bin</span>
+          </div>
+          <div class="act-terminal active-program maximized hidden">
+            <img src="./img/Terminal.jpg" alt="shadow minter" class="act-terminal mini-logo" /><span
+              class="act-terminal program-text">Terminal</span>
+          </div>
+        </div>
+
+        <div class="time-box">
+          <img src="./img/devices_alpha.png" alt="config logo" class="config-logo" />
+          <span class="current-time"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

@@ -28,11 +28,13 @@ terminalInput.addEventListener("keydown", function (e) {
       output2.style.color = "green";
       output2.innerHTML = "help";
       output.innerHTML =
-        "<span class='red'>==============Commands==============</span>" +
+        "<span class='red'>=================Commands=================</span>" +
         "<br>" +
         "<span class='green'>cd</span> => change directory" +
         "<br>" +
         "<span class='green'>ls</span> => current directory" +
+        "<br>" +
+        "<span class='green'>clear</span> => clear terminal" +
         "<br>" +
         "<span class='green'>mint_price</span> => returns mint price" +
         "<br>" +
@@ -42,7 +44,7 @@ terminalInput.addEventListener("keydown", function (e) {
         "<br>" +
         "<span class='green'>lore</span> => returns sicarius lore" +
         "<br>" +
-        "<span class='red'>====================================</span>";
+        "<span class='red'>==========================================</span>";
       terminalOutput.insertAdjacentElement("beforeend", output2);
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;
