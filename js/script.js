@@ -100,6 +100,22 @@ menuGallery.addEventListener("click", () => {
   programsDropMenu.classList.add("hidden");
 });
 
+//Open rarity chart
+const menuRarity = document.querySelector(".menu-rarity");
+const closeRarity = document.querySelector(".clo-rarity");
+const rarityModal = document.querySelector(".rarity-modal");
+
+closeRarity.addEventListener("click", () => {
+  rarityModal.classList.add("hidden");
+});
+
+menuRarity.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  rarityModal.classList.remove("hidden");
+  startButton.classList.toggle("clicked");
+  programsDropMenu.classList.add("hidden");
+});
+
 mainProgram.addEventListener("click", (e) => {
   const t = e.target.classList[0];
   if (t === "start-button") return;
