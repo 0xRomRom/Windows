@@ -292,12 +292,13 @@ body {
   font-size: 13px;
   font-family: Windows;
   color: white;
+  line-height: 14px;
 }
 
 .recycle-modal {
   position: absolute;
-  width: 410px;
-  height: 260px;
+  width: 610px;
+  height: 360px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
   box-shadow: 1px 1px 2px black;
@@ -975,6 +976,32 @@ body {
   user-select: none;
 }
 
+.bin-item {
+  font-family: Windows;
+  padding-left: 0.3rem;
+}
+
+.bin-item2 {
+  font-family: Windows;
+  padding-left: 0.3rem;
+  position: absolute;
+  left: 12.5rem;
+}
+
+.bin-item3 {
+  font-family: Windows;
+  padding-left: 0.3rem;
+  position: absolute;
+  left: 25.1rem;
+}
+
+.bin-item2 {
+  font-family: Windows;
+  padding-left: 0.3rem;
+  position: absolute;
+  left: 12.5rem;
+}
+
 .drop-1 {
   position: absolute;
   width: 185px;
@@ -1114,10 +1141,10 @@ body {
 
 .terminal-output {
   margin-top: 10px;
-  /* overflow-y: auto; */
   height: calc(100% - 20px - 25px);
-  /* height: 19.8rem; */
+  position: relative;
   font-size: 13px;
+  overflow-y: scroll;
 }
 
 .inner-program {
