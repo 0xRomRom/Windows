@@ -1,6 +1,25 @@
 const terminalInput = document.querySelector(".terminal-input");
 const terminalOutput = document.querySelector(".terminal-output");
 const terminalBody = document.querySelector(".terminal-body");
+
+import ABI from "./abi.js";
+const CONTRACT = "0x0FdA45Aa7b4d96c0e96D995568504a44C725940b";
+let contractInstance;
+let currentMintCount = 0;
+
+const capFetch = async () => {
+  if (window.ethereum) {
+    window.web3 = new Web3(window.ethereum);
+    contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+
+    const currentlyMinted = await contractInstance.methods
+      .CURRENT_SUPPLY()
+      .call();
+    currentMintCount = currentlyMinted;
+  }
+};
+capFetch();
+
 terminalBody.addEventListener("click", () => {
   terminalInput.focus();
 });
@@ -43,17 +62,12 @@ terminalInput.addEventListener("keydown", function (e) {
         "<br>" +
         "<span class='green'>lore</span> => returns sicarius lore" +
         "<br>" +
+        "<span class='green'>live</span> => is minting live?" +
+        "<br>" +
+        "<span class='green'>roi</span> => return on investment since mint" +
+        "<br>" +
         "<span class='red'>==========================================</span>";
       terminalOutput.insertAdjacentElement("beforeend", output2);
-      terminalOutput.insertAdjacentElement("beforeend", output);
-      return;
-    }
-
-    if (command === "dn") {
-      const output = document.createElement("div");
-      output.style.color = "green";
-      output.innerHTML = prePend;
-      output.textContent = "Suck deez nuts";
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;
     }
@@ -61,17 +75,68 @@ terminalInput.addEventListener("keydown", function (e) {
     if (command.slice(0, 2) === "cd") {
       const output = document.createElement("div");
       output.style.color = "green";
+      output.innerHTML = prePend + " cd deez nuts";
+      terminalOutput.insertAdjacentElement("beforeend", output);
+      return;
+    }
+
+    if (command === "roi") {
+      const output = document.createElement("div");
+      output.innerHTML = prePend + ` ROI since mint: N/A`;
+      output.style.color = "green";
+      terminalOutput.insertAdjacentElement("beforeend", output);
+      return;
+    }
+
+    if (command === "live") {
+      const output = document.createElement("div");
+      output.innerHTML = prePend + ` Mint is not live yet`;
+      output.style.color = "green";
+      terminalOutput.insertAdjacentElement("beforeend", output);
+      return;
+    }
+
+    if (command === "lore") {
+      const output = document.createElement("div");
       output.innerHTML = prePend;
-      output.textContent = "cd deez nuts";
+      output.style.color = "green";
+      output.innerHTML =
+        `<br>` +
+        `Sicarius were a feared and mysterious order of assassins which emerged from the depths of despair. Their ability to move unseen made them elusive and deadly. Legends spoke of their shadowy prowess and lethal methods. Their reputation and covert operations spread fear among those who crossed their path…` +
+        `<br>`;
+      terminalOutput.insertAdjacentElement("beforeend", output);
+      return;
+    }
+
+    if (command === "cur_supp") {
+      const output = document.createElement("div");
+      output.innerHTML =
+        prePend + ` Currently Minted: [${currentMintCount}/2222]`;
+      output.style.color = "green";
+      terminalOutput.insertAdjacentElement("beforeend", output);
+      return;
+    }
+
+    if (command === "mint_price") {
+      const output = document.createElement("div");
+      output.innerHTML = prePend + " Mint price: T.B.A.";
+      output.style.color = "green";
+      terminalOutput.insertAdjacentElement("beforeend", output);
+      return;
+    }
+
+    if (command === "mint_cap") {
+      const output = document.createElement("div");
+      output.innerHTML = prePend + " Max = [2/wallet]";
+      output.style.color = "green";
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;
     }
 
     if (command === "ls") {
       const output = document.createElement("div");
-      output.innerHTML = prePend;
+      output.innerHTML = prePend + " /root";
       output.style.color = "green";
-      output.textContent = "/root";
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;
     }
@@ -81,23 +146,9 @@ terminalInput.addEventListener("keydown", function (e) {
       return;
     }
 
-    if (command === "funsu") {
-      const output = document.createElement("div");
-
-      output.innerHTML = prePend;
-      output.textContent = command;
-
-      output.style.color = "red";
-      output.innerHTML = prePend;
-      output.textContent = "Funsu is gonu";
-      terminalOutput.insertAdjacentElement("beforeend", output);
-      return;
-    }
-
     const output = document.createElement("div");
     output.style.color = "purple";
-    output.innerHTML = prePend;
-    output.textContent = "Unknown command: " + command;
+    output.innerHTML = "Unknown command: " + command;
     terminalOutput.insertAdjacentElement("beforeend", output);
     return;
   }
