@@ -58,7 +58,6 @@ window.ethereum.on("accountsChanged", async (accounts) => {
     .userMintedCount(accounts[0])
     .call();
     mintCount = value;
-  console.log(`Changed accs value is: ${value}`);
   modal1.classList.remove("hidden");
   modal2.classList.add("hidden");
 
@@ -129,7 +128,6 @@ const connectToMetamask = async () => {
   //Disable mint UI when user has already minted
   let value;
   value = await contractInstance.methods.userMintedCount(account).call();
-  console.log(value);
 
   if (+value === 2) {
     incrementMintCount.disabled = true;

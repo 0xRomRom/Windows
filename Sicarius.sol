@@ -53,7 +53,7 @@ contract Sicarius is ERC721, Ownable {
         baseUri = _baseUri;
     }
 
-    function withdrawAll() external onlyOwner {
+    function withdrawAll() external onlyOwner payable {
         payable(msg.sender).transfer(address(this).balance);
     }
 
