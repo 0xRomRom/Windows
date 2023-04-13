@@ -141,12 +141,14 @@ const connectToMetamask = async () => {
     if (+value === 0) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
+      incrementMintCount.disabled = false;
       eligibleText.textContent = "Eligible: True"
     }
 
     if (+value === 1) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
+      incrementMintCount.disabled = false;
       eligibleText.textContent = "Eligible: True"
     }
     if (+value === 2) {
