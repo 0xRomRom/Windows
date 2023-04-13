@@ -671,7 +671,7 @@ body {
   font-family: Windows;
   text-align: center;
   font-size: 17px;
-  top: -1rem;
+  top: -0.5rem;
   position: relative;
 }
 
@@ -980,20 +980,24 @@ body {
 .bin-item {
   font-family: Windows;
   padding-left: 0.3rem;
+  position: absolute;
+  top: 1.5rem;
 }
 
 .bin-item2 {
   font-family: Windows;
   padding-left: 0.3rem;
-  position: absolute;
   left: 12.5rem;
+  position: absolute;
+  top: 1.5rem;
 }
 
 .bin-item3 {
   font-family: Windows;
   padding-left: 0.3rem;
-  position: absolute;
   left: 25.1rem;
+  position: absolute;
+  top: 1.5rem;
 }
 
 .bin-item2 {
@@ -1022,9 +1026,9 @@ body {
 .drop-2 {
   position: absolute;
   width: 185px;
-  height: 78px;
+  height: 38px;
   background-color: rgb(195, 199, 203);
-  bottom: 147px;
+  bottom: 187px;
   left: 179px;
   z-index: 10;
   border-top: 2px solid rgb(251, 250, 251);
@@ -1145,7 +1149,7 @@ body {
   height: calc(100% - 20px - 25px);
   position: relative;
   font-size: 13px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .inner-program {

@@ -20,22 +20,6 @@ startButton.addEventListener("click", () => {
   startButton.classList.toggle("clicked");
 });
 
-//Open Roadmap
-const menuRoadmap = document.querySelector(".menu-roadmap");
-const closeRoadmap = document.querySelector(".clo-roadmap");
-const roadmapModal = document.querySelector(".roadmap-modal");
-
-menuRoadmap.addEventListener("click", () => {
-  startMenuList.classList.toggle("hidden");
-  roadmapModal.classList.remove("hidden");
-  startButton.classList.toggle("clicked");
-  documentsDropMenu.classList.add("hidden");
-});
-
-closeRoadmap.addEventListener("click", () => {
-  roadmapModal.classList.add("hidden");
-});
-
 //Open Team
 const menuTeam = document.querySelector(".menu-team");
 const closeTeam = document.querySelector(".clo-team");
