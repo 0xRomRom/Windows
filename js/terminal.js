@@ -104,7 +104,7 @@ terminalInput.addEventListener("keydown", function (e) {
       output.innerHTML =
         `<br>` +
         `Sicarius were a feared and mysterious order of assassins which emerged from the depths of despair. Their ability to move unseen made them elusive and deadly. Legends spoke of their shadowy prowess and lethal methods. Their reputation and covert operations spread fear among those who crossed their path…` +
-        `<br>`;
+        `<br><br>`;
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;
     }

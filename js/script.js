@@ -155,16 +155,16 @@ closeTrashCan.addEventListener("click", () => {
   binActive = false;
 });
 
-let shadowActive = false;
+// let shadowActive = false;
 
 const shadowBar = document.querySelector(".act-shadow");
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
-  if (!shadowActive) {
+  // if (!shadowActive) {
     shadowMinterModal.classList.remove("hidden");
     shadowBar.classList.remove("hidden");
     shadowActive = true;
-  }
+  // }
 });
 
 closeShadowMinter.addEventListener("click", () => {

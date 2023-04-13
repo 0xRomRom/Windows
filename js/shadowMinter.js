@@ -13,7 +13,9 @@ const currentlyMintedCount = document.querySelector(".currently-minted");
 
 const CONTRACT = "0xfa881a246e7D23fb6049922A2284F4aD22A37869";
 
-let account;
+let accountChanged = false;
+
+let account = "";
 let contractInstance;
 let currMintCount;
 window.onload = async () => {
@@ -24,7 +26,6 @@ window.onload = async () => {
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-
     currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
   }
 };
@@ -39,74 +40,121 @@ const updateCircSupply = async () => {
   }, 2000);
 };
 
+window.ethereum.on("accountsChanged", async (accounts) => {
+  if (account === "") return;
+
+  accountChanged = true;
+  account = accounts[0];
+
+  connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 25) + `...`;
+  bytes32Text.innerHTML =
+    `Bytes32: ` + keccak256(account).toString("hex").slice(0, 26) + `...`;
+
+  shadowMinterModals.classList.add("hidden");
+  shadowBars.classList.add("hidden");
+  shadowMinterModals.classList.remove("enlarged");
+  let value = await contractInstance.methods
+    .userMintedCount(accounts[0])
+    .call();
+    mintCount = value;
+  console.log(`Changed accs value is: ${value}`);
+  modal1.classList.remove("hidden");
+  modal2.classList.add("hidden");
+
+
+  setTimeout(() => {
+    if (mintCount === 0) {
+      mintButton.disabled = false;
+      mintButton.classList.add("win-stl");
+      incrementMintCount.disabled = false;
+    }
+
+    if (mintCount === 1) {
+      mintButton.disabled = false;
+      mintButton.classList.add("win-stl");
+      incrementMintCount.disabled = false;
+    }
+    if (mintCount === 2) {
+      incrementMintCount.disabled = true;
+      mintButton.disabled = true;
+      mintButton.classList.remove("win-stl");
+    }
+    //###
+    // mintButton.disabled = true;
+    // mintButton.classList.remove("win-stl");
+  },7000);
+});
+
 const connectToMetamask = async () => {
   //Check if metamask is installed
+
   if (!window.ethereum) {
     alert("Install Metamask to continue. Visit https://metamask.io");
     return;
   }
 
-  if (window.ethereum) {
-    //Request current user
+  //Request current user
 
-    await window.ethereum.send("eth_requestAccounts");
+  await window.ethereum.send("eth_requestAccounts");
 
-    //Initialize web3 class
-    window.web3 = new Web3(window.ethereum);
+  //Initialize web3 class
+  window.web3 = new Web3(window.ethereum);
 
-    //Get array of accounts
-    const accounts = await web3.eth.getAccounts();
+  //Get array of accounts
+  const accounts = await web3.eth.getAccounts();
 
-    //Select first account
-    account = accounts[0];
+  //Select first account
+  account = accounts[0];
 
-    //Display user wallet
-    modal1.classList.add("hidden");
-    modal2.classList.remove("hidden");
-    connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 25) + `...`;
-    bytes32Text.innerHTML =
-      `Bytes32: ` + keccak256(account).toString("hex").slice(0, 26) + `...`;
+  //Display user wallet
+  modal1.classList.add("hidden");
+  modal2.classList.remove("hidden");
+  connectUserWallet.innerHTML = "Wallet ID: " + account.slice(0, 25) + `...`;
+  bytes32Text.innerHTML =
+    `Bytes32: ` + keccak256(account).toString("hex").slice(0, 26) + `...`;
 
-    //Handle UI updates
+  //Handle UI updates
+  if (!accountChanged) {
     incrementStatusBar(11);
     updateStatusText(statussesArray2);
+  }
+
+  mintButton.disabled = true;
+  mintButton.classList.remove("win-stl");
+
+  //Disable mint UI when user has already minted
+  let value;
+  value = await contractInstance.methods.userMintedCount(account).call();
+  console.log(value);
+
+  if (+value === 2) {
+    incrementMintCount.disabled = true;
     mintButton.disabled = true;
     mintButton.classList.remove("win-stl");
+  }
 
-    //Disable mint UI when user has already minted
-    let value;
-    value = await contractInstance.methods.userMintedCount(account).call();
-    console.log(value);
+  setTimeout(() => {
+    if (+value === 0) {
+      mintButton.disabled = false;
+      mintButton.classList.add("win-stl");
+    }
 
+    if (+value === 1) {
+      mintButton.disabled = false;
+      mintButton.classList.add("win-stl");
+    }
     if (+value === 2) {
       incrementMintCount.disabled = true;
       mintButton.disabled = true;
       mintButton.classList.remove("win-stl");
     }
+    //###
+    // mintButton.disabled = true;
+    // mintButton.classList.remove("win-stl");
+  }, 6000);
 
-    setTimeout(() => {
-      if (+value === 0) {
-        mintButton.disabled = false;
-        mintButton.classList.add("win-stl");
-      }
-
-      if (+value === 1) {
-        mintButton.disabled = false;
-        mintButton.classList.add("win-stl");
-      }
-      if (+value === 2) {
-        incrementMintCount.disabled = true;
-        mintButton.disabled = true;
-        mintButton.classList.remove("win-stl");
-      }
-      //###
-      // mintButton.disabled = true;
-      // mintButton.classList.remove("win-stl");
-    }, 6000);
-
-    //Call current circ supply interval fetcher
-    updateCircSupply();
-  }
+  //Call current circ supply interval fetcher
+  updateCircSupply();
 };
 connectMetamask.addEventListener("click", connectToMetamask);
 
@@ -177,7 +225,7 @@ const updateStatusText = (arrays) => {
 let mintCount = 1;
 let ethPrice = 0;
 const ethMintPrice = 0.01337; //ETH
-const ethMintWeiPrice = +(BigInt("13370000000000000")).toString().slice(0);
+const ethMintWeiPrice = +BigInt("13370000000000000").toString().slice(0);
 let usdPricePerNft = 0;
 
 const ethPriceFetcher = async () => {
@@ -244,7 +292,6 @@ const redirectSocialsBox = document.querySelector(".redirect-socials");
 const statusText2 = document.querySelector(".status-text2");
 
 let error = false;
-
 
 const rotateSpinner = () => {
   let index = 0;
