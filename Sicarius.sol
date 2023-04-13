@@ -19,8 +19,7 @@ contract Sicarius is ERC721, Ownable {
     string public baseExtension = ".json";
 
     constructor() ERC721("Sicarius", "SCRS") {
-        // MINT_PRICE = 10000000000000000 wei; //0.01Eth
-        MINT_PRICE = 1000000000000000 wei; //0.001Eth
+        MINT_PRICE = 13370000000000000 wei; //0.01337 ETH
         TOTAL_SUPPLY = 2222;
         baseUri = "ipfs://bafybeibiupvktahrdkwkipj2myrxp7tt2hmxris3h7ztdir6rnd3vlbozu/";
     }
@@ -30,7 +29,7 @@ contract Sicarius is ERC721, Ownable {
         // require(isSaleActive, "The sale is paused.");
         require(CURRENT_SUPPLY + _amount <= TOTAL_SUPPLY, "Mint cap has been reached.");
         require(msg.value >= MINT_PRICE * _amount, "Not enough funds to mint.");
-        require(userMintedAmount[msg.sender] + _amount < 3, "User mint cap reached.");
+        require(userMintedAmount[msg.sender] + _amount <= 2, "User mint cap reached.");
         require(_amount > 0 && _amount <= 2, "Invalid amount");
 
         userMintedAmount[msg.sender] += _amount;
@@ -54,7 +53,7 @@ contract Sicarius is ERC721, Ownable {
         baseUri = _baseUri;
     }
 
-    function withdrawAll() external payable onlyOwner {
+    function withdrawAll() external onlyOwner {
         payable(msg.sender).transfer(address(this).balance);
     }
 
