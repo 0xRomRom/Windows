@@ -39,7 +39,6 @@ minimizeTrashCan.addEventListener("click", () => {
 const parent = document.querySelector(".active-programs");
 parent.addEventListener("click", (event) => {
   // Trashcan event
-  console.log(event)
   if (event.target.classList[0] === "act-bin")
    {
     const activeBin = document.querySelector(".act-bin");
