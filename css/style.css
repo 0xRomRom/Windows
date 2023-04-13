@@ -429,6 +429,7 @@ body {
   left: 0.4rem;
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
 }
 
 .minter-box-right {
@@ -439,6 +440,7 @@ body {
   top: 0.8rem;
   display: flex;
   flex-direction: column;
+  gap: 0.4rem;
 }
 
 .minter-action-box {
@@ -467,7 +469,7 @@ body {
   font-size: 13px;
   background-color: #c3c7cb;
   position: absolute;
-  top: -7px;
+  top: -9px;
   left: 5px;
 }
 
@@ -1260,7 +1262,7 @@ body {
   background-color: black;
   height: 3px;
   width: 100%;
-  top: 6rem;
+  top: 5.8rem;
   position: absolute;
 }
 
@@ -1269,13 +1271,13 @@ body {
   background-color: black;
   height: 3px;
   width: 100%;
-  top: 1.2rem;
+  top: 1.1rem;
   position: absolute;
 }
 
 .nft-mint-price {
   font-family: Windows;
-  font-size: 15px;
+  font-size: 14px;
   display: block;
   text-align: center;
 }

@@ -11,11 +11,12 @@ const capFetch = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-
-    const currentlyMinted = await contractInstance.methods
-      .CURRENT_SUPPLY()
-      .call();
-    currentMintCount = currentlyMinted;
+    try {
+      const currentlyMinted = await contractInstance.methods
+        .CURRENT_SUPPLY()
+        .call();
+      currentMintCount = currentlyMinted;
+    } catch (err) {}
   }
 };
 capFetch();
@@ -119,7 +120,7 @@ terminalInput.addEventListener("keydown", function (e) {
 
     if (command === "mint_price") {
       const output = document.createElement("div");
-      output.innerHTML = prePend + " Mint price: T.B.A.";
+      output.innerHTML = prePend + " Mint price: 0.01337 ETH";
       output.style.color = "green";
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;

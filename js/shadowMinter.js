@@ -11,7 +11,7 @@ const modal3 = document.querySelector(".minter-inner-3");
 const bytes32Text = document.querySelector(".bytes32-text");
 const currentlyMintedCount = document.querySelector(".currently-minted");
 
-const CONTRACT = "0x0FdA45Aa7b4d96c0e96D995568504a44C725940b";
+const CONTRACT = "0xfa881a246e7D23fb6049922A2284F4aD22A37869";
 
 let account;
 let contractInstance;
@@ -100,8 +100,8 @@ const connectToMetamask = async () => {
         mintButton.classList.remove("win-stl");
       }
       //###
-      mintButton.disabled = true;
-      mintButton.classList.remove("win-stl");
+      // mintButton.disabled = true;
+      // mintButton.classList.remove("win-stl");
     }, 6000);
 
     //Call current circ supply interval fetcher
@@ -176,7 +176,8 @@ const updateStatusText = (arrays) => {
 // Get ETH price
 let mintCount = 1;
 let ethPrice = 0;
-const ethMintPrice = 0.022; //ETH
+const ethMintPrice = 0.01337; //ETH
+const ethMintWeiPrice = +(BigInt("13370000000000000")).toString().slice(0);
 let usdPricePerNft = 0;
 
 const ethPriceFetcher = async () => {
@@ -185,7 +186,7 @@ const ethPriceFetcher = async () => {
   );
   const result = await fetcher.json();
   ethPrice = +result.ethereum.usd.toFixed(0);
-  usdPricePerNft = ethPrice / 45.5; // <=
+  usdPricePerNft = ethPrice / 74.8; // <=
   totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
     usdPricePerNft * mintCount
   ).toFixed(2)}$ USD )`;
@@ -244,6 +245,7 @@ const statusText2 = document.querySelector(".status-text2");
 
 let error = false;
 
+
 const rotateSpinner = () => {
   let index = 0;
 
@@ -276,7 +278,7 @@ mintButton.addEventListener("click", async () => {
   try {
     await contractInstance.methods.mint(mintCount).send({
       from: account,
-      value: (1000000000000000 * mintCount).toString(),
+      value: (ethMintWeiPrice * mintCount).toString(),
       gas: 300000,
     });
   } catch (err) {
