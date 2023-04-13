@@ -10,6 +10,7 @@ const modal2 = document.querySelector(".minter-inner-2");
 const modal3 = document.querySelector(".minter-inner-3");
 const bytes32Text = document.querySelector(".bytes32-text");
 const currentlyMintedCount = document.querySelector(".currently-minted");
+const eligibleText = document.querySelector(".eligible-text");
 
 const CONTRACT = "0xfa881a246e7D23fb6049922A2284F4aD22A37869";
 
@@ -67,17 +68,20 @@ window.ethereum.on("accountsChanged", async (accounts) => {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
       incrementMintCount.disabled = false;
+      eligibleText.textContent = "Eligible: True"
     }
 
     if (mintCount === 1) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
       incrementMintCount.disabled = false;
+      eligibleText.textContent = "Eligible: True"
     }
     if (mintCount === 2) {
       incrementMintCount.disabled = true;
       mintButton.disabled = true;
       mintButton.classList.remove("win-stl");
+      eligibleText.textContent = "Eligible: False"
     }
     //###
     // mintButton.disabled = true;
@@ -137,16 +141,19 @@ const connectToMetamask = async () => {
     if (+value === 0) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
+      eligibleText.textContent = "Eligible: True"
     }
 
     if (+value === 1) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
+      eligibleText.textContent = "Eligible: True"
     }
     if (+value === 2) {
       incrementMintCount.disabled = true;
       mintButton.disabled = true;
       mintButton.classList.remove("win-stl");
+      eligibleText.textContent = "Eligible: False"
     }
     //###
     // mintButton.disabled = true;
