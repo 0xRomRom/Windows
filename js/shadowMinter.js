@@ -12,7 +12,7 @@ const bytes32Text = document.querySelector(".bytes32-text");
 const currentlyMintedCount = document.querySelector(".currently-minted");
 const eligibleText = document.querySelector(".eligible-text");
 
-const CONTRACT = "0xfa881a246e7D23fb6049922A2284F4aD22A37869";
+const CONTRACT = "0x8BdE31b891faE62645770960d72C8439138D2f43";
 
 let accountChanged = false;
 
@@ -57,35 +57,34 @@ window.ethereum.on("accountsChanged", async (accounts) => {
   let value = await contractInstance.methods
     .userMintedCount(accounts[0])
     .call();
-    mintCount = value;
+  mintCount = value;
   modal1.classList.remove("hidden");
   modal2.classList.add("hidden");
-
 
   setTimeout(() => {
     if (mintCount === 0) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
       incrementMintCount.disabled = false;
-      eligibleText.textContent = "Eligible: True"
+      eligibleText.textContent = "Eligible: True";
     }
 
     if (mintCount === 1) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
       incrementMintCount.disabled = false;
-      eligibleText.textContent = "Eligible: True"
+      eligibleText.textContent = "Eligible: True";
     }
     if (mintCount === 2) {
       incrementMintCount.disabled = true;
       mintButton.disabled = true;
       mintButton.classList.remove("win-stl");
-      eligibleText.textContent = "Eligible: False"
+      eligibleText.textContent = "Eligible: False";
     }
     //###
     // mintButton.disabled = true;
     // mintButton.classList.remove("win-stl");
-  },7000);
+  }, 7000);
 });
 
 const connectToMetamask = async () => {
@@ -140,20 +139,20 @@ const connectToMetamask = async () => {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
       incrementMintCount.disabled = false;
-      eligibleText.textContent = "Eligible: True"
+      eligibleText.textContent = "Eligible: True";
     }
 
     if (+value === 1) {
       mintButton.disabled = false;
       mintButton.classList.add("win-stl");
       incrementMintCount.disabled = false;
-      eligibleText.textContent = "Eligible: True"
+      eligibleText.textContent = "Eligible: True";
     }
     if (+value === 2) {
       incrementMintCount.disabled = true;
       mintButton.disabled = true;
       mintButton.classList.remove("win-stl");
-      eligibleText.textContent = "Eligible: False"
+      eligibleText.textContent = "Eligible: False";
     }
     //###
     // mintButton.disabled = true;
