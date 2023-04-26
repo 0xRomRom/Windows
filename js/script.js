@@ -155,13 +155,11 @@ closeTrashCan.addEventListener("click", () => {
   binActive = false;
 });
 
-
-
 const shadowBar = document.querySelector(".act-shadow");
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
-    shadowMinterModal.classList.remove("hidden");
-    shadowBar.classList.remove("hidden");
+  shadowMinterModal.classList.remove("hidden");
+  shadowBar.classList.remove("hidden");
 });
 
 closeShadowMinter.addEventListener("click", () => {
@@ -267,4 +265,21 @@ socialsHover.addEventListener("mouseover", () => {
 
 socialsHover.addEventListener("mouseleave", () => {
   socialsMenu.classList.add("hidden");
+});
+
+const shutdownButton = document.querySelector(".shtdwn");
+const shutdownFallback = document.querySelector(".fallback2");
+
+shutdownButton.addEventListener("click", () => {
+  socialsMenu.classList.add("hidden");
+  mintInfoMenu.classList.add("hidden");
+  documentsDropMenu.classList.add("hidden");
+  programsDropMenu.classList.add("hidden");
+  startMenuList.classList.add("hidden");
+  startMenuList.classList.add("hidden");
+  startButton.classList.remove("clicked");
+
+  setTimeout(() => {
+    shutdownFallback.style.display = "flex";
+  }, 3000);
 });
