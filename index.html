@@ -25,8 +25,8 @@
 
   <body>
     <div class="app">
-      <div class="fallback">VGA_ERROR: smol device not supported</div>
       <div class="fallback2">NGMI</div>
+      <div class="fallback">VGA_ERROR: smol device not supported</div>
       <!--Windows nav menu-->
       <div class="menu-list hidden">
         <img src="./img/windows95 bar.png" class="win95-long" />
@@ -370,51 +370,49 @@
 
         <!-- Recycle Bin Modal -->
         <div class="recycle-modal hidden">
-          <div class="recycle-wrapper">
-            <div class="program-row">
-              <div class="left-block">
-                <img
-                  src="./img/Recycle Bin.png"
-                  alt="recycle bin"
-                  class="mini-logo"
-                />
-                <span class="program-row-text">Recycle Bin</span>
+          <div class="program-row">
+            <div class="left-block">
+              <img
+                src="./img/Recycle Bin.png"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Recycle Bin</span>
+            </div>
+            <div class="trashcan-buttons">
+              <button class="minimize min-trash"></button>
+              <button class="enlarge enl-trash"></button>
+              <button class="close clo-trash"></button>
+            </div>
+          </div>
+          <div class="settings-row">
+            <span class="setrow set-1"><u>F</u>ile</span>
+            <span class="setrow set-2"><u>E</u>dit</span>
+            <span class="setrow set-3"><u>V</u>iew</span>
+            <span class="setrow set-4"><u>H</u>elp</span>
+          </div>
+          <div class="recycle-inner">
+            <div class="recycle-meta-info">
+              <div class="name-block">
+                <span class="meta-text">Name</span>
               </div>
-              <div class="trashcan-buttons">
-                <button class="minimize min-trash"></button>
-                <button class="enlarge enl-trash"></button>
-                <button class="close clo-trash"></button>
+              <div class="location-block">
+                <span class="meta-text">Type</span>
+              </div>
+              <div class="location-block">
+                <span class="meta-text">Size</span>
               </div>
             </div>
-            <div class="settings-row">
-              <span class="setrow set-1"><u>F</u>ile</span>
-              <span class="setrow set-2"><u>E</u>dit</span>
-              <span class="setrow set-3"><u>V</u>iew</span>
-              <span class="setrow set-4"><u>H</u>elp</span>
+            <span class="bin-item">SBF_Carol_Tape.mp4</span>
+            <span class="bin-item2">.mp4</span>
+            <span class="bin-item3">42.690 GB</span>
+          </div>
+          <div class="recycle-info-row">
+            <div class="rec-left">
+              <span class="objects-info">1 object(s)</span>
             </div>
-            <div class="recycle-inner">
-              <div class="recycle-meta-info">
-                <div class="name-block">
-                  <span class="meta-text">Name</span>
-                </div>
-                <div class="location-block">
-                  <span class="meta-text">Type</span>
-                </div>
-                <div class="location-block">
-                  <span class="meta-text">Size</span>
-                </div>
-              </div>
-              <span class="bin-item">SBF_Carol_Tape.mp4</span>
-              <span class="bin-item2">.mp4</span>
-              <span class="bin-item3">42.690 GB</span>
-            </div>
-            <div class="recycle-info-row">
-              <div class="rec-left">
-                <span class="objects-info">1 object(s)</span>
-              </div>
-              <div class="rec-right">
-                <span class="bytes-info">42 690 000 000 bytes</span>
-              </div>
+            <div class="rec-right">
+              <span class="bytes-info">42 690 000 000 bytes</span>
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@ const bytes32Text = document.querySelector(".bytes32-text");
 const currentlyMintedCount = document.querySelector(".currently-minted");
 const eligibleText = document.querySelector(".eligible-text");
 
-const CONTRACT = "0x8BdE31b891faE62645770960d72C8439138D2f43";
+const CONTRACT = "";
 
 let accountChanged = false;
 
