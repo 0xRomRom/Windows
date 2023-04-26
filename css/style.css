@@ -361,10 +361,10 @@ body {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 99%;
+  top: 0px;
+  height: 380px;
   display: flex;
   flex-direction: column;
-  /* background-color: red; */
   gap: 1px;
 }
 
@@ -384,7 +384,7 @@ body {
   position: relative;
   width: 99%;
   left: 0.5%;
-  height: 21rem;
+  height: 100%;
 }
 
 .minter-inner-3 {
@@ -1398,4 +1398,10 @@ body {
     display: flex;
     font-size: 2.3vw;
   }
+}
+
+.progress-wrap {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
 }
