@@ -269,6 +269,7 @@ socialsHover.addEventListener("mouseleave", () => {
 
 const shutdownButton = document.querySelector(".shtdwn");
 const shutdownFallback = document.querySelector(".fallback2");
+const startBar = document.querySelector(".start-bar");
 
 shutdownButton.addEventListener("click", () => {
   socialsMenu.classList.add("hidden");
@@ -280,6 +281,15 @@ shutdownButton.addEventListener("click", () => {
   startButton.classList.remove("clicked");
 
   setTimeout(() => {
+    trashIconDesk.classList.add("hidden");
+    shadowMinterDesk.classList.add("hidden");
+    terminalDesk.classList.add("hidden");
+  }, 1000);
+  setTimeout(() => {
+    startBar.classList.add("hidden");
+  }, 2000);
+
+  setTimeout(() => {
     shutdownFallback.style.display = "flex";
-  }, 3000);
+  }, 4500);
 });
