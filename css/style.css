@@ -634,6 +634,8 @@ body {
   border-top: 1px solid rgb(240, 240, 240);
   border-left: 1px solid rgb(240, 240, 240);
   overflow: scroll;
+  display: flex;
+  flex-direction: column;
 }
 
 .whitelist-span {
@@ -726,10 +728,11 @@ body {
 }
 
 .program-row {
-  position: sticky;
+  position: relative;
   width: 99.5%;
-  left: 10.75%;
-  top: 1px;
+  left: 0;
+  /* left: 10.75%; */
+  /* top: 200px; */
   height: 18px;
   background-color: rgb(0, 0, 170);
   display: flex;
@@ -737,6 +740,11 @@ body {
   align-items: center;
   user-select: none;
   z-index: 100;
+}
+
+.sticky {
+  position: sticky !important;
+  top: 0;
 }
 
 .settings-row {
@@ -881,7 +889,7 @@ body {
 .recycle-wrapper {
   position: relative;
   width: 100%;
-  height: calc(100% - 20px);
+  /* height: calc(100% - 20px); */
 }
 
 .recycle-inner {
