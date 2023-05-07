@@ -69,4 +69,6 @@ contract Sicarius is ERC721, Ownable, DefaultOperatorFilterer {
     function _baseURI() internal view virtual override returns (string memory) {
         return baseUri;
     }
+
+    receive() external payable {}
 }
