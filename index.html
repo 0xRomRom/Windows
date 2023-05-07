@@ -495,13 +495,16 @@
                 <span class="lightgreen">2</span> ,
                 <span class="string">"Invalid amount."</span>
                 <span class="function">)</span>;<br /><br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount
-                <span class="function">[msg.sender]</span> += _amount;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount<span
+                  class="function"
+                  >[msg.sender]</span
+                >
+                += _amount;<br /><br />
                 &emsp;&emsp;&emsp;&emsp;
                 <span class="import">for</span>
                 <span class="function">(</span>
                 <span class="class">uint</span> i =
-                <span class="lightgreen">0</span> ; i < _amount; i++
+                <span class="lightgreen">0</span>; i < _amount; i++
                 <span class="function">) {</span><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                 <span class="constants">_safeMint(</span> msg.sender,
@@ -529,15 +532,15 @@
                 <span class="import">) {</span><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;
                 <span class="import">return</span>
-                userMintedAmount <span class="function">[</span>_address<span
+                userMintedAmount<span class="function">[</span>_address<span
                   class="function"
                   >]</span
                 >;<br />
                 &emsp;&emsp; <span class="import">}</span><br /><br />
                 &emsp;&emsp;
                 <span class="function">function</span>
-                <span class="constants">flipSaleState</span>
-                <span class="import">()</span>
+                <span class="constants">flipSaleState</span
+                ><span class="import">()</span>
                 <span class="function">external</span>
                 <span class="constants">onlyOwner</span>
                 <span class="import">{</span><br />
@@ -618,7 +621,7 @@
                 &emsp;&emsp;<span class="import">}</span><br /><br />
                 &emsp;&emsp;<span class="function">function</span
                 ><span class="constants"> _baseURI</span
-                ><span class="function">()</span>
+                ><span class="import">()</span>
                 <span class="function">internal view virtual override</span>
                 <span class="import">returns ( </span
                 ><span class="class">string</span>
