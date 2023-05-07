@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
-
 pragma solidity ^0.8.4;
 
+import './DefaultOperatorFilterer.sol';
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract Sicarius is ERC721, Ownable {
+contract Sicarius is ERC721, Ownable, DefaultOperatorFilterer {
     using Strings for uint256;
 
     uint public MINT_PRICE;
@@ -26,7 +26,7 @@ contract Sicarius is ERC721, Ownable {
 
 
     function mint(uint _amount) public payable {
-        // require(isSaleActive, "The sale is paused.");
+        require(isSaleActive, "The sale is paused.");
         require(CURRENT_SUPPLY + _amount <= TOTAL_SUPPLY, "Mint cap has been reached.");
         require(msg.value >= MINT_PRICE * _amount, "Not enough funds to mint.");
         require(userMintedAmount[msg.sender] + _amount <= 2, "User mint cap reached.");

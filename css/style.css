@@ -1464,13 +1464,14 @@ body {
 
 .smart-contract-code {
   position: relative;
-  width: 98%;
-  left: 1%;
-  top: 0.5rem;
-  height: 23.5rem;
+  width: 99.7%;
+  top: 0.2rem;
+  height: 24.1rem;
   background-color: #121212;
   overflow: scroll;
   padding: 0.2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .smart-code {
@@ -1483,25 +1484,25 @@ body {
 }
 
 .import {
-  color: #e060ee !important;
+  color: rgb(183, 125, 179) !important;
 }
 
 .function {
-  color: #569cd6 !important;
+  color: rgb(76, 133, 182) !important;
 }
 
 .string {
-  color: #ce9178;
+  color: rgb(189, 102, 64);
 }
 
 .class {
-  color: #8ab877;
-}
-
-.constants {
-  color: #dcdcaa;
+  color: rgb(70, 170, 150);
 }
 
 .lightgreen {
   color: lightgreen;
+}
+
+.constants {
+  color: rgb(220, 220, 170);
 }

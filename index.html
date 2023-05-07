@@ -400,6 +400,9 @@
                 ><br />
                 <span class="import">pragma</span>
                 <span class="function">solidity</span> ^0.8.4; <br /><br />
+                <span class="import">import</span>
+                <span class="string">"./DefaultOperatorFilterer.sol"</span
+                >;<br />
                 <span class="import">import</span
                 ><span class="string"
                   >&emsp;"@openzeppelin/contracts/access/Ownable.sol"</span
@@ -413,7 +416,8 @@
                 <span class="class">Sicarius</span>
                 <span class="function">is</span>
                 <span class="class">ERC721</span>,
-                <span class="class">Ownable</span>
+                <span class="class">Ownable</span>,
+                <span class="class">DefaultOperatorFilterer</span>
                 <span class="constants">{</span> <br />
                 &emsp;<span class="import">using</span>
                 <span class="class">Strings</span>
@@ -442,7 +446,7 @@
                 &emsp;<span class="function">constructor</span>
                 <span class="import">()</span>
                 <span class="constants">ERC721</span
-                ><span class="import">(</span>"Sicarius", "SCRS"
+                ><span class="import">( </span>"Sicarius", "SCRS"
                 <span class="import">)</span>
                 <span class="import">&emsp;{</span>
                 <br />
@@ -551,26 +555,82 @@
                 <span class="import">{</span><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;baseUri = _baseUri;<br />
                 &emsp;&emsp;<span class="import">}</span><br /><br />
-                &emsp;&emsp;function withdrawAll() external onlyOwner payable
-                {<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;payable(msg.sender).transfer(address(this).balance);<br />
-                &emsp;&emsp;}<br /><br />
-                &emsp;&emsp;function tokenURI(uint256 tokenId) public view
-                virtual override returns (string memory) {<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;require(_exists(tokenId),
-                "ERC721Metadata: URI query for nonexistent token");<br /><br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;string memory currentBaseURI =
-                _baseURI();<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;return
-                bytes(currentBaseURI).length > 0<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;?
-                string(abi.encodePacked(currentBaseURI, tokenId.toString(),
-                baseExtension)) <br />&emsp;&emsp;&emsp;&emsp;&emsp;: "";<br />
-                &emsp;&emsp;}<br /><br />
-                &emsp;&emsp;function _baseURI() internal view virtual override
-                returns (string memory) {<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;return baseUri;<br />
-                &emsp;&emsp;} <br />}<br />
+                &emsp;&emsp;<span class="function">function </span
+                ><span class="constants">withdrawAll</span
+                ><span class="import">()</span
+                ><span class="function"> external</span>
+                <span class="constants">onlyOwner</span>
+                <span class="function">payable</span>
+                <span class="import">{</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="function"
+                  >payable(msg.sender)</span
+                ><span class="constants">.transfer</span
+                ><span class="function">(</span
+                ><span class="class">address</span
+                ><span class="constants">(</span
+                ><span class="function">this</span
+                ><span class="constants">)</span>.balance<span class="function"
+                  >)</span
+                >;<br />
+                &emsp;&emsp;<span class="import">}</span><br /><br />
+                &emsp;&emsp;<span class="function">function</span>
+                <span class="constants">tokenURI </span
+                ><span class="import">( </span
+                ><span class="class">uint256</span> tokenId
+                <span class="import"> )</span>
+                <span class="function">public view virtual override</span>
+                <span class="import">returns (</span>
+                <span class="class">string</span
+                ><span class="function"> memory</span>
+                <span class="import">) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">require</span
+                ><span class="function">( </span
+                ><span class="constants">_exists(</span> tokenId<span
+                  class="constants"
+                >
+                  )</span
+                >,
+                <span class="string"
+                  >"ERC721Metadata: URI query for nonexistent token"</span
+                >
+                <span class="function">)</span>;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="class">string</span>
+                <span class="function">memory</span> currentBaseURI =
+                <span class="constants">_baseURI()</span>;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">return</span>
+                <span class="class">bytes</span
+                ><span class="function">(</span>currentBaseURI<span
+                  class="function"
+                  >)</span
+                >.length > <span class="lightgreen">0</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;?
+                <span class="class">string</span
+                ><span class="function">( abi</span>.<span
+                  class="span constants"
+                  >encodePacked(</span
+                >currentBaseURI,
+                <tokenId class="span constants">toString</tokenId
+                ><span class="import">()</span>, baseExtension<span
+                  class="constants"
+                  >)</span
+                ><span class="function">)</span>
+                <br />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:
+                <span class="string">""</span>;<br />
+                &emsp;&emsp;<span class="import">}</span><br /><br />
+                &emsp;&emsp;<span class="function">function</span
+                ><span class="constants"> _baseURI</span
+                ><span class="function">()</span>
+                <span class="function">internal view virtual override</span>
+                <span class="import">returns ( </span
+                ><span class="class">string</span>
+                <span class="function">memory</span
+                ><span class="import"> ) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">return</span>
+                baseUri;<br />
+                &emsp;&emsp;<span class="import">}</span> <br /><span
+                  class="constants"
+                  >}</span
+                ><br />
               </p>
             </div>
           </div>
