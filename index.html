@@ -401,6 +401,11 @@
                 <span class="import">import</span>
                 <span class="string">"./DefaultOperatorFilterer.sol"</span
                 >;<br />
+                <span class="import">import</span>
+                <span class="string"
+                  >"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol"</span
+                >;<br />
+
                 <span class="import">import</span
                 ><span class="string"
                   >&emsp;"@openzeppelin/contracts/access/Ownable.sol"</span
@@ -609,8 +614,8 @@
                 ><span class="function">( abi</span>.<span
                   class="span constants"
                   >encodePacked( </span
-                >currentBaseURI,
-                <tokenId class="span constants">toString</tokenId
+                >currentBaseURI, tokenId.<span class="span constants"
+                  >toString</span
                 ><span class="import">()</span>, baseExtension<span
                   class="constants"
                 >

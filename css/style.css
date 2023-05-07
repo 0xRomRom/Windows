@@ -550,7 +550,7 @@ body {
 
 .contract-modal {
   position: absolute;
-  width: 720px;
+  width: 750px;
   height: 410px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
