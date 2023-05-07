@@ -438,7 +438,7 @@
                 <span class="function">public</span> baseUri;<br />
                 &emsp;<span class="class">string</span>
                 <span class="function">public</span> baseExtension =
-                <span class="string">".json"</span> ;<br /><br />
+                <span class="string">".json"</span>;<br /><br />
                 &emsp;<span class="function">constructor</span>
                 <span class="import">()</span>
                 <span class="constants">ERC721</span
@@ -448,12 +448,12 @@
                 <br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;MINT_PRICE =
                 <span class="constants">13370000000000000</span>
-                <span class="function">wei</span> ;
+                <span class="function">wei</span>;
                 <span class="comment">//0.01337 ETH</span> <br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;TOTAL_SUPPLY =
-                <span class="constants">2222</span>
-                ;<br />&emsp;&emsp;&emsp;&emsp;&emsp;baseUri =
-                <span class="string">"ipfs://?/"</span> ;
+                <span class="constants">2222</span
+                >;<br />&emsp;&emsp;&emsp;&emsp;&emsp;baseUri =
+                <span class="string">"ipfs://?/"</span>;
                 <br />
                 &emsp; <span class="import">}</span> <br /><br />&emsp;
                 <span class="function">function</span>
@@ -478,7 +478,7 @@
                 <span class="function">(</span>
                 <span class="function">msg</span>.value >= MINT_PRICE * _amount,
                 <span class="string">"Not enough funds to mint."</span>
-                <span class="function">)</span> ;<br />
+                <span class="function">)</span>;<br />
                 &emsp;&emsp;&emsp;&emsp;
                 <span class="import">require</span>
                 <span class="function">(</span> userMintedAmount
@@ -487,7 +487,7 @@
                 ><span class="constants">]</span> + _amount <=
                 <span class="lightgreen">2</span> ,
                 <span class="string">"User mint cap reached."</span>
-                <span class="function">)</span> ;<br />
+                <span class="function">)</span>;<br />
                 &emsp;&emsp;&emsp;&emsp;
                 <span class="import">require</span>
                 <span class="function">(</span> _amount >
@@ -497,7 +497,7 @@
                 <span class="function">)</span>;<br /><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount
                 <span class="function">[msg.sender]</span> += _amount;<br /><br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;
+                &emsp;&emsp;&emsp;&emsp;
                 <span class="import">for</span>
                 <span class="function">(</span>
                 <span class="class">uint</span> i =
@@ -513,7 +513,7 @@
                 >&emsp;&emsp;CURRENT_SUPPLY + <span class="lightgreen">1</span>
                 <span class="constants">)</span>;<br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CURRENT_SUPPLY++;<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp; <span class="function">}</span
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="function">}</span
                 ><br />
                 &emsp;&emsp; <span class="import">}</span> <br /><br />
                 &emsp;&emsp;
@@ -529,8 +529,10 @@
                 <span class="import">) {</span><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;
                 <span class="import">return</span>
-                userMintedAmount <span class="function">[</span>_address
-                <span class="function">]</span>;<br />
+                userMintedAmount <span class="function">[</span>_address<span
+                  class="function"
+                  >]</span
+                >;<br />
                 &emsp;&emsp; <span class="import">}</span><br /><br />
                 &emsp;&emsp;
                 <span class="function">function</span>
