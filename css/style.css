@@ -550,7 +550,7 @@ body {
 
 .contract-modal {
   position: absolute;
-  width: 510px;
+  width: 710px;
   height: 410px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
@@ -1460,4 +1460,44 @@ body {
 
 .blur {
   filter: grayscale(1);
+}
+
+.smart-contract-code {
+  position: relative;
+  width: 98%;
+  left: 1%;
+  top: 0.5rem;
+  height: 23.5rem;
+  background-color: #121212;
+  overflow: scroll;
+  padding: 0.2rem;
+}
+
+.smart-code {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
+
+.comment {
+  color: #608b4e;
+}
+
+.import {
+  color: #e060ee;
+}
+
+.function {
+  color: #569cd6;
+}
+
+.string {
+  color: #ce9178;
+}
+
+.class {
+  color: #8ab877;
+}
+
+.constants {
+  color: #dcdcaa;
 }

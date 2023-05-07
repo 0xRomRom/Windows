@@ -379,7 +379,7 @@
         </div>
 
         <!-- Smart Contract Modal -->
-        <div class="contract-modal hidden">
+        <div class="contract-modal">
           <div class="recycle-wrapper">
             <div class="program-row">
               <div class="left-block">
@@ -393,6 +393,130 @@
               <div class="trashcan-button">
                 <button class="close clo-contract"></button>
               </div>
+            </div>
+            <div class="smart-contract-code">
+              <p class="smart-code">
+                <span class="comment">// SPDX-License-Identifier: MIT</span
+                ><br />
+                <span class="import">pragma</span>
+                <span class="function">solidity</span> ^0.8.4; <br /><br />
+                <span class="import">import</span
+                ><span class="string"
+                  >&emsp;"@openzeppelin/contracts/access/Ownable.sol"</span
+                >
+                ; <br /><span class="import">import</span
+                ><span class="string"
+                  >&emsp;"@openzeppelin/contracts/token/ERC721/ERC721.sol"</span
+                >
+                ;<br /><br />
+                <span class="function">contract</span>
+                <span class="class">Sicarius</span>
+                <span class="function">is</span>
+                <span class="class">ERC721</span>,
+                <span class="class">Ownable</span>
+                <span class="constants">{</span> <br />
+                &emsp;<span class="import">using</span>
+                <span class="class">Strings</span>
+                <span class="import">for</span>
+                <span class="class">uint256</span>;<br /><br />
+                &emsp;<span class="class">uint</span>
+                <span class="function">public</span> MINT_PRICE;<br />
+                &emsp;<span class="class">uint</span>
+                <span class="function">public</span> TOTAL_SUPPLY;<br />
+                &emsp;<span class="class">uint</span>
+                <span class="function">public</span> CURRENT_SUPPLY;<br />
+                &emsp;<span class="class">bool</span>
+                <span class="function">public</span> isSaleActive;<br /><br />
+                &emsp;<span class="function">mapping</span
+                ><span class="import">(</span>
+                <span class="class">address</span> =>
+                <span class="class">uint</span>
+                <span class="import">)</span>
+                <span class="function">private</span>
+                userMintedAmount;<br /><br />
+                &emsp;<span class="class">string</span>
+                <span class="function">public</span> baseUri;<br />
+                &emsp;<span class="class">string</span>
+                <span class="function">public</span> baseExtension =
+                <span class="string">".json"</span> ;<br /><br />
+                &emsp;<span class="function">constructor</span>
+                <span class="import">()</span>
+                <span class="constants">ERC721</span
+                ><span class="import">(</span>"Sicarius", "SCRS"
+                <span class="import">)</span>
+                <span class="import">&emsp;{</span>
+                <br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;MINT_PRICE =
+                <span class="constants">13370000000000000</span>
+                <span class="function">wei</span> ;
+                <span class="comment">//0.01337 ETH</span> <br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;TOTAL_SUPPLY =
+                <span class="constants">2222</span>
+                ;<br />&emsp;&emsp;&emsp;&emsp;&emsp;baseUri =
+                <span class="string">"ipfs://?/"</span> ;
+                <br />
+                &emsp; <span class="import">}</span> <br /><br />&emsp;
+                <span class="function">function</span>
+                <span class="constants">mint</span
+                ><span class="import">(</span>
+                <span class="class">uint</span> _amount)
+                <span class="function">public payable</span>
+                <span class="import">{</span> <br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;require(isSaleActive, "The sale is
+                paused.");<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;require(CURRENT_SUPPLY + _amount
+                <= TOTAL_SUPPLY, "Mint cap has been reached.");
+                <br />&emsp;&emsp;&emsp;&emsp;&emsp;require(msg.value >=
+                MINT_PRICE * _amount, "Not enough funds to mint.");<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;require(userMintedAmount[msg.sender]
+                + _amount <= 2, "User mint cap reached.");<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;require(_amount > 0 && _amount <=
+                2, "Invalid amount");<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount[msg.sender] +=
+                _amount;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;for (uint i = 0; i _amount; i++)
+                {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_safeMint(msg.sender,
+                CURRENT_SUPPLY + 1);<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;tokenURI(CURRENT_SUPPLY
+                + 1);<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CURRENT_SUPPLY++;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;}<br />
+                &emsp;&emsp;}
+                <br /><br />
+                &emsp;&emsp;function userMintedCount(address _address) public
+                view returns (uint) {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;return
+                userMintedAmount[_address];<br />
+                &emsp;&emsp;}<br /><br />
+                &emsp;&emsp;function flipSaleState() external onlyOwner {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;isSaleActive = !isSaleActive;<br />
+                &emsp;&emsp;}<br /><br />
+                &emsp;&emsp;function setBaseUri(string memory _baseUri) external
+                onlyOwner {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;baseUri = _baseUri;<br />
+                &emsp;&emsp;}<br /><br />
+                &emsp;&emsp;function withdrawAll() external onlyOwner payable
+                {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;payable(msg.sender).transfer(address(this).balance);<br />
+                &emsp;&emsp;}<br /><br />
+                &emsp;&emsp;function tokenURI(uint256 tokenId) public view
+                virtual override returns (string memory) {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;require(_exists(tokenId),
+                "ERC721Metadata: URI query for nonexistent token");<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;string memory currentBaseURI =
+                _baseURI();<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;return
+                bytes(currentBaseURI).length > 0<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;?
+                string(abi.encodePacked(currentBaseURI, tokenId.toString(),
+                baseExtension)) <br />&emsp;&emsp;&emsp;&emsp;&emsp;: "";<br />
+                &emsp;&emsp;}<br /><br />
+                &emsp;&emsp;function _baseURI() internal view virtual override
+                returns (string memory) {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;return baseUri;<br />
+                &emsp;&emsp;} <br />}<br />
+              </p>
             </div>
           </div>
         </div>
