@@ -30,7 +30,7 @@ contract Sicarius is ERC721, Ownable, DefaultOperatorFilterer {
         require(CURRENT_SUPPLY + _amount <= TOTAL_SUPPLY, "Mint cap has been reached.");
         require(msg.value >= MINT_PRICE * _amount, "Not enough funds to mint.");
         require(userMintedAmount[msg.sender] + _amount <= 2, "User mint cap reached.");
-        require(_amount > 0 && _amount <= 2, "Invalid amount");
+        require(_amount > 0 && _amount <= 2, "Invalid amount.");
 
         userMintedAmount[msg.sender] += _amount;
 
