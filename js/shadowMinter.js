@@ -27,7 +27,11 @@ window.onload = async () => {
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-    currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
+    currentlyMintedCount.innerHTML = `[${await currentlyMinted}/2222]`;
+
+    const provider = window.ethereum;
+    const networkId = await provider.request({ method: "net_version" });
+    console.log(networkId);
   }
 };
 
@@ -82,8 +86,8 @@ window.ethereum.on("accountsChanged", async (accounts) => {
       eligibleText.textContent = "Eligible: False";
     }
     //###
-    // mintButton.disabled = true;
-    // mintButton.classList.remove("win-stl");
+    mintButton.disabled = true;
+    mintButton.classList.remove("win-stl");
   }, 7000);
 });
 
@@ -127,6 +131,7 @@ const connectToMetamask = async () => {
   //Disable mint UI when user has already minted
   let value;
   value = await contractInstance.methods.userMintedCount(account).call();
+  console.log(value);
 
   if (+value === 2) {
     incrementMintCount.disabled = true;

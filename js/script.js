@@ -36,6 +36,22 @@ menuTeam.addEventListener("click", () => {
   documentsDropMenu.classList.add("hidden");
 });
 
+//Open Contract
+const menuContract = document.querySelector(".menu-contract");
+const closeContract = document.querySelector(".clo-contract");
+const contractModal = document.querySelector(".contract-modal");
+
+closeContract.addEventListener("click", () => {
+  contractModal.classList.add("hidden");
+});
+
+menuContract.addEventListener("click", () => {
+  startMenuList.classList.toggle("hidden");
+  contractModal.classList.remove("hidden");
+  startButton.classList.toggle("clicked");
+  documentsDropMenu.classList.add("hidden");
+});
+
 //Open whitelist
 const menuWhitelist = document.querySelector(".menu-whitelist");
 const closeWhitelist = document.querySelector(".clo-whitelist");
