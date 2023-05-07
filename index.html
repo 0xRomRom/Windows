@@ -459,43 +459,98 @@
                 <span class="function">function</span>
                 <span class="constants">mint</span
                 ><span class="import">(</span>
-                <span class="class">uint</span> _amount)
+                <span class="class">uint</span> _amount
+                <span class="import">)</span>
                 <span class="function">public payable</span>
                 <span class="import">{</span> <br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;require(isSaleActive, "The sale is
-                paused.");<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;require(CURRENT_SUPPLY + _amount
-                <= TOTAL_SUPPLY, "Mint cap has been reached.");
-                <br />&emsp;&emsp;&emsp;&emsp;&emsp;require(msg.value >=
-                MINT_PRICE * _amount, "Not enough funds to mint.");<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;require(userMintedAmount[msg.sender]
-                + _amount <= 2, "User mint cap reached.");<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;require(_amount > 0 && _amount <=
-                2, "Invalid amount");<br /><br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount[msg.sender] +=
-                _amount;<br /><br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;for (uint i = 0; i _amount; i++)
-                {<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;_safeMint(msg.sender,
-                CURRENT_SUPPLY + 1);<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;tokenURI(CURRENT_SUPPLY
-                + 1);<br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span> isSaleActive,
+                <span class="string">"The sale is paused."</span>
+                <span class="function">)</span> ;<br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span>&emsp;CURRENT_SUPPLY + _amount <=
+                TOTAL_SUPPLY,
+                <span class="string">"Mint cap has been reached."</span>
+                <span class="function">)</span>;<br />&emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span>
+                <span class="function">msg</span>.value >= MINT_PRICE * _amount,
+                <span class="string">"Not enough funds to mint."</span>
+                <span class="function">)</span> ;<br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span> userMintedAmount
+                <span class="constants">[</span>
+                <span class="function">msg.sender</span
+                ><span class="constants">&emsp;]</span> + _amount <=
+                <span class="lightgreen">2</span> ,
+                <span class="string">"User mint cap reached."</span>
+                <span class="function">)</span> ;<br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span> _amount >
+                <span class="lightgreen">0</span> && _amount <=
+                <span class="lightgreen">2</span> ,
+                <span class="string">"Invalid amount"</span>
+                <span class="function">)</span>;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount
+                <span class="function">[msg.sender]</span> += _amount;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;
+                <span class="import">for</span>
+                <span class="function">(</span>
+                <span class="class">uint</span> i =
+                <span class="lightgreen">0</span> ; i < _amount; i++
+                <span class="function">) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <span class="constants">_safeMint(</span> msg.sender,
+                CURRENT_SUPPLY + <span class="lightgreen">1</span>
+                <span class="constants">)</span>;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span
+                  class="constants"
+                  >tokenURI(</span
+                >&emsp;CURRENT_SUPPLY + <span class="lightgreen">1</span>
+                <span class="constants">)</span>;<br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CURRENT_SUPPLY++;<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;}<br />
-                &emsp;&emsp;}
-                <br /><br />
-                &emsp;&emsp;function userMintedCount(address _address) public
-                view returns (uint) {<br />
-                &emsp;&emsp;&emsp;&emsp;&emsp;return
-                userMintedAmount[_address];<br />
-                &emsp;&emsp;}<br /><br />
-                &emsp;&emsp;function flipSaleState() external onlyOwner {<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp; <span class="function">}</span
+                ><br />
+                &emsp;&emsp; <span class="import">}</span> <br /><br />
+                &emsp;&emsp;
+                <span class="function">function</span>
+                <span class="constants">userMintedCount</span>
+                <span class="import">(</span
+                ><span class="class">&emsp;address</span> _address
+                <span class="import">)</span>
+                <span class="function">public view</span>
+                <span class="import"></span>
+                <span class="import">returns</span>
+                <span class="import">(</span> <span class="class">uint</span>
+                <span class="import">) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;
+                <span class="import">return</span>
+                userMintedAmount <span class="function">[</span>_address
+                <span class="function">]</span>;<br />
+                &emsp;&emsp; <span class="import">}</span><br /><br />
+                &emsp;&emsp;
+                <span class="function">function</span>
+                <span class="constants">flipSaleState</span>
+                <span class="import">()</span>
+                <span class="function">external</span>
+                <span class="constants">onlyOwner</span>
+                <span class="import">{</span><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;isSaleActive = !isSaleActive;<br />
-                &emsp;&emsp;}<br /><br />
-                &emsp;&emsp;function setBaseUri(string memory _baseUri) external
-                onlyOwner {<br />
+                &emsp;&emsp;&emsp;<span class="import">}</span> <br /><br />
+                &emsp;&emsp;<span class="function">function</span>
+                <span class="constants">setBaseUri</span>
+                <span class="import">( </span><span class="class">string</span>
+                <span class="function">memory</span> _baseUri
+                <span class="import">)</span>
+                <span class="function">external</span>
+                <span class="constants">onlyOwner</span>
+                <span class="import">{</span><br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;baseUri = _baseUri;<br />
-                &emsp;&emsp;}<br /><br />
+                &emsp;&emsp;<span class="import">}</span><br /><br />
                 &emsp;&emsp;function withdrawAll() external onlyOwner payable
                 {<br />
                 &emsp;&emsp;&emsp;&emsp;&emsp;payable(msg.sender).transfer(address(this).balance);<br />

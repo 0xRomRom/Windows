@@ -550,7 +550,7 @@ body {
 
 .contract-modal {
   position: absolute;
-  width: 710px;
+  width: 720px;
   height: 410px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
@@ -1483,11 +1483,11 @@ body {
 }
 
 .import {
-  color: #e060ee;
+  color: #e060ee !important;
 }
 
 .function {
-  color: #569cd6;
+  color: #569cd6 !important;
 }
 
 .string {
@@ -1500,4 +1500,8 @@ body {
 
 .constants {
   color: #dcdcaa;
+}
+
+.lightgreen {
+  color: lightgreen;
 }
