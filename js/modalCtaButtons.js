@@ -39,8 +39,7 @@ minimizeTrashCan.addEventListener("click", () => {
 const parent = document.querySelector(".active-programs");
 parent.addEventListener("click", (event) => {
   // Trashcan event
-  if (event.target.classList[0] === "act-bin")
-   {
+  if (event.target.classList[0] === "act-bin") {
     const activeBin = document.querySelector(".act-bin");
     activeBin.classList.add("maximized");
     activeBin.classList.remove("minimized");
@@ -48,17 +47,15 @@ parent.addEventListener("click", (event) => {
   }
 
   // Shadow Minter event
-  if (event.target.classList[0] === "act-shadow")
-   {
+  if (event.target.classList[0] === "act-shadow") {
     const activeShadows = document.querySelector(".act-shadow");
     activeShadows.classList.add("maximized");
     activeShadows.classList.remove("minimized");
-    shadowMinterModal.classList.remove("hidden");
+    shadowMintModal.classList.remove("hidden");
   }
 
   // Terminal event
-  if (event.target.classList[0] === "act-terminal")
-   {
+  if (event.target.classList[0] === "act-terminal") {
     const activeTerminals = document.querySelector(".act-terminal");
     activeTerminals.classList.add("maximized");
     activeTerminals.classList.remove("minimized");

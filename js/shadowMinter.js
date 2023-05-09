@@ -86,8 +86,8 @@ window.ethereum.on("accountsChanged", async (accounts) => {
       eligibleText.textContent = "Eligible: False";
     }
     //###
-    mintButton.disabled = true;
-    mintButton.classList.remove("win-stl");
+    // mintButton.disabled = true;
+    // mintButton.classList.remove("win-stl");
   }, 7000);
 });
 
@@ -397,12 +397,12 @@ mintButton.addEventListener("click", async () => {
   let queryString = "";
 
   if (mintCount === 1) {
-    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${+currentlyMinted}%20LFG!%20%40Sicarius`;
+    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${+currentlyMinted}%20LFG!%20%40Sicarius_Quest`;
   }
   if (mintCount === 2) {
     queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${
       +currentlyMinted - 1
-    }%20%26%20%23${+currentlyMinted}%20LFG!%20%40Sicarius`;
+    }%20%26%20%23${+currentlyMinted}%20LFG!%20%40Sicarius_Quest`;
   }
 
   setTimeout(() => {
