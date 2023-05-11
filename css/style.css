@@ -283,6 +283,12 @@ body {
   top: 15rem;
 }
 
+.desk-town {
+  position: absolute;
+  left: 6rem;
+  top: 28rem;
+}
+
 .desktop-logo {
   width: 30px;
   user-select: none;
@@ -1505,4 +1511,8 @@ body {
 
 .constants {
   color: rgb(220, 220, 170);
+}
+
+.rounded {
+  border-radius: 5px 5px;
 }

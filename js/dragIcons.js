@@ -56,3 +56,6 @@ makeElementDraggable(shadowMinter);
 
 const desktopTerminalIcon = document.querySelector(".desk-terminal");
 makeElementDraggable(desktopTerminalIcon);
+
+const desktopTownIcon = document.querySelector(".desk-town");
+makeElementDraggable(desktopTownIcon);
