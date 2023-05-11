@@ -1,7 +1,6 @@
 const { MerkleTree } = require("merkletreejs");
 const keccak256 = require("keccak256");
 const round1 = require("../Wallets");
-console.log(round1);
 
 const CURRENT_ROOT =
   "0xac54501931b008d53e0ab4839bc9f0907162c200fddd7e64a1c278e50eff5dd0";

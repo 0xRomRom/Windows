@@ -543,8 +543,6 @@ body {
   border-left: 1px solid rgb(240, 240, 240);
 }
 
-
-
 .roadmap-modal {
   position: absolute;
   width: 510px;
@@ -1550,7 +1548,6 @@ body {
   top: 4rem;
 }
 
-
 .crier-inner {
   position: absolute;
   padding-top: 1px;
@@ -1633,7 +1630,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Windows; background-color: #8000002f; /* Dark red */
+  font-family: Windows;
+  background-color: #8000002f; /* Dark red */
   animation: fade-green 4s infinite;
 }
 
@@ -1647,7 +1645,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: Windows; background-color: #8000002f; /* Dark red */
+  font-family: Windows;
+  background-color: #8000002f; /* Dark red */
   animation: fade-red 4s infinite;
 }
 
@@ -1662,19 +1661,18 @@ body {
 .wal-in {
   z-index: 50;
   color: white;
-  font-size: 4vw;
+  font-size: 30px;
   font-family: Windows;
-  text-shadow: 0px 0px 20px rgb(143, 253, 0);
+  text-shadow: 0px 0px 30px rgb(143, 253, 0);
 }
 
 .wal-out {
   z-index: 50;
   color: white;
-  font-size: 4vw;
+  font-size: 30px;
   font-family: Windows;
   text-shadow: 0px 0px 20px rgb(253, 0, 0);
 }
-
 
 @keyframes fade-green {
   0% {
