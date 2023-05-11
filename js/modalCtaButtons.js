@@ -10,11 +10,16 @@ const terminalModal = document.querySelector(".terminal-modal");
 const enlargeTerminal = document.querySelector(".enl-terminal");
 const minimizeTerminal = document.querySelector(".min-terminal");
 
+const crierModal = document.querySelector(".crier-modal");
+const enlargeCrier = document.querySelector(".enl-crier");
+const minimizeCrier = document.querySelector(".min-crier");
+
 let trashCanEnlarged = false;
 let shadowMinterEnlarged = false;
 let terminalEnlarged = false;
+let crierEnlarged = false;
 
-// Recycle Modal \\
+
 
 // Enlarge trash can
 enlargeTrashCan.addEventListener("click", () => {
@@ -61,6 +66,14 @@ parent.addEventListener("click", (event) => {
     activeTerminals.classList.remove("minimized");
     terminalModal.classList.remove("hidden");
   }
+
+  // Crier modal
+  if (event.target.classList[0] === "act-crier") {
+    const activeCriers = document.querySelector(".act-crier");
+    activeCriers.classList.add("maximized");
+    activeCriers.classList.remove("minimized");
+    crierModal.classList.remove("hidden");
+  }
 });
 
 // Shadow Minter Modal \\
@@ -103,4 +116,25 @@ minimizeTerminal.addEventListener("click", () => {
   terminalModal.classList.add("hidden");
   activeTerminal.classList.add("minimized");
   activeTerminal.classList.remove("maximized");
+});
+
+// Crier Modal \\
+
+// Enlarge Crier
+enlargeCrier.addEventListener("click", () => {
+  if (!crierEnlarged) {
+    crierModal.classList.add("enlarged");
+    crierEnlarged = true;
+    return;
+  }
+  crierModal.classList.remove("enlarged");
+  crierEnlarged = false;
+});
+
+// Minimize min button
+minimizeCrier.addEventListener("click", () => {
+  const activeCrier = document.querySelector(".act-crier");
+  crierModal.classList.add("hidden");
+  activeCrier.classList.add("minimized");
+  activeCrier.classList.remove("maximized");
 });

@@ -149,10 +149,15 @@ const closeShadowMinter = document.querySelector(".clo-shadow");
 const terminalModals = document.querySelector(".terminal-modal");
 const terminalDesk = document.querySelector(".desk-terminal");
 const closeTerminal = document.querySelector(".clo-terminal");
+
+const crierModals = document.querySelector(".crier-modal");
+const crierDesk = document.querySelector(".desk-crier");
+const closeCrier = document.querySelector(".clo-crier");
+
 const startmenuRun = document.querySelector(".run");
 
-let binActive = false;
 
+let binActive = false;
 const trashBar = document.querySelector(".act-bin");
 // Open recycle bin modal
 trashIconDesk.addEventListener("dblclick", () => {
@@ -171,13 +176,18 @@ closeTrashCan.addEventListener("click", () => {
   binActive = false;
 });
 
+////
+let shadowActive = false;
 const shadowBar = document.querySelector(".act-shadow");
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
+  if (!shadowActive) {
   shadowMinterModal.classList.remove("hidden");
   shadowBar.classList.remove("hidden");
+  }
 });
 
+// Close shadow minter
 closeShadowMinter.addEventListener("click", () => {
   shadowMinterModal.classList.add("hidden");
   shadowMinterModal.classList.remove("enlarged");
@@ -185,8 +195,31 @@ closeShadowMinter.addEventListener("click", () => {
   shadowActive = false;
 });
 
-let terminalActive = false;
+////
 
+let crierActive = false;
+const crierBar = document.querySelector(".act-crier");
+// Open shadow minter modal
+crierDesk.addEventListener("dblclick", () => {
+  if (!crierActive) {
+  crierModals.classList.remove("hidden");
+  crierBar.classList.remove("hidden");
+  }
+});
+
+// Close shadow minter
+closeCrier.addEventListener("click", () => {
+  crierModals.classList.add("hidden");
+  crierModals.classList.remove("enlarged");
+  crierBar.classList.add("hidden");
+  crierActive = false;
+});
+
+
+
+////
+
+let terminalActive = false;
 const terminalInputField = document.querySelector(".terminal-input");
 const terminalBar = document.querySelector(".act-terminal");
 // Open terminal modal
