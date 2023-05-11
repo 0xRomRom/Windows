@@ -210,3 +210,5 @@ const round1 = [
   "0x602B93A6ab102907a40cDE6B786cD07B4279E796",
   "0xfF21f8Fc5e50Bfeb7dFe4d848924C4d1643f144D",
 ];
+
+module.exports = round1;

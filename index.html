@@ -15,6 +15,7 @@
     <script type="module" src="./js/terminal.js"></script>
     <script type="module" src="./js/shadowMinter.js"></script>
     <script type="module" src="./js/blocktime.js"></script>
+    <script type="module" src="./js/ValidateWallets.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.2.3/ethers.umd.min.js"></script>
     <script
@@ -818,7 +819,7 @@
         </div>
 
         <!-- Crier Modal -->
-        <div class="crier-modal">
+        <div class="crier-modal hidden">
           <div class="term-row program-row">
             <div class="left-block">
               <img
@@ -837,11 +838,29 @@
           
 
           <div class="crier-inner">
-            <div class="crier-inputs"></div>
+            <div class="crier-inputs">
+              <h2 class="validate-hero">Validate</h2>
+              <div class="crier-inputbox">
+                <div class="val-buttonbox">
+                  <label for="val-wal" class="wal-label">Enter your wallet</label>
+                  <input type="text" placeholder="0x..." class="validate-wallet" id="val-wal">
+                </div>
+                <div class="val-buttonbox">
+                  <button class="hash-wallet-button">Call Crier</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="result-flash wallet-in hidden">
+             <h3 class="result-text wal-in">You're in!</h3>
+            </div>
+
+            <div class="result-flash wallet-out hidden">
+             <h3 class="result-text wal-out">Oops... can't find your wallet</h3>
+            </div>
+
             <img src="./img/Crier.png" alt="Town Crier" class="crier-bg">
-
           </div>
-
         </div>
       </div>
 
