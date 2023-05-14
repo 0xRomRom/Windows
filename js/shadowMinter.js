@@ -100,7 +100,6 @@ const connectToMetamask = async () => {
   }
 
   //Request current user
-
   await window.ethereum.send("eth_requestAccounts");
 
   //Initialize web3 class
