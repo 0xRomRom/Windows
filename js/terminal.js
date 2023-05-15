@@ -91,7 +91,7 @@ terminalInput.addEventListener("keydown", function (e) {
 
     if (command === "live") {
       const output = document.createElement("div");
-      output.innerHTML = prePend + ` Mint is not live yet`;
+      output.innerHTML = prePend + ` May 19 ~ 17:00 UTC`;
       output.style.color = "green";
       terminalOutput.insertAdjacentElement("beforeend", output);
       return;
