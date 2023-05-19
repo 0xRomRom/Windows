@@ -3,7 +3,7 @@ const terminalOutput = document.querySelector(".terminal-output");
 const terminalBody = document.querySelector(".terminal-body");
 
 import ABI from "./abi.js";
-const CONTRACT = "0x0FdA45Aa7b4d96c0e96D995568504a44C725940b";
+const CONTRACT = "0x8C05a509cD25C068d8F9A7D44853CD047f3B5b5F";
 let contractInstance;
 let currentMintCount = 0;
 
