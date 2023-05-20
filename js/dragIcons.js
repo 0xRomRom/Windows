@@ -59,3 +59,6 @@ makeElementDraggable(desktopTerminalIcon);
 
 const desktopTownIcon = document.querySelector(".desk-crier");
 makeElementDraggable(desktopTownIcon);
+
+const desktopOpenSea = document.querySelector(".desk-opensea");
+makeElementDraggable(desktopOpenSea);

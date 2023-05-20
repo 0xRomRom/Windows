@@ -3,20 +3,25 @@ const terminalOutput = document.querySelector(".terminal-output");
 const terminalBody = document.querySelector(".terminal-body");
 
 import ABI from "./abi.js";
-const CONTRACT = "0x8C05a509cD25C068d8F9A7D44853CD047f3B5b5F";
-let contractInstance;
+const CONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
 let currentMintCount = 0;
+
+let contractInstance;
 
 const capFetch = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+    console.log(contractInstance)
     try {
       const currentlyMinted = await contractInstance.methods
         .CURRENT_SUPPLY()
         .call();
       currentMintCount = currentlyMinted;
-    } catch (err) {}
+      console.log(currentMintCount)
+    } catch (err) {
+      console.error(err);
+    }
   }
 };
 capFetch();

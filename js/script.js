@@ -154,6 +154,8 @@ const crierModals = document.querySelector(".crier-modal");
 const crierDesk = document.querySelector(".desk-crier");
 const closeCrier = document.querySelector(".clo-crier");
 
+const openSeaIconDesk = document.querySelector(".desk-opensea");
+
 const startmenuRun = document.querySelector(".run");
 
 
@@ -215,6 +217,11 @@ closeCrier.addEventListener("click", () => {
   crierActive = false;
 });
 
+
+// Open shadow minter modal
+openSeaIconDesk.addEventListener("dblclick", () => {
+  window.open('https://opensea.io/collection/scrs', '_blank');
+});
 
 
 ////

@@ -286,7 +286,13 @@ body {
 .desk-crier {
   position: absolute;
   left: 6rem;
-  top: 28rem;
+  top: 23rem;
+}
+
+.desk-opensea {
+  position: absolute;
+  left: 10rem;
+  top: 35rem;
 }
 
 .desktop-logo {
