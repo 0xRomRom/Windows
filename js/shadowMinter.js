@@ -27,7 +27,7 @@ window.onload = async () => {
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-    currentlyMintedCount.innerHTML = `[${await currentlyMinted}/2222]`;
+    currentlyMintedCount.innerHTML = `[${await currentlyMinted - 1}/2222]`;
 
     const provider = window.ethereum;
     const networkId = await provider.request({ method: "net_version" });
@@ -391,7 +391,7 @@ mintButton.addEventListener("click", async () => {
     redirectSocialsBox.classList.remove("hidden");
   }, 14000);
 
-  let currentlyMinted = await contractInstance.methods.CURRENT_SUPPLY().call();
+  let currentlyMinted = await contractInstance.methods.CURRENT_SUPPLY().call() - 1;
 
   let queryString = "";
 
