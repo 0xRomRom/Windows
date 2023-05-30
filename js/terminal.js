@@ -12,13 +12,11 @@ const capFetch = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-    console.log(contractInstance)
     try {
       const currentlyMinted = await contractInstance.methods
         .CURRENT_SUPPLY()
         .call() - 1;
       currentMintCount = currentlyMinted;
-      console.log(currentMintCount)
     } catch (err) {
       console.error(err);
     }

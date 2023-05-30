@@ -22,7 +22,9 @@ let currMintCount;
 window.onload = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
+    console.log(window.web3);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+    // console.log(contractInstance);
 
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
@@ -31,7 +33,7 @@ window.onload = async () => {
 
     const provider = window.ethereum;
     const networkId = await provider.request({ method: "net_version" });
-    console.log(networkId);
+    // console.log(networkId);
   }
 };
 
@@ -164,7 +166,7 @@ const connectToMetamask = async () => {
   }, 6000);
 
   //Call current circ supply interval fetcher
-  updateCircSupply();
+  // updateCircSupply();
 };
 connectMetamask.addEventListener("click", connectToMetamask);
 
@@ -391,7 +393,7 @@ mintButton.addEventListener("click", async () => {
     redirectSocialsBox.classList.remove("hidden");
   }, 14000);
 
-  let currentlyMinted = await contractInstance.methods.CURRENT_SUPPLY().call() - 1;
+  let currentlyMinted = await contractInstance.methods.CURRENT_SUPPLY().call();
 
   let queryString = "";
 
