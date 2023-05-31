@@ -1,4 +1,3 @@
-require("dotenv").config();
 
 const programsHover = document.querySelector(".d1");
 const documentsHover = document.querySelector(".d2");
@@ -199,26 +198,42 @@ closeShadowMinter.addEventListener("click", () => {
 
 ////
 
-let crierActive = false;
+const gameIntro = document.querySelector(".game-intro");
+const soundTrack = document.querySelector(".soundtrack");
 const crierBar = document.querySelector(".act-crier");
-// Open shadow minter modal
+const app = document.querySelector(".app");
+
+let crierActive = false;
+// Open crier modal
 crierDesk.addEventListener("dblclick", () => {
+    gameIntro.classList.add("fadeOut")
   if (!crierActive) {
+    mainProgram.classList.add("blurry");
   crierModals.classList.remove("hidden");
   crierBar.classList.remove("hidden");
+  soundTrack.play();
+  soundTrack.muted = !soundTrack.muted;
+  app.style.backgroundImage = "url('./PVP/SicariusDark.png')"
   }
+  setTimeout(() => {
+gameIntro.classList.add("hidden");
+  }, 5000)
 });
 
-// Close shadow minter
+// Close crier modal
 closeCrier.addEventListener("click", () => {
   crierModals.classList.add("hidden");
+  mainProgram.classList.remove("blurry");
   crierModals.classList.remove("enlarged");
   crierBar.classList.add("hidden");
   crierActive = false;
+  app.style.backgroundImage = "url('./PVP/Sicarius.png')"
+  soundTrack.muted = !soundTrack.muted;
+  gameIntro.classList.remove("hidden");
 });
 
 
-// Open shadow minter modal
+// Open OpenSea
 openSeaIconDesk.addEventListener("dblclick", () => {
   window.open('https://opensea.io/collection/scrs', '_blank');
 });

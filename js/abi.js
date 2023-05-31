@@ -1,4 +1,4 @@
-const ABI = [
+export const ABI = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -549,4 +549,4 @@ const ABI = [
 	}
 ];
 
-module.exports = ABI;
+

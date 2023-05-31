@@ -2,7 +2,7 @@ const terminalInput = document.querySelector(".terminal-input");
 const terminalOutput = document.querySelector(".terminal-output");
 const terminalBody = document.querySelector(".terminal-body");
 
-import ABI from "./abi.js";
+import {ABI} from "./abi.js";
 const CONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
 let currentMintCount = 0;
 

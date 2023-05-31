@@ -120,16 +120,6 @@ minimizeTerminal.addEventListener("click", () => {
 
 // Crier Modal \\
 
-// Enlarge Crier
-enlargeCrier.addEventListener("click", () => {
-  if (!crierEnlarged) {
-    crierModal.classList.add("enlarged");
-    crierEnlarged = true;
-    return;
-  }
-  crierModal.classList.remove("enlarged");
-  crierEnlarged = false;
-});
 
 // Minimize min button
 minimizeCrier.addEventListener("click", () => {

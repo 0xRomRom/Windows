@@ -1,6 +1,5 @@
-import ABI from "./abi.js";
+import {ABI} from "./abi.js";
 
-import keccak256 from "keccak256";
 
 const mintButton = document.querySelector(".mint-button");
 const connectMetamask = document.querySelector(".connect-metamask");
@@ -22,9 +21,7 @@ let currMintCount;
 window.onload = async () => {
   if (window.ethereum) {
     window.web3 = new Web3(window.ethereum);
-    console.log(window.web3);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
-    // console.log(contractInstance);
 
     const currentlyMinted = await contractInstance.methods
       .CURRENT_SUPPLY()
@@ -33,7 +30,6 @@ window.onload = async () => {
 
     const provider = window.ethereum;
     const networkId = await provider.request({ method: "net_version" });
-    // console.log(networkId);
   }
 };
 
@@ -132,7 +128,6 @@ const connectToMetamask = async () => {
   //Disable mint UI when user has already minted
   let value;
   value = await contractInstance.methods.userMintedCount(account).call();
-  console.log(value);
 
   if (+value === 2) {
     incrementMintCount.disabled = true;
@@ -166,7 +161,7 @@ const connectToMetamask = async () => {
   }, 6000);
 
   //Call current circ supply interval fetcher
-  // updateCircSupply();
+  updateCircSupply();
 };
 connectMetamask.addEventListener("click", connectToMetamask);
 
