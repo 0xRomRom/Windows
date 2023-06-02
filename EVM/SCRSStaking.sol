@@ -18,7 +18,7 @@ contract SCRSStaking {
 
     function stakeNFT(uint _amount) public {
         uint NFTsOwned = NFTsHeld(msg.sender);
-        require(NFTsOwned >= _amount, "Not enough NFT's to stake");
+        require(_amount >= NFTsOwned, "Not enough NFT's to stake");
     }
 
     function claimTokens() public {}
