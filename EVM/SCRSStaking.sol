@@ -8,19 +8,6 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/ReentrancyGuard.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/security/Pausable.sol";
 
-/**
- * @title ERC721 Staking Smart Contract
- *
- * @author andreitoma8
- *
- * @notice This contract uses a simple principle to alow users to stake ERC721 Tokens and earn ERC20 Reward Tokens distributed by the owner of the contract.
- * Each time a user stakes or withdraws a new Token Id, the contract will store the time of the transaction and the amount of ERC20 Reward Tokens that the user has earned up to that point
- * (based on the amount of time that has passed since the last transaction, the amount of Tokens staked and the amount of ERC20 Reward Tokens distributed per hour so that the amount of ERC20
- * Reward Tokens earned by the user is always distributed accounting for how many ERC721 Tokens he has staked at that particular moment.
- * The user can claim the ERC20 Reward Tokens at any time by calling the claimRewards function.
- *
- * @dev The contract is built to be compatible with most ERC721 and ERC20 tokens.
- */
 contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     using SafeERC20 for IERC20;
 
@@ -57,7 +44,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     /**
      * @dev The amount of ERC20 Reward Tokens accrued per hour.
      */
-    uint256 private rewardsPerHour = 100000;
+    uint256 private rewardsPerHour = 100000 * 1e18;
 
     /**
      * @dev Mapping of stakers to their staking info.
@@ -92,6 +79,10 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     constructor(IERC721 _nftCollection, IERC20 _rewardsToken) {
         nftCollection = _nftCollection;
         rewardsToken = _rewardsToken;
+    }
+
+    function contractERC20Balance() public view returns (uint) {
+        return rewardsToken.balanceOf(address(this));
     }
 
     /**
@@ -172,8 +163,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         Staker storage staker = stakers[msg.sender];
 
         uint256 rewards = calculateRewards(msg.sender) +
-            staker.unclaimedRewards *
-            10 ** 18;
+            staker.unclaimedRewards;
         require(rewards > 0, "You have no rewards to claim");
 
         staker.timeOfLastUpdate = block.timestamp;
