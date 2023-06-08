@@ -12,52 +12,22 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     using SafeERC20 for IERC20;
 
     IERC20 public immutable rewardsToken;
-
     IERC721 public immutable nftCollection;
 
-    uint256 constant SECONDS_IN_HOUR = 3600;
-
     struct Staker {
-        /**
-         * @dev The array of Token Ids staked by the user.
-         */
         uint256[] stakedTokenIds;
-        /**
-         * @dev The time of the last update of the rewards.
-         */
-        uint256 timeOfLastUpdate;
-        /**
-         * @dev The amount of ERC20 Reward Tokens that have not been claimed by the user.
-         */
         uint256 unclaimedRewards;
     }
+    mapping(uint => uint) tokenDuration;
 
+    uint256 constant SECONDS_IN_HOUR = 3600;
     uint256 private rewardsPerHour = 100000 * 1e18;
 
-    /**
-     * @dev Mapping of stakers to their staking info.
-     */
+    // Staker address => Staker struct
     mapping(address => Staker) public stakers;
 
-    /**
-     * @dev Mapping of Token Id to staker address.
-     */
+    // Token ID => Staker address
     mapping(uint256 => address) public stakerAddress;
-
-    /**
-     * @dev Array of stakers addresses.
-     */
-    address[] public stakersArray;
-
-    /**
-     * @dev Mapping of stakers addresses to their index in the stakersArray.
-     */
-    mapping(address => uint256) public stakerToArrayIndex;
-
-    /**
-     * @notice Mapping of Token Id to it's index in the staker's stakedTokenIds array.
-     */
-    mapping(uint256 => uint256) public tokenIdToArrayIndex;
 
     constructor(IERC721 _nftCollection, IERC20 _rewardsToken) {
         nftCollection = _nftCollection;
@@ -70,13 +40,6 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
 
     function stake(uint256[] calldata _tokenIds) external whenNotPaused {
         Staker storage staker = stakers[msg.sender];
-        if (staker.stakedTokenIds.length > 0) {
-            updateRewards(msg.sender);
-        } else {
-            stakersArray.push(msg.sender);
-            stakerToArrayIndex[msg.sender] = stakersArray.length - 1;
-            staker.timeOfLastUpdate = block.timestamp;
-        }
 
         uint256 len = _tokenIds.length;
         for (uint256 i; i < len; ++i) {
@@ -88,33 +51,23 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             nftCollection.transferFrom(msg.sender, address(this), _tokenIds[i]);
 
             staker.stakedTokenIds.push(_tokenIds[i]);
-            tokenIdToArrayIndex[_tokenIds[i]] =
-                staker.stakedTokenIds.length -
-                1;
             stakerAddress[_tokenIds[i]] = msg.sender;
         }
     }
 
-    /**
-     * @notice Function used to withdraw ERC721 Tokens.
-     * @param _tokenIds - The array of Token Ids to withdraw.
-     */
     function withdraw(uint256[] calldata _tokenIds) external nonReentrant {
         Staker storage staker = stakers[msg.sender];
         require(staker.stakedTokenIds.length > 0, "You have no tokens staked");
-        updateRewards(msg.sender);
 
         uint256 lenToWithdraw = _tokenIds.length;
         for (uint256 i; i < lenToWithdraw; ++i) {
             require(stakerAddress[_tokenIds[i]] == msg.sender);
 
-            uint256 index = tokenIdToArrayIndex[_tokenIds[i]];
             uint256 lastTokenIndex = staker.stakedTokenIds.length - 1;
             if (index != lastTokenIndex) {
                 staker.stakedTokenIds[index] = staker.stakedTokenIds[
                     lastTokenIndex
                 ];
-                tokenIdToArrayIndex[staker.stakedTokenIds[index]] = index;
             }
             staker.stakedTokenIds.pop();
 
@@ -122,21 +75,8 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
 
             nftCollection.transferFrom(address(this), msg.sender, _tokenIds[i]);
         }
-
-        if (staker.stakedTokenIds.length == 0) {
-            uint256 index = stakerToArrayIndex[msg.sender];
-            uint256 lastStakerIndex = stakersArray.length - 1;
-            if (index != lastStakerIndex) {
-                stakersArray[index] = stakersArray[lastStakerIndex];
-                stakerToArrayIndex[stakersArray[index]] = index;
-            }
-            stakersArray.pop();
-        }
     }
 
-    /**
-     * @notice Function used to claim the accrued ERC20 Reward Tokens.
-     */
     function claimRewards() external {
         Staker storage staker = stakers[msg.sender];
 
@@ -144,28 +84,9 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             staker.unclaimedRewards;
         require(rewards > 0, "You have no rewards to claim");
 
-        staker.timeOfLastUpdate = block.timestamp;
         staker.unclaimedRewards = 0;
 
         rewardsToken.safeTransfer(msg.sender, rewards);
-    }
-
-    /**
-     * @notice Function used to set the amount of ERC20 Reward Tokens accrued per hour.
-     * @param _newValue - The new value of the rewardsPerHour variable.
-     * @dev Because the rewards are calculated passively, the owner has to first update the rewards
-     * to all the stakers, witch could result in very heavy load and expensive transactions or
-     * even reverting due to reaching the gas limit per block.
-     */
-    function setRewardsPerHour(uint256 _newValue) public onlyOwner {
-        address[] memory _stakers = stakersArray;
-
-        uint256 len = _stakers.length;
-        for (uint256 i; i < len; ++i) {
-            updateRewards(_stakers[i]);
-        }
-
-        rewardsPerHour = _newValue;
     }
 
     function userStakeInfo(
@@ -181,7 +102,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     function availableRewards(
         address _user
     ) internal view returns (uint256 _rewards) {
-        Staker memory staker = stakers[_user];
+        Staker storage staker = stakers[_user];
 
         if (staker.stakedTokenIds.length == 0) {
             return staker.unclaimedRewards;
@@ -193,18 +114,11 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     function calculateRewards(
         address _staker
     ) public view returns (uint256 _rewards) {
-        Staker memory staker = stakers[_staker];
+        Staker storage staker = stakers[_staker];
         return (((
             ((block.timestamp - staker.timeOfLastUpdate) *
                 staker.stakedTokenIds.length)
         ) * rewardsPerHour) / SECONDS_IN_HOUR);
-    }
-
-    function updateRewards(address _staker) internal {
-        Staker storage staker = stakers[_staker];
-
-        staker.unclaimedRewards += calculateRewards(_staker);
-        staker.timeOfLastUpdate = block.timestamp;
     }
 
     function pause() external onlyOwner {
