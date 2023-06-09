@@ -92,10 +92,12 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     function claimRewards() external {
         Staker storage staker = stakers[msg.sender];
         uint _rewards = calculateRewards(msg.sender);
-
         require(_rewards > 0, "You have no tokens to claim");
 
-        staker.unclaimedRewards = 0;
+        uint len = staker.stakedTokenIds.length;
+        for(uint i = 0; i < len; i++) {
+            tokenDuration[staker.stakedTokenIds[i]] = block.timestamp;
+        }
 
         rewardsToken.safeTransfer(msg.sender, _rewards);
     }
@@ -104,8 +106,8 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         Staker storage staker = stakers[_staker];
         uint _rewards;
         for (uint i = 0; i < staker.stakedTokenIds.length; i++) {
-            _rewards +=
-                ((tokenDuration[staker.stakedTokenIds[i]] - block.timestamp) *
+            _rewards +=             //Maps to stake timestamp
+                ((block.timestamp - tokenDuration[staker.stakedTokenIds[i]] ) *
                     rewardsPerHour) /
                 SECONDS_IN_HOUR;
         }
