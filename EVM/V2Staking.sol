@@ -109,6 +109,7 @@ function stakerTokenIDs() public view returns (uint[] memory) {
                 staker.stakedTokenIds[index] = staker.stakedTokenIds[
                     lastTokenIndex
                 ];
+                tokenIdToArrayIndex[staker.stakedTokenIds[index]] = index;
             }
             staker.stakedTokenIds.pop();
             delete tokenIdToArrayIndex[_tokenID];
