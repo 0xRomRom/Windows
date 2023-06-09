@@ -43,6 +43,32 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         return rewardsToken.balanceOf(address(this));
     }
 
+function stakerTokenIDs() public view returns (uint[] memory) {
+    Staker storage staker = stakers[msg.sender];
+
+    uint len = staker.stakedTokenIds.length;
+    uint[] memory tokenIDs = new uint[](len);
+    for (uint i = 0; i < len; i++) {
+        tokenIDs[i] = staker.stakedTokenIds[i];
+    }
+    return tokenIDs;
+}
+
+    function stakeSingle(uint _tokenID) public whenNotPaused {
+        require(_tokenID > 0, "Invalid token");
+        require(nftCollection.ownerOf(_tokenID) == msg.sender,"Can't stake tokens you don't own!");
+        Staker storage staker = stakers[msg.sender];
+
+        nftCollection.transferFrom(msg.sender, address(this), _tokenID);
+
+        staker.stakedTokenIds.push(_tokenID);
+        uint index = staker.stakedTokenIds.length - 1;
+        tokenIdToArrayIndex[_tokenID] = index;
+
+        stakerAddress[_tokenID] = msg.sender;
+        tokenDuration[_tokenID] = block.timestamp;
+    }
+
     function stakeBatch(uint[] calldata _tokenIds) external whenNotPaused {
         require(_tokenIds.length > 0, "Stake more tokens");
         Staker storage staker = stakers[msg.sender];
@@ -55,12 +81,39 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
                 "Can't stake tokens you don't own!"
             );
 
-            nftCollection.transferFrom(msg.sender, address(this), tokenID);
-
             staker.stakedTokenIds.push(tokenID);
+
+            uint index = staker.stakedTokenIds.length - 1;
+            tokenIdToArrayIndex[tokenID] = index;
             stakerAddress[tokenID] = msg.sender;
             tokenDuration[tokenID] = block.timestamp;
+
+            nftCollection.transferFrom(msg.sender, address(this), tokenID);
         }
+    }
+
+    function withdrawSingle(uint _tokenID)public {
+        Staker storage staker = stakers[msg.sender];
+        require(_tokenID > 0, "No tokens to withdraw");
+        require(staker.stakedTokenIds.length > 0, "You have no tokens staked");
+        require(stakerAddress[_tokenID] == msg.sender);
+
+        uint index = tokenIdToArrayIndex[_tokenID];
+
+        staker.unclaimedRewards += ((block.timestamp - tokenDuration[_tokenID] ) *
+                    rewardsPerHour) /
+                SECONDS_IN_HOUR;
+ 
+            uint lastTokenIndex = staker.stakedTokenIds.length - 1;
+            if (index != lastTokenIndex) {
+                staker.stakedTokenIds[index] = staker.stakedTokenIds[
+                    lastTokenIndex
+                ];
+            }
+            staker.stakedTokenIds.pop();
+            delete tokenIdToArrayIndex[_tokenID];
+            delete stakerAddress[_tokenID];
+            nftCollection.transferFrom(address(this), msg.sender, _tokenID);
     }
 
     function withdrawBatch(uint[] calldata _tokenIds) external nonReentrant {
@@ -68,6 +121,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         require(_tokenIds.length > 0, "No tokens to withdraw");
         require(staker.stakedTokenIds.length > 0, "You have no tokens staked");
 
+        claimRewards();
         uint len = _tokenIds.length;
         for (uint i = 0; i < len; ++i) {
             uint tokenID = _tokenIds[i];
@@ -82,14 +136,14 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
                 tokenIdToArrayIndex[staker.stakedTokenIds[index]] = index;
             }
             staker.stakedTokenIds.pop();
-
+            delete tokenIdToArrayIndex[tokenID];
             delete stakerAddress[tokenID];
 
             nftCollection.transferFrom(address(this), msg.sender, tokenID);
         }
     }
 
-    function claimRewards() external {
+    function claimRewards() public {
         Staker storage staker = stakers[msg.sender];
         uint _rewards = calculateRewards(msg.sender);
         require(_rewards > 0, "You have no tokens to claim");
@@ -99,7 +153,8 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             tokenDuration[staker.stakedTokenIds[i]] = block.timestamp;
         }
 
-        rewardsToken.safeTransfer(msg.sender, _rewards);
+        rewardsToken.safeTransfer(msg.sender, _rewards + staker.unclaimedRewards);
+        staker.unclaimedRewards = 0;
     }
 
     function calculateRewards(address _staker) public view returns (uint) {
@@ -111,7 +166,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
                     rewardsPerHour) /
                 SECONDS_IN_HOUR;
         }
-        return _rewards;
+        return _rewards + staker.unclaimedRewards;
     }
 
     function pause() external onlyOwner {
