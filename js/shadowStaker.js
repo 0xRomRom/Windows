@@ -1,6 +1,9 @@
 const connectMetamask = document.querySelector('.connect-meta-stake');
+const approvalButton = document.querySelector('.approval-btn');
+const skipButton = document.querySelector('.skip-btn');
 const tab1 = document.querySelector(".tab1");
 const tab2 = document.querySelector(".tab2");
+const tab3 = document.querySelector(".tab3");
 
 
 let staker;
@@ -19,4 +22,12 @@ connectMetamask.addEventListener('click', async () => {
         tab1.classList.add("hidden");
         tab2.classList.remove("hidden");
     }
+});
+
+approvalButton.addEventListener("click", () => {});
+
+
+skipButton.addEventListener("click", () => {
+    tab2.classList.add("hidden");
+    tab3.classList.remove("hidde");
 });

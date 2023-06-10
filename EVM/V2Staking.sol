@@ -44,6 +44,10 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         return rewardsToken.balanceOf(address(this));
     }
 
+    function checkIfApproved() public view returns (bool) {
+        return nftCollection.isApprovedForAll(msg.sender, address(this));
+    }
+
     function stakerTokenIDs() public view returns (uint[] memory) {
         Staker storage staker = stakers[msg.sender];
 
@@ -57,7 +61,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
 
     function stakeSingle(uint _tokenID) public whenNotPaused {
         require(_tokenID > 0, "Invalid token");
-        require(nftCollection.ownerOf(_tokenID) == msg.sender,"Can't stake tokens you don't own!");
+        require(nftCollection.ownerOf(_tokenID) == msg.sender, "Can't stake tokens you don't own!");
         Staker storage staker = stakers[msg.sender];
 
         nftCollection.transferFrom(msg.sender, address(this), _tokenID);
