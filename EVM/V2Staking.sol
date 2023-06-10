@@ -18,6 +18,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     struct Staker {
         uint[] stakedTokenIds;
         uint unclaimedRewards;
+        uint totalAccumulated;
     }
 
     uint constant SECONDS_IN_HOUR = 3600;
@@ -121,6 +122,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             delete stakerAddress[_tokenID];
             nftCollection.transferFrom(address(this), msg.sender, _tokenID);
             rewardsToken.safeTransfer(msg.sender, staker.unclaimedRewards);
+            staker.totalAccumulated += staker.unclaimedRewards;
             staker.unclaimedRewards = 0;
     }
 
@@ -162,6 +164,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         }
 
         rewardsToken.safeTransfer(msg.sender, _rewards);
+        staker.totalAccumulated += _rewards;
         staker.unclaimedRewards = 0;
     }
 

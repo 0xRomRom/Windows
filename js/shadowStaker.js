@@ -29,5 +29,10 @@ connectMetamask.addEventListener('click', async () => {
     }
 });
 
-approvalButton.addEventListener("click", () => {});
+approvalButton.addEventListener("click", () => {
+
+    //Approve contract
+
+    //show tab 3
+});
 

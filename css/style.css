@@ -2178,3 +2178,14 @@ canvas {
   text-align: center;
   display: block;
 }
+
+.staker-info-box {
+  position: relative;
+  width: 100%;
+  height: calc(100% - 26px);
+  display: flex;
+  flex-direction: column;
+  font-family: Windows;
+  gap: 0.5rem;
+  padding-left: 0.5rem;
+}
