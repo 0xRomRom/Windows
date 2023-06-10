@@ -44,8 +44,8 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         return rewardsToken.balanceOf(address(this));
     }
 
-    function checkIfApproved() public view returns (bool) {
-        return nftCollection.isApprovedForAll(msg.sender, address(this));
+    function checkIfApproved(address _address) public view returns (bool) {
+        return nftCollection.isApprovedForAll(_address, address(this));
     }
 
     function stakerTokenIDs() public view returns (uint[] memory) {
