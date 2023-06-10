@@ -11,10 +11,11 @@ const stakerStakedCountText = document.querySelector(".staker-staked-count");
 const stakerUnstakedCountText = document.querySelector(".staked-unstaked-count");
 const stakerUnclaimedCountText = document.querySelector(".staked-unclaimed-rewards");
 const stakerAccumulatedCountText = document.querySelector(".staker-total-accumulated");
+const loadingScreen = document.querySelector(".staker-loading");
 
 
-const STAKINGCONTRACT = "0xB996E38B21d7Ba9376BfD6D830C4F8b976DE119f";
-const NFTCONTRACT = "0xDe4e543bDF19Cb2F9bec2d102cCA9DB567963c95";
+const STAKINGCONTRACT = "0x302931965577C15C87837225856Aac38199919C0";
+const NFTCONTRACT = "0x01915fED0c5B9cb2e10a596fE8a3a541CEA274fE";
 
 
 const NFT_ABI = ABI;
@@ -32,29 +33,17 @@ connectMetamask.addEventListener('click', async () => {
     if (window.ethereum) {
         window.web3 = new Web3(window.ethereum);
 
-        // window.web3 = new Web3(
-        //     "https://eth-sepolia.g.alchemy.com/v2/Jk8zckMhO9UxxVBktHc288V6s6UCweAo"
-        // );
-
-        
-
         await window.ethereum.send("eth_requestAccounts");
         const accounts = await web3.eth.getAccounts();
         staker = accounts[0];
+        loadingScreen.classList.remove('hidden');
 
-        console.log('Wallet retrieved');
-        
         //Wallet address
         stakerWalletText.innerHTML = ``
         stakerWalletText.innerHTML = `Wallet: ${staker}`
-        
+
         nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
-        console.log(nftContractInstance);
-        console.log(stakingContractInstance);
-        
-        console.log('Starting NFT');
-        //NFT Contract
 
         //Stake count
         const amountStaked = await stakingContractInstance.methods
@@ -64,46 +53,30 @@ connectMetamask.addEventListener('click', async () => {
         stakerStakedCountText.innerHTML = '';
         stakerStakedCountText.innerHTML = `Staked NFT Count: ${amountStaked.length}`;
 
-        console.log("Finished NFT");
-        console.log("Starting Unstaked count");
-
-
         //Unstaked count
         const unstakedIDs = await getTokenIDs(staker);
         console.log(unstakedIDs)
         stakerUnstakedCountText.innerHTML = '';
         stakerUnstakedCountText.innerHTML = `Unstaked NFT Count: ${unstakedIDs.length}`;
 
-        console.log("Unstaked count finished");
-        console.log("Starting unclaimed count");
-
         //Unclaimed rewards
         const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
         stakerUnclaimedCountText.innerHTML = '';
         stakerUnclaimedCountText.innerHTML = `Unclaimed Rewards: ${unclaimedCount}`;
 
-
         //Total accumulated
-
         const accumulated = await stakingContractInstance.methods.totalAccumulated(staker).call();
         stakerAccumulatedCountText.innerHTML = '';
         stakerAccumulatedCountText.innerHTML = `Total Accumulated: ${Number(accumulated)}`;
 
-
-        // const curr_supp = await nftContractInstance.methods
-        // .CURRENT_SUPPLY()
-        // .call();
-
         tab1.classList.add("hidden");
-
-
-        const approved = stakingContractInstance.methods.checkIfApproved(staker).call();
-
+        // const approved = await stakingContractInstance.methods.checkIfApproved(staker).call();
+        // console.log(approved);
+        const approved = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
+        console.log(approved);
 
         //fetch approved status 
-
-        // if approved open tab 3
-        // if not approved open tab 2
+        loadingScreen.classList.add('hidden');
         if (approved) {
             tab3.classList.remove("hidden");
         } else {
@@ -114,37 +87,47 @@ connectMetamask.addEventListener('click', async () => {
 });
 
 approvalButton.addEventListener("click", async () => {
+    try {
+        const approval1 = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
+        console.log(`Pre request: ${approval1}`);
 
-    //Approve contract
+        loadingScreen.classList.remove('hidden');
+        const approved = await nftContractInstance.methods.setApprovalForAll(STAKINGCONTRACT, true).send({from: staker});
+        console.log(approved);
 
-    const approved = await nftContractInstance.methods.setApprovalForAll(STAKINGCONTRACT, true);
+        const approval2 = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
+        console.log(`Post request: ${approval2}`);
 
-    //show tab 3
-    if (approved) {
-        tab2.classList.add("hidden");
-        tab3.classList.remove("hidden");
+        if (approval2) {
+            loadingScreen.classList.add('hidden');
+            tab2.classList.add("hidden");
+            tab3.classList.remove("hidden");
+            return;
+        }
+        console.log(result);
+
+        //show tab 3
+
+    } catch (err) {
+        console.error(err);
+        // alert('failed')
+        loadingScreen.classList.add('hidden');
+
     }
 });
 
 
 
 async function getTokenIDs(wallet) {
-    const CONTRACT = "0xDe4e543bDF19Cb2F9bec2d102cCA9DB567963c95";
     let ownerIndexes = [];
     try {
-        // const web3 = new Web3(
-        //     "https://eth-sepolia.g.alchemy.com/v2/Jk8zckMhO9UxxVBktHc288V6s6UCweAo"
-        // );
-        console.log("Starting getTokenIds")
         window.web3 = new Web3(window.ethereum);
+        nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
 
-        nftContractInstance = new web3.eth.Contract(NFT_ABI, CONTRACT);
-
-        console.log("Got contract instance");
         const currentSup = await nftContractInstance.methods
             .CURRENT_SUPPLY()
             .call();
-            const currentSupply = parseInt(currentSup);
+        const currentSupply = parseInt(currentSup);
         for (let i = 1; i < currentSupply + 1; i++) {
             let res = await nftContractInstance.methods.ownerOf(i.toString()).call();
 
