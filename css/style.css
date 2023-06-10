@@ -2171,6 +2171,12 @@ canvas {
   border-top: 1px solid #ffffff;
   border-right: 1px solid #868a8e;
   border-bottom: 1px solid #868a8e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: Windows;
+
 }
 
 .box-title {
@@ -2186,6 +2192,45 @@ canvas {
   display: flex;
   flex-direction: column;
   font-family: Windows;
-  gap: 0.5rem;
+  gap: 0.1rem;
   padding-left: 0.5rem;
+}
+
+.old-btn {
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(20, 20, 20);
+  border-bottom: 2px solid rgb(20, 20, 20);
+  cursor: pointer;
+  width: 9rem;
+  height: 3rem;
+  font-size: 0.95rem;
+}
+.old-btn:active {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(251, 250, 251);
+}
+
+.green {
+  background-color: rgb(125, 240, 185);
+  color: black;
+  text-shadow: 0px 0px 5px white;
+}
+
+.left {
+  border-radius: 0px 10px 10px 0px;
+}
+
+.left-xl {
+  border-radius: 0px 20px 20px 0px;
+}
+
+.right {
+  border-radius: 10px 0px 0px 10px;
+}
+
+.right-xl {
+  border-radius: 20px 0px 0px 20px;
 }

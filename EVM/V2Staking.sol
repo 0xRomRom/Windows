@@ -60,12 +60,12 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         return tokenIDs;
     }
 
-    function nftStakeCount(_staker) public view returns (uint) {
+    function nftStakeCount(address _staker) public view returns (uint) {
         Staker storage staker = stakers[_staker];
         return staker.stakedTokenIds.length;
     }
 
-    function totalAccumulated(_staker) public view returns (uint) {
+    function totalAccumulated(address _staker) public view returns (uint) {
         Staker storage staker = stakers[_staker];
         return staker.totalAccumulated;
     }

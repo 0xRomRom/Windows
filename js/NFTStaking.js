@@ -1,39 +1,32 @@
+import {ABI} from "./abi.js";
 
-// Get user NFT owner IDs
 
+let nftContractInstance;
 
-// const Web3 = require("web3");
-// const { ABI } = require("./abi");
+async function getTokenIDs(wallet) {
+    const CONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
+    let ownerIndexes = [];
+  try {
+    const web3 = new Web3(
+      "https://eth-sepolia.g.alchemy.com/v2/Jk8zckMhO9UxxVBktHc288V6s6UCweAo"
+    );
 
-// const CONTRACT = "0x8B9749E8c1134104ecda7af93Ed7290D321B185D";
-// const USER_ADDY = "0xcCbde33b68dd30A2596718981F39771D27e57626";
+    nftContractInstance = new web3.eth.Contract(NFT_ABI, CONTRACT);
 
-// let contractInstance;
-// let ownerIndexes = [];
+    const currentSupply = await nftContractInstance.methods
+      .CURRENT_SUPPLY()
+      .call();
 
-// async function run() {
-//   try {
-//     const web3 = new Web3(
-//       "https://eth-sepolia.g.alchemy.com/v2/Jk8zckMhO9UxxVBktHc288V6s6UCweAo"
-//     );
+    for (let i = 1; i < currentSupply + 1; i++) {
+      let res = await nftContractInstance.methods.ownerOf(i.toString()).call();
 
-//     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+      if (res.toString() === wallet) {
+        ownerIndexes.push(i);
+      }
+    }
+    return ownerIndexes;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
-//     const currentSupply = await contractInstance.methods
-//       .CURRENT_SUPPLY()
-//       .call();
-
-//     for (let i = 1; i < currentSupply + 1; i++) {
-//       let res = await contractInstance.methods.ownerOf(i.toString()).call();
-
-//       if (res.toString() === USER_ADDY) {
-//         ownerIndexes.push(i);
-//       }
-//     }
-//   } catch (err) {
-//     // console.error(err);
-//   }
-// }
-// run().then(() => {
-//   console.log(`Owner Indexes: ${ownerIndexes}`);
-// });

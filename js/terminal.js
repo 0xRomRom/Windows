@@ -19,7 +19,6 @@ const capFetch = async () => {
     .CURRENT_SUPPLY()
     .call();
     let currentlyMinted = Number(currently) - 1;
-    console.log(currentlyMinted);
 
       currentMintCount = currentlyMinted;
     } catch (err) {

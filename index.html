@@ -16,8 +16,9 @@
   <script type="module" src="./js/modalCtaButtons.js"></script>
   <script type="module" src="./js/clock.js"></script>
   <script type="module" src="./js/abi.js"></script>
-  <script type="module" src="./js/terminal.js"></script>
-  <script type="module" src="./js/shadowMinter.js"></script>
+  <!-- <script type="module" src="./js/terminal.js"></script> -->
+  <script type="module" src="./js/stakingAbi.js"></script>
+  <!-- <script type="module" src="./js/shadowMinter.js"></script> -->
   <script type="module" src="./js/shadowStaker.js"></script>
   <script type="module" src="./js/blocktime.js"></script>
   <script type="module" src="./js/sicariusPvP.js"></script>
@@ -687,7 +688,7 @@
         </div>
         <div class="staker-tabs">
 
-          <div class="tab1 connect-tab hidden">
+          <div class="tab1 connect-tab">
             <button class="connect-meta-stake">Connect Metamask</button>
           </div>
 
@@ -700,15 +701,16 @@
             </div>
           </div>
 
-          <div class="stake-interface tab3">
+          <div class="stake-interface tab3 hidden">
             <div class="wrap">
               <div class="staker-info-top">
                 <span class="box-title">Staker Info</span>
                 <div class="staker-info-box">
-                  <span class="staker-wallet">Address: </span>
-                  <span>NFT Stake Count: </span>
-                  <span>Unclaimed Rewards: </span>
-                  <span>Total Accumulated: </span>
+                  <span class="staker-wallet">Wallet: </span>
+                  <span class="staker-staked-count">Staked NFT Count: </span>
+                  <span class="staked-unstaked-count">Unstaked NFT Count: </span>
+                  <span class="staked-unclaimed-rewards">Unclaimed Rewards: </span>
+                  <span class="staker-total-accumulated">Total Accumulated: </span>
                 </div>
               </div>
             </div>
@@ -728,7 +730,13 @@
 
             </div>
             <div class="bdr-long">
-              <div class="staker-btn-row"></div>
+              <div class="staker-btn-row">
+                <button class="old-btn left-xl">Stake Batch ==></button>
+                <button class="old-btn left">Stake Single =></button>
+                <button class="old-btn green">Claim Rewards</button>
+                <button class="old-btn right"><= Unstake Single</button>
+                <button class="old-btn right-xl"><== Unstake Batch</button>
+              </div>
             </div>
           </div>
         </div>
