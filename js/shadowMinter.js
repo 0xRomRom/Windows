@@ -23,22 +23,22 @@ window.onload = async () => {
     window.web3 = new Web3(window.ethereum);
     contractInstance = new web3.eth.Contract(ABI, CONTRACT);
 
-    const currentlyMinted = await contractInstance.methods
+    const currently = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-    currentlyMintedCount.innerHTML = `[${await currentlyMinted - 1}/2222]`;
+      let currentlyMinted = Number(currently) - 1;
+    currentlyMintedCount.innerHTML = `[${await currentlyMinted}/2222]`;
 
-    const provider = window.ethereum;
-    const networkId = await provider.request({ method: "net_version" });
   }
 };
 
 const updateCircSupply = async () => {
   setInterval(async () => {
-    const currentlyMinted = await contractInstance.methods
+    const currently = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-    currMintCount = currentlyMinted;
+      let currentlyMinted = Number(currently);
+    currMintCount = currentlyMinted - 1;
     currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
   }, 2000);
 };
@@ -126,8 +126,10 @@ const connectToMetamask = async () => {
   mintButton.classList.remove("win-stl");
 
   //Disable mint UI when user has already minted
-  let value;
-  value = await contractInstance.methods.userMintedCount(account).call();
+  let val;
+  val = await contractInstance.methods.userMintedCount(account).call();
+
+  let value = Number(val);
 
   if (+value === 2) {
     incrementMintCount.disabled = true;
@@ -266,7 +268,7 @@ incrementMintCount.addEventListener("click", () => {
   if (mintCount === 2) {
     incrementMintCount.disabled = true;
   }
-  totalMintPrice.innerHTML = `Total: ${ethMintPrice * mintCount} ETH ( ${(
+  totalMintPrice.innerHTML = `Total: ${Number(ethMintPrice) * Number(mintCount)} ETH ( ${(
     usdPricePerNft * mintCount
   ).toFixed(2)}$ USD )`;
 });
