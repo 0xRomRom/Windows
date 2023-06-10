@@ -60,6 +60,16 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         return tokenIDs;
     }
 
+    function nftStakeCount(_staker) public view returns (uint) {
+        Staker storage staker = stakers[_staker];
+        return staker.stakedTokenIds.length;
+    }
+
+    function totalAccumulated(_staker) public view returns (uint) {
+        Staker storage staker = stakers[_staker];
+        return staker.totalAccumulated;
+    }
+
     function stakeSingle(uint _tokenID) public whenNotPaused {
         require(_tokenID > 0, "Invalid token");
         require(nftCollection.ownerOf(_tokenID) == msg.sender, "Can't stake tokens you don't own!");
