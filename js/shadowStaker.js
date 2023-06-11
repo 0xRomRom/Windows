@@ -14,10 +14,11 @@ const stakerAccumulatedCountText = document.querySelector(".staker-total-accumul
 const loadingScreen = document.querySelector(".staker-loading");
 const walletNFTwrapper = document.querySelector(".wallet-nfts");
 const totalStakersCountText = document.querySelector(".total-stakers");
+const totalNFTsStakedCountText = document.querySelector(".total-nfts-staked");
 
 
-const STAKINGCONTRACT = "0x302931965577C15C87837225856Aac38199919C0";
-const NFTCONTRACT = "0x01915fED0c5B9cb2e10a596fE8a3a541CEA274fE";
+const STAKINGCONTRACT = "0x4faE142d0291a7D3C2b600495103c0B1550eAcB7";
+const NFTCONTRACT = "0x7e34e89885409AE936e1a38a310E392F7849cB34";
 
 
 const NFT_ABI = ABI;
@@ -25,9 +26,10 @@ const STAKE_ABI = STAKING_ABI;
 let staker;
 let nftContractInstance;
 let stakingContractInstance;
-let totalStakedCurrently;
+let totalNFTSStakedCurrently;
+let totalStakersCount;
 
-let userTokenIDs = [1, 2, 3, 4];
+let userTokenIDs = [];
 let queuedForStaking = [];
 
 connectMetamask.addEventListener('click', async () => {
@@ -52,20 +54,33 @@ connectMetamask.addEventListener('click', async () => {
         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
 
 
-        //Total staked currently
+        //Total NFT staked currently
+        let addyArray = [];
         const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
         for(let i = 1; i < Number(supply) + 1; i++) {
-            let addyArray = [];
             const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
             if((totalStaked) !== '0x0000000000000000000000000000000000000000') {
                 addyArray.push(totalStaked);
+                totalNFTSStakedCurrently = addyArray.length;
             }
-            totalStakedCurrently = addyArray.length;
 
         }
         totalStakersCountText.innerHTML = '';
-        totalStakersCountText.innerHTML = `Total Stakers: ${totalStakedCurrently}`;
-        
+        totalStakersCountText.innerHTML = `Total Stakers: ${totalNFTSStakedCurrently}`;
+
+
+        // Total stakers
+        for(let i = 1; i < Number(supply); i++) {
+            const result = await stakingContractInstance.methods.stakerTokenIDs(staker).call();
+            console.log(result)
+            totalNFTSStakedCurrently += result;
+            console.log(totalNFTSStakedCurrently);
+        }
+
+
+        totalNFTsStakedCountText.innerHTML = '';
+        totalNFTsStakedCountText.innerHTML = `Total NFTs Staked: ${totalStakersCount}`;
+
 
         //Stake count
         const amountStaked = await stakingContractInstance.methods
@@ -82,8 +97,11 @@ connectMetamask.addEventListener('click', async () => {
 
         //Unclaimed rewards
         const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
+        // const intLength = unclaimedCount.toString();
+        // const reward = unclaimedCount.toString()
+        // console.log(intLength);
         stakerUnclaimedCountText.innerHTML = '';
-        stakerUnclaimedCountText.innerHTML = `Unclaimed Rewards: ${unclaimedCount}`;
+        stakerUnclaimedCountText.innerHTML = `Unclaimed Rewards: ${unclaimedCount.toString().slice(0, -18)} $SCRS`;
 
         //Total accumulated
         const accumulated = await stakingContractInstance.methods.totalAccumulated(staker).call();
@@ -155,8 +173,8 @@ async function getTokenIDs(wallet) {
 }
 
 const renderWallet = async () => {
-    // userTokenIDs = await getTokenIDs(staker);
-    userTokenIDs = [1, 2, 3, 4];
+    userTokenIDs = await getTokenIDs(staker);
+    // userTokenIDs = [1, 2, 3, 4];
     userTokenIDs.map((token) => {
         walletNFTwrapper.innerHTML += `<div class="wallet-nft" data-nft="${token}">
                                         <img src="https://ipfs.io/ipfs/bafybeiakbvi37hhzvmrokwuy5kcdr6n36eerrtteeodj2xc74ymku7tgli/${token}.png" alt="NFT" class="nft-mini">

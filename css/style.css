@@ -2273,7 +2273,7 @@ canvas {
 .wallet-nft {
   position: relative;
   width: 7.5rem;
-  /* height: 9.1rem; */
+  height: 9.1rem;
   border: 1px solid transparent;
   cursor: pointer;
 }

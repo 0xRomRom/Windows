@@ -27,6 +27,9 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     // Token ID => Stake timestamp
     mapping(uint => uint) public tokenDuration;
 
+    // Staker address => Staked Count
+    mapping(address => uint) public stakeCount;
+
     // Staker address => Staker struct
     mapping(address => Staker) public stakers;
 
@@ -49,8 +52,8 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         return nftCollection.isApprovedForAll(_address, address(this));
     }
 
-    function stakerTokenIDs() public view returns (uint[] memory) {
-        Staker storage staker = stakers[msg.sender];
+    function stakerTokenIDs(address _staker) public view returns (uint[] memory) {
+        Staker storage staker = stakers[_staker];
 
         uint len = staker.stakedTokenIds.length;
         uint[] memory tokenIDs = new uint[](len);
