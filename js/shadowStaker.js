@@ -27,7 +27,7 @@ let staker;
 let nftContractInstance;
 let stakingContractInstance;
 let totalNFTSStakedCurrently;
-let totalStakersCount;
+let totalStakersCount = 0;
 
 let userTokenIDs = [];
 let queuedForStaking = [];
@@ -54,32 +54,25 @@ connectMetamask.addEventListener('click', async () => {
         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
 
 
-        //Total NFT staked currently
         let addyArray = [];
         const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
-        for(let i = 1; i < Number(supply) + 1; i++) {
+
+        //Total NFT staked currently
+        for (let i = 1; i < Number(supply) + 1; i++) {
             const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
-            if((totalStaked) !== '0x0000000000000000000000000000000000000000') {
+            if ((totalStaked) !== '0x0000000000000000000000000000000000000000') {
                 addyArray.push(totalStaked);
                 totalNFTSStakedCurrently = addyArray.length;
             }
 
         }
-        totalStakersCountText.innerHTML = '';
-        totalStakersCountText.innerHTML = `Total Stakers: ${totalNFTSStakedCurrently}`;
-
-
-        // Total stakers
-        for(let i = 1; i < Number(supply); i++) {
-            const result = await stakingContractInstance.methods.stakerTokenIDs(staker).call();
-            console.log(result)
-            totalNFTSStakedCurrently += result;
-            console.log(totalNFTSStakedCurrently);
-        }
-
-
         totalNFTsStakedCountText.innerHTML = '';
-        totalNFTsStakedCountText.innerHTML = `Total NFTs Staked: ${totalStakersCount}`;
+        totalNFTsStakedCountText.innerHTML = `Total NFTs Staked: ${totalNFTSStakedCurrently}`;
+
+        //Total stakers
+        addyArray = Array.from(new Set(addyArray));
+        totalStakersCountText.innerHTML = '';
+        totalStakersCountText.innerHTML = `Total Stakers: ${addyArray.length}`;
 
 
         //Stake count
@@ -97,9 +90,6 @@ connectMetamask.addEventListener('click', async () => {
 
         //Unclaimed rewards
         const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
-        // const intLength = unclaimedCount.toString();
-        // const reward = unclaimedCount.toString()
-        // console.log(intLength);
         stakerUnclaimedCountText.innerHTML = '';
         stakerUnclaimedCountText.innerHTML = `Unclaimed Rewards: ${unclaimedCount.toString().slice(0, -18)} $SCRS`;
 
