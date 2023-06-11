@@ -13,6 +13,7 @@ const stakerUnclaimedCountText = document.querySelector(".staked-unclaimed-rewar
 const stakerAccumulatedCountText = document.querySelector(".staker-total-accumulated");
 const loadingScreen = document.querySelector(".staker-loading");
 const walletNFTwrapper = document.querySelector(".wallet-nfts");
+const totalStakersCountText = document.querySelector(".total-stakers");
 
 
 const STAKINGCONTRACT = "0x302931965577C15C87837225856Aac38199919C0";
@@ -24,6 +25,7 @@ const STAKE_ABI = STAKING_ABI;
 let staker;
 let nftContractInstance;
 let stakingContractInstance;
+let totalStakedCurrently;
 
 let userTokenIDs = [1, 2, 3, 4];
 let queuedForStaking = [];
@@ -44,10 +46,26 @@ connectMetamask.addEventListener('click', async () => {
 
         //Wallet address
         stakerWalletText.innerHTML = ``
-        stakerWalletText.innerHTML = `Wallet: ${staker}`
+        stakerWalletText.innerHTML = `Wallet: ${staker.slice(0, 15)}...`
 
         nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
+
+
+        //Total staked currently
+        const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
+        for(let i = 1; i < Number(supply) + 1; i++) {
+            let addyArray = [];
+            const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
+            if((totalStaked) !== '0x0000000000000000000000000000000000000000') {
+                addyArray.push(totalStaked);
+            }
+            totalStakedCurrently = addyArray.length;
+
+        }
+        totalStakersCountText.innerHTML = '';
+        totalStakersCountText.innerHTML = `Total Stakers: ${totalStakedCurrently}`;
+        
 
         //Stake count
         const amountStaked = await stakingContractInstance.methods
@@ -58,7 +76,6 @@ connectMetamask.addEventListener('click', async () => {
 
         //Unstaked count
         const unstakedIDs = await getTokenIDs(staker);
-        console.log(unstakedIDs)
         userTokenIDs = unstakedIDs;
         stakerUnstakedCountText.innerHTML = '';
         stakerUnstakedCountText.innerHTML = `Unstaked NFT Count: ${unstakedIDs.length}`;
