@@ -11,14 +11,17 @@ const stakerStakedCountText = document.querySelector(".staker-staked-count");
 const stakerUnstakedCountText = document.querySelector(".staked-unstaked-count");
 const stakerUnclaimedCountText = document.querySelector(".staked-unclaimed-rewards");
 const stakerAccumulatedCountText = document.querySelector(".staker-total-accumulated");
+const vaultTotalBalance = document.querySelector(".vault-total-balance");
+const totalVaultClaimed = document.querySelector(".total-vault-claimed");
 const loadingScreen = document.querySelector(".staker-loading");
 const walletNFTwrapper = document.querySelector(".wallet-nfts");
+const vaultNFTwrapper = document.querySelector(".vault-nfts");
 const totalStakersCountText = document.querySelector(".total-stakers");
 const totalNFTsStakedCountText = document.querySelector(".total-nfts-staked");
 
 
-const STAKINGCONTRACT = "0x4faE142d0291a7D3C2b600495103c0B1550eAcB7";
-const NFTCONTRACT = "0x7e34e89885409AE936e1a38a310E392F7849cB34";
+const STAKINGCONTRACT = "0xB4839cCa1bF4c596D26B4a64137E89A8d366cFE8";
+const NFTCONTRACT = "0xe9617CC716642E66dfE9E0fB143C6c1f966b7DBd";
 
 
 const NFT_ABI = ABI;
@@ -31,6 +34,9 @@ let totalStakersCount = 0;
 
 let userTokenIDs = [];
 let queuedForStaking = [];
+
+let userStakedTokenIDs = [];
+let queuedForUnstaking = [];
 
 connectMetamask.addEventListener('click', async () => {
     if (!window.ethereum) {
@@ -105,7 +111,12 @@ connectMetamask.addEventListener('click', async () => {
         //fetch approved status 
         loadingScreen.classList.add('hidden');
         if (approved) {
+            const accounts = await web3.eth.getAccounts();
+            staker = accounts[0];
             renderWallet();
+            renderVault();
+            getVaultBalance();
+            getTotalAccumulatedRewards();
             tab3.classList.remove("hidden");
         } else {
             tab2.classList.remove("hidden");
@@ -125,6 +136,8 @@ approvalButton.addEventListener("click", async () => {
 
         if (approval2) {
             loadingScreen.classList.add('hidden');
+            const accounts = await web3.eth.getAccounts();
+            staker = accounts[0];
             renderWallet();
             tab2.classList.add("hidden");
             tab3.classList.remove("hidden");
@@ -162,6 +175,29 @@ async function getTokenIDs(wallet) {
     }
 }
 
+async function getVaultTokenIDs(wallet) {
+    let ownerIndexes = [];
+    try {
+        window.web3 = new Web3(window.ethereum);
+        nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
+
+        const currentlyStaked = await nftContractInstance.methods
+            .CURRENT_SUPPLY()
+            .call();
+        const currentSupply = parseInt(currentlyStaked);
+        for (let i = 1; i < currentSupply + 1; i++) {
+            let res = await stakingContractInstance.methods.stakerAddress(i).call();
+
+            if (res.toString() === wallet) {
+                ownerIndexes.push(i);
+            }
+        }
+        return ownerIndexes;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
 const renderWallet = async () => {
     userTokenIDs = await getTokenIDs(staker);
     // userTokenIDs = [1, 2, 3, 4];
@@ -173,9 +209,35 @@ const renderWallet = async () => {
     });
 };
 
-const renderVault = () => {
-
+const renderVault = async () => {
+    userStakedTokenIDs = await getVaultTokenIDs(staker);
+    // userTokenIDs = [1, 2, 3, 4];
+    userStakedTokenIDs.map((token) => {
+        vaultNFTwrapper.innerHTML += `<div class="vault-nft" data-nft="${token}">
+                                        <img src="https://ipfs.io/ipfs/bafybeiakbvi37hhzvmrokwuy5kcdr6n36eerrtteeodj2xc74ymku7tgli/${token}.png" alt="NFT" class="nft-mini">
+                                        <span class="nft-id">#${token}</span>
+                                        </div>`
+    });
 }
+
+const getVaultBalance = async () => {
+    try {
+        window.web3 = new Web3(window.ethereum);
+        nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
+
+        const vaultBalance = await stakingContractInstance.methods.contractERC20Balance().call();
+        vaultTotalBalance.innerHTML = '';
+        vaultTotalBalance.innerHTML = `Current Vault Balance: ${vaultBalance.toLocaleString().slice(0, -24)}`;
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const getTotalAccumulatedRewards = async () => {
+    const totalAccumulated = await stakingContractInstance.methods.totalClaimed().call();
+    totalVaultClaimed.innerHTML = '';
+    totalVaultClaimed.innerHTML = `Total Accumulated Rewards: ${totalAccumulated.toLocaleString().slice(0, -24)}`;
+};
 
 const walletNFTBox = document.querySelector(".wallet-nfts");
 
