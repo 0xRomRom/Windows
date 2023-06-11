@@ -2155,6 +2155,7 @@ canvas {
   border-top: 1px solid #ffffff;
   border-right: 1px solid #868a8e;
   border-bottom: 1px solid #868a8e;
+  overflow-y: scroll;
 }
 
 .bdr {
@@ -2193,6 +2194,15 @@ canvas {
   font-family: Windows;
   text-align: center;
   display: block;
+}
+
+.stickyy {
+position: sticky;
+text-align: center;
+top: 0;
+width: 100%;
+background-color: #C3C7CB;
+z-index: 30;
 }
 
 .staker-info-box {
