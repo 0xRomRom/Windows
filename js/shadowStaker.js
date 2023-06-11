@@ -96,7 +96,7 @@ connectMetamask.addEventListener('click', async () => {
         //Total accumulated
         const accumulated = await stakingContractInstance.methods.totalAccumulated(staker).call();
         stakerAccumulatedCountText.innerHTML = '';
-        stakerAccumulatedCountText.innerHTML = `Total Accumulated: ${Number(accumulated)}`;
+        stakerAccumulatedCountText.innerHTML = `Total Accumulated: ${accumulated.toString().slice(0, -18)} $SCRS`;
 
         tab1.classList.add("hidden");
 
