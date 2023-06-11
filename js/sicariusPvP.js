@@ -571,8 +571,6 @@ const animate = (e) => {
 animate();
 
 window.addEventListener("keydown", (e) => {
-  console.log(`Enemy:${enemy.position.x}`)
-  // console.log(`Player:${player.position.x}`)
   if (!player.dead) {
 
     //Canvas border

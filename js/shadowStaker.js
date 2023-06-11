@@ -12,6 +12,7 @@ const stakerUnstakedCountText = document.querySelector(".staked-unstaked-count")
 const stakerUnclaimedCountText = document.querySelector(".staked-unclaimed-rewards");
 const stakerAccumulatedCountText = document.querySelector(".staker-total-accumulated");
 const loadingScreen = document.querySelector(".staker-loading");
+const walletNFTwrapper = document.querySelector(".wallet-nfts");
 
 
 const STAKINGCONTRACT = "0x302931965577C15C87837225856Aac38199919C0";
@@ -23,6 +24,9 @@ const STAKE_ABI = STAKING_ABI;
 let staker;
 let nftContractInstance;
 let stakingContractInstance;
+
+let userTokenIDs = [1, 2, 3, 4];
+let queuedForStaking = [];
 
 connectMetamask.addEventListener('click', async () => {
     if (!window.ethereum) {
@@ -49,13 +53,13 @@ connectMetamask.addEventListener('click', async () => {
         const amountStaked = await stakingContractInstance.methods
             .stakerTokenIDs(staker)
             .call();
-        console.log(amountStaked)
         stakerStakedCountText.innerHTML = '';
         stakerStakedCountText.innerHTML = `Staked NFT Count: ${amountStaked.length}`;
 
         //Unstaked count
         const unstakedIDs = await getTokenIDs(staker);
         console.log(unstakedIDs)
+        userTokenIDs = unstakedIDs;
         stakerUnstakedCountText.innerHTML = '';
         stakerUnstakedCountText.innerHTML = `Unstaked NFT Count: ${unstakedIDs.length}`;
 
@@ -70,14 +74,13 @@ connectMetamask.addEventListener('click', async () => {
         stakerAccumulatedCountText.innerHTML = `Total Accumulated: ${Number(accumulated)}`;
 
         tab1.classList.add("hidden");
-        // const approved = await stakingContractInstance.methods.checkIfApproved(staker).call();
-        // console.log(approved);
+
         const approved = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
-        console.log(approved);
 
         //fetch approved status 
         loadingScreen.classList.add('hidden');
         if (approved) {
+            renderWallet();
             tab3.classList.remove("hidden");
         } else {
             tab2.classList.remove("hidden");
@@ -88,11 +91,8 @@ connectMetamask.addEventListener('click', async () => {
 
 approvalButton.addEventListener("click", async () => {
     try {
-        const approval1 = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
-        console.log(`Pre request: ${approval1}`);
-
         loadingScreen.classList.remove('hidden');
-        const approved = await nftContractInstance.methods.setApprovalForAll(STAKINGCONTRACT, true).send({from: staker});
+        const approved = await nftContractInstance.methods.setApprovalForAll(STAKINGCONTRACT, true).send({ from: staker });
         console.log(approved);
 
         const approval2 = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
@@ -100,14 +100,12 @@ approvalButton.addEventListener("click", async () => {
 
         if (approval2) {
             loadingScreen.classList.add('hidden');
+            renderWallet();
             tab2.classList.add("hidden");
             tab3.classList.remove("hidden");
+        } else {
             return;
         }
-        console.log(result);
-
-        //show tab 3
-
     } catch (err) {
         console.error(err);
         // alert('failed')
@@ -115,8 +113,6 @@ approvalButton.addEventListener("click", async () => {
 
     }
 });
-
-
 
 async function getTokenIDs(wallet) {
     let ownerIndexes = [];
@@ -140,3 +136,38 @@ async function getTokenIDs(wallet) {
         console.error(err);
     }
 }
+
+const renderWallet = async () => {
+    // userTokenIDs = await getTokenIDs(staker);
+    userTokenIDs = [1, 2, 3, 4];
+    userTokenIDs.map((token) => {
+        walletNFTwrapper.innerHTML += `<div class="wallet-nft" data-nft="${token}">
+                                        <img src="https://ipfs.io/ipfs/bafybeiakbvi37hhzvmrokwuy5kcdr6n36eerrtteeodj2xc74ymku7tgli/${token}.png" alt="NFT" class="nft-mini">
+                                        <span class="nft-id">#${token}</span>
+                                        </div>`
+    });
+};
+
+const renderVault = () => {
+
+}
+
+const walletNFTBox = document.querySelector(".wallet-nfts");
+
+walletNFTBox.addEventListener("click", (e) => {
+    const element = e.target.parentNode;
+    if (element.dataset.nft === undefined) return;
+
+    //Add to queue array
+    queuedForStaking.push(+element.dataset.nft)
+
+    //Toggle styling
+    const selectedBool = element.classList.contains('selected');
+    if (!selectedBool) {
+        element.classList.add("selected");
+        return;
+    }
+
+    element.classList.remove("selected");
+    queuedForStaking = queuedForStaking.filter(num => num !== +element.dataset.nft);
+});
