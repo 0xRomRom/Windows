@@ -171,12 +171,10 @@ const totalStakers = async () => {
     //Total NFT staked currently
     for (let i = 1; i < Number(supply) + 1; i++) {
         const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
-        console.log(totalStaked)
         if ((totalStaked) !== '0x0000000000000000000000000000000000000000') {
             walletArray.push(totalStaked);
             totalNFTSStakedCurrently = walletArray.length;
-        }
-        
+        } 
     }
 
     walletArray = Array.from(new Set(walletArray));
@@ -351,7 +349,27 @@ const claimRewards = document.querySelector(".claim-rewards");
 const unstakeSingle = document.querySelector(".unstake-single");
 const unstakeBatch = document.querySelector(".unstake-batch");
 
-stakeSingle.addEventListener("click", () => { });
+stakeSingle.addEventListener("click", async () => { 
+    if(queuedForStaking.length === 0) return;
+    if(queuedForStaking.length > 1) return;
+
+    let unstake = queuedForStaking[0];
+    await stakingContractInstance.methods.stakeSingle(unstake.toString()).send({from: staker});
+
+    renderWallet();
+    renderVault();
+    getVaultBalance();
+    getTotalAccumulatedRewards();
+    stakerTotalAccumulated();
+    stakerUnclaimedRewards();
+    stakerStakedCount();
+    stakerUnstakedCount();
+    totalStakers();
+    totalCurrentlyStaked();
+    vaultStakingDuration();
+    queuedForStaking = [];
+
+});
 stakeBatch.addEventListener("click", () => { });
 
 claimRewards.addEventListener("click", async () => {
@@ -367,10 +385,9 @@ claimRewards.addEventListener("click", async () => {
 unstakeSingle.addEventListener("click", async () => {
     if(queuedForUnstaking.length === 0) return;
     if(queuedForUnstaking.length > 1) return;
+
     let unstake = queuedForUnstaking[0];
-    console.log(unstake)
     await stakingContractInstance.methods.withdrawSingle(unstake.toString()).send({from: staker});
-    console.log(queuedForUnstaking);
 
     renderWallet();
     renderVault();
