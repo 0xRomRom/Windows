@@ -95,19 +95,15 @@ connectMetamask.addEventListener('click', async () => {
         stakerUnstakedCountText.innerHTML = `Unstaked NFT Count: ${unstakedIDs.length}`;
 
         //Unclaimed rewards
-        const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
-        stakerUnclaimedCountText.innerHTML = '';
-        stakerUnclaimedCountText.innerHTML = `Unclaimed Rewards: ${Number(unclaimedCount) > 0 ? unclaimedCount.toString().slice(0, -18) : 0} $SCRS`;
+        stakerUnclaimedRewards();
 
         //Staker total accumulated
-        const accumulated = await stakingContractInstance.methods.totalAccumulated(staker).call();
-        stakerAccumulatedCountText.innerHTML = '';
-        stakerAccumulatedCountText.innerHTML = `Total Accumulated: ${Number(accumulated) > 0 ? accumulated.toString().slice(0, -18) : 0} $SCRS`;
+        stakerTotalAccumulated();
 
         //Staking duration
         const totalAccumulated = await stakingContractInstance.methods.totalClaimed().call();
         const converted = +totalAccumulated.toString().slice(0, -18);
-        const percentage = ( converted / 2000000000) * 100;
+        const percentage = (converted / 2000000000) * 100;
         stakingDurationText.innerHTML = '';
         stakingDurationText.innerHTML = `Staking Duration: ${Math.floor(percentage)}/100%`;
 
@@ -183,7 +179,20 @@ async function getTokenIDs(wallet) {
     }
 }
 
-async function getVaultTokenIDs(wallet) {
+
+const stakerUnclaimedRewards = async () => {
+    const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
+    stakerUnclaimedCountText.innerHTML = '';
+    stakerUnclaimedCountText.innerHTML = `Unclaimed Rewards: ${Number(unclaimedCount) > 0 ? unclaimedCount.toString().slice(0, -18) : 0} $SCRS`;
+};
+
+const stakerTotalAccumulated = async () => {
+    const accumulated = await stakingContractInstance.methods.totalAccumulated(staker).call();
+    stakerAccumulatedCountText.innerHTML = '';
+    stakerAccumulatedCountText.innerHTML = `Total Accumulated: ${Number(accumulated) > 0 ? accumulated.toString().slice(0, -18) : 0} $SCRS`;
+};
+
+const getVaultTokenIDs = async (wallet) => {
     let ownerIndexes = [];
     try {
         window.web3 = new Web3(window.ethereum);
@@ -274,7 +283,7 @@ const vaultNFTBox = document.querySelector(".vault-nfts");
 vaultNFTBox.addEventListener("click", (e) => {
     const element = e.target.parentNode;
     if (element.dataset.nft === undefined) return;
-    
+
     //Add to queue array
     queuedForUnstaking.push(+element.dataset.nft)
 
@@ -288,3 +297,25 @@ vaultNFTBox.addEventListener("click", (e) => {
     element.classList.remove("selected");
     queuedForUnstaking = queuedForUnstaking.filter(num => num !== +element.dataset.nft);
 });
+
+// Staking CTAs
+
+const stakeSingle = document.querySelector(".stake-single");
+const stakeBatch = document.querySelector(".stake-batch");
+const claimRewards = document.querySelector(".claim-rewards");
+const unstakeSingle = document.querySelector(".unstake-single");
+const unstakeBatch = document.querySelector(".unstake-batch");
+
+stakeSingle.addEventListener("click", () => { });
+stakeBatch.addEventListener("click", () => { });
+
+claimRewards.addEventListener("click", async () => {
+    await stakingContractInstance.methods.claimRewards().send({ from: staker });
+    stakerUnclaimedRewards();
+    getTotalAccumulatedRewards();
+    stakerTotalAccumulated();
+    getVaultBalance();
+});
+
+unstakeSingle.addEventListener("click", () => { });
+unstakeBatch.addEventListener("click", () => { });
