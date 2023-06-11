@@ -33,11 +33,16 @@ let stakingContractInstance;
 let totalNFTSStakedCurrently;
 let totalStakersCount = 0;
 
+//Wallet arrays
 let userTokenIDs = [];
 let queuedForStaking = [];
 
+//Vault arrays
 let userStakedTokenIDs = [];
 let queuedForUnstaking = [];
+
+//Current stakers
+let addyArray = [];
 
 connectMetamask.addEventListener('click', async () => {
     if (!window.ethereum) {
@@ -61,38 +66,20 @@ connectMetamask.addEventListener('click', async () => {
         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
 
 
-        let addyArray = [];
+        
         const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
 
         //Total NFT staked currently
-        for (let i = 1; i < Number(supply) + 1; i++) {
-            const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
-            if ((totalStaked) !== '0x0000000000000000000000000000000000000000') {
-                addyArray.push(totalStaked);
-                totalNFTSStakedCurrently = addyArray.length;
-            }
-
-        }
-        totalNFTsStakedCountText.innerHTML = '';
-        totalNFTsStakedCountText.innerHTML = `Total NFTs Staked: ${totalNFTSStakedCurrently}`;
+        totalCurrentlyStaked();
 
         //Total stakers
-        addyArray = Array.from(new Set(addyArray));
-        totalStakersCountText.innerHTML = '';
-        totalStakersCountText.innerHTML = `Total Stakers: ${addyArray.length}`;
+        totalStakers();
 
         //Stake count
-        const amountStaked = await stakingContractInstance.methods
-            .stakerTokenIDs(staker)
-            .call();
-        stakerStakedCountText.innerHTML = '';
-        stakerStakedCountText.innerHTML = `Staked NFT Count: ${amountStaked.length}`;
+        stakerStakedCount();
 
         //Unstaked count
-        const unstakedIDs = await getTokenIDs(staker);
-        userTokenIDs = unstakedIDs;
-        stakerUnstakedCountText.innerHTML = '';
-        stakerUnstakedCountText.innerHTML = `Unstaked NFT Count: ${unstakedIDs.length}`;
+        stakerUnstakedCount();
 
         //Unclaimed rewards
         stakerUnclaimedRewards();
@@ -101,18 +88,13 @@ connectMetamask.addEventListener('click', async () => {
         stakerTotalAccumulated();
 
         //Staking duration
-        const totalAccumulated = await stakingContractInstance.methods.totalClaimed().call();
-        const converted = +totalAccumulated.toString().slice(0, -18);
-        const percentage = (converted / 2000000000) * 100;
-        stakingDurationText.innerHTML = '';
-        stakingDurationText.innerHTML = `Staking Duration: ${Math.floor(percentage)}/100%`;
-
+        vaultStakingDuration();
 
         tab1.classList.add("hidden");
 
+        //Fetch approved status 
         const approved = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
 
-        //fetch approved status 
         loadingScreen.classList.add('hidden');
         if (approved) {
             const accounts = await web3.eth.getAccounts();
@@ -179,6 +161,66 @@ async function getTokenIDs(wallet) {
     }
 }
 
+const totalStakers = async () => {
+    let walletArray = [];
+    const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
+    //Total NFT staked currently
+    for (let i = 1; i < Number(supply) + 1; i++) {
+        const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
+        console.log(totalStaked)
+        if ((totalStaked) !== '0x0000000000000000000000000000000000000000') {
+            walletArray.push(totalStaked);
+            totalNFTSStakedCurrently = walletArray.length;
+        }
+        
+    }
+
+
+    walletArray = Array.from(new Set(walletArray));
+    console.log(addyArray)
+    totalStakersCountText.innerHTML = '';
+    totalStakersCountText.innerHTML = `Total Stakers: ${walletArray.length}`;
+};
+
+const totalCurrentlyStaked = async () => {
+    let walletArray = [];
+    const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
+    //Total NFT staked currently
+    for (let i = 1; i < Number(supply) + 1; i++) {
+        const totalStaked = await stakingContractInstance.methods.stakerAddress(i).call();
+        console.log(totalStaked)
+        if ((totalStaked) !== '0x0000000000000000000000000000000000000000') {
+            walletArray.push(totalStaked);
+            totalNFTSStakedCurrently = walletArray.length;
+        }
+        
+    }
+    totalNFTsStakedCountText.innerHTML = '';
+    totalNFTsStakedCountText.innerHTML = `Total NFTs Staked: ${totalNFTSStakedCurrently}`;
+};
+
+const vaultStakingDuration = async () => {
+    const totalAccumulated = await stakingContractInstance.methods.totalClaimed().call();
+    const converted = +totalAccumulated.toString().slice(0, -18);
+    const percentage = (converted / 2000000000) * 100;
+    stakingDurationText.innerHTML = '';
+    stakingDurationText.innerHTML = `Staking Duration: ${Math.floor(percentage)}/100%`;
+};
+
+const stakerStakedCount = async () => {
+    const amountStaked = await stakingContractInstance.methods
+    .stakerTokenIDs(staker)
+    .call();
+stakerStakedCountText.innerHTML = '';
+stakerStakedCountText.innerHTML = `Staked NFT Count: ${amountStaked.length}`;
+};
+
+const stakerUnstakedCount = async () => {
+    const unstakedIDs = await getTokenIDs(staker);
+    userTokenIDs = unstakedIDs;
+    stakerUnstakedCountText.innerHTML = '';
+    stakerUnstakedCountText.innerHTML = `Unstaked NFT Count: ${unstakedIDs.length}`;
+};
 
 const stakerUnclaimedRewards = async () => {
     const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
@@ -310,11 +352,13 @@ stakeSingle.addEventListener("click", () => { });
 stakeBatch.addEventListener("click", () => { });
 
 claimRewards.addEventListener("click", async () => {
+    loadingScreen.classList.remove('hidden');
     await stakingContractInstance.methods.claimRewards().send({ from: staker });
     stakerUnclaimedRewards();
     getTotalAccumulatedRewards();
     stakerTotalAccumulated();
     getVaultBalance();
+    loadingScreen.classList.add('hidden');
 });
 
 unstakeSingle.addEventListener("click", () => { });
