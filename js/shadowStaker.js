@@ -370,7 +370,24 @@ stakeSingle.addEventListener("click", async () => {
     queuedForStaking = [];
 
 });
-stakeBatch.addEventListener("click", () => { });
+stakeBatch.addEventListener("click",  async () => { 
+    if(queuedForStaking.length === 0) return;
+
+    await stakingContractInstance.methods.stakeBatch(queuedForStaking).send({from: staker});
+
+    renderWallet();
+    renderVault();
+    getVaultBalance();
+    getTotalAccumulatedRewards();
+    stakerTotalAccumulated();
+    stakerUnclaimedRewards();
+    stakerStakedCount();
+    stakerUnstakedCount();
+    totalStakers();
+    totalCurrentlyStaked();
+    vaultStakingDuration();
+    queuedForStaking = [];
+});
 
 claimRewards.addEventListener("click", async () => {
     loadingScreen.classList.remove('hidden');
@@ -402,4 +419,22 @@ unstakeSingle.addEventListener("click", async () => {
     vaultStakingDuration();
     queuedForUnstaking = [];
  });
-unstakeBatch.addEventListener("click", () => { });
+
+unstakeBatch.addEventListener("click", async () => { 
+    if(queuedForUnstaking.length === 0) return;
+
+    await stakingContractInstance.methods.withdrawBatch(queuedForUnstaking).send({from: staker});
+
+    renderWallet();
+    renderVault();
+    getVaultBalance();
+    getTotalAccumulatedRewards();
+    stakerTotalAccumulated();
+    stakerUnclaimedRewards();
+    stakerStakedCount();
+    stakerUnstakedCount();
+    totalStakers();
+    totalCurrentlyStaked();
+    vaultStakingDuration();
+    queuedForUnstaking = [];
+});
