@@ -137,6 +137,10 @@ mainProgram.addEventListener("click", (e) => {
   }
 });
 
+const stakerModals = document.querySelector(".staker-modal");
+const stakerIconDesk = document.querySelector(".desk-staker");
+const closeStaker = document.querySelector(".clo-staker");
+
 const trashCanModals = document.querySelector(".recycle-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
 const closeTrashCan = document.querySelector(".clo-trash");
@@ -157,6 +161,25 @@ const openSeaIconDesk = document.querySelector(".desk-opensea");
 
 const startmenuRun = document.querySelector(".run");
 
+
+let stakerActive = false;
+const stakeBar = document.querySelector(".act-staker");
+// Open staker modal
+stakerIconDesk.addEventListener("dblclick", () => {
+  if (!stakerActive) {
+    stakerModals.classList.remove("hidden");
+    stakeBar.classList.remove("hidden");
+    stakerActive = true;
+  }
+});
+
+// Close staker modal
+closeStaker.addEventListener("click", () => {
+  stakerModals.classList.add("hidden");
+  stakerModals.classList.remove("enlarged");
+  stakeBar.classList.add("hidden");
+  stakerActive = false;
+});
 
 let binActive = false;
 const trashBar = document.querySelector(".act-bin");

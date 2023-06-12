@@ -62,3 +62,6 @@ makeElementDraggable(desktopTownIcon);
 
 const desktopOpenSea = document.querySelector(".desk-opensea");
 makeElementDraggable(desktopOpenSea);
+
+const desktopStaker = document.querySelector(".desk-staker");
+makeElementDraggable(desktopStaker);
