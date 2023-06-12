@@ -112,7 +112,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         }
     }
 
-    function withdrawSingle(uint _tokenID)public {
+    function withdrawSingle(uint _tokenID) public nonReentrant {
         Staker storage staker = stakers[msg.sender];
         require(_tokenID > 0, "No tokens to withdraw");
         require(staker.stakedTokenIds.length > 0, "You have no tokens staked");
@@ -134,6 +134,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             staker.stakedTokenIds.pop();
             delete tokenIdToArrayIndex[_tokenID];
             delete stakerAddress[_tokenID];
+            delete tokenDuration[_tokenID];
             nftCollection.transferFrom(address(this), msg.sender, _tokenID);
             rewardsToken.safeTransfer(msg.sender, staker.unclaimedRewards);
             staker.totalAccumulated += staker.unclaimedRewards;
@@ -141,7 +142,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             staker.unclaimedRewards = 0;
     }
 
-    function withdrawBatch(uint[] calldata _tokenIds) external nonReentrant {
+    function withdrawBatch(uint[] calldata _tokenIds) public nonReentrant {
         Staker storage staker = stakers[msg.sender];
         require(_tokenIds.length > 0, "No tokens to withdraw");
         require(staker.stakedTokenIds.length > 0, "You have no tokens staked");
@@ -163,6 +164,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
             staker.stakedTokenIds.pop();
             delete tokenIdToArrayIndex[tokenID];
             delete stakerAddress[tokenID];
+            delete tokenDuration[tokenID];
 
             nftCollection.transferFrom(address(this), msg.sender, tokenID);
         }

@@ -778,7 +778,7 @@ body {
 
 .program-row {
   position: relative;
-  width: 99.5%;
+  width: calc(100% - 1px);
   left: 0;
   /* left: 10.75%; */
   /* top: 200px; */
@@ -2266,6 +2266,7 @@ z-index: 30;
   font-family: Windows;
   background-color: #121212c9;
   color: white;
+  user-select: none;
 }
 
 .wallet-nfts {

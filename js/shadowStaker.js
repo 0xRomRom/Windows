@@ -21,8 +21,8 @@ const totalNFTsStakedCountText = document.querySelector(".total-nfts-staked");
 const stakingDurationText = document.querySelector(".staking-duration");
 
 
-const STAKINGCONTRACT = "0xfbe956ae4272dddc9fc1D83467f1e9700Cb19170";
-const NFTCONTRACT = "0x79Fd1e2245f3C390e835C07d2825391ed2E6a540";
+const STAKINGCONTRACT = "0x4e8cf040174827918a8D0ed97a786f198F07F9ad";
+const NFTCONTRACT = "0x6F429DdeD6Bff87562864B6bA007834569570DD8";
 
 
 const NFT_ABI = ABI;
@@ -281,7 +281,7 @@ const getVaultBalance = async () => {
 
         const vaultBalance = await stakingContractInstance.methods.contractERC20Balance().call();
         vaultTotalBalance.innerHTML = '';
-        vaultTotalBalance.innerHTML = `Current Vault Balance: ${vaultBalance.toLocaleString().slice(0, -24)}`;
+        vaultTotalBalance.innerHTML = `Current Vault Balance: ${Number(vaultBalance) > 0 ? vaultBalance.toLocaleString().slice(0, -24) : 0}`;
     } catch (err) {
         console.error(err);
     }
@@ -399,7 +399,7 @@ claimRewards.addEventListener("click", async () => {
     try {
 
         const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
-        startLoading(`Claiming: ~${unclaimedCount.toString().slice(0, -18).toLocaleString()} SCRS`);
+        startLoading(`Claiming: ${unclaimedCount.toString().slice(0, -18).toLocaleString()} $SCRS`);
         await stakingContractInstance.methods.claimRewards().send({ from: staker });
         stakerUnclaimedRewards();
         getTotalAccumulatedRewards();
