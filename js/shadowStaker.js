@@ -31,7 +31,6 @@ let staker;
 let nftContractInstance;
 let stakingContractInstance;
 let totalNFTSStakedCurrently;
-let totalStakersCount = 0;
 
 //Wallet arrays
 let userTokenIDs = [];
@@ -40,9 +39,6 @@ let queuedForStaking = [];
 //Vault arrays
 let userStakedTokenIDs = [];
 let queuedForUnstaking = [];
-
-//Current stakers
-let addyArray = [];
 
 connectMetamask.addEventListener('click', async () => {
     if (!window.ethereum) {
@@ -56,7 +52,7 @@ connectMetamask.addEventListener('click', async () => {
         await window.ethereum.send("eth_requestAccounts");
         const accounts = await web3.eth.getAccounts();
         staker = accounts[0];
-        loadingScreen.classList.remove('hidden');
+        startLoading("Connecting Metamask...");
 
         //Wallet address
         stakerWalletText.innerHTML = ``
@@ -64,10 +60,6 @@ connectMetamask.addEventListener('click', async () => {
 
         nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
-
-
-        
-        const supply = await nftContractInstance.methods.CURRENT_SUPPLY().call();
 
         //Total NFT staked currently
         totalCurrentlyStaked();
@@ -95,7 +87,9 @@ connectMetamask.addEventListener('click', async () => {
         //Fetch approved status 
         const approved = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
 
-        loadingScreen.classList.add('hidden');
+        endLoading();
+        queryStats();
+
         if (approved) {
             const accounts = await web3.eth.getAccounts();
             staker = accounts[0];
@@ -113,7 +107,7 @@ connectMetamask.addEventListener('click', async () => {
 
 approvalButton.addEventListener("click", async () => {
     try {
-        loadingScreen.classList.remove('hidden');
+        startLoading("Approving...")
         const approved = await nftContractInstance.methods.setApprovalForAll(STAKINGCONTRACT, true).send({ from: staker });
         console.log(approved);
 
@@ -121,13 +115,13 @@ approvalButton.addEventListener("click", async () => {
         console.log(`Post request: ${approval2}`);
 
         if (approval2) {
-            loadingScreen.classList.add('hidden');
             const accounts = await web3.eth.getAccounts();
             staker = accounts[0];
             renderWallet();
             renderVault();
             getVaultBalance();
             getTotalAccumulatedRewards();
+            endLoading();
             tab2.classList.add("hidden");
             tab3.classList.remove("hidden");
         } else {
@@ -136,7 +130,7 @@ approvalButton.addEventListener("click", async () => {
     } catch (err) {
         console.error(err);
         // alert('failed')
-        loadingScreen.classList.add('hidden');
+        endLoading();
 
     }
 });
@@ -174,7 +168,7 @@ const totalStakers = async () => {
         if ((totalStaked) !== '0x0000000000000000000000000000000000000000') {
             walletArray.push(totalStaked);
             totalNFTSStakedCurrently = walletArray.length;
-        } 
+        }
     }
 
     walletArray = Array.from(new Set(walletArray));
@@ -192,7 +186,7 @@ const totalCurrentlyStaked = async () => {
             walletArray.push(totalStaked);
             totalNFTSStakedCurrently = walletArray.length;
         }
-        
+
     }
     totalNFTsStakedCountText.innerHTML = '';
     totalNFTsStakedCountText.innerHTML = `Total NFTs Staked: ${Number(totalNFTSStakedCurrently) > 0 ? Number(totalNFTSStakedCurrently) : 0}`;
@@ -208,10 +202,10 @@ const vaultStakingDuration = async () => {
 
 const stakerStakedCount = async () => {
     const amountStaked = await stakingContractInstance.methods
-    .stakerTokenIDs(staker)
-    .call();
-stakerStakedCountText.innerHTML = '';
-stakerStakedCountText.innerHTML = `Staked NFT Count: ${amountStaked.length}`;
+        .stakerTokenIDs(staker)
+        .call();
+    stakerStakedCountText.innerHTML = '';
+    stakerStakedCountText.innerHTML = `Staked NFT Count: ${amountStaked.length}`;
 };
 
 const stakerUnstakedCount = async () => {
@@ -296,7 +290,7 @@ const getVaultBalance = async () => {
 const getTotalAccumulatedRewards = async () => {
     const totalAccumulated = await stakingContractInstance.methods.totalClaimed().call();
     totalVaultClaimed.innerHTML = '';
-    totalVaultClaimed.innerHTML = `Total Accumulated Rewards: ${+totalAccumulated.toLocaleString().slice(0, -24) > 0 ? totalAccumulated.toLocaleString().slice(0, -24) : 0}`;
+    totalVaultClaimed.innerHTML = `Total Accumulated Rewards: ${totalAccumulated.toLocaleString().slice(0, -24)}`;
 };
 
 
@@ -349,92 +343,164 @@ const claimRewards = document.querySelector(".claim-rewards");
 const unstakeSingle = document.querySelector(".unstake-single");
 const unstakeBatch = document.querySelector(".unstake-batch");
 
-stakeSingle.addEventListener("click", async () => { 
-    if(queuedForStaking.length === 0) return;
-    if(queuedForStaking.length > 1) return;
+stakeSingle.addEventListener("click", async () => {
+    if (queuedForStaking.length === 0) return;
+    if (queuedForStaking.length > 1) return;
+    try {
+        startLoading(`Staking: ${queuedForStaking[0]}`)
+        
+        let unstake = queuedForStaking[0];
+        await stakingContractInstance.methods.stakeSingle(unstake.toString()).send({ from: staker });
+        
+        renderWallet();
+        renderVault();
+        getVaultBalance();
+        getTotalAccumulatedRewards();
+        stakerTotalAccumulated();
+        stakerUnclaimedRewards();
+        stakerStakedCount();
+        stakerUnstakedCount();
+        totalStakers();
+        totalCurrentlyStaked();
+        vaultStakingDuration();
+        queuedForStaking = [];
+        endLoading();
+    } catch (err) {
+        endLoading();
+    }
+        
+    });
+    stakeBatch.addEventListener("click", async () => {
+    if (queuedForStaking.length === 0) return;
+    try {
+        startLoading(`Staking: ${queuedForStaking.sort().join(", ")}`)
+        await stakingContractInstance.methods.stakeBatch(queuedForStaking).send({ from: staker });
+        
+        renderWallet();
+        renderVault();
+        getVaultBalance();
+        getTotalAccumulatedRewards();
+        stakerTotalAccumulated();
+        stakerUnclaimedRewards();
+        stakerStakedCount();
+        stakerUnstakedCount();
+        totalStakers();
+        totalCurrentlyStaked();
+        vaultStakingDuration();
+        queuedForStaking = [];
+        endLoading();
+    } catch (err) {
+        endLoading();
 
-    let unstake = queuedForStaking[0];
-    await stakingContractInstance.methods.stakeSingle(unstake.toString()).send({from: staker});
-
-    renderWallet();
-    renderVault();
-    getVaultBalance();
-    getTotalAccumulatedRewards();
-    stakerTotalAccumulated();
-    stakerUnclaimedRewards();
-    stakerStakedCount();
-    stakerUnstakedCount();
-    totalStakers();
-    totalCurrentlyStaked();
-    vaultStakingDuration();
-    queuedForStaking = [];
-
-});
-stakeBatch.addEventListener("click",  async () => { 
-    if(queuedForStaking.length === 0) return;
-
-    await stakingContractInstance.methods.stakeBatch(queuedForStaking).send({from: staker});
-
-    renderWallet();
-    renderVault();
-    getVaultBalance();
-    getTotalAccumulatedRewards();
-    stakerTotalAccumulated();
-    stakerUnclaimedRewards();
-    stakerStakedCount();
-    stakerUnstakedCount();
-    totalStakers();
-    totalCurrentlyStaked();
-    vaultStakingDuration();
-    queuedForStaking = [];
+    }
 });
 
 claimRewards.addEventListener("click", async () => {
-    loadingScreen.classList.remove('hidden');
-    await stakingContractInstance.methods.claimRewards().send({ from: staker });
-    stakerUnclaimedRewards();
-    getTotalAccumulatedRewards();
-    stakerTotalAccumulated();
-    getVaultBalance();
-    loadingScreen.classList.add('hidden');
+    try {
+
+        const unclaimedCount = await stakingContractInstance.methods.calculateRewards(staker).call();
+        startLoading(`Claiming: ~${unclaimedCount.toString().slice(0, -18).toLocaleString()} SCRS`);
+        await stakingContractInstance.methods.claimRewards().send({ from: staker });
+        stakerUnclaimedRewards();
+        getTotalAccumulatedRewards();
+        stakerTotalAccumulated();
+        getVaultBalance();
+        endLoading();
+    } catch (err) {
+        endLoading();
+    }
 });
 
 unstakeSingle.addEventListener("click", async () => {
-    if(queuedForUnstaking.length === 0) return;
-    if(queuedForUnstaking.length > 1) return;
+    if (queuedForUnstaking.length === 0) return;
+    if (queuedForUnstaking.length > 1) return;
+    try {
 
-    let unstake = queuedForUnstaking[0];
-    await stakingContractInstance.methods.withdrawSingle(unstake.toString()).send({from: staker});
+        startLoading(`Unstaking: ${queuedForUnstaking[0]}`)
 
-    renderWallet();
-    renderVault();
-    getVaultBalance();
-    getTotalAccumulatedRewards();
-    stakerTotalAccumulated();
-    stakerUnclaimedRewards();
-    stakerStakedCount();
-    stakerUnstakedCount();
-    totalStakers();
-    totalCurrentlyStaked();
-    vaultStakingDuration();
-    queuedForUnstaking = [];
- });
+        let unstake = queuedForUnstaking[0];
+        await stakingContractInstance.methods.withdrawSingle(unstake.toString()).send({ from: staker });
 
-unstakeBatch.addEventListener("click", async () => { 
-    if(queuedForUnstaking.length === 0) return;
+        renderWallet();
+        renderVault();
+        getVaultBalance();
+        getTotalAccumulatedRewards();
+        stakerTotalAccumulated();
+        stakerUnclaimedRewards();
+        stakerStakedCount();
+        stakerUnstakedCount();
+        totalStakers();
+        totalCurrentlyStaked();
+        vaultStakingDuration();
+        queuedForUnstaking = [];
+        endLoading();
+    } catch (err) {
+        endLoading();
 
-    await stakingContractInstance.methods.withdrawBatch(queuedForUnstaking).send({from: staker});
-
-    renderWallet();
-    renderVault();
-    getVaultBalance();
-    getTotalAccumulatedRewards();
-    stakerTotalAccumulated();
-    stakerUnclaimedRewards();
-    stakerStakedCount();
-    stakerUnstakedCount();
-    totalStakers();
-    totalCurrentlyStaked();
-    vaultStakingDuration();
-    queuedForUnstaking = [];
+    }
 });
+
+unstakeBatch.addEventListener("click", async () => {
+    if (queuedForUnstaking.length === 0) return;
+    try {
+        startLoading(`Unstaking: ${queuedForUnstaking.sort().join(", ")}`)
+
+        await stakingContractInstance.methods.withdrawBatch(queuedForUnstaking).send({ from: staker });
+
+        renderWallet();
+        renderVault();
+        getVaultBalance();
+        getTotalAccumulatedRewards();
+        stakerTotalAccumulated();
+        stakerUnclaimedRewards();
+        stakerStakedCount();
+        stakerUnstakedCount();
+        totalStakers();
+        totalCurrentlyStaked();
+        vaultStakingDuration();
+        queuedForUnstaking = [];
+        endLoading();
+    } catch (err) {
+        endLoading();
+
+    }
+});
+
+const startLoading = (message) => {
+    loadingScreen.innerHTML = '';
+    loadingScreen.innerHTML = message;
+    loadingScreen.classList.remove('hidden');
+};
+
+const endLoading = () => {
+    loadingScreen.classList.add('hidden');
+}
+
+const queryStats = () => {
+    let counter = 0;
+
+    setInterval(() => {
+        counter++;
+        if (counter === 15) {
+            counter = 0;
+        }
+        if (counter === 0) {
+            stakerUnclaimedRewards();
+        }
+        if (counter === 2) {
+            totalStakers();
+        }
+        if (counter === 5) {
+            totalCurrentlyStaked();
+        }
+        if (counter === 11) {
+            getTotalAccumulatedRewards();
+        }
+        if (counter === 13) {
+            getVaultBalance();
+        }
+        if (counter === 15) {
+            vaultStakingDuration();
+        }
+    }, 1000);
+};
