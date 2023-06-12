@@ -18,7 +18,7 @@ const capFetch = async () => {
     const currently = await contractInstance.methods
     .CURRENT_SUPPLY()
     .call();
-    let currentlyMinted = Number(currently) - 1;
+    let currentlyMinted = Number(currently);
 
       currentMintCount = currentlyMinted;
     } catch (err) {

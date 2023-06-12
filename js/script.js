@@ -1,4 +1,5 @@
-
+import { ABI } from "./abi.js";
+const NFT_ABI = ABI;
 const programsHover = document.querySelector(".d1");
 const documentsHover = document.querySelector(".d2");
 const mintInfoHover = document.querySelector(".d3");
@@ -165,12 +166,28 @@ const startmenuRun = document.querySelector(".run");
 let stakerActive = false;
 const stakeBar = document.querySelector(".act-staker");
 // Open staker modal
-stakerIconDesk.addEventListener("dblclick", () => {
+stakerIconDesk.addEventListener("dblclick", async () => {
   if (!stakerActive) {
     stakerModals.classList.remove("hidden");
     stakeBar.classList.remove("hidden");
     stakerActive = true;
   }
+
+  //////
+  const stakersToGo = document.querySelector(".staker-unlocks");
+  let nftContractInstance;
+  const NFTCONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
+  window.web3 = new Web3(window.ethereum);
+  nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
+  const currentSup = await nftContractInstance.methods
+      .CURRENT_SUPPLY()
+      .call();
+  console.log(currentSup)
+  const currentSupply = parseInt(currentSup);
+  stakersToGo.innerHTML = '';
+  stakersToGo.innerHTML = `Unlocks after ${1111 - currentSupply} more mints...`;
+
+
 });
 
 // Close staker modal

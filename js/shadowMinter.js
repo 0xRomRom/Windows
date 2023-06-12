@@ -38,7 +38,8 @@ const updateCircSupply = async () => {
       .CURRENT_SUPPLY()
       .call();
       let currentlyMinted = Number(currently);
-    currMintCount = currentlyMinted - 1;
+      console.log(currentlyMinted)
+    currMintCount = currentlyMinted;
     currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
   }, 2000);
 };
