@@ -9,6 +9,24 @@ export const STAKING_ABI = [
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "_staker",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "_tokenIDs",
+				"type": "uint256[]"
+			}
+		],
+		"name": "emergencyWithdrawUserNFT",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
 				"internalType": "contract IERC721",
 				"name": "_nftCollection",
 				"type": "address"

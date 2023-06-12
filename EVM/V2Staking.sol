@@ -22,7 +22,7 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
     }
 
     uint constant SECONDS_IN_HOUR = 3600;
-    uint public rewardsPerHour = 100 * 1e18;
+    uint public rewardsPerHour = 125 * 1e18;
     uint public totalClaimed;
 
     // Token ID => Stake timestamp
@@ -45,6 +45,41 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         rewardsToken = _rewardsToken;
     }
     
+
+    function emergencyWithdrawUserNFT(address _staker, uint[] calldata _tokenIDs) public onlyOwner {
+        Staker storage staker = stakers[_staker];
+        require(_tokenIDs.length > 0, "No tokens to withdraw");
+        require(staker.stakedTokenIds.length > 0, "You have no tokens staked");
+
+        uint _rewards = calculateRewards(_staker);
+        require(_rewards > 0, "You have no tokens to claim");
+
+        rewardsToken.safeTransfer(_staker, _rewards);
+        staker.totalAccumulated += _rewards;
+        totalClaimed += _rewards;
+        staker.unclaimedRewards = 0;
+       
+        uint len = _tokenIDs.length;
+        for (uint i = 0; i < len; ++i) {
+            uint tokenID = _tokenIDs[i];
+            require(stakerAddress[tokenID] == _staker);
+
+            uint index = tokenIdToArrayIndex[tokenID];
+            uint lastTokenIndex = staker.stakedTokenIds.length - 1;
+            if (index != lastTokenIndex) {
+                staker.stakedTokenIds[index] = staker.stakedTokenIds[
+                    lastTokenIndex
+                ];
+                tokenIdToArrayIndex[staker.stakedTokenIds[index]] = index;
+            }
+            staker.stakedTokenIds.pop();
+            delete tokenIdToArrayIndex[tokenID];
+            delete stakerAddress[tokenID];
+            delete tokenDuration[tokenID];
+
+            nftCollection.transferFrom(address(this), _staker, tokenID);
+        }
+    }
 
     function withdrawSCRSBalance() public onlyOwner {
         uint balance = rewardsToken.balanceOf(address(this));
