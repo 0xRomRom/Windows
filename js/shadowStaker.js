@@ -21,7 +21,7 @@ const totalNFTsStakedCountText = document.querySelector(".total-nfts-staked");
 const stakingDurationText = document.querySelector(".staking-duration");
 
 
-const STAKINGCONTRACT = "0x4e8cf040174827918a8D0ed97a786f198F07F9ad";
+const STAKINGCONTRACT = "0x47C28eED9b763FA22BB13E507D00fA1Ef0F1797a";
 const NFTCONTRACT = "0x6F429DdeD6Bff87562864B6bA007834569570DD8";
 
 

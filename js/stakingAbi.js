@@ -141,6 +141,13 @@ export const STAKING_ABI = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "withdrawSCRSBalance",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",

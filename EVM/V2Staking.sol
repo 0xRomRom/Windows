@@ -45,6 +45,15 @@ contract SCRSStaking is Ownable, ReentrancyGuard, Pausable {
         rewardsToken = _rewardsToken;
     }
     
+
+    function withdrawSCRSBalance() public onlyOwner {
+        uint balance = rewardsToken.balanceOf(address(this));
+        require(owner() == msg.sender, "Not the owner");
+        require(balance > 0, "No balance to withdraw");
+
+        rewardsToken.safeTransfer(msg.sender, balance);
+    }
+
     function contractERC20Balance() public view returns (uint) {
         return rewardsToken.balanceOf(address(this));
     }
