@@ -18,13 +18,18 @@ contract SCRSLottery is Ownable {
     address[] public lotteryEntrants;
     bool public lotteryActive;
 
-    constructor(address _SCRSTokenAddress) {
+    constructor(address _SCRSTokenAddress, address _SCRSNFT) {
         SCRSToken = IERC20(_SCRSTokenAddress);
         ENTRY_FEE = 100000 * 10 ** 18;
+        SCRSNFT = IERC721(_SCRSNFT);
     }
 
     function getEntrantsCount() public view returns (uint) {
         return lotteryEntrants.length;
+    }
+
+    function lotteryEntrant(uint _index) public view returns (address) {
+        return lotteryEntrants[_index];
     }
 
     function changeEntryFee(uint _newFeeAmount) public onlyOwner {
@@ -35,17 +40,23 @@ contract SCRSLottery is Ownable {
         return SCRSToken.balanceOf(address(this));
     }
 
+    function withdrawSCRSBalance() public onlyOwner {
+        uint balance = SCRSToken.balanceOf(address(this));
+        SCRSToken.transfer(msg.sender, balance);
+    }
+
     function fundLotteryPot(uint _amount) public onlyOwner {
         lotteryPot += _amount;
         lotteryActive = true;
+        SCRSToken.transfer(address(this), _amount);
     }
 
     function enterLottery(address _player, uint _entryCount) public payable {
         uint entryCost = _entryCount * ENTRY_FEE;
-        // uint nftBalance = SCRSNFT.balanceOf(_player);
+        uint nftBalance = SCRSNFT.balanceOf(_player);
         uint tokenBalance = SCRSToken.balanceOf(_player);
         
-        // require(nftBalance > 0, "Only for Sicarius holders!");
+        require(nftBalance > 0, "Only for Sicarius holders!");
 
         require(tokenBalance >= entryCost, "Not enough $SCRS to participate");
         // require(lotteryActive, "Wait for lottery start");
