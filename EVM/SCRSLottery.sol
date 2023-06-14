@@ -24,6 +24,10 @@ contract SCRSLottery is Ownable {
         SCRSNFT = IERC721(_SCRSNFT);
     }
 
+    function pauseLottery() public onlyOwner {
+        lotteryActive = !lotteryActive;
+    }
+
     function getEntrantsCount() public view returns (uint) {
         return lotteryEntrants.length;
     }
