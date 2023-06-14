@@ -142,6 +142,10 @@ const stakerModals = document.querySelector(".staker-modal");
 const stakerIconDesk = document.querySelector(".desk-staker");
 const closeStaker = document.querySelector(".clo-staker");
 
+const lotteryModals = document.querySelector(".lottery-modal");
+const lotteryIconDesk = document.querySelector(".lottery-icon");
+const closeLottery = document.querySelector(".clo-lottery");
+
 const trashCanModals = document.querySelector(".recycle-modal");
 const trashIconDesk = document.querySelector(".trash-icon");
 const closeTrashCan = document.querySelector(".clo-trash");
@@ -197,6 +201,28 @@ closeStaker.addEventListener("click", () => {
   stakeBar.classList.add("hidden");
   stakerActive = false;
 });
+
+
+//Lottery 
+let lotteryActive = false;
+const lotteryBar = document.querySelector(".act-lottery");
+// Open recycle bin modal
+lotteryIconDesk.addEventListener("dblclick", () => {
+  if (!lotteryActive) {
+    lotteryModals.classList.remove("hidden");
+    lotteryBar.classList.remove("hidden");
+    lotteryActive = true;
+  }
+});
+
+// Close lottery modal
+closeLottery.addEventListener("click", () => {
+  lotteryModals.classList.add("hidden");
+  lotteryModals.classList.remove("enlarged");
+  lotteryBar.classList.add("hidden");
+  lotteryActive = false;
+});
+
 
 let binActive = false;
 const trashBar = document.querySelector(".act-bin");

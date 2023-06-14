@@ -1,3 +1,6 @@
+const lotteryModal = document.querySelector(".lottery-modal");
+const minimizeLottery = document.querySelector(".min-lottery");
+
 const trashCanModal = document.querySelector(".recycle-modal");
 const enlargeTrashCan = document.querySelector(".enl-trash");
 const minimizeTrashCan = document.querySelector(".min-trash");
@@ -20,6 +23,13 @@ let terminalEnlarged = false;
 let crierEnlarged = false;
 
 
+// Minimize lottery
+minimizeLottery.addEventListener("click", () => {
+  const activeLottery = document.querySelector(".act-lottery");
+  lotteryModal.classList.add("hidden");
+  activeLottery.classList.remove("maximized");
+  activeLottery.classList.add("minimized");
+});
 
 // Enlarge trash can
 enlargeTrashCan.addEventListener("click", () => {
@@ -32,7 +42,7 @@ enlargeTrashCan.addEventListener("click", () => {
   trashCanEnlarged = false;
 });
 
-// Minimize min button
+// Minimize trashcan
 minimizeTrashCan.addEventListener("click", () => {
   const activeBin = document.querySelector(".act-bin");
   trashCanModal.classList.add("hidden");
@@ -43,8 +53,9 @@ minimizeTrashCan.addEventListener("click", () => {
 // Enlarge from task bar handler
 const parent = document.querySelector(".active-programs");
 parent.addEventListener("click", (event) => {
+  const e = event.target.classList[0];
   // Trashcan event
-  if (event.target.classList[0] === "act-bin") {
+  if (e === "act-bin") {
     const activeBin = document.querySelector(".act-bin");
     activeBin.classList.add("maximized");
     activeBin.classList.remove("minimized");
@@ -52,7 +63,7 @@ parent.addEventListener("click", (event) => {
   }
 
   // Shadow Minter event
-  if (event.target.classList[0] === "act-shadow") {
+  if (e === "act-shadow") {
     const activeShadows = document.querySelector(".act-shadow");
     activeShadows.classList.add("maximized");
     activeShadows.classList.remove("minimized");
@@ -60,7 +71,7 @@ parent.addEventListener("click", (event) => {
   }
 
   // Terminal event
-  if (event.target.classList[0] === "act-terminal") {
+  if (e === "act-terminal") {
     const activeTerminals = document.querySelector(".act-terminal");
     activeTerminals.classList.add("maximized");
     activeTerminals.classList.remove("minimized");
@@ -68,11 +79,19 @@ parent.addEventListener("click", (event) => {
   }
 
   // Crier modal
-  if (event.target.classList[0] === "act-crier") {
+  if (e === "act-crier") {
     const activeCriers = document.querySelector(".act-crier");
     activeCriers.classList.add("maximized");
     activeCriers.classList.remove("minimized");
     crierModal.classList.remove("hidden");
+  }
+
+  // Lottery modal
+  if (e === "act-lottery") {
+    const activeLotteries = document.querySelector(".act-lottery");
+    activeLotteries.classList.add("maximized");
+    activeLotteries.classList.remove("minimized");
+    lotteryModal.classList.remove("hidden");
   }
 });
 
