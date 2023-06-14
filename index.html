@@ -19,6 +19,7 @@
   <script type="module" src="./js/terminal.js"></script>
   <script type="module" src="./js/stakingAbi.js"></script>
   <script type="module" src="./js/shadowMinter.js"></script>
+  <script type="module" src="./js/lottery.js"></script>
   <!-- <script type="module" src="./js/shadowStaker.js"></script> -->
   <script type="module" src="./js/blocktime.js"></script>
   <script type="module" src="./js/sicariusPvP.js"></script>
@@ -722,9 +723,9 @@
             <div class="ticketcount lot-box">
               <span class="ticket-title">Ticketcount</span>
               <div class="ticket-btns">
-                <button class="old-btns">-</button>
-                <span>0</span>
-                <button class="old-btns">+</button>
+                <button class="old-btns dec-ticket">-</button>
+                <span class="ticket-count">0</span>
+                <button class="old-btns inc-ticket">+</button>
               </div>
             </div>
             
@@ -732,7 +733,7 @@
 
             <div class="approvecount lot-box">
               <span class="ticket-title">Approve Tokens</span>
-              <button class="old-btnss">Approve</button>
+              <button class="old-btnss approve-lottery">Approve</button>
               <span class="approved-tokens">0K</span>
             </div>
 

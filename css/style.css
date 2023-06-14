@@ -2575,7 +2575,7 @@ canvas {
   width: 5rem;
   height: 1.5rem;
   font-size: 0.95rem;
-  margin-left: 1rem;
+  margin-left: 0.8rem;
 }
 .old-btnss:active {
   border-top: 2px solid black;
@@ -2586,4 +2586,8 @@ canvas {
 
 .entr {
   margin-left: 2.3rem;
+}
+
+.approved-tokens {
+  font-size: 13px;
 }
