@@ -267,6 +267,12 @@ body {
   border: 1px dotted blue;
 }
 
+.lottery-icon {
+  position: absolute;
+  left: 15rem;
+  top: 5rem;
+}
+
 .trash-icon {
   position: absolute;
   left: 5rem;
@@ -536,6 +542,17 @@ body {
 }
 
 .terminal-modal {
+  position: absolute;
+  width: 510px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
+.lottery-modal {
   position: absolute;
   width: 510px;
   height: 400px;
@@ -2345,7 +2362,7 @@ z-index: 30;
   position: absolute;
   z-index: 100;
   width: calc(100% - 2px);
-  height: 100%;
+  height: calc(100% - 20px);
   background-color: black;
   color: white;
   display: flex;
@@ -2354,4 +2371,8 @@ z-index: 30;
   display: flex;
   font-family: Windows;
   font-size: 18px;
+}
+
+.min-pad {
+  margin-left: 18px;
 }

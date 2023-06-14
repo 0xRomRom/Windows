@@ -65,3 +65,6 @@ makeElementDraggable(desktopOpenSea);
 
 const desktopStaker = document.querySelector(".desk-staker");
 makeElementDraggable(desktopStaker);
+
+const desktopLottery = document.querySelector(".lottery-icon");
+makeElementDraggable(desktopLottery);
