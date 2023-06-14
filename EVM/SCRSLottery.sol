@@ -48,7 +48,7 @@ contract SCRSLottery is Ownable {
     function fundLotteryPot(uint _amount) public onlyOwner {
         lotteryPot += _amount;
         lotteryActive = true;
-        SCRSToken.transfer(address(this), _amount);
+        SCRSToken.transferFrom(msg.sender, address(this), _amount);
     }
 
     function enterLottery(address _player, uint _entryCount) public payable {
@@ -82,3 +82,13 @@ contract SCRSLottery is Ownable {
         lotteryActive = false;
     }
 }
+
+//Front end to add:
+//Probability percentage counter
+//Entrants count
+//Total win pot
+//Time until draw
+//Entry price
+//Total entries
+//Price pot value USD
+//Entry price value USD
