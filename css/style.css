@@ -269,8 +269,8 @@ body {
 
 .lottery-icon {
   position: absolute;
-  left: 15rem;
-  top: 5rem;
+  left: 13rem;
+  top: 7rem;
 }
 
 .trash-icon {
@@ -554,8 +554,8 @@ body {
 
 .lottery-modal {
   position: absolute;
-  width: 510px;
-  height: 400px;
+  width: 610px;
+  height: 450px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
   box-shadow: 1px 1px 2px black;
@@ -2376,3 +2376,51 @@ z-index: 30;
 .min-pad {
   margin-left: 18px;
 }
+
+.lottery-inner {
+  position: relative;
+  width: calc(100% - 2px);
+  height: calc(100% - 20px);
+}
+
+.lottery-scrollbox {
+  position: relative;
+  width: 100%;
+  height: 3rem;
+  top: 1px;
+  padding: 2px;
+  overflow: hidden;
+}
+
+.animated-bar {
+  position: relative;
+  width: 120%;
+  left: -3%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border-top: 2px solid rgb(145, 145, 145);
+  border-left: 2px solid rgb(145, 145, 145);
+  border-bottom: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(251, 250, 251);
+}
+
+.marquee {
+  color: black;
+	letter-spacing: 2px;
+	font-weight: 700;
+  font-size: 1.8rem;
+
+  font-family: Windows;
+  user-select: none;
+}
+
+.purp {
+  color: purple;
+}
+
+.greeny {
+  color: rgb(17, 165, 17);
+}
+
