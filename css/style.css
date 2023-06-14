@@ -1844,8 +1844,6 @@ body {
   z-index: 400;
 }
 
-
-
 .min-crier {
   margin-left: 18px;
 }
@@ -2218,12 +2216,12 @@ canvas {
 }
 
 .stickyy {
-position: sticky;
-text-align: center;
-top: 0;
-width: 100%;
-background-color: #C3C7CB;
-z-index: 30;
+  position: sticky;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  background-color: #c3c7cb;
+  z-index: 30;
 }
 
 .staker-info-box {
@@ -2339,11 +2337,11 @@ z-index: 30;
 }
 
 .selected {
-  border: 2px solid rgb(17,4,137);
+  border: 2px solid rgb(17, 4, 137);
 }
 
 .selected:hover {
-  border: 2px solid rgb(17,4,137);
+  border: 2px solid rgb(17, 4, 137);
 }
 
 .nft-mini {
@@ -2400,16 +2398,17 @@ z-index: 30;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  border-top: 2px solid rgb(145, 145, 145);
-  border-left: 2px solid rgb(145, 145, 145);
-  border-bottom: 2px solid rgb(251, 250, 251);
-  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+
 }
 
 .marquee {
   color: black;
-	letter-spacing: 2px;
-	font-weight: 700;
+  letter-spacing: 2px;
+  font-weight: 700;
   font-size: 1.8rem;
 
   font-family: Windows;
@@ -2424,3 +2423,74 @@ z-index: 30;
   color: rgb(17, 165, 17);
 }
 
+.lottery-midbox {
+  position: relative;
+  width: 100%;
+  height: 20rem;
+  display: flex;
+  gap: 3px;
+}
+
+.lottery-player-stats {
+  position: relative;
+  height: 100%;
+  width: 25%;
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+}
+
+.lottery-game-stats {
+  position: relative;
+  height: 100%;
+  width: 50%;
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+}
+
+.lottery-stats-stats {
+  position: relative;
+  height: 100%;
+  width: 25%;
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+}
+
+.lottery-ctas {
+  position: relative;
+  width: 100%;
+  margin-top: 0.15rem;
+  height: 3.65rem;
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+}
+
+.lottery-hero {
+  font-family: Windows;
+  display: block;
+  text-align: center;
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  user-select: none;
+}
+
+.lottery-slot {
+  font-family: Windows;
+  display: block;
+  text-align: center;
+  border-bottom: 2px solid rgb(145, 145, 145);
+  border-right: 2px solid rgb(145, 145, 145);
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  user-select: none;
+  margin: 5px 0;
+}
