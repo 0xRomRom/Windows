@@ -124,22 +124,24 @@ connectLotteryMetamask.addEventListener("click", async () => {
 
 
         //Player entry count
-
         let entrants = [];
         for (let i = 0; i < Number(totalPlayerCount); i++) {
             let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
-            entrants.push(entrant);
+            if (entrant === player) {
+                entrants.push(entrant);
+            }
         }
-        console.log(entrants);
-        let filteredEntrants = Array.from(new Set(entrants));
-        console.log(filteredEntrants);
-        lotteryPlayerEntryCount.innerHTML = `Total Entries:<br>${filteredEntrants.length > 0 ? filteredEntrants.length : 0}`;
+        lotteryPlayerEntryCount.innerHTML = `Total Entries:<br>${entrants.length > 0 ? entrants.length : 0}`;
 
 
-
-        //Total entrants count
-        totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
-        lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${Number(totalPlayerCount)}`;
+        //Total players count
+        let players = [];
+        for (let i = 0; i < Number(totalPlayerCount); i++) {
+            let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+            players.push(entrant);
+        }
+        let filteredPlayers = Array.from(new Set(players));
+        lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${filteredPlayers.length}`;
 
 
         // //Game total entries
