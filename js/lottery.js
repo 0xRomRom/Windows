@@ -12,6 +12,7 @@ const lotteryTotalPlayerCount = document.querySelector(".lott-total-players");
 const lotteryTotalEntries = document.querySelector(".lott-total-entries");
 const lotteryProbabilityText = document.querySelector(".lott-probability");
 const lotteryWinPotText = document.querySelector(".lottery-winpot");
+const marquee = document.querySelector(".marquee");
 
 
 const ticketCount = document.querySelector(".ticket-count");
@@ -64,19 +65,14 @@ approveLottery.addEventListener("click", async () => {
     }
     const entryPrice = await lotteryContractInstance.methods.ENTRY_FEE().call();
     const finalEntryPrice = Math.round(Number(entryPrice) / 1E18);
-    console.log(player)
-    console.log(ticketCounter * finalEntryPrice);
     await scrsTokenContractInstance.methods.increaseAllowance(LOTTERYCONTRACT, Number(ticketCounter * finalEntryPrice)).send({ from: player });
-    console.log(`Allowance: ${await scrsTokenContractInstance.methods.allowance(player)}`);
-
 });
 
 enterLottery.addEventListener("click", async () => {
-    console.log("Entering");
     try {
         await lotteryContractInstance.methods.enterLottery(player, ticketCounter).send({ from: player });
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 });
 
@@ -110,9 +106,7 @@ connectLotteryMetamask.addEventListener("click", async () => {
 
         // Player SCRS Approved Balance
         scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
-        console.log(scrsApprovedCount);
         let scrsCount = Number(scrsApprovedCount);
-        console.log(scrsCount);
         lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${scrsCount.toLocaleString()}`;
 
         //Total entries count
@@ -158,6 +152,11 @@ connectLotteryMetamask.addEventListener("click", async () => {
         lotteryProbability = ((playerEntryCount / (Number(totalPlayerCount)) * 1000) / 10).toString().slice(0, 5);
         lotteryProbabilityText.innerHTML = `Probability:<br> ${lotteryProbability > 0 ? lotteryProbability : 0}%`;
 
+        //Marque text
+        marquee.innerHTML = `<span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
+        class="greeny">${lotteryWinPot}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
+        class="purp">$</span>SCRS<span class="purp"> $$$</span>`
+
         //Pot in USD
 
 
@@ -167,6 +166,6 @@ connectLotteryMetamask.addEventListener("click", async () => {
         lotteryBox.classList.remove("hidden");
 
     } catch (err) {
-        console.log(err);
+        console.error(err);
     }
 });
