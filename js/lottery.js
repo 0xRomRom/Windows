@@ -109,7 +109,7 @@ connectLotteryMetamask.addEventListener("click", async () => {
         let approvedSCRS = Number(scrsApprovedCount) / 1E18;
         lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${(Number(approvedSCRS)).toLocaleString()}`;
 
-        //Total players count
+        //Total entries count
         totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
         lotteryTotalEntries.innerHTML = `Total Entries:<br>${totalPlayerCount}`;
 
@@ -118,10 +118,7 @@ connectLotteryMetamask.addEventListener("click", async () => {
             let currentPlayer = await lotteryContractInstance.methods.lotteryEntrant(i).call();
             playerEntryArray.push(currentPlayer);
         }
-        let filteredTotalPlayers = Array.from(new Set(playerEntryArray));
-
-        playerEntryCount = filteredTotalPlayers.length;
-        lotteryTotalPlayerCount.innerHTML = `Entry Count: <br>${Number(playerEntryCount)}`;
+        lotteryTotalPlayerCount.innerHTML = `Entry Count: <br>${Number(playerEntryArray.length)}`;
 
 
         //Player entry count
@@ -132,6 +129,7 @@ connectLotteryMetamask.addEventListener("click", async () => {
                 entrants.push(entrant);
             }
         }
+        playerEntryCount = entrants.length;
         lotteryPlayerEntryCount.innerHTML = `Total Entries:<br>${entrants.length > 0 ? entrants.length : 0}`;
 
 
@@ -145,8 +143,14 @@ connectLotteryMetamask.addEventListener("click", async () => {
         lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${filteredPlayers.length}`;
 
         // //Player Probability
-        // lotteryProbability = Number(totalPlayerCount) / Number(playerEntryCount);
-        // lotteryProbabilityText.innerHTML = `Probability:<br> ${Number(lotteryProbability) > 0 ? Number(lotteryProbability).toString().slice(0, 5) : 0}%`;
+        let playerArr = [];
+        for (let i = 0; i < Number(totalPlayerCount); i++) {
+            let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+            playerArr.push(entrant);
+        }
+
+        lotteryProbability = ((playerEntryCount / (Number(totalPlayerCount)) * 1000) / 10).toString().slice(0, 5);
+        lotteryProbabilityText.innerHTML = `Probability:<br> ${lotteryProbability > 0 ? lotteryProbability : 0}%`;
 
         //Pot in USD
 
