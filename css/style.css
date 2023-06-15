@@ -2381,6 +2381,15 @@ canvas {
   height: calc(100% - 20px);
 }
 
+.lottery-metamask-box {
+  position: relative;
+  width: calc(100% - 2px);
+  height: calc(100% - 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .lottery-scrollbox {
   position: relative;
   width: 100%;
@@ -2402,7 +2411,6 @@ canvas {
   border-right: 2px solid rgb(145, 145, 145);
   border-top: 2px solid rgb(251, 250, 251);
   border-left: 2px solid rgb(251, 250, 251);
-
 }
 
 .marquee {
@@ -2500,7 +2508,6 @@ canvas {
   user-select: none;
   margin: 5px 0;
   text-align: center;
-
 }
 
 .lottery-title {
@@ -2513,7 +2520,7 @@ canvas {
   border-top: 2px solid rgb(251, 250, 251);
   border-left: 2px solid rgb(251, 250, 251);
   text-align: center;
-
+  user-select: none;
 }
 
 .lottery-copy {
@@ -2526,6 +2533,7 @@ canvas {
   font-family: Windows;
   font-size: 20px;
   text-align: center;
+  user-select: none;
 }
 
 .lot-box {
@@ -2535,11 +2543,13 @@ canvas {
   border-top: 2px solid rgb(251, 250, 251);
   border-left: 2px solid rgb(251, 250, 251);
   width: 32%;
+  user-select: none;
 }
 
 .ticket-title {
   display: block;
   text-align: center;
+  user-select: none;
 }
 
 .ticket-btns {
@@ -2547,6 +2557,7 @@ canvas {
   width: 100%;
   justify-content: center;
   gap: 0.5rem;
+  user-select: none;
 }
 
 .old-btns {
@@ -2558,6 +2569,7 @@ canvas {
   width: 1.5rem;
   height: 1.5rem;
   font-size: 0.95rem;
+  user-select: none;
 }
 .old-btns:active {
   border-top: 2px solid black;
@@ -2576,6 +2588,7 @@ canvas {
   height: 1.5rem;
   font-size: 0.95rem;
   margin-left: 0.8rem;
+  user-select: none;
 }
 .old-btnss:active {
   border-top: 2px solid black;
@@ -2586,8 +2599,29 @@ canvas {
 
 .entr {
   margin-left: 2.3rem;
+  user-select: none;
 }
 
 .approved-tokens {
   font-size: 13px;
+  user-select: none;
+}
+
+.lott-metamask-connect {
+  border-top: 2px solid rgb(251, 250, 251);
+  border-left: 2px solid rgb(251, 250, 251);
+  border-right: 2px solid rgb(20, 20, 20);
+  border-bottom: 2px solid rgb(20, 20, 20);
+  cursor: pointer;
+  width: 9.5rem;
+  height: 2.5rem;
+  font-size: 0.95rem;
+  margin-left: 0.8rem;
+  user-select: none;
+}
+.lott-metamask-connect:active {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid rgb(251, 250, 251);
+  border-bottom: 2px solid rgb(251, 250, 251);
 }

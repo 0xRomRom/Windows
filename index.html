@@ -689,20 +689,27 @@
           </div>
         </div>
 
-        <div class="lottery-inner">
+        <div class="lottery-metamask-box">
+          <button class="lott-metamask-connect">Connect Metamask</button>
+        </div>
+
+        <div class="lottery-inner hidden">
           <div class="lottery-scrollbox">
             <div class="animated-bar">
               <marquee class="marquee" behavior="scroll" direction="left">
-                <span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span class="greeny">6,200,000</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span class="purp">$</span>SCRS<span class="purp"> $$$</span></marquee>
+                <span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
+                  class="greeny">6,200,000</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
+                  class="purp">$</span>SCRS<span class="purp"> $$$</span>
+              </marquee>
             </div>
           </div>
           <div class="lottery-midbox">
             <div class="lottery-player-stats">
               <span class="lottery-hero">Player Stats</span>
-              <div class="lottery-slot">Wallet:<br> 0x1f65a...</div>
-              <div class="lottery-slot">$SCRS Balance: <br>730,551</div>
-              <div class="lottery-slot">$SCRS Approved: <br>400,000</div>
-              <div class="lottery-slot">Entry Count: <br>5</div>
+              <div class="lottery-slot lott-wallet">Wallet:<br> 0x1f65a...</div>
+              <div class="lottery-slot lott-tokencount">$SCRS Balance: <br>730,551</div>
+              <div class="lottery-slot lott-approved-count">$SCRS Approved: <br>400,000</div>
+              <div class="lottery-slot lott-player-entrycount">Entry Count: <br>5</div>
               <div class="lottery-slot">Probability:<br> 5%</div>
             </div>
             <div class="lottery-game-stats">
@@ -711,7 +718,7 @@
             </div>
             <div class="lottery-stats-stats">
               <span class="lottery-hero">Lottery Stats</span>
-              <div class="lottery-slot">Total Players:<br>20</div>
+              <div class="lottery-slot lott-total-players">Total Players:<br>20</div>
               <div class="lottery-slot">Total Entries:<br>100</div>
               <div class="lottery-slot">Pot in USD:<br>N/A$</div>
               <div class="lottery-slot">Entry price in USD:<br>N/A$</div>
@@ -728,7 +735,7 @@
                 <button class="old-btns inc-ticket">+</button>
               </div>
             </div>
-            
+
             <span>==></span>
 
             <div class="approvecount lot-box">
@@ -770,7 +777,8 @@
 
           <div class="tab2 approve-tab hidden">
             <div class="approve-top">
-              <span class="approve-txt">In order to stake your Sicarius NFT(s) you need approval from the Sicarius NFT contract,<br> to transfer your NFT(s) on your behalf to the staking contract.</span>
+              <span class="approve-txt">In order to stake your Sicarius NFT(s) you need approval from the Sicarius NFT
+                contract,<br> to transfer your NFT(s) on your behalf to the staking contract.</span>
             </div>
             <div class="approve-bot">
               <button class="approval-btn">Approve Contract</button>
@@ -779,31 +787,31 @@
 
           <div class="stake-interface tab3 hidden">
             <div class="stake-top-wrapper">
-            <div class="wrap">
-              <div class="staker-info-top">
-                <span class="box-title">Staker Info</span>
-                <div class="staker-info-box">
-                  <span class="staker-wallet">Wallet: </span>
-                  <span class="staker-staked-count">Staked NFT Count: </span>
-                  <span class="staked-unstaked-count">Unstaked NFT Count: </span>
-                  <span class="staked-unclaimed-rewards">Unclaimed Rewards: </span>
-                  <span class="staker-total-accumulated">Total Accumulated: </span>
+              <div class="wrap">
+                <div class="staker-info-top">
+                  <span class="box-title">Staker Info</span>
+                  <div class="staker-info-box">
+                    <span class="staker-wallet">Wallet: </span>
+                    <span class="staker-staked-count">Staked NFT Count: </span>
+                    <span class="staked-unstaked-count">Unstaked NFT Count: </span>
+                    <span class="staked-unclaimed-rewards">Unclaimed Rewards: </span>
+                    <span class="staker-total-accumulated">Total Accumulated: </span>
+                  </div>
+                </div>
+              </div>
+              <div class="wrap">
+                <div class="staker-info-top">
+                  <span class="box-title">Vault Stats</span>
+                  <div class="staker-info-box">
+                    <span class="total-stakers">Total Stakers: 0</span>
+                    <span class="total-nfts-staked">Total NFTs Staked: 0 </span>
+                    <span class="total-vault-claimed">Total Accumulated Rewards:</span>
+                    <span class="vault-total-balance">Current Vault Balance:</span>
+                    <span class="staking-duration">Staking Duration: 0/100% </span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="wrap">
-              <div class="staker-info-top">
-                <span class="box-title">Vault Stats</span>
-                <div class="staker-info-box">
-                  <span class="total-stakers">Total Stakers: 0</span>
-                  <span class="total-nfts-staked">Total NFTs Staked: 0 </span>
-                  <span class="total-vault-claimed">Total Accumulated Rewards:</span>
-                  <span class="vault-total-balance">Current Vault Balance:</span>
-                  <span class="staking-duration">Staking Duration: 0/100% </span>
-                </div>
-              </div>
-            </div>
-          </div>
             <div class="staker-info-bot">
               <div class="bdr">
                 <div class="staker-bot-left">
@@ -813,13 +821,13 @@
                   </div>
                 </div>
               </div>
-              
+
               <div class="bdr">
                 <div class="staker-bot-right">
-                    <span class="box-title stickyy">Vault</span>
+                  <span class="box-title stickyy">Vault</span>
                   <div class="vault-nfts"></div>
-                  </div>
                 </div>
+              </div>
 
             </div>
             <div class="bdr-long">
@@ -827,8 +835,10 @@
                 <button class="old-btn left-xl stake-batch">Stake Batch ==></button>
                 <button class="old-btn left stake-single">Stake Single =></button>
                 <button class="old-btn green claim-rewards">Claim Rewards</button>
-                <button class="old-btn right unstake-single"><= Unstake Single</button>
-                <button class="old-btn right-xl unstake-batch"><== Unstake Batch</button>
+                <button class="old-btn right unstake-single">
+                  <= Unstake Single</button>
+                    <button class="old-btn right-xl unstake-batch">
+                      <== Unstake Batch</button>
               </div>
             </div>
           </div>
