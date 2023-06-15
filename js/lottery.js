@@ -85,9 +85,8 @@ const rotateSpinner = () => {
         }
         connectLotteryMetamask.innerHTML = spinElements[index];
         index++;
-        if (error) {
+        if (connectError) {
             clearInterval(rotater);
-            statusText2.innerHTML = `Program: Failed To Mint`;
         }
     }, 100);
 };
@@ -95,14 +94,15 @@ const rotateSpinner = () => {
 const spinElements = ["|", "/", "-", "\\", "|", "/", "-", "\\", "|"];
 
 
-
+let connectError = false;
 connectLotteryMetamask.addEventListener("click", async () => {
     try {
-
+        connectError = false;
         if (!window.ethereum) {
             alert("Install Metamask to continue. Visit https://metamask.io");
             return;
         }
+        connectLotteryMetamask.disabled = true;
         rotateSpinner();
         //Setup Web3 & Player
         window.web3 = new Web3(window.ethereum);
@@ -182,10 +182,17 @@ connectLotteryMetamask.addEventListener("click", async () => {
 
         //Entryprice in USD
 
+
+        connectLotteryMetamask.disabled = false;
         metamaskBox.classList.add("hidden");
         lotteryBox.classList.remove("hidden");
 
     } catch (err) {
         console.error(err);
+        connectError = true;
+        connectLotteryMetamask.disabled = false;
+        setTimeout(() => {
+            connectLotteryMetamask.innerHTML = "Connect Metamask";
+        }, 300);
     }
 });
