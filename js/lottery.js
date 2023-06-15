@@ -10,6 +10,8 @@ const lotteryApprovedCount = document.querySelector(".lott-approved-count");
 const lotteryPlayerCount = document.querySelector(".lott-player-entrycount");
 const lotteryTotalPlayerCount = document.querySelector(".lott-total-players");
 const lotteryTotalEntries = document.querySelector(".lott-total-entries");
+const lotteryProbabilityText = document.querySelector(".lott-probability");
+const lotteryWinPotText = document.querySelector(".lottery-winpot");
 
 
 const ticketCount = document.querySelector(".ticket-count");
@@ -20,8 +22,8 @@ const approvedTokens = document.querySelector(".approved-tokens");
 const enterLottery = document.querySelector(".entr");
 
 //Contracts
-const LOTTERYCONTRACT = "0x1C0C54E01C5A32f471360eD5AfE638Bc130E8730";
-const SCRSTOKENCONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
+let LOTTERYCONTRACT = "0xBb38d2bb8195b0F491157908Fd84678366ADffbA";
+let SCRSTOKENCONTRACT = "0x5AdC95C2143E459DbF538ba74411be12cB5E8CaE";
 
 const SCRSABI = TOKENABI;
 const LOTT_ABI = LOTTERY_ABI;
@@ -35,6 +37,8 @@ let scrsTokenCount = 0;
 let scrsApprovedCount = 0;
 let playerEntryCount = 0;
 let totalPlayerCount = 0;
+let lotteryProbability = 0;
+let lotteryWinPot = 0;
 
 incrementTicketCount.addEventListener("click", () => {
     ticketCounter++;
@@ -59,62 +63,84 @@ approveLottery.addEventListener("click", async () => {
         return;
     }
 
-    await lotteryContractInstance.methods.enterLottery(player)
-
-
-
 });
 
 enterLottery.addEventListener("click", () => { });
 
 connectLotteryMetamask.addEventListener("click", async () => {
-    if (!window.ethereum) {
-        alert("Install Metamask to continue. Visit https://metamask.io");
-        return;
+    try {
+
+        if (!window.ethereum) {
+            alert("Install Metamask to continue. Visit https://metamask.io");
+            return;
+        }
+
+        if (window.ethereum) {
+            //Setup Web3 & Player
+            window.web3 = new Web3(window.ethereum);
+            await window.ethereum.send("eth_requestAccounts");
+            const accounts = await web3.eth.getAccounts();
+            scrsTokenContractInstance = new web3.eth.Contract(SCRSABI, SCRSTOKENCONTRACT);
+            lotteryContractInstance = new web3.eth.Contract(LOTT_ABI, LOTTERYCONTRACT);
+
+            player = accounts[0];
+            playerWalletText.innerHTML = `Wallet:<br> ${player.slice(0, 8)}...`
+
+            //Lottery Win Pot
+            lotteryWinPot = await lotteryContractInstance.methods.lotteryPot().call();
+            lotteryWinPotText.innerHTML = `Enter for a chance at:<br> ${Number(lotteryWinPot).toLocaleString()} $SCRS`
+
+            //Player SCRS Token Balance
+            let fetchBalance = await scrsTokenContractInstance.methods.balanceOf(player).call();
+            scrsTokenCount = Number(fetchBalance) / 1E18;
+            lotteryTokenCount.innerHTML = `$SCRS Balance: <br>${Number(scrsTokenCount).toLocaleString()}`;
+
+
+            // Player SCRS Approved Balance
+            scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
+            let approvedSCRS = Number(scrsApprovedCount) / 1E18;
+            lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${(Number(approvedSCRS)).toLocaleString()}`;
+
+            //Player entrycount
+            totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
+
+            for (let i = 0; i < Number(totalPlayerCount); i++) {
+                let currentPlayer = await lotteryContractInstance.methods.lotteryEntrant(i);
+
+                if (currentPlayer === player) {
+                    playerEntryCount++;
+                }
+            }
+
+            lotteryPlayerCount.innerHTML = `Entry Count: <br>${Number(playerEntryCount)}`;
+
+            //Total player count
+            totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
+            lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${Number(totalPlayerCount)}`;
+
+            //Game total entries
+            let entrants = [];
+            for (let i = 0; i < Number(totalPlayerCount); i++) {
+                let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+                entrants.push(entrant);
+            }
+            console.log(entrants)
+            let filteredEntrants = Array.from(new Set(entrants));
+            lotteryTotalEntries.innerHTML = `Total Entries:<br>${Number(filteredEntrants).length > 0 ? Number(filteredEntrants).length : 0}`;
+
+            //Player Probability
+            lotteryProbability = Number(totalPlayerCount) / Number(playerEntryCount);
+            lotteryProbabilityText.innerHTML = `Probability:<br> ${Number(lotteryProbability) > 0 ? Number(lotteryProbability).toString().slice(0, 5) : 0}%`;
+
+            //Pot in USD
+
+
+            //Entryprice in USD
+
+            metamaskBox.classList.add("hidden");
+            lotteryBox.classList.remove("hidden");
+        }
+    } catch (err) {
+        console.log(err)
     }
-
-    // SCRSTOKENCONTRACT = new web3.eth.Contract(SCRSABI, SCRSTOKENCONTRACT);
-    // LOTTERYCONTRACT = new web3.eth.Contract(LOTT_ABI, LOTTERYCONTRACT);
-
-    //Setup Web3 & Player
-    window.web3 = new Web3(window.ethereum);
-    await window.ethereum.send("eth_requestAccounts");
-    const accounts = await web3.eth.getAccounts();
-    player = accounts[0];
-    playerWalletText.innerHTML = `Wallet:<br> ${player.slice(0, 8)}...`
-
-    //Player SCRS Token Balance
-    // scrsTokenCount = await SCRSTOKENCONTRACT.methods.balanceOf(player);
-    // lotteryTokenCount.innerHTML = `$SCRS Balance: <br>${scrsTokenCount.toLocaleString()}`;
-
-
-    //Player SCRS Approved Balance
-    // scrsApprovedCount = await SCRSTOKENCONTRACT.methods.allowance(player, LOTTERYCONTRACT);
-    // lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${scrsApprovedCount.toLocaleString()};
-
-    //Player entrycount
-    // totalPlayerCount = await LOTTERYCONTRACT.methods.getEntrantsCount().call();
-
-    // for (let i = 0; i < Number(totalPlayerCount); i++) {
-    //     let currentPlayer = await LOTTERYCONTRACT.methods.lotteryEntrant(i);
-
-    //     if (currentPlayer === player) {
-    //         playerEntryCount++;
-    //     }
-    // }
-
-    // lotteryPlayerCount.innerHTML = `Entry Count: <br>${Number(playerEntryCount)}`;
-
-    //Total player count
-    // totalPlayerCount = await LOTTERYCONTRACT.methods.getEntrantsCount().call();
-    // lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${Number(totalPlayerCount)}`;
-
-    //Game total entries
-    // lotteryTotalEntries.innerHTML = `Total Entries:<br>${Number(totalPlayerCount)}`;
-
-
-
-
-    metamaskBox.classList.add("hidden");
-    lotteryBox.classList.remove("hidden");
 });
