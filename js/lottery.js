@@ -62,14 +62,18 @@ approveLottery.addEventListener("click", async () => {
         alert("Buy a Sicarius to participate!");
         return;
     }
+    const entryPrice = await lotteryContractInstance.methods.ENTRY_FEE().call();
+    const finalEntryPrice = Math.round(Number(entryPrice) / 1E18);
+    console.log(player)
+    console.log(ticketCounter * finalEntryPrice);
+    await scrsTokenContractInstance.methods.increaseAllowance(LOTTERYCONTRACT, Number(ticketCounter * finalEntryPrice)).send({ from: player });
+    console.log(`Allowance: ${await scrsTokenContractInstance.methods.allowance(player)}`);
 
 });
 
 enterLottery.addEventListener("click", async () => {
     console.log("Entering");
     try {
-        console.log(player);
-        console.log(lotteryContractInstance)
         await lotteryContractInstance.methods.enterLottery(player, ticketCounter).send({ from: player });
     } catch (err) {
         console.log(err);
@@ -106,8 +110,10 @@ connectLotteryMetamask.addEventListener("click", async () => {
 
         // Player SCRS Approved Balance
         scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
-        let approvedSCRS = Number(scrsApprovedCount) / 1E18;
-        lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${(Number(approvedSCRS)).toLocaleString()}`;
+        console.log(scrsApprovedCount);
+        let scrsCount = Number(scrsApprovedCount);
+        console.log(scrsCount);
+        lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${scrsCount.toLocaleString()}`;
 
         //Total entries count
         totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
