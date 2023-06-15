@@ -76,6 +76,26 @@ enterLottery.addEventListener("click", async () => {
     }
 });
 
+const rotateSpinner = () => {
+    let index = 0;
+
+    const rotater = setInterval(() => {
+        if (index === 8) {
+            index = 0;
+        }
+        connectLotteryMetamask.innerHTML = spinElements[index];
+        index++;
+        if (error) {
+            clearInterval(rotater);
+            statusText2.innerHTML = `Program: Failed To Mint`;
+        }
+    }, 100);
+};
+
+const spinElements = ["|", "/", "-", "\\", "|", "/", "-", "\\", "|"];
+
+
+
 connectLotteryMetamask.addEventListener("click", async () => {
     try {
 
@@ -83,7 +103,7 @@ connectLotteryMetamask.addEventListener("click", async () => {
             alert("Install Metamask to continue. Visit https://metamask.io");
             return;
         }
-
+        rotateSpinner();
         //Setup Web3 & Player
         window.web3 = new Web3(window.ethereum);
         await window.ethereum.send("eth_requestAccounts");
