@@ -111,6 +111,7 @@ connectLotteryMetamask.addEventListener("click", async () => {
 
         //Total players count
         totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
+        lotteryTotalEntries.innerHTML = `Total Entries:<br>${totalPlayerCount}`;
 
         let playerEntryArray = [];
         for (let i = 0; i < Number(totalPlayerCount); i++) {
@@ -142,16 +143,6 @@ connectLotteryMetamask.addEventListener("click", async () => {
         }
         let filteredPlayers = Array.from(new Set(players));
         lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${filteredPlayers.length}`;
-
-
-        // //Game total entries
-        // let entrants = [];
-        // for (let i = 0; i < Number(totalPlayerCount); i++) {
-        //     let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
-        //     entrants.push(entrant);
-        // }
-        // let filteredEntrants = Array.from(new Set(entrants));
-        // lotteryTotalEntries.innerHTML = `Total Entries:<br>${Number(filteredEntrants).length > 0 ? Number(filteredEntrants).length : 0}`;
 
         // //Player Probability
         // lotteryProbability = Number(totalPlayerCount) / Number(playerEntryCount);
