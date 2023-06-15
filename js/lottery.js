@@ -7,7 +7,7 @@ const connectLotteryMetamask = document.querySelector(".lott-metamask-connect");
 const playerWalletText = document.querySelector(".lott-wallet");
 const lotteryTokenCount = document.querySelector(".lott-tokencount");
 const lotteryApprovedCount = document.querySelector(".lott-approved-count");
-const lotteryPlayerCount = document.querySelector(".lott-player-entrycount");
+const lotteryPlayerEntryCount = document.querySelector(".lott-player-entrycount");
 const lotteryTotalPlayerCount = document.querySelector(".lott-total-players");
 const lotteryTotalEntries = document.querySelector(".lott-total-entries");
 const lotteryProbabilityText = document.querySelector(".lott-probability");
@@ -124,6 +124,18 @@ connectLotteryMetamask.addEventListener("click", async () => {
 
 
         //Player entry count
+
+        let entrants = [];
+        for (let i = 0; i < Number(totalPlayerCount); i++) {
+            let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+            entrants.push(entrant);
+        }
+        console.log(entrants);
+        let filteredEntrants = Array.from(new Set(entrants));
+        console.log(filteredEntrants);
+        lotteryPlayerEntryCount.innerHTML = `Total Entries:<br>${filteredEntrants.length > 0 ? filteredEntrants.length : 0}`;
+
+
 
         //Total entrants count
         totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
