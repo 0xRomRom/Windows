@@ -2508,6 +2508,11 @@ canvas {
   user-select: none;
   margin: 5px 0;
   text-align: center;
+  overflow: hidden;
+}
+
+.lott-approved-count {
+  padding-left: 3px;
 }
 
 .lottery-title {

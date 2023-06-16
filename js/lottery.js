@@ -69,6 +69,7 @@ approveLottery.addEventListener("click", async () => {
 });
 
 enterLottery.addEventListener("click", async () => {
+    if (ticketCounter === 0) return;
     try {
         await lotteryContractInstance.methods.enterLottery(player, ticketCounter).send({ from: player });
     } catch (err) {
@@ -127,7 +128,8 @@ connectLotteryMetamask.addEventListener("click", async () => {
         // Player SCRS Approved Balance
         scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
         let scrsCount = Number(scrsApprovedCount);
-        lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${scrsCount.toLocaleString()}`;
+        console.log(Number(scrsCount));
+        lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${Number(scrsCount).toLocaleString()}`;
 
         //Total entries count
         totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
@@ -186,7 +188,8 @@ connectLotteryMetamask.addEventListener("click", async () => {
         connectLotteryMetamask.disabled = false;
         metamaskBox.classList.add("hidden");
         lotteryBox.classList.remove("hidden");
-
+        //Stops button spinner
+        connectError = true;
     } catch (err) {
         console.error(err);
         connectError = true;
