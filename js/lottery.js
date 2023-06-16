@@ -163,10 +163,13 @@ connectLotteryMetamask.addEventListener("click", async () => {
         //Entryprice in USD
         await getEntryPriceInUSD();
 
+
+        const marqueeBar = document.querySelector(".animated-bar");
         //Marque text
-        marquee.innerHTML = `<span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
-        class="greeny">${lotteryWinPot.toLocaleString()}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
-        class="purp">$</span>SCRS<span class="purp"> $$$</span>`;
+        marqueeBar.innerHTML = `<marquee class="marquee" behavior="scroll" direction="left">
+        <span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
+        class="greeny">${(Number(lotteryWinPot) / 1E18).toLocaleString()}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
+        class="purp">$</span>SCRS<span class="purp"> $$$</span></marquee>`;
 
         connectLotteryMetamask.disabled = false;
         metamaskBox.classList.add("hidden");
