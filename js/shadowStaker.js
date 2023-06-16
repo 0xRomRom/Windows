@@ -75,25 +75,25 @@ window.onload = async () => {
 //         stakingContractInstance = new web3.eth.Contract(STAKE_ABI, STAKINGCONTRACT);
 
 //         //Total NFT staked currently
-//         totalCurrentlyStaked();
+//         await totalCurrentlyStaked();
 
 //         //Total stakers
-//         totalStakers();
+//         await totalStakers();
 
 //         //Stake count
-//         stakerStakedCount();
+//         await stakerStakedCount();
 
 //         //Unstaked count
-//         stakerUnstakedCount();
+//         await stakerUnstakedCount();
 
 //         //Unclaimed rewards
-//         stakerUnclaimedRewards();
+//         await stakerUnclaimedRewards();
 
 //         //Staker total accumulated
-//         stakerTotalAccumulated();
+//         await stakerTotalAccumulated();
 
 //         //Staking duration
-//         vaultStakingDuration();
+//         await vaultStakingDuration();
 
 //         tab1.classList.add("hidden");
 
@@ -101,7 +101,7 @@ window.onload = async () => {
 //         const approved = await nftContractInstance.methods.isApprovedForAll(staker, STAKINGCONTRACT).call();
 
 //         endLoading();
-//         queryStats();
+//         await queryStats();
 
 //         if (approved) {
 //             const accounts = await web3.eth.getAccounts();

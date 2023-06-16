@@ -13,6 +13,7 @@ const lotteryTotalEntries = document.querySelector(".lott-total-entries");
 const lotteryProbabilityText = document.querySelector(".lott-probability");
 const lotteryWinPotText = document.querySelector(".lottery-winpot");
 const marquee = document.querySelector(".marquee");
+const lotteryLoadingText = document.querySelector(".lottery-loading");
 
 
 const ticketCount = document.querySelector(".ticket-count");
@@ -58,21 +59,41 @@ decrementTicketCount.addEventListener("click", () => {
 
 approveLottery.addEventListener("click", async () => {
     if (ticketCounter === 0) return;
-    const nftBalance = await scrsTokenContractInstance.methods.balanceOf(player);
-    if (Number(nftBalance) < 1) {
-        alert("Buy a Sicarius to participate!");
-        return;
+    try {
+
+
+        const nftBalance = await scrsTokenContractInstance.methods.balanceOf(player);
+        if (Number(nftBalance) < 1) {
+            alert("Buy a Sicarius to participate!");
+            return;
+        }
+        const entryPrice = await lotteryContractInstance.methods.ENTRY_FEE().call();
+        const finalEntryPrice = Math.round(Number(entryPrice) / 1E18);
+        loadingScreen(`Approving: ${Number(ticketCounter * finalEntryPrice).toLocaleString()} $SCRS...`);
+        await scrsTokenContractInstance.methods.increaseAllowance(LOTTERYCONTRACT, Number(ticketCounter * finalEntryPrice)).send({ from: player });
+        loadingScreen("Approval Successful. Updating UI.");
+        await updateUI();
+        endLoadingScreen();
+    } catch (err) {
+        console.error(err);
+        endLoadingScreen();
     }
-    const entryPrice = await lotteryContractInstance.methods.ENTRY_FEE().call();
-    const finalEntryPrice = Math.round(Number(entryPrice) / 1E18);
-    await scrsTokenContractInstance.methods.increaseAllowance(LOTTERYCONTRACT, Number(ticketCounter * finalEntryPrice)).send({ from: player });
 });
 
 enterLottery.addEventListener("click", async () => {
     if (ticketCounter === 0) return;
     try {
+        await getPlayerSCRSBalance();
+        const balance = Math.round(Number(scrsTokenCount));
+        if (balance < ticketCounter * 100000) return;
+
+        loadingScreen("Entering Lottery...");
         await lotteryContractInstance.methods.enterLottery(player, ticketCounter).send({ from: player });
+        loadingScreen("Successful entry. Updating UI.");
+        await updateUI();
+        endLoadingScreen();
     } catch (err) {
+        endLoadingScreen();
         console.error(err);
     }
 });
@@ -116,80 +137,48 @@ connectLotteryMetamask.addEventListener("click", async () => {
         playerWalletText.innerHTML = `Wallet:<br> ${player.slice(0, 8)}...`
 
         //Lottery Win Pot
-        lotteryWinPot = await lotteryContractInstance.methods.lotteryPot().call();
-        let convertedPot = Number(lotteryWinPot) / 1E18;
-        lotteryWinPotText.innerHTML = `Enter for a chance at:<br> ${Number(convertedPot).toLocaleString()} $SCRS`
+        await getLotteryWinPot();
 
         //Player SCRS Token Balance
-        let fetchBalance = await scrsTokenContractInstance.methods.balanceOf(player).call();
-        scrsTokenCount = Number(fetchBalance) / 1E18;
-        lotteryTokenCount.innerHTML = `$SCRS Balance: <br>${Number(scrsTokenCount).toLocaleString()}`;
+        await getPlayerSCRSBalance();
 
         // Player SCRS Approved Balance
-        scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
-        let scrsCount = Number(scrsApprovedCount);
-        console.log(Number(scrsCount));
-        lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${Number(scrsCount).toLocaleString()}`;
+        await getPlayerApprovedBalance();
 
         //Total entries count
-        totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
-        lotteryTotalEntries.innerHTML = `Total Entries:<br>${totalPlayerCount}`;
-
-        let playerEntryArray = [];
-        for (let i = 0; i < Number(totalPlayerCount); i++) {
-            let currentPlayer = await lotteryContractInstance.methods.lotteryEntrant(i).call();
-            playerEntryArray.push(currentPlayer);
-        }
-        lotteryTotalPlayerCount.innerHTML = `Entry Count: <br>${Number(playerEntryArray.length)}`;
-
+        await getTotalEntrants();
 
         //Player entry count
-        let entrants = [];
-        for (let i = 0; i < Number(totalPlayerCount); i++) {
-            let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
-            if (entrant === player) {
-                entrants.push(entrant);
-            }
-        }
-        playerEntryCount = entrants.length;
-        lotteryPlayerEntryCount.innerHTML = `Total Entries:<br>${entrants.length > 0 ? entrants.length : 0}`;
-
+        await getPlayerEntryCount();
 
         //Total players count
-        let players = [];
-        for (let i = 0; i < Number(totalPlayerCount); i++) {
-            let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
-            players.push(entrant);
-        }
-        let filteredPlayers = Array.from(new Set(players));
-        lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${filteredPlayers.length}`;
+        await getTotalPlayer();
 
         // //Player Probability
-        let playerArr = [];
-        for (let i = 0; i < Number(totalPlayerCount); i++) {
-            let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
-            playerArr.push(entrant);
-        }
+        await getPlayerProbability();
 
-        lotteryProbability = ((playerEntryCount / (Number(totalPlayerCount)) * 1000) / 10).toString().slice(0, 5);
-        lotteryProbabilityText.innerHTML = `Probability:<br> ${lotteryProbability > 0 ? lotteryProbability : 0}%`;
+        //Pot in USD
+        await getPotInUSD();
+
+        //Entryprice in USD
+        await getEntryPriceInUSD();
 
         //Marque text
         marquee.innerHTML = `<span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
-        class="greeny">${lotteryWinPot}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
-        class="purp">$</span>SCRS<span class="purp"> $$$</span>`
-
-        //Pot in USD
-
-
-        //Entryprice in USD
-
+        class="greeny">${lotteryWinPot.toLocaleString()}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
+        class="purp">$</span>SCRS<span class="purp"> $$$</span>`;
 
         connectLotteryMetamask.disabled = false;
         metamaskBox.classList.add("hidden");
         lotteryBox.classList.remove("hidden");
+
         //Stops button spinner
         connectError = true;
+
+        setInterval(async () => {
+            await updateUI();
+        }, 10000);
+
     } catch (err) {
         console.error(err);
         connectError = true;
@@ -199,3 +188,89 @@ connectLotteryMetamask.addEventListener("click", async () => {
         }, 300);
     }
 });
+
+const getLotteryWinPot = async () => {
+    lotteryWinPot = await lotteryContractInstance.methods.lotteryPot().call();
+    let convertedPot = Number(lotteryWinPot) / 1E18;
+    lotteryWinPotText.innerHTML = `Enter for a chance at:<br> ${Number(convertedPot).toLocaleString()} $SCRS`;
+};
+
+const getPlayerSCRSBalance = async () => {
+    let fetchBalance = await scrsTokenContractInstance.methods.balanceOf(player).call();
+    scrsTokenCount = Number(fetchBalance) / 1E18;
+    lotteryTokenCount.innerHTML = `$SCRS Balance: <br>${Number(scrsTokenCount).toLocaleString()}`;
+};
+
+const getPlayerApprovedBalance = async () => {
+    scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
+    let scrsCount = Number(scrsApprovedCount);
+    lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${Number(scrsCount).toLocaleString()}`;
+};
+
+const getTotalEntrants = async () => {
+    totalPlayerCount = await lotteryContractInstance.methods.getEntrantsCount().call();
+    lotteryTotalEntries.innerHTML = `Total Entries:<br>${totalPlayerCount}`;
+};
+
+const getTotalPlayer = async () => {
+    let players = [];
+    for (let i = 0; i < Number(totalPlayerCount); i++) {
+        let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+        players.push(entrant);
+    }
+    let filteredPlayers = Array.from(new Set(players));
+    lotteryTotalPlayerCount.innerHTML = `Total Players:<br>${filteredPlayers.length}`;
+};
+
+const getPlayerEntryCount = async () => {
+    let entrants = [];
+    for (let i = 0; i < Number(totalPlayerCount); i++) {
+        let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+        if (entrant === player) {
+            entrants.push(entrant);
+        }
+    }
+    playerEntryCount = entrants.length;
+    lotteryPlayerEntryCount.innerHTML = `Total Entries:<br>${entrants.length > 0 ? entrants.length : 0}`;
+};
+
+const getPlayerProbability = async () => {
+    let playerArr = [];
+    for (let i = 0; i < Number(totalPlayerCount); i++) {
+        let entrant = await lotteryContractInstance.methods.lotteryEntrant(i).call();
+        playerArr.push(entrant);
+    }
+
+    lotteryProbability = ((playerEntryCount / (Number(totalPlayerCount)) * 1000) / 10).toString().slice(0, 5);
+    lotteryProbabilityText.innerHTML = `Probability:<br> ${lotteryProbability > 0 ? lotteryProbability : 0}%`;
+};
+
+const getPotInUSD = async () => {
+
+};
+
+const getEntryPriceInUSD = async () => {
+
+};
+
+const updateUI = async () => {
+    await getLotteryWinPot();
+    await getPlayerSCRSBalance();
+    await getPlayerApprovedBalance();
+    await getTotalEntrants();
+    await getPlayerEntryCount();
+    await getTotalPlayer();
+    await getPlayerProbability();
+    await getPotInUSD();
+    await getEntryPriceInUSD();
+};
+
+
+const loadingScreen = (message) => {
+    lotteryLoadingText.classList.remove("hidden");
+    lotteryLoadingText.innerHTML = message;
+};
+
+const endLoadingScreen = () => {
+    lotteryLoadingText.classList.add("hidden");
+};
