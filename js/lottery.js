@@ -67,10 +67,6 @@ approveLottery.addEventListener("click", async () => {
         }
 
         const entryPrice = 100000 * ticketCounter;
-        console.log(entryPrice.toString() + "000000000000000000");
-        const bigNumber = BigInt(entryPrice * 10 ** 18).toString(10);
-        console.log(bigNumber);
-
         const finalNum = entryPrice.toString() + "000000000000000000";
 
         loadingScreen(`Approving: ${Number(finalNum / 1E18).toLocaleString()} $SCRS...`);
@@ -89,6 +85,9 @@ enterLottery.addEventListener("click", async () => {
     try {
         const balance = Math.round(Number(scrsTokenCount));
         if (balance < ticketCounter * 100000) return;
+        if (Number(scrsApprovedCount) / 1E18 < ticketCounter * 100000) return;
+        console.log(Number(scrsApprovedCount) / 1E18)
+        console.log(ticketCounter * 100000)
 
         loadingScreen("Entering Lottery...");
         await lotteryContractInstance.methods.enterLottery(player, ticketCounter).send({ from: player });
