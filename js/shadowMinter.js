@@ -1,4 +1,4 @@
-import {ABI} from "./abi.js";
+import { ABI } from "./abi.js";
 
 
 const mintButton = document.querySelector(".mint-button");
@@ -26,8 +26,8 @@ window.onload = async () => {
     const currently = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-      let currentlyMinted = Number(currently) - 1;
-    currentlyMintedCount.innerHTML = `[${await currentlyMinted}/2222]`;
+    let currentlyMinted = Number(currently) - 1;
+    currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
 
   }
 };
@@ -37,8 +37,8 @@ const updateCircSupply = async () => {
     const currently = await contractInstance.methods
       .CURRENT_SUPPLY()
       .call();
-      let currentlyMinted = Number(currently);
-      console.log(currentlyMinted)
+    let currentlyMinted = Number(currently);
+    console.log(currentlyMinted)
     currMintCount = currentlyMinted;
     currentlyMintedCount.innerHTML = `[${currentlyMinted}/2222]`;
   }, 2000);
@@ -109,6 +109,9 @@ const connectToMetamask = async () => {
 
   //Select first account
   account = accounts[0];
+
+  //Init contract
+  contractInstance = new web3.eth.Contract(ABI, CONTRACT);
 
   //Display user wallet
   modal1.classList.add("hidden");
@@ -399,9 +402,8 @@ mintButton.addEventListener("click", async () => {
     queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${+currentlyMinted}%20LFG!%20%40Sicarius_Quest`;
   }
   if (mintCount === 2) {
-    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${
-      +currentlyMinted - 1
-    }%20%26%20%23${+currentlyMinted}%20LFG!%20%40Sicarius_Quest`;
+    queryString = `https://twitter.com/intent/tweet?text=I%20just%20minted%20Sicarius%20%23${+currentlyMinted - 1
+      }%20%26%20%23${+currentlyMinted}%20LFG!%20%40Sicarius_Quest`;
   }
 
   setTimeout(() => {

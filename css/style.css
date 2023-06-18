@@ -2644,3 +2644,17 @@ canvas {
   font-size: 18px;
   color: white;
 }
+
+.lottery-unlocks {
+  position: absolute;
+  width: calc(100% - 2px);
+  height: calc(100% - 20px);
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Windows;
+  z-index: 10;
+  color: white;
+  font-size: 18px;
+}

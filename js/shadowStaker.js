@@ -40,6 +40,8 @@ let queuedForStaking = [];
 let userStakedTokenIDs = [];
 let queuedForUnstaking = [];
 
+
+//Display mints to go
 window.onload = async () => {
     const stakersToGo = document.querySelector(".staker-unlocks");
     window.web3 = new Web3(window.ethereum);
