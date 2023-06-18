@@ -12,7 +12,6 @@ const lotteryTotalPlayerCount = document.querySelector(".lott-total-players");
 const lotteryTotalEntries = document.querySelector(".lott-total-entries");
 const lotteryProbabilityText = document.querySelector(".lott-probability");
 const lotteryWinPotText = document.querySelector(".lottery-winpot");
-const marquee = document.querySelector(".marquee");
 const lotteryLoadingText = document.querySelector(".lottery-loading");
 
 
@@ -24,8 +23,8 @@ const approvedTokens = document.querySelector(".approved-tokens");
 const enterLottery = document.querySelector(".entr");
 
 //Contracts
-let LOTTERYCONTRACT = "0xBb38d2bb8195b0F491157908Fd84678366ADffbA";
-let SCRSTOKENCONTRACT = "0x5AdC95C2143E459DbF538ba74411be12cB5E8CaE";
+let LOTTERYCONTRACT = "0x55AF39042cc0E39bA527CfB2b4D56fF393130b55";
+let SCRSTOKENCONTRACT = "0xd37C7Ba263D0b9CF64CcF35eFe50e93741e900f9";
 
 const SCRSABI = TOKENABI;
 const LOTT_ABI = LOTTERY_ABI;
@@ -57,20 +56,25 @@ decrementTicketCount.addEventListener("click", () => {
     approvedTokens.innerHTML = `${ticketCounter > 9 ? (ticketCounter / 10).toLocaleString() + "M" : (ticketCounter * 100).toLocaleString() + "K"}`;
 });
 
+
 approveLottery.addEventListener("click", async () => {
     if (ticketCounter === 0) return;
     try {
-
-
         const nftBalance = await scrsTokenContractInstance.methods.balanceOf(player);
         if (Number(nftBalance) < 1) {
             alert("Buy a Sicarius to participate!");
             return;
         }
-        const entryPrice = await lotteryContractInstance.methods.ENTRY_FEE().call();
-        const finalEntryPrice = Math.round(Number(entryPrice) / 1E18);
-        loadingScreen(`Approving: ${Number(ticketCounter * finalEntryPrice).toLocaleString()} $SCRS...`);
-        await scrsTokenContractInstance.methods.increaseAllowance(LOTTERYCONTRACT, Number(ticketCounter * finalEntryPrice)).send({ from: player });
+
+        const entryPrice = 100000 * ticketCounter;
+        console.log(entryPrice.toString() + "000000000000000000");
+        const bigNumber = BigInt(entryPrice * 10 ** 18).toString(10);
+        console.log(bigNumber);
+
+        const finalNum = entryPrice.toString() + "000000000000000000";
+
+        loadingScreen(`Approving: ${Number(finalNum / 1E18).toLocaleString()} $SCRS...`);
+        await scrsTokenContractInstance.methods.increaseAllowance(LOTTERYCONTRACT, finalNum).send({ from: player });
         loadingScreen("Approval Successful. Updating UI.");
         await updateUI();
         endLoadingScreen();
@@ -83,7 +87,6 @@ approveLottery.addEventListener("click", async () => {
 enterLottery.addEventListener("click", async () => {
     if (ticketCounter === 0) return;
     try {
-        await getPlayerSCRSBalance();
         const balance = Math.round(Number(scrsTokenCount));
         if (balance < ticketCounter * 100000) return;
 
@@ -92,6 +95,7 @@ enterLottery.addEventListener("click", async () => {
         loadingScreen("Successful entry. Updating UI.");
         await updateUI();
         endLoadingScreen();
+        updateMarquee();
     } catch (err) {
         endLoadingScreen();
         console.error(err);
@@ -163,13 +167,8 @@ connectLotteryMetamask.addEventListener("click", async () => {
         //Entryprice in USD
         await getEntryPriceInUSD();
 
-
-        const marqueeBar = document.querySelector(".animated-bar");
-        //Marque text
-        marqueeBar.innerHTML = `<marquee class="marquee" behavior="scroll" direction="left">
-        <span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
-        class="greeny">${(Number(lotteryWinPot) / 1E18).toLocaleString()}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
-        class="purp">$</span>SCRS<span class="purp"> $$$</span></marquee>`;
+        //Update marquee text
+        updateMarquee();
 
         connectLotteryMetamask.disabled = false;
         metamaskBox.classList.add("hidden");
@@ -207,7 +206,7 @@ const getPlayerSCRSBalance = async () => {
 const getPlayerApprovedBalance = async () => {
     scrsApprovedCount = await scrsTokenContractInstance.methods.allowance(player, LOTTERYCONTRACT).call();
     let scrsCount = Number(scrsApprovedCount);
-    lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${Number(scrsCount).toLocaleString()}`;
+    lotteryApprovedCount.innerHTML = `$SCRS Approved: <br>${Number(scrsCount / 1E18).toLocaleString()}`;
 };
 
 const getTotalEntrants = async () => {
@@ -246,6 +245,14 @@ const getPlayerProbability = async () => {
 
     lotteryProbability = ((playerEntryCount / (Number(totalPlayerCount)) * 1000) / 10).toString().slice(0, 5);
     lotteryProbabilityText.innerHTML = `Probability:<br> ${lotteryProbability > 0 ? lotteryProbability : 0}%`;
+};
+
+const updateMarquee = () => {
+    const marqueeBar = document.querySelector(".animated-bar");
+    marqueeBar.innerHTML = `<marquee class="marquee" behavior="scroll" direction="left">
+    <span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
+    class="greeny">${(Number(lotteryWinPot) / 1E18).toLocaleString()}</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
+    class="purp">$</span>SCRS<span class="purp"> $$$</span></marquee>`;
 };
 
 const getPotInUSD = async () => {

@@ -120,6 +120,19 @@ export const LOTTERY_ABI = [
     },
     {
         "inputs": [],
+        "name": "approvedSCRSBalance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
         "name": "ENTRY_FEE",
         "outputs": [
             {
