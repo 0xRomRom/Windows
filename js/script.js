@@ -184,8 +184,8 @@ stakerIconDesk.addEventListener("dblclick", async () => {
   window.web3 = new Web3(window.ethereum);
   nftContractInstance = new web3.eth.Contract(NFT_ABI, NFTCONTRACT);
   const currentSup = await nftContractInstance.methods
-      .CURRENT_SUPPLY()
-      .call();
+    .CURRENT_SUPPLY()
+    .call();
   console.log(currentSup)
   const currentSupply = parseInt(currentSup);
   stakersToGo.innerHTML = '';
@@ -207,12 +207,25 @@ closeStaker.addEventListener("click", () => {
 let lotteryActive = false;
 const lotteryBar = document.querySelector(".act-lottery");
 // Open recycle bin modal
-lotteryIconDesk.addEventListener("dblclick", () => {
+lotteryIconDesk.addEventListener("dblclick", async () => {
   if (!lotteryActive) {
     lotteryModals.classList.remove("hidden");
     lotteryBar.classList.remove("hidden");
     lotteryActive = true;
   }
+
+
+  ///
+  const NFTCONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
+  const lotteryUnlocks = document.querySelector(".lottery-unlocks");
+  window.web3 = new Web3(window.ethereum);
+  let nftContractInstance = new web3.eth.Contract(ABI, NFTCONTRACT);
+  const currentSup = await nftContractInstance.methods
+    .CURRENT_SUPPLY()
+    .call();
+  const currentSupply = parseInt(currentSup);
+  lotteryUnlocks.innerHTML = '';
+  lotteryUnlocks.innerHTML = `Unlocks after ${1111 - currentSupply} more mints...`;
 });
 
 // Close lottery modal
@@ -249,8 +262,8 @@ const shadowBar = document.querySelector(".act-shadow");
 // Open shadow minter modal
 shadowMinterDesk.addEventListener("dblclick", () => {
   if (!shadowActive) {
-  shadowMinterModal.classList.remove("hidden");
-  shadowBar.classList.remove("hidden");
+    shadowMinterModal.classList.remove("hidden");
+    shadowBar.classList.remove("hidden");
   }
 });
 
@@ -272,17 +285,17 @@ const app = document.querySelector(".app");
 let crierActive = false;
 // Open crier modal
 crierDesk.addEventListener("dblclick", () => {
-    gameIntro.classList.add("fadeOut")
+  gameIntro.classList.add("fadeOut")
   if (!crierActive) {
     mainProgram.classList.add("blurry");
-  crierModals.classList.remove("hidden");
-  crierBar.classList.remove("hidden");
-  soundTrack.play();
-  soundTrack.muted = !soundTrack.muted;
-  app.style.backgroundImage = "url('./PVP/SicariusDark.png')"
+    crierModals.classList.remove("hidden");
+    crierBar.classList.remove("hidden");
+    soundTrack.play();
+    soundTrack.muted = !soundTrack.muted;
+    app.style.backgroundImage = "url('./PVP/SicariusDark.png')"
   }
   setTimeout(() => {
-gameIntro.classList.add("hidden");
+    gameIntro.classList.add("hidden");
   }, 5000)
 });
 

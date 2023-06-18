@@ -3,19 +3,6 @@ import { TOKENABI } from "./tokenAbi.js";
 import { ABI } from "./abi.js";
 
 
-//Display mints to go
-window.onload = async () => {
-    const NFTCONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
-    const lotteryUnlocks = document.querySelector(".lottery-unlocks");
-    window.web3 = new Web3(window.ethereum);
-    let nftContractInstance = new web3.eth.Contract(ABI, NFTCONTRACT);
-    const currentSup = await nftContractInstance.methods
-        .CURRENT_SUPPLY()
-        .call();
-    const currentSupply = parseInt(currentSup);
-    lotteryUnlocks.innerHTML = '';
-    lotteryUnlocks.innerHTML = `Unlocks after ${1111 - currentSupply} more mints...`;
-}
 
 // const metamaskBox = document.querySelector(".lottery-metamask-box");
 // const lotteryBox = document.querySelector(".lottery-inner");
