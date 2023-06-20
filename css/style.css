@@ -541,6 +541,25 @@ body {
   top: 0.75rem;
 }
 
+.nftgallery-modal {
+  position: absolute;
+  width: 810px;
+  height: 500px;
+  background-color: rgb(195, 199, 203);
+  z-index: 70;
+  box-shadow: 1px 1px 2px black;
+  border-top: 1px solid rgb(240, 240, 240);
+  border-left: 1px solid rgb(240, 240, 240);
+}
+
+.nftgallery-inner {
+  top: 2.55rem;
+  position: relative;
+  width: calc(100% - 2px);
+  height: calc(100% - 60px);
+  background-color: green;
+}
+
 .terminal-modal {
   position: absolute;
   width: 510px;

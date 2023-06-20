@@ -186,7 +186,6 @@ stakerIconDesk.addEventListener("dblclick", async () => {
   const currentSup = await nftContractInstance.methods
     .CURRENT_SUPPLY()
     .call();
-  console.log(currentSup)
   const currentSupply = parseInt(currentSup);
   stakersToGo.innerHTML = '';
   stakersToGo.innerHTML = `Unlocks after ${1111 - currentSupply} more mints...`;
