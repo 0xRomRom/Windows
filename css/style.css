@@ -550,14 +550,19 @@ body {
   box-shadow: 1px 1px 2px black;
   border-top: 1px solid rgb(240, 240, 240);
   border-left: 1px solid rgb(240, 240, 240);
+  overflow: hidden;
 }
 
 .nftgallery-inner {
-  top: 2.55rem;
+  top: 1.55rem;
   position: relative;
   width: calc(100% - 2px);
   height: calc(100% - 60px);
-  background-color: green;
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  margin: 0 1.85rem;
 }
 
 .terminal-modal {
@@ -2340,6 +2345,18 @@ canvas {
 }
 
 .vault-nft:hover {
+  border: 1px solid rgb(17, 4, 137);
+}
+
+.gallery-nft {
+  position: relative;
+  width: 7.5rem;
+  height: 9.1rem;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.gallery-nft:hover {
   border: 1px solid rgb(17, 4, 137);
 }
 
