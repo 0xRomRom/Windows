@@ -557,7 +557,7 @@ body {
   top: 1.3rem;
   position: relative;
   width: calc(100% - 2px);
-  height: calc(100% - 60px);
+  height: calc(100% - 56px);
   display: flex;
   gap: 0.3rem;
   flex-wrap: wrap;
