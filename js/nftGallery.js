@@ -1,12 +1,16 @@
 import { ABI } from "./abi.js";
 const NFTCONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
+const closeGalleryButton = document.querySelector(".clo-gallery");
+const nftGalleryModal = document.querySelector(".nftgallery-modal");
+const nftGallery = document.querySelector(".nftgallery-inner");
+const nftOwnerInner = document.querySelector(".nftowner-inner");
+const closeOwnerModal = document.querySelector(".clo-innernft");
 
 let nftContractInstance;
 let userTokenIDs = [];
-let userWalletIDs = [];
+let currentlyMinted = 0;
 
 async function getTokenIDs() {
-
     try {
         window.web3 = new Web3(window.ethereum);
         nftContractInstance = new web3.eth.Contract(ABI, NFTCONTRACT);
@@ -15,16 +19,11 @@ async function getTokenIDs() {
             .CURRENT_SUPPLY()
             .call();
         const currentSupply = parseInt(currentSup);
+        currentlyMinted = currentSupply;
 
         for (let i = 1; i < currentSupply + 1; i++) {
             userTokenIDs.push(i);
         }
-
-        // for (let i = 1; i < currentSupply + 1; i++) {
-        //     let userWallet = await nftContractInstance.methods.ownerOf(i).call();
-        //     console.log(userWallet)
-        //     userWalletIDs.push(userWallet);
-        // }
 
     } catch (err) {
         console.error(err);
@@ -33,7 +32,6 @@ async function getTokenIDs() {
 
 const renderImages = async () => {
     await getTokenIDs();
-    const nftGallery = document.querySelector(".nftgallery-inner");
 
     nftGallery.innerHTML = '';
     userTokenIDs.map((token) => {
@@ -53,24 +51,39 @@ const renderImages = async () => {
         div.appendChild(img);
         div.appendChild(span);
 
-        // Add event listener to the div element
         div.addEventListener('click', () => {
-            // Perform the desired action or handle the event here
-            console.log(`Clicked NFT: ${token}`);
+            renderOwnedNFT(Number(token));
+
         });
 
         nftGallery.appendChild(div);
     });
 };
-
-
-
-
-const galleryNFTItem = document.querySelector(".gallery-nft");
-
-// galleryNFTItem.addEventListener("click", () => {
-//     alert('hi')
-// });
-
-
 renderImages();
+
+
+
+const renderOwnedNFT = async (id) => {
+    const nftImage = document.querySelector(".owner-nft-img");
+    nftImage.src = `https://ipfs.io/ipfs/bafybeiakbvi37hhzvmrokwuy5kcdr6n36eerrtteeodj2xc74ymku7tgli/${id}.png`;
+
+    const nftId = document.querySelector(".owner-nft-id");
+    nftId.innerHTML = `#${id}`;
+
+    const nftWallet = document.querySelector(".owner-nft-wallet");
+    const owner = await nftContractInstance.methods.ownerOf(id).call();
+    nftWallet.innerHTML = `Owner: <a href="https://opensea.io/assets/ethereum/0xad2bf4b604054c60a1ad7574c0b731967d12000c/${id}" target="_blank">${owner.slice(0, 13)}</a>`;
+
+    nftOwnerInner.classList.remove("hidden");
+};
+
+closeOwnerModal.addEventListener("click", () => {
+    nftOwnerInner.classList.add("hidden");
+});
+
+
+
+//Close gallery
+closeGalleryButton.addEventListener("click", () => {
+    nftGalleryModal.classList.add("hidden");
+});

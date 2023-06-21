@@ -180,20 +180,6 @@
     </div>
 
     <div class="center-modals">
-      <!-- Galery Modal -->
-      <div class="gallery-modal hidden">
-        <div class="program-row">
-          <div class="left-block">
-            <img src="./img/Gallery.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">NFT Gallery</span>
-          </div>
-          <div class="trashcan-button">
-            <button class="close clo-gallery"></button>
-          </div>
-        </div>
-        <span class="whitelist-span">Coming soon...</span>
-      </div>
-
       <!-- Rarity Chart Modal -->
       <div class="rarity-modal hidden">
         <div class="program-row">
@@ -646,19 +632,24 @@
       </div>
 
       <!-- NFT Gallery -->
-      <div class="nftgallery-modal">
+      <div class="nftgallery-modal hidden">
         <div class="term-row program-row">
           <div class="left-block">
-            <img src="./img/Terminal.jpg" alt="NFT Gallery" class="mini-logo" />
+            <img src="./img/Gallery.png" alt="NFT Gallery" class="mini-logo" />
             <span class="program-row-text">Gallery</span>
           </div>
           <div class="trashcan-buttons">
-            <button class="minimize min-terminal"></button>
-            <button class="enlarge enl-terminal"></button>
-            <button class="close clo-terminal"></button>
+            <button class="close clo-gallery"></button>
           </div>
         </div>
-
+        <div class="nftowner-inner hidden">
+          <button class="close clo-innernft"></button>
+          <div class="nftown-inner">
+            <img src="./img/Benji.png" class="owner-nft-img" alt="Sicarius NFT">
+            <span class="owner-nft-id"></span>
+            <span class="owner-nft-wallet"></span>
+          </div>
+        </div>
         <div class="nftgallery-inner"></div>
 
       </div>

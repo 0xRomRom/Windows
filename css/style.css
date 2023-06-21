@@ -543,7 +543,7 @@ body {
 
 .nftgallery-modal {
   position: absolute;
-  width: 810px;
+  width: 790px;
   height: 500px;
   background-color: rgb(195, 199, 203);
   z-index: 70;
@@ -554,7 +554,7 @@ body {
 }
 
 .nftgallery-inner {
-  top: 1.55rem;
+  top: 1.3rem;
   position: relative;
   width: calc(100% - 2px);
   height: calc(100% - 60px);
@@ -562,7 +562,7 @@ body {
   gap: 0.3rem;
   flex-wrap: wrap;
   overflow-y: scroll;
-  margin: 0 1.85rem;
+  margin: 0 1.5rem;
 }
 
 .terminal-modal {
@@ -942,6 +942,19 @@ body {
 .close {
   position: relative;
   top: 1px;
+  width: 16px;
+  height: 16px;
+  background: url("../img/Close.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-clip: border-box;
+  cursor: pointer;
+}
+
+.clo-innernft {
+  position: absolute;
+  top: 43px;
+  right: 13rem;
   width: 16px;
   height: 16px;
   background: url("../img/Close.png");
@@ -2693,4 +2706,49 @@ canvas {
   z-index: 10;
   color: white;
   font-size: 18px;
+}
+
+.nftowner-inner {
+  position: absolute;
+  z-index: 10;
+  width: calc(100% - 2px);
+  height: calc(100% - 20px);
+  background-color: rgba(0, 0, 0, 0.666);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nftown-inner {
+  width: 400px;
+  height: 400px;
+  background-color: rgb(195, 199, 203);
+}
+
+.owner-nft-img {
+  position: relative;
+  margin: 4rem auto 0;
+  display: block;
+  width: 17rem;
+}
+
+.owner-nft-id {
+  position: absolute;
+  text-align: center;
+  font-family: Windows;
+  top: 3.5rem;
+  width: 25rem;
+  font-size: 20px;
+}
+
+.owner-nft-wallet {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-family: Windows;
+  margin-top: 0.5rem;
+}
+
+.clo-gallery {
+  margin-left: 35px;
 }

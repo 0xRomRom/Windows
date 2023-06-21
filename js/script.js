@@ -86,16 +86,11 @@ menuFAQ.addEventListener("click", () => {
 
 //Open gallery
 const menuGallery = document.querySelector(".menu-gallery");
-const closeGallery = document.querySelector(".clo-gallery");
-const galleryModal = document.querySelector(".gallery-modal");
-
-closeGallery.addEventListener("click", () => {
-  galleryModal.classList.add("hidden");
-});
+const nftGalleryModal = document.querySelector(".nftgallery-modal");
 
 menuGallery.addEventListener("click", () => {
   startMenuList.classList.toggle("hidden");
-  galleryModal.classList.remove("hidden");
+  nftGalleryModal.classList.remove("hidden");
   startButton.classList.toggle("clicked");
   programsDropMenu.classList.add("hidden");
 });
