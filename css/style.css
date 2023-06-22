@@ -954,7 +954,7 @@ body {
 .clo-innernft {
   position: absolute;
   top: 43px;
-  right: 13rem;
+  right: 12.4rem;
   width: 16px;
   height: 16px;
   background: url("../img/Close.png");
@@ -2478,6 +2478,10 @@ canvas {
 
 .greeny {
   color: rgb(17, 165, 17);
+}
+
+.greenn {
+  color: green;
 }
 
 .lottery-midbox {

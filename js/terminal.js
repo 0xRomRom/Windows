@@ -2,7 +2,7 @@ const terminalInput = document.querySelector(".terminal-input");
 const terminalOutput = document.querySelector(".terminal-output");
 const terminalBody = document.querySelector(".terminal-body");
 
-import {ABI} from "./abi.js";
+import { ABI } from "./abi.js";
 const CONTRACT = "0xaD2bf4b604054C60a1aD7574C0B731967D12000C";
 let currentMintCount = 0;
 
@@ -11,14 +11,14 @@ let contractInstance;
 const capFetch = async () => {
   if (window.ethereum) {
     try {
-    window.web3 = new Web3(window.ethereum);
-    contractInstance = new web3.eth.Contract(ABI, CONTRACT);
+      window.web3 = new Web3(window.ethereum);
+      contractInstance = new web3.eth.Contract(ABI, CONTRACT);
 
 
-    const currently = await contractInstance.methods
-    .CURRENT_SUPPLY()
-    .call();
-    let currentlyMinted = Number(currently);
+      const currently = await contractInstance.methods
+        .CURRENT_SUPPLY()
+        .call();
+      let currentlyMinted = Number(currently);
 
       currentMintCount = currentlyMinted;
     } catch (err) {
@@ -56,23 +56,23 @@ terminalInput.addEventListener("keydown", function (e) {
       output.innerHTML =
         "<span class='red'>=================Commands=================</span>" +
         "<br>" +
-        "<span class='green'>cd</span> => change directory" +
+        "<span class='greenn'>cd</span> => change directory" +
         "<br>" +
-        "<span class='green'>ls</span> => current directory" +
+        "<span class='greenn'>ls</span> => current directory" +
         "<br>" +
-        "<span class='green'>clear</span> => clear terminal" +
+        "<span class='greenn'>clear</span> => clear terminal" +
         "<br>" +
-        "<span class='green'>mint_price</span> => returns mint price" +
+        "<span class='greenn'>mint_price</span> => returns mint price" +
         "<br>" +
-        "<span class='green'>mint_cap</span> => returns user mint cap" +
+        "<span class='greenn'>mint_cap</span> => returns user mint cap" +
         "<br>" +
-        "<span class='green'>cur_supp</span> => returns current minted supply" +
+        "<span class='greenn'>cur_supp</span> => returns current minted supply" +
         "<br>" +
-        "<span class='green'>lore</span> => returns sicarius lore" +
+        "<span class='greenn'>lore</span> => returns sicarius lore" +
         "<br>" +
-        "<span class='green'>live</span> => is minting live?" +
+        "<span class='greenn'>live</span> => is minting live?" +
         "<br>" +
-        "<span class='green'>roi</span> => return on investment since mint" +
+        "<span class='greenn'>roi</span> => return on investment since mint" +
         "<br>" +
         "<span class='red'>==========================================</span>";
       terminalOutput.insertAdjacentElement("beforeend", output2);
