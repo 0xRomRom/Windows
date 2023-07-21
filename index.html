@@ -1,389 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sicarius Innocens</title>
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
+    <link href="./css/style.css" rel="stylesheet" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
+      integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script type="module" src="./js/script.js"></script>
+    <script type="module" src="./js/dragIcons.js"></script>
+    <script type="module" src="./js/modalCtaButtons.js"></script>
+    <script type="module" src="./js/clock.js"></script>
+    <script type="module" src="./js/abi.js"></script>
+    <script type="module" src="./js/terminal.js"></script>
+    <script type="module" src="./js/stakingAbi.js"></script>
+    <script type="module" src="./js/shadowMinter.js"></script>
+    <script type="module" src="./js/lottery.js"></script>
+    <script type="module" src="./js/shadowStaker.js"></script>
+    <script type="module" src="./js/blocktime.js"></script>
+    <script type="module" src="./js/sicariusPvP.js"></script>
+    <script type="module" src="./js/nftGallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/keccak256@1.0.6/keccak256.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.2.3/ethers.umd.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/5f3c108898.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sicarius Innocens</title>
-  <link rel="icon" type="image/x-icon" href="/img/favicon.ico" />
-  <link href="./css/style.css" rel="stylesheet" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"
-    integrity="sha512-H6cPm97FAsgIKmlBA4s774vqoN24V5gSQL4yBTDOY2su2DeXZVhQPxFK4P6GPdnZqM9fg1G3cMv5wD7e6cFLZQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script type="module" src="./js/script.js"></script>
-  <script type="module" src="./js/dragIcons.js"></script>
-  <script type="module" src="./js/modalCtaButtons.js"></script>
-  <script type="module" src="./js/clock.js"></script>
-  <script type="module" src="./js/abi.js"></script>
-  <script type="module" src="./js/terminal.js"></script>
-  <script type="module" src="./js/stakingAbi.js"></script>
-  <script type="module" src="./js/shadowMinter.js"></script>
-  <script type="module" src="./js/lottery.js"></script>
-  <script type="module" src="./js/shadowStaker.js"></script>
-  <script type="module" src="./js/blocktime.js"></script>
-  <script type="module" src="./js/sicariusPvP.js"></script>
-  <script type="module" src="./js/nftGallery.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/keccak256@1.0.6/keccak256.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.2.3/ethers.umd.min.js"></script>
-  <script src="https://kit.fontawesome.com/5f3c108898.js" crossorigin="anonymous"></script>
-</head>
-
-<body>
-  <div class="app">
-    <div class="fallback2">NGMI</div>
-    <div class="fallback">VGA_ERROR: smol device not supported</div>
-    <!--Windows nav menu-->
-    <div class="menu-list hidden">
-      <img src="./img/windows95 bar.png" class="win95-long" />
-      <div class="start-nav-list">
-        <div class="nav-item d1">
-          <div class="arrow-box">
-            <i class="fa-solid fa-play"></i>
-          </div>
-          <img src="./img/Programs.png" alt="turn computer off" class="nav-icon ico-sml" />
-          <span class="nav-item-title">Programs</span>
-        </div>
-
-        <div class="nav-item d2">
-          <div class="arrow-box">
-            <i class="fa-solid fa-play"></i>
-          </div>
-          <img src="./img/Documents.png" alt="turn computer off" class="nav-icon" />
-          <span class="nav-item-title">Documents</span>
-        </div>
-
-        <div class="nav-item d3">
-          <div class="arrow-box">
-            <i class="fa-solid fa-play"></i>
-          </div>
-          <img src="./img/Mint Info.png" alt="turn computer off" class="nav-icon ico-sml" />
-          <span class="nav-item-title">Mint Info</span>
-        </div>
-
-        <div class="nav-item d4">
-          <div class="arrow-box">
-            <i class="fa-solid fa-play"></i>
-          </div>
-          <img src="./img/Socials.png" alt="turn computer off" class="nav-icon ico-sml" />
-          <span class="nav-item-title">Socials</span>
-        </div>
-
-        <a href="https://twitter.com/Sicarius_Quest" class="a-clean">
-          <div class="nav-item">
-            <img src="./img/Help Book.png" alt="turn computer off" class="nav-icon ico-sml" />
-            <span class="nav-item-title">Help</span>
-          </div>
-        </a>
-
-        <div class="nav-item run">
-          <img src="./img/Program Wait.png" alt="turn computer off" class="nav-icon ico-sml" />
-          <span class="nav-item-title">Run...</span>
-        </div>
-
-        <div class="border"></div>
-        <div class="nav-item shtdwn">
-          <img src="./img/Shut Down.png" alt="turn computer off" class="nav-icon" />
-          <span class="nav-item-title">Sh<u class="u">u</u>t Down...</span>
-        </div>
-      </div>
-
-      <div class="drop-1 hidden">
-        <div class="menu-gallery inner-program">
-          <div class="program-logo">
-            <img src="./img/Gallery.png" alt="NFT Gallery" class="program-img" />
-          </div>
-          <span class="program-title">NFT Gallery</span>
-          <div class="arrow-box2">
-            <i class="fa-solid fa-play"></i>
-          </div>
-        </div>
-
-        <div class="menu-rarity inner-program">
-          <div class="program-logo">
-            <img src="./img/Rarity.png" alt="Rarity chart" class="program-img" />
-          </div>
-          <span class="program-title">Rarity Chart</span>
-          <div class="arrow-box2">
-            <i class="fa-solid fa-play"></i>
-          </div>
-        </div>
-      </div>
-      <div class="drop-2 hidden">
-        <div class="menu-team inner-program">
-          <div class="program-logo">
-            <img src="./img/Team.png" alt="Team logo" class="program-img" />
-          </div>
-          <span class="program-title">Team info</span>
-          <div class="arrow-box2">
-            <i class="fa-solid fa-play"></i>
-          </div>
-        </div>
-
-        <div class="menu-contract inner-program">
-          <div class="program-logo">
-            <img src="./img/Diskette.png" alt="Smart Contract logo" class="program-img" />
-          </div>
-          <span class="program-title">Smart Contract</span>
-          <div class="arrow-box2">
-            <i class="fa-solid fa-play"></i>
-          </div>
-        </div>
-      </div>
-      <div class="drop-3 hidden">
-        <div class="menu-faq inner-program">
-          <div class="program-logo">
-            <img src="./img/Pickaxe.png" alt="Faq logo" class="program-img" />
-          </div>
-          <span class="program-title">Mint FAQ</span>
-          <div class="arrow-box2">
-            <i class="fa-solid fa-play"></i>
-          </div>
-        </div>
-
-        <div class="menu-whitelist inner-program">
-          <div class="program-logo">
-            <img src="./img/Info.png" alt="Info logo" class="program-img" />
-          </div>
-          <span class="program-title">How to whitelist</span>
-          <div class="arrow-box2">
-            <i class="fa-solid fa-play"></i>
-          </div>
-        </div>
-      </div>
-      <div class="drop-4 hidden">
-        <a href="https://discord.gg/9ryW2FkRpN" target="_blank" class="a-clean">
-          <div class="inner-program">
-            <div class="program-logo">
-              <img src="./img/Discord.png" alt="Discord logo" class="program-img" />
+  <body>
+    <div class="app">
+      <div class="fallback2">NGMI</div>
+      <div class="fallback">VGA_ERROR: smol device not supported</div>
+      <!--Windows nav menu-->
+      <div class="menu-list hidden">
+        <img src="./img/windows95 bar.png" class="win95-long" />
+        <div class="start-nav-list">
+          <div class="nav-item d1">
+            <div class="arrow-box">
+              <i class="fa-solid fa-play"></i>
             </div>
-            <span class="program-title">Discord</span>
+            <img
+              src="./img/Programs.png"
+              alt="turn computer off"
+              class="nav-icon ico-sml"
+            />
+            <span class="nav-item-title">Programs</span>
+          </div>
+
+          <div class="nav-item d2">
+            <div class="arrow-box">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            <img
+              src="./img/Documents.png"
+              alt="turn computer off"
+              class="nav-icon"
+            />
+            <span class="nav-item-title">Documents</span>
+          </div>
+
+          <div class="nav-item d3">
+            <div class="arrow-box">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            <img
+              src="./img/Mint Info.png"
+              alt="turn computer off"
+              class="nav-icon ico-sml"
+            />
+            <span class="nav-item-title">Mint Info</span>
+          </div>
+
+          <div class="nav-item d4">
+            <div class="arrow-box">
+              <i class="fa-solid fa-play"></i>
+            </div>
+            <img
+              src="./img/Socials.png"
+              alt="turn computer off"
+              class="nav-icon ico-sml"
+            />
+            <span class="nav-item-title">Socials</span>
+          </div>
+
+          <a href="https://twitter.com/Sicarius_Quest" class="a-clean">
+            <div class="nav-item">
+              <img
+                src="./img/Help Book.png"
+                alt="turn computer off"
+                class="nav-icon ico-sml"
+              />
+              <span class="nav-item-title">Help</span>
+            </div>
+          </a>
+
+          <div class="nav-item run">
+            <img
+              src="./img/Program Wait.png"
+              alt="turn computer off"
+              class="nav-icon ico-sml"
+            />
+            <span class="nav-item-title">Run...</span>
+          </div>
+
+          <div class="border"></div>
+          <div class="nav-item shtdwn">
+            <img
+              src="./img/Shut Down.png"
+              alt="turn computer off"
+              class="nav-icon"
+            />
+            <span class="nav-item-title">Sh<u class="u">u</u>t Down...</span>
+          </div>
+        </div>
+
+        <div class="drop-1 hidden">
+          <div class="menu-gallery inner-program">
+            <div class="program-logo">
+              <img
+                src="./img/Gallery.png"
+                alt="NFT Gallery"
+                class="program-img"
+              />
+            </div>
+            <span class="program-title">NFT Gallery</span>
             <div class="arrow-box2">
               <i class="fa-solid fa-play"></i>
             </div>
           </div>
-        </a>
 
-        <a href="https://twitter.com/Sicarius_Quest" target="_blank" class="a-clean">
-          <div class="inner-program">
+          <div class="menu-rarity inner-program">
             <div class="program-logo">
-              <img src="./img/Twitter.webp" alt="Discord logo" class="program-img" />
+              <img
+                src="./img/Rarity.png"
+                alt="Rarity chart"
+                class="program-img"
+              />
             </div>
-            <span class="program-title">Twitter</span>
+            <span class="program-title">Rarity Chart</span>
             <div class="arrow-box2">
               <i class="fa-solid fa-play"></i>
             </div>
           </div>
-        </a>
-      </div>
-    </div>
-
-    <div class="center-modals">
-      <!-- Rarity Chart Modal -->
-      <div class="rarity-modal hidden">
-        <div class="program-row">
-          <div class="left-block">
-            <img src="./img/Rarity.png" alt="Rarity chart" class="mini-logo" />
-            <span class="program-row-text">Rarity Chart</span>
+        </div>
+        <div class="drop-2 hidden">
+          <div class="menu-team inner-program">
+            <div class="program-logo">
+              <img src="./img/Team.png" alt="Team logo" class="program-img" />
+            </div>
+            <span class="program-title">Team info</span>
+            <div class="arrow-box2">
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
-          <div class="trashcan-button">
-            <button class="close clo-rarity"></button>
+
+          <div class="menu-contract inner-program">
+            <div class="program-logo">
+              <img
+                src="./img/Diskette.png"
+                alt="Smart Contract logo"
+                class="program-img"
+              />
+            </div>
+            <span class="program-title">Smart Contract</span>
+            <div class="arrow-box2">
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
         </div>
-        <span class="rarity-text">Coming Soon...</span>
-      </div>
-
-      <!-- FAQ Modal -->
-      <div class="faq-modal hidden">
-        <div class="sticky program-row">
-          <div class="left-block">
-            <img src="./img/Pickaxe.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">Mint FAQ</span>
+        <div class="drop-3 hidden">
+          <div class="menu-faq inner-program">
+            <div class="program-logo">
+              <img src="./img/Pickaxe.png" alt="Faq logo" class="program-img" />
+            </div>
+            <span class="program-title">Mint FAQ</span>
+            <div class="arrow-box2">
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
-          <div class="trashcan-button">
-            <button class="close clo-faq"></button>
+
+          <div class="menu-whitelist inner-program">
+            <div class="program-logo">
+              <img src="./img/Info.png" alt="Info logo" class="program-img" />
+            </div>
+            <span class="program-title">How to whitelist</span>
+            <div class="arrow-box2">
+              <i class="fa-solid fa-play"></i>
+            </div>
           </div>
         </div>
-        <div class="faq-overflow">
-          <div class="faq-textbox">
-            <span class="question">Total supply?</span>
-            <span class="answer">2222</span>
-            <hr / class="faq-hr">
-            <span class="question">Royalties?</span>
-            <span class="answer">4.44%</span>
-            <hr / class="faq-hr">
-            <span class="question">Mint date?</span>
-            <span class="answer">May 19 ~ 17:00 UTC</span>
-            <hr / class="faq-hr">
-            <span class="question">Mint price?</span>
-            <span class="answer">0.01337 ETH</span>
-            <hr / class="faq-hr">
-            <span class="question">Mint cap per wallet?</span>
-            <span class="answer">Max 2/wallet</span>
-            <hr / class="faq-hr">
-            <span class="question">Team allocation?</span>
-            <span class="answer">0</span>
-            <hr / class="faq-hr">
-            <span class="question">What network?</span>
-            <span class="answer">Ethereum</span>
-            <hr / class="faq-hr">
-            <span class="question">What utility sir?</span>
-            <span class="answer">No false promises here</span>
-            <hr / class="faq-hr">
-            <span class="question">Aftermarkets?</span>
-            <span class="answer">OpenSea & more</span>
-            <hr / class="faq-hr">
-            <span class="question">What if I mint more than 2?</span>
-            <span class="answer">mi familia</span>
-            <hr / class="faq-hr">
-            <span class="question">Why is the art so pixelated?</span>
-            <span class="answer">We work with COBOL on an 80's mainframe</span>
-            <hr / class="faq-hr">
-            <span class="question">Burn/Stake plans?</span>
-            <span class="answer">The future will tell</span>
-            <hr / class="faq-hr">
-            <span class="question">What is Sicarius?</span>
-            <span class="answer">A gang of 'innocent' Latin assassins</span>
-            <hr / class="faq-hr">
-            <span class="question">Will my frens think my new pfp is based?</span>
-            <span class="answer">fuck yes</span>
-            <hr / class="faq-hr">
-            <span class="question">Am I gonna make it?</span>
-            <span class="answer">yes</span>
-            <hr / class="faq-hr">
-          </div>
+        <div class="drop-4 hidden">
+          <a
+            href="https://discord.gg/9ryW2FkRpN"
+            target="_blank"
+            class="a-clean"
+          >
+            <div class="inner-program">
+              <div class="program-logo">
+                <img
+                  src="./img/Discord.png"
+                  alt="Discord logo"
+                  class="program-img"
+                />
+              </div>
+              <span class="program-title">Discord</span>
+              <div class="arrow-box2">
+                <i class="fa-solid fa-play"></i>
+              </div>
+            </div>
+          </a>
+
+          <a
+            href="https://twitter.com/Sicarius_Quest"
+            target="_blank"
+            class="a-clean"
+          >
+            <div class="inner-program">
+              <div class="program-logo">
+                <img
+                  src="./img/Twitter.webp"
+                  alt="Discord logo"
+                  class="program-img"
+                />
+              </div>
+              <span class="program-title">Twitter</span>
+              <div class="arrow-box2">
+                <i class="fa-solid fa-play"></i>
+              </div>
+            </div>
+          </a>
         </div>
       </div>
 
-      <!-- Whitelist Modal -->
-      <div class="whitelist-modal hidden">
-        <div class="program-row">
-          <div class="left-block">
-            <img src="./img/Info.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">How To Whitelist</span>
-          </div>
-          <div class="trashcan-button">
-            <button class="close clo-whitelist"></button>
-          </div>
-        </div>
-        <span class="whitelist-span">We don't believe in whitelists,<br />
-          everyone gets a fair chance.</span>
-      </div>
-
-      <!-- Team Modal -->
-      <div class="team-modal hidden">
-        <div class="recycle-wrapper">
+      <div class="center-modals">
+        <!-- Rarity Chart Modal -->
+        <div class="rarity-modal hidden">
           <div class="program-row">
             <div class="left-block">
-              <img src="./img/Team.png" alt="recycle bin" class="mini-logo" />
-              <span class="program-row-text">Team</span>
+              <img
+                src="./img/Rarity.png"
+                alt="Rarity chart"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Rarity Chart</span>
             </div>
             <div class="trashcan-button">
-              <button class="close clo-team"></button>
+              <button class="close clo-rarity"></button>
             </div>
           </div>
-          <div class="team-cont">
-            <div class="team-member">
-              <img class="team-member-img" src="./img/Benji.png" alt="Benji Bytecode" />
-              <h2 class="team-title">Benji Bytecode</h2>
-            </div>
+          <span class="rarity-text">Coming Soon...</span>
+        </div>
 
-            <div class="team-member">
-              <img class="team-member-img" src="./img/Huey.jpeg" alt="Benji Bytecode" />
-              <h2 class="team-title">Cyberking</h2>
+        <!-- FAQ Modal -->
+        <div class="faq-modal hidden">
+          <div class="sticky program-row">
+            <div class="left-block">
+              <img
+                src="./img/Pickaxe.png"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Mint FAQ</span>
+            </div>
+            <div class="trashcan-button">
+              <button class="close clo-faq"></button>
+            </div>
+          </div>
+          <div class="faq-overflow">
+            <div class="faq-textbox">
+              <span class="question">Total supply?</span>
+              <span class="answer">2222</span>
+              <hr / class="faq-hr">
+              <span class="question">Royalties?</span>
+              <span class="answer">4.44%</span>
+              <hr / class="faq-hr">
+              <span class="question">Mint date?</span>
+              <span class="answer">May 19 ~ 17:00 UTC</span>
+              <hr / class="faq-hr">
+              <span class="question">Mint price?</span>
+              <span class="answer">0.01337 ETH</span>
+              <hr / class="faq-hr">
+              <span class="question">Mint cap per wallet?</span>
+              <span class="answer">Max 2/wallet</span>
+              <hr / class="faq-hr">
+              <span class="question">Team allocation?</span>
+              <span class="answer">0</span>
+              <hr / class="faq-hr">
+              <span class="question">What network?</span>
+              <span class="answer">Ethereum</span>
+              <hr / class="faq-hr">
+              <span class="question">What utility sir?</span>
+              <span class="answer">No false promises here</span>
+              <hr / class="faq-hr">
+              <span class="question">Aftermarkets?</span>
+              <span class="answer">OpenSea & more</span>
+              <hr / class="faq-hr">
+              <span class="question">What if I mint more than 2?</span>
+              <span class="answer">mi familia</span>
+              <hr / class="faq-hr">
+              <span class="question">Why is the art so pixelated?</span>
+              <span class="answer"
+                >We work with COBOL on an 80's mainframe</span
+              >
+              <hr / class="faq-hr">
+              <span class="question">Burn/Stake plans?</span>
+              <span class="answer">The future will tell</span>
+              <hr / class="faq-hr">
+              <span class="question">What is Sicarius?</span>
+              <span class="answer">A gang of 'innocent' Latin assassins</span>
+              <hr / class="faq-hr">
+              <span class="question"
+                >Will my frens think my new pfp is based?</span
+              >
+              <span class="answer">fuck yes</span>
+              <hr / class="faq-hr">
+              <span class="question">Am I gonna make it?</span>
+              <span class="answer">yes</span>
+              <hr / class="faq-hr">
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Smart Contract Modal -->
-      <div class="contract-modal hidden">
-        <div class="recycle-wrapper">
+        <!-- Whitelist Modal -->
+        <div class="whitelist-modal hidden">
           <div class="program-row">
             <div class="left-block">
-              <img src="./img/Diskette.png" alt="recycle bin" class="mini-logo" />
-              <span class="program-row-text">Smart Contract</span>
+              <img src="./img/Info.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">How To Whitelist</span>
             </div>
             <div class="trashcan-button">
-              <button class="close clo-contract"></button>
+              <button class="close clo-whitelist"></button>
             </div>
           </div>
-          <div class="smart-contract-code">
-            <p class="smart-code">
-              <span class="comment">// SPDX-License-Identifier: MIT</span><br />
-              <span class="import">pragma</span>
-              <span class="function">solidity</span> ^0.8.4; <br /><br />
-              <span class="import">import</span>
-              <span class="string">"./DefaultOperatorFilterer.sol"</span>;<br />
-              <span class="import">import</span>
-              <span
-                class="string">"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol"</span>;<br />
+          <span class="whitelist-span"
+            >We don't believe in whitelists,<br />
+            everyone gets a fair chance.</span
+          >
+        </div>
 
-              <span class="import">import</span><span
-                class="string">&emsp;"@openzeppelin/contracts/access/Ownable.sol"</span>;<br /><span
-                class="import">import</span><span
-                class="string">&emsp;"@openzeppelin/contracts/token/ERC721/ERC721.sol"</span>;<br /><br />
-              <span class="function">contract</span>
-              <span class="class">Sicarius</span>
-              <span class="function">is</span>
-              <span class="class">ERC721</span>,
-              <span class="class">Ownable</span>,
-              <span class="class">DefaultOperatorFilterer</span>
-              <span class="constants">{</span> <br />
-              &emsp;<span class="import">using</span>
-              <span class="class">Strings</span>
-              <span class="import">for</span>
-              <span class="class">uint256</span>;<br /><br />
-              &emsp;<span class="class">uint</span>
-              <span class="function">public</span> MINT_PRICE;<br />
-              &emsp;<span class="class">uint</span>
-              <span class="function">public</span> TOTAL_SUPPLY;<br />
-              &emsp;<span class="class">uint</span>
-              <span class="function">public</span> CURRENT_SUPPLY;<br />
-              &emsp;<span class="class">bool</span>
-              <span class="function">public</span> isSaleActive;<br /><br />
-              &emsp;<span class="function">mapping</span><span class="import">(</span>
-              <span class="class">address</span> =>
-              <span class="class">uint</span>
-              <span class="import">)</span>
-              <span class="function">private</span>
-              userMintedAmount;<br /><br />
-              &emsp;<span class="class">string</span>
-              <span class="function">public</span> baseUri;<br />
-              &emsp;<span class="class">string</span>
-              <span class="function">public</span> baseExtension =
-              <span class="string">".json"</span>;<br /><br />
-              &emsp;<span class="function">constructor</span>
-              <span class="import">()</span>
-              <span class="constants">ERC721</span><span class="import">( </span>"Sicarius", "SCRS"
-              <span class="import">)</span>
-              <span class="import">&emsp;{</span>
-              <br />
-              &emsp;&emsp;&emsp;&emsp;&emsp;MINT_PRICE =
-              <span class="lightgreen">13370000000000000</span>
-              <span class="function">wei</span>;
-              <span class="comment">//0.01337 ETH</span> <br />
-              &emsp;&emsp;&emsp;&emsp;&emsp;TOTAL_SUPPLY =
-              <span class="lightgreen">2222</span>;<br />&emsp;&emsp;&emsp;&emsp;&emsp;baseUri =
-              <span class="string">"ipfs://?/"</span>;
-              <br />
-              &emsp; <span class="import">}</span> <br /><br />&emsp;
-              <span class="function">function</span>
-              <span class="constants">mint </span><span class="import">(</span>
-              <span class="class">uint</span> _amount
-              <span class="import">)</span>
-              <span class="function">public payable</span>
-              <span class="import">{</span> <br />
-              &emsp;&emsp;&emsp;&emsp;
-              <span class="import">require</span>
-              <span class="function">(</span> isSaleActive,
-              <span class="string">"The sale is paused."</span>
-              <span class="function">)</span> ;<br />
-              &emsp;&emsp;&emsp;&emsp;
-              <span class="import">require</span>
-              <span class="function">(</span>&emsp;CURRENT_SUPPLY + _amount <= TOTAL_SUPPLY, <span class="string">"Mint
-                cap has been reached."</span>
+        <!-- Team Modal -->
+        <div class="team-modal hidden">
+          <div class="recycle-wrapper">
+            <div class="program-row">
+              <div class="left-block">
+                <img src="./img/Team.png" alt="recycle bin" class="mini-logo" />
+                <span class="program-row-text">Team</span>
+              </div>
+              <div class="trashcan-button">
+                <button class="close clo-team"></button>
+              </div>
+            </div>
+            <div class="team-cont">
+              <div class="team-member">
+                <img
+                  class="team-member-img"
+                  src="./img/Benji.png"
+                  alt="Benji Bytecode"
+                />
+                <h2 class="team-title">Benji Bytecode</h2>
+              </div>
+
+              <div class="team-member">
+                <img
+                  class="team-member-img"
+                  src="./img/Huey.jpeg"
+                  alt="Benji Bytecode"
+                />
+                <h2 class="team-title">Cyberking</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Smart Contract Modal -->
+        <div class="contract-modal hidden">
+          <div class="recycle-wrapper">
+            <div class="program-row">
+              <div class="left-block">
+                <img
+                  src="./img/Diskette.png"
+                  alt="recycle bin"
+                  class="mini-logo"
+                />
+                <span class="program-row-text">Smart Contract</span>
+              </div>
+              <div class="trashcan-button">
+                <button class="close clo-contract"></button>
+              </div>
+            </div>
+            <div class="smart-contract-code">
+              <p class="smart-code">
+                <span class="comment">// SPDX-License-Identifier: MIT</span
+                ><br />
+                <span class="import">pragma</span>
+                <span class="function">solidity</span> ^0.8.4; <br /><br />
+                <span class="import">import</span>
+                <span class="string">"./DefaultOperatorFilterer.sol"</span
+                >;<br />
+                <span class="import">import</span>
+                <span class="string"
+                  >"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/Strings.sol"</span
+                >;<br />
+
+                <span class="import">import</span
+                ><span class="string"
+                  >&emsp;"@openzeppelin/contracts/access/Ownable.sol"</span
+                >;<br /><span class="import">import</span
+                ><span class="string"
+                  >&emsp;"@openzeppelin/contracts/token/ERC721/ERC721.sol"</span
+                >;<br /><br />
+                <span class="function">contract</span>
+                <span class="class">Sicarius</span>
+                <span class="function">is</span>
+                <span class="class">ERC721</span>,
+                <span class="class">Ownable</span>,
+                <span class="class">DefaultOperatorFilterer</span>
+                <span class="constants">{</span> <br />
+                &emsp;<span class="import">using</span>
+                <span class="class">Strings</span>
+                <span class="import">for</span>
+                <span class="class">uint256</span>;<br /><br />
+                &emsp;<span class="class">uint</span>
+                <span class="function">public</span> MINT_PRICE;<br />
+                &emsp;<span class="class">uint</span>
+                <span class="function">public</span> TOTAL_SUPPLY;<br />
+                &emsp;<span class="class">uint</span>
+                <span class="function">public</span> CURRENT_SUPPLY;<br />
+                &emsp;<span class="class">bool</span>
+                <span class="function">public</span> isSaleActive;<br /><br />
+                &emsp;<span class="function">mapping</span
+                ><span class="import">(</span>
+                <span class="class">address</span> =>
+                <span class="class">uint</span>
+                <span class="import">)</span>
+                <span class="function">private</span>
+                userMintedAmount;<br /><br />
+                &emsp;<span class="class">string</span>
+                <span class="function">public</span> baseUri;<br />
+                &emsp;<span class="class">string</span>
+                <span class="function">public</span> baseExtension =
+                <span class="string">".json"</span>;<br /><br />
+                &emsp;<span class="function">constructor</span>
+                <span class="import">()</span>
+                <span class="constants">ERC721</span
+                ><span class="import">( </span>"Sicarius", "SCRS"
+                <span class="import">)</span>
+                <span class="import">&emsp;{</span>
+                <br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;MINT_PRICE =
+                <span class="lightgreen">13370000000000000</span>
+                <span class="function">wei</span>;
+                <span class="comment">//0.01337 ETH</span> <br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;TOTAL_SUPPLY =
+                <span class="lightgreen">2222</span
+                >;<br />&emsp;&emsp;&emsp;&emsp;&emsp;baseUri =
+                <span class="string">"ipfs://?/"</span>;
+                <br />
+                &emsp; <span class="import">}</span> <br /><br />&emsp;
+                <span class="function">function</span>
+                <span class="constants">mint </span
+                ><span class="import">(</span>
+                <span class="class">uint</span> _amount
+                <span class="import">)</span>
+                <span class="function">public payable</span>
+                <span class="import">{</span> <br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span> isSaleActive,
+                <span class="string">"The sale is paused."</span>
+                <span class="function">)</span> ;<br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span>&emsp;CURRENT_SUPPLY + _amount <=
+                TOTAL_SUPPLY,
+                <span class="string">"Mint cap has been reached."</span>
                 <span class="function">)</span>;<br />&emsp;&emsp;&emsp;&emsp;
                 <span class="import">require</span>
                 <span class="function">(</span>
@@ -393,602 +491,790 @@
                 &emsp;&emsp;&emsp;&emsp;
                 <span class="import">require</span>
                 <span class="function">(</span> userMintedAmount
-                <span class="constants">[</span><span class="function">msg.sender</span><span class="constants">]</span>
-                + _amount <= <span class="lightgreen">2</span> ,
-                  <span class="string">"User mint cap reached."</span>
-                  <span class="function">)</span>;<br />
-                  &emsp;&emsp;&emsp;&emsp;
-                  <span class="import">require</span>
-                  <span class="function">(</span> _amount >
-                  <span class="lightgreen">0</span> && _amount <= <span class="lightgreen">2</span> ,
-                    <span class="string">"Invalid amount."</span>
-                    <span class="function">)</span>;<br /><br />
-                    &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount<span class="function">[msg.sender]</span>
-                    += _amount;<br /><br />
-                    &emsp;&emsp;&emsp;&emsp;
-                    <span class="import">for</span>
-                    <span class="function">(</span>
-                    <span class="class">uint</span> i =
-                    <span class="lightgreen">0</span>; i < _amount; i++ <span class="function">) {</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                      <span class="constants">_safeMint(</span> msg.sender,
-                      CURRENT_SUPPLY + <span class="lightgreen">1</span>
-                      <span class="constants">)</span>;<br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span
-                        class="constants">tokenURI(</span>&emsp;&emsp;CURRENT_SUPPLY + <span class="lightgreen">1</span>
-                      <span class="constants">)</span>;<br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CURRENT_SUPPLY++;<br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;<span class="function">}</span><br />
-                      &emsp;&emsp; <span class="import">}</span> <br /><br />
-                      &emsp;&emsp;
-                      <span class="function">function</span>
-                      <span class="constants">userMintedCount</span>
-                      <span class="import">(</span><span class="class">&emsp;address</span> _address
-                      <span class="import">)</span>
-                      <span class="function">public view</span>
-                      <span class="import"></span>
-                      <span class="import">returns</span>
-                      <span class="import">(</span> <span class="class">uint</span>
-                      <span class="import">) {</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;
-                      <span class="import">return</span>
-                      userMintedAmount<span class="function">[</span>_address<span class="function">]</span>;<br />
-                      &emsp;&emsp; <span class="import">}</span><br /><br />
-                      &emsp;&emsp;
-                      <span class="function">function</span>
-                      <span class="constants">flipSaleState</span><span class="import">()</span>
-                      <span class="function">external</span>
-                      <span class="constants">onlyOwner</span>
-                      <span class="import">{</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;isSaleActive = !isSaleActive;<br />
-                      &emsp;&emsp;&emsp;<span class="import">}</span> <br /><br />
-                      &emsp;&emsp;<span class="function">function</span>
-                      <span class="constants">setBaseUri</span>
-                      <span class="import">( </span><span class="class">string</span>
-                      <span class="function">memory</span> _baseUri
-                      <span class="import">)</span>
-                      <span class="function">external</span>
-                      <span class="constants">onlyOwner</span>
-                      <span class="import">{</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;baseUri = _baseUri;<br />
-                      &emsp;&emsp;<span class="import">}</span><br /><br />
-                      &emsp;&emsp;<span class="function">function </span><span class="constants">withdrawAll</span><span
-                        class="import">()</span><span class="function"> external</span>
-                      <span class="constants">onlyOwner</span>
-                      <span class="function">payable</span>
-                      <span class="import">{</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;<span class="function">payable(msg.sender)</span><span
-                        class="constants">.transfer</span><span class="function">(</span><span
-                        class="class">address</span><span class="constants">(</span><span
-                        class="function">this</span><span class="constants">)</span>.balance<span
-                        class="function">)</span>;<br />
-                      &emsp;&emsp;<span class="import">}</span><br /><br />
-                      &emsp;&emsp;<span class="function">function</span>
-                      <span class="constants">tokenURI </span><span class="import">( </span><span
-                        class="class">uint256</span> tokenId
-                      <span class="import"> )</span>
-                      <span class="function">public view virtual override</span>
-                      <span class="import">returns (</span>
-                      <span class="class">string</span><span class="function"> memory</span>
-                      <span class="import">) {</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">require</span><span class="function">(
-                      </span><span class="constants">_exists(</span> tokenId<span class="constants">
-                        )</span>,
-                      <span class="string">"ERC721Metadata: URI query for nonexistent token"</span>
-                      <span class="function">)</span>;<br /><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;<span class="class">string</span>
-                      <span class="function">memory</span> currentBaseURI =
-                      <span class="constants">_baseURI()</span>;<br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">return</span>
-                      <span class="class">bytes</span><span class="function">(</span>currentBaseURI<span
-                        class="function">)</span>.length > <span class="lightgreen">0</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;?
-                      <span class="class">string</span><span class="function">( abi</span>.<span
-                        class="span constants">encodePacked( </span>currentBaseURI, tokenId.<span
-                        class="span constants">toString</span><span class="import">()</span>, baseExtension<span
-                        class="constants">
-                        )</span><span class="function">)</span>
-                      <br />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:
-                      <span class="string">""</span>;<br />
-                      &emsp;&emsp;<span class="import">}</span><br /><br />
-                      &emsp;&emsp;<span class="function">function</span><span class="constants"> _baseURI</span><span
-                        class="import">()</span>
-                      <span class="function">internal view virtual override</span>
-                      <span class="import">returns ( </span><span class="class">string</span>
-                      <span class="function">memory</span><span class="import"> ) {</span><br />
-                      &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">return</span>
-                      baseUri;<br />
-                      &emsp;&emsp;<span class="import">}</span> <br /><br />
-                      <span class="constants">&emsp;&emsp;receive</span><span class="import">() </span><span
-                        class="function">external payable</span>
-                      <span class="import">{}</span><br /><span class="constants">}</span><br />
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Recycle Bin Modal -->
-      <div class="recycle-modal hidden">
-        <div class="program-row">
-          <div class="left-block">
-            <img src="./img/Recycle Bin.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">Recycle Bin</span>
-          </div>
-          <div class="trashcan-buttons">
-            <button class="minimize min-trash"></button>
-            <button class="enlarge enl-trash"></button>
-            <button class="close clo-trash"></button>
-          </div>
-        </div>
-        <div class="settings-row">
-          <span class="setrow set-1"><u>F</u>ile</span>
-          <span class="setrow set-2"><u>E</u>dit</span>
-          <span class="setrow set-3"><u>V</u>iew</span>
-          <span class="setrow set-4"><u>H</u>elp</span>
-        </div>
-        <div class="recycle-inner">
-          <div class="recycle-meta-info">
-            <div class="name-block">
-              <span class="meta-text">Name</span>
+                <span class="constants">[</span
+                ><span class="function">msg.sender</span
+                ><span class="constants">]</span> + _amount <=
+                <span class="lightgreen">2</span> ,
+                <span class="string">"User mint cap reached."</span>
+                <span class="function">)</span>;<br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">require</span>
+                <span class="function">(</span> _amount >
+                <span class="lightgreen">0</span> && _amount <=
+                <span class="lightgreen">2</span> ,
+                <span class="string">"Invalid amount."</span>
+                <span class="function">)</span>;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;userMintedAmount<span
+                  class="function"
+                  >[msg.sender]</span
+                >
+                += _amount;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;
+                <span class="import">for</span>
+                <span class="function">(</span>
+                <span class="class">uint</span> i =
+                <span class="lightgreen">0</span>; i < _amount; i++
+                <span class="function">) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                <span class="constants">_safeMint(</span> msg.sender,
+                CURRENT_SUPPLY + <span class="lightgreen">1</span>
+                <span class="constants">)</span>;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<span
+                  class="constants"
+                  >tokenURI(</span
+                >&emsp;&emsp;CURRENT_SUPPLY + <span class="lightgreen">1</span>
+                <span class="constants">)</span>;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;CURRENT_SUPPLY++;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="function">}</span
+                ><br />
+                &emsp;&emsp; <span class="import">}</span> <br /><br />
+                &emsp;&emsp;
+                <span class="function">function</span>
+                <span class="constants">userMintedCount</span>
+                <span class="import">(</span
+                ><span class="class">&emsp;address</span> _address
+                <span class="import">)</span>
+                <span class="function">public view</span>
+                <span class="import"></span>
+                <span class="import">returns</span>
+                <span class="import">(</span> <span class="class">uint</span>
+                <span class="import">) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;
+                <span class="import">return</span>
+                userMintedAmount<span class="function">[</span>_address<span
+                  class="function"
+                  >]</span
+                >;<br />
+                &emsp;&emsp; <span class="import">}</span><br /><br />
+                &emsp;&emsp;
+                <span class="function">function</span>
+                <span class="constants">flipSaleState</span
+                ><span class="import">()</span>
+                <span class="function">external</span>
+                <span class="constants">onlyOwner</span>
+                <span class="import">{</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;isSaleActive = !isSaleActive;<br />
+                &emsp;&emsp;&emsp;<span class="import">}</span> <br /><br />
+                &emsp;&emsp;<span class="function">function</span>
+                <span class="constants">setBaseUri</span>
+                <span class="import">( </span><span class="class">string</span>
+                <span class="function">memory</span> _baseUri
+                <span class="import">)</span>
+                <span class="function">external</span>
+                <span class="constants">onlyOwner</span>
+                <span class="import">{</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;baseUri = _baseUri;<br />
+                &emsp;&emsp;<span class="import">}</span><br /><br />
+                &emsp;&emsp;<span class="function">function </span
+                ><span class="constants">withdrawAll</span
+                ><span class="import">()</span
+                ><span class="function"> external</span>
+                <span class="constants">onlyOwner</span>
+                <span class="function">payable</span>
+                <span class="import">{</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="function"
+                  >payable(msg.sender)</span
+                ><span class="constants">.transfer</span
+                ><span class="function">(</span
+                ><span class="class">address</span
+                ><span class="constants">(</span
+                ><span class="function">this</span
+                ><span class="constants">)</span>.balance<span class="function"
+                  >)</span
+                >;<br />
+                &emsp;&emsp;<span class="import">}</span><br /><br />
+                &emsp;&emsp;<span class="function">function</span>
+                <span class="constants">tokenURI </span
+                ><span class="import">( </span
+                ><span class="class">uint256</span> tokenId
+                <span class="import"> )</span>
+                <span class="function">public view virtual override</span>
+                <span class="import">returns (</span>
+                <span class="class">string</span
+                ><span class="function"> memory</span>
+                <span class="import">) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">require</span
+                ><span class="function">( </span
+                ><span class="constants">_exists(</span> tokenId<span
+                  class="constants"
+                >
+                  )</span
+                >,
+                <span class="string"
+                  >"ERC721Metadata: URI query for nonexistent token"</span
+                >
+                <span class="function">)</span>;<br /><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="class">string</span>
+                <span class="function">memory</span> currentBaseURI =
+                <span class="constants">_baseURI()</span>;<br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">return</span>
+                <span class="class">bytes</span
+                ><span class="function">(</span>currentBaseURI<span
+                  class="function"
+                  >)</span
+                >.length > <span class="lightgreen">0</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;?
+                <span class="class">string</span
+                ><span class="function">( abi</span>.<span
+                  class="span constants"
+                  >encodePacked( </span
+                >currentBaseURI, tokenId.<span class="span constants"
+                  >toString</span
+                ><span class="import">()</span>, baseExtension<span
+                  class="constants"
+                >
+                  )</span
+                ><span class="function">)</span>
+                <br />&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;:
+                <span class="string">""</span>;<br />
+                &emsp;&emsp;<span class="import">}</span><br /><br />
+                &emsp;&emsp;<span class="function">function</span
+                ><span class="constants"> _baseURI</span
+                ><span class="import">()</span>
+                <span class="function">internal view virtual override</span>
+                <span class="import">returns ( </span
+                ><span class="class">string</span>
+                <span class="function">memory</span
+                ><span class="import"> ) {</span><br />
+                &emsp;&emsp;&emsp;&emsp;&emsp;<span class="import">return</span>
+                baseUri;<br />
+                &emsp;&emsp;<span class="import">}</span> <br /><br />
+                <span class="constants">&emsp;&emsp;receive</span
+                ><span class="import">() </span
+                ><span class="function">external payable</span>
+                <span class="import">{}</span><br /><span class="constants"
+                  >}</span
+                ><br />
+              </p>
             </div>
-            <div class="location-block">
-              <span class="meta-text">Type</span>
+          </div>
+        </div>
+
+        <!-- Recycle Bin Modal -->
+        <div class="recycle-modal hidden">
+          <div class="program-row">
+            <div class="left-block">
+              <img
+                src="./img/Recycle Bin.png"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Recycle Bin</span>
             </div>
-            <div class="location-block">
-              <span class="meta-text">Size</span>
+            <div class="trashcan-buttons">
+              <button class="minimize min-trash"></button>
+              <button class="enlarge enl-trash"></button>
+              <button class="close clo-trash"></button>
             </div>
           </div>
-          <span class="bin-item">SBF_Carol_Tape.mp4</span>
-          <span class="bin-item2">.mp4</span>
-          <span class="bin-item3">42.690 GB</span>
-        </div>
-        <div class="recycle-info-row">
-          <div class="rec-left">
-            <span class="objects-info">1 object(s)</span>
+          <div class="settings-row">
+            <span class="setrow set-1"><u>F</u>ile</span>
+            <span class="setrow set-2"><u>E</u>dit</span>
+            <span class="setrow set-3"><u>V</u>iew</span>
+            <span class="setrow set-4"><u>H</u>elp</span>
           </div>
-          <div class="rec-right">
-            <span class="bytes-info">42 690 000 000 bytes</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Shadow Minter Modal-->
-      <div class="shadow-minter-modal hidden">
-        <div class="program-row sticky">
-          <div class="left-block">
-            <img src="./img/Shadow Minter.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">Shadow Minter v0.32</span>
-          </div>
-          <div class="trashcan-buttons">
-            <button class="minimize min-shadow"></button>
-            <button class="enlarge enl-shadow"></button>
-            <button class="close clo-shadow"></button>
-          </div>
-        </div>
-
-        <div class="modals-wrapper">
-          <div class="minter-inner-1">
-            <button class="connect-metamask">Connect wallet</button>
-          </div>
-
-          <div class="minter-inner-2 hidden">
-            <div class="border-wrap">
-              <div class="minter-user-info">
-                <span class="minter-info-box"><u>Minter Info</u></span>
-                <div class="minter-box-left">
-                  <span class="connected-wallet">Minter ID: Unknown</span>
-                  <span class="block-timestamp">Block Timestamp: 1685531088</span>
-                  <span class="bytes32-text">Bytes32: </span>
-                </div>
-                <div class="minter-box-right">
-                  <span class="eligible-text">Eligible: True </span>
-                  <span class="gmi-text">GMI: True </span>
-                  <span class="early-text">Early: True </span>
-                </div>
+          <div class="recycle-inner">
+            <div class="recycle-meta-info">
+              <div class="name-block">
+                <span class="meta-text">Name</span>
+              </div>
+              <div class="location-block">
+                <span class="meta-text">Type</span>
+              </div>
+              <div class="location-block">
+                <span class="meta-text">Size</span>
               </div>
             </div>
+            <span class="bin-item">SBF_Carol_Tape.mp4</span>
+            <span class="bin-item2">.mp4</span>
+            <span class="bin-item3">42.690 GB</span>
+          </div>
+          <div class="recycle-info-row">
+            <div class="rec-left">
+              <span class="objects-info">1 object(s)</span>
+            </div>
+            <div class="rec-right">
+              <span class="bytes-info">42 690 000 000 bytes</span>
+            </div>
+          </div>
+        </div>
 
-            <div class="border-wrap2">
-              <div class="minter-action-box">
-                <span class="minter-info-box"><u>Execution</u></span>
-                <img src="./img/art-gif.gif" alt="Pixel art gif image" class="mint-gif" />
-                <div class="mint-config-box">
-                  <div class="row">
-                    <span class="nft-mint-price">Mint Price: 0.01337ETH</span>
-                    <hr class="total-hr" />
+        <!-- Shadow Minter Modal-->
+        <div class="shadow-minter-modal hidden">
+          <div class="program-row sticky">
+            <div class="left-block">
+              <img
+                src="./img/Shadow Minter.png"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Shadow Minter v0.32</span>
+            </div>
+            <div class="trashcan-buttons">
+              <button class="minimize min-shadow"></button>
+              <button class="enlarge enl-shadow"></button>
+              <button class="close clo-shadow"></button>
+            </div>
+          </div>
+
+          <div class="modals-wrapper">
+            <div class="minter-inner-1">
+              <button class="connect-metamask">Connect wallet</button>
+            </div>
+
+            <div class="minter-inner-2 hidden">
+              <div class="border-wrap">
+                <div class="minter-user-info">
+                  <span class="minter-info-box"><u>Minter Info</u></span>
+                  <div class="minter-box-left">
+                    <span class="connected-wallet">Minter ID: Unknown</span>
+                    <span class="block-timestamp"
+                      >Block Timestamp: 1685531088</span
+                    >
+                    <span class="bytes32-text">Bytes32: </span>
                   </div>
-                  <div class="mint-btn-row">
-                    <button class="btn-stl min" disabled>-</button>
-                    <span class="mint-counter">Mint: 1</span>
-                    <button class="btn-stl plus">+</button>
-                  </div>
-                  <div class="row">
-                    <hr class="total-hr" />
-                    <span class="total-mint-price"></span>
-                  </div>
-                  <div class="center-btn">
-                    <button class="mint-button win-stl">Mint</button>
-                  </div>
-                </div>
-                <div class="cur-minted-box">
-                  <span>Currently Minted:</span>
-                  <span class="currently-minted"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="minter-inner-3 hidden">
-            <span class="success-mint">Mint successful, please stand by
-            </span>
-          </div>
-
-          <div class="progress-wrap">
-            <div class="status-bar"></div>
-            <span class="status-text">Program: Downloading</span>
-            <span class="status-text2 hidden">Program: Downloading</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- NFT Gallery -->
-      <div class="nftgallery-modal hidden">
-        <div class="term-row program-row">
-          <div class="left-block">
-            <img src="./img/Gallery.png" alt="NFT Gallery" class="mini-logo" />
-            <span class="program-row-text">NFT Gallery</span>
-          </div>
-          <div class="trashcan-buttons">
-            <button class="close clo-gallery"></button>
-          </div>
-        </div>
-        <div class="nftowner-inner hidden">
-          <button class="close clo-innernft"></button>
-          <div class="nftown-inner">
-            <img src="./img/Benji.png" class="owner-nft-img" alt="Sicarius NFT">
-            <span class="owner-nft-id"></span>
-            <span class="owner-nft-wallet"></span>
-          </div>
-        </div>
-        <div class="nftgallery-inner"></div>
-
-      </div>
-
-      <!-- Terminal Modal -->
-      <div class="terminal-modal hidden">
-        <div class="term-row program-row">
-          <div class="left-block">
-            <img src="./img/Terminal.jpg" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">Terminal</span>
-          </div>
-          <div class="trashcan-buttons">
-            <button class="minimize min-terminal"></button>
-            <button class="enlarge enl-terminal"></button>
-            <button class="close clo-terminal"></button>
-          </div>
-        </div>
-
-        <div class="terminal">
-          <div class="terminal-body">
-            <div class="terminal-prompt">
-              <div class="terminal-flex">
-                <span class="terminal-prompt-user">0x398fa</span>
-                <span class="terminal-prompt-path">~ $</span>
-                <input type="text" class="terminal-input" />
-              </div>
-              <div class="redirect-socials hidden">
-                <span>Speading love...</span>
-                <span class="spinner"></span>
-              </div>
-              <div class="terminal-output"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Lottery modal -->
-      <div class="lottery-modal hidden">
-        <div class="lottery-row program-row">
-          <div class="left-block">
-            <img src="./img/Lottery.png" alt="Sicarius Lottery" class="mini-logo" />
-            <span class="program-row-text">Sicarius Lottery</span>
-          </div>
-          <div class="trashcan-buttons">
-            <button class="minimize min-pad min-lottery"></button>
-            <button class="close clo-lottery"></button>
-          </div>
-        </div>
-
-        <div class="lottery-unlocks"></div>
-
-        <div class="lottery-metamask-box">
-          <button class="lott-metamask-connect">Connect Metamask</button>
-        </div>
-
-        <div class="lottery-inner hidden">
-          <div class="lottery-loading hidden"></div>
-          <div class="lottery-scrollbox">
-            <div class="animated-bar">
-              <marquee class="marquee" behavior="scroll" direction="left">
-                <span class="purp">$$$ </span>Sicarius Lottery <span class="purp">$$$</span> Weekly Stake: <span
-                  class="greeny">0</span> SCRS<span class="purp"> $$$</span> Entry is only 100K <span
-                  class="purp">$</span>SCRS<span class="purp"> $$$</span>
-              </marquee>
-            </div>
-          </div>
-          <div class="lottery-midbox">
-            <div class="lottery-player-stats">
-              <span class="lottery-hero">Player Stats</span>
-              <div class="lottery-slot lott-wallet">Wallet:<br> 0x1f65a...</div>
-              <div class="lottery-slot lott-tokencount">$SCRS Balance: <br>730,551</div>
-              <div class="lottery-slot lott-approved-count">$SCRS Approved: <br>400,000</div>
-              <div class="lottery-slot lott-player-entrycount"></div>
-              <div class="lottery-slot lott-probability">Probability:<br> 5%</div>
-            </div>
-            <div class="lottery-game-stats">
-              <span class="lottery-title">Sicarius Lottery</span>
-              <span class="lottery-copy lottery-winpot">Enter for a chance at:<br> 6,200,000 $SCRS</span>
-            </div>
-            <div class="lottery-stats-stats">
-              <span class="lottery-hero">Lottery Stats</span>
-              <div class="lottery-slot lott-total-players">Total Players:<br>20</div>
-              <div class="lottery-slot lott-total-entries">Total Entries:<br>100</div>
-              <div class="lottery-slot">Pot in USD:<br>N/A$</div>
-              <div class="lottery-slot">Entry price in USD:<br>N/A$</div>
-              <div class="lottery-slot">Draw:<br>Friday</div>
-            </div>
-          </div>
-          <div class="lottery-ctas">
-
-            <div class="ticketcount lot-box">
-              <span class="ticket-title">Ticketcount</span>
-              <div class="ticket-btns">
-                <button class="old-btns dec-ticket">-</button>
-                <span class="ticket-count">0</span>
-                <button class="old-btns inc-ticket">+</button>
-              </div>
-            </div>
-
-            <span>==></span>
-
-            <div class="approvecount lot-box">
-              <span class="ticket-title">Approve Tokens</span>
-              <button class="old-btnss approve-lottery">Approve</button>
-              <span class="approved-tokens">0K</span>
-            </div>
-
-            <span>==></span>
-
-            <div class="enter-lottery lot-box">
-              <span class="ticket-title">Enter Lottery</span>
-              <button class="old-btnss entr">Enter</button>
-            </div>
-
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Shadow Staker -->
-      <div class="staker-modal hidden">
-        <div class="program-row">
-          <div class="left-block">
-            <img src="./img/staker-icon.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">Shadow Staker</span>
-          </div>
-          <div class="trashcan-button">
-            <button class="close clo-staker"></button>
-          </div>
-        </div>
-        <div class="staker-unlocks"></div>
-        <div class="staker-loading hidden">Loading...</div>
-        <div class="staker-tabs">
-
-          <div class="tab1 connect-tab">
-            <button class="connect-meta-stake">Connect Metamask</button>
-          </div>
-
-          <div class="tab2 approve-tab hidden">
-            <div class="approve-top">
-              <span class="approve-txt">In order to stake your Sicarius NFT(s) you need approval from the Sicarius NFT
-                contract,<br> to transfer your NFT(s) on your behalf to the staking contract.</span>
-            </div>
-            <div class="approve-bot">
-              <button class="approval-btn">Approve Contract</button>
-            </div>
-          </div>
-
-          <div class="stake-interface tab3 hidden">
-            <div class="stake-top-wrapper">
-              <div class="wrap">
-                <div class="staker-info-top">
-                  <span class="box-title">Staker Info</span>
-                  <div class="staker-info-box">
-                    <span class="staker-wallet">Wallet: </span>
-                    <span class="staker-staked-count">Staked NFT Count: </span>
-                    <span class="staked-unstaked-count">Unstaked NFT Count: </span>
-                    <span class="staked-unclaimed-rewards">Unclaimed Rewards: </span>
-                    <span class="staker-total-accumulated">Total Accumulated: </span>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap">
-                <div class="staker-info-top">
-                  <span class="box-title">Vault Stats</span>
-                  <div class="staker-info-box">
-                    <span class="total-stakers">Total Stakers: 0</span>
-                    <span class="total-nfts-staked">Total NFTs Staked: 0 </span>
-                    <span class="total-vault-claimed">Total Accumulated Rewards:</span>
-                    <span class="vault-total-balance">Current Vault Balance:</span>
-                    <span class="staking-duration">Staking Duration: 0/100% </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="staker-info-bot">
-              <div class="bdr">
-                <div class="staker-bot-left">
-                  <span class="box-title stickyy">Wallet</span>
-                  <div class="wallet-nfts">
-
+                  <div class="minter-box-right">
+                    <span class="eligible-text">Eligible: True </span>
+                    <span class="gmi-text">GMI: True </span>
+                    <span class="early-text">Early: True </span>
                   </div>
                 </div>
               </div>
 
-              <div class="bdr">
-                <div class="staker-bot-right">
-                  <span class="box-title stickyy">Vault</span>
-                  <div class="vault-nfts"></div>
+              <div class="border-wrap2">
+                <div class="minter-action-box">
+                  <span class="minter-info-box"><u>Execution</u></span>
+                  <img
+                    src="./img/art-gif.gif"
+                    alt="Pixel art gif image"
+                    class="mint-gif"
+                  />
+                  <div class="mint-config-box">
+                    <div class="row">
+                      <span class="nft-mint-price">Mint Price: 0.01337ETH</span>
+                      <hr class="total-hr" />
+                    </div>
+                    <div class="mint-btn-row">
+                      <button class="btn-stl min" disabled>-</button>
+                      <span class="mint-counter">Mint: 1</span>
+                      <button class="btn-stl plus">+</button>
+                    </div>
+                    <div class="row">
+                      <hr class="total-hr" />
+                      <span class="total-mint-price"></span>
+                    </div>
+                    <div class="center-btn">
+                      <button class="mint-button win-stl">Mint</button>
+                    </div>
+                  </div>
+                  <div class="cur-minted-box">
+                    <span>Currently Minted:</span>
+                    <span class="currently-minted"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="minter-inner-3 hidden">
+              <span class="success-mint"
+                >Mint successful, please stand by
+              </span>
+            </div>
+
+            <div class="progress-wrap">
+              <div class="status-bar"></div>
+              <span class="status-text">Program: Downloading</span>
+              <span class="status-text2 hidden">Program: Downloading</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- NFT Gallery -->
+        <div class="nftgallery-modal hidden">
+          <div class="term-row program-row">
+            <div class="left-block">
+              <img
+                src="./img/Gallery.png"
+                alt="NFT Gallery"
+                class="mini-logo"
+              />
+              <span class="program-row-text">NFT Gallery</span>
+            </div>
+            <div class="trashcan-buttons">
+              <button class="close clo-gallery"></button>
+            </div>
+          </div>
+          <div class="nftowner-inner hidden">
+            <button class="close clo-innernft"></button>
+            <div class="nftown-inner">
+              <img
+                src="./img/Benji.png"
+                class="owner-nft-img"
+                alt="Sicarius NFT"
+              />
+              <span class="owner-nft-id"></span>
+              <span class="owner-nft-wallet"></span>
+            </div>
+          </div>
+          <div class="nftgallery-inner"></div>
+        </div>
+
+        <!-- Terminal Modal -->
+        <div class="terminal-modal hidden">
+          <div class="term-row program-row">
+            <div class="left-block">
+              <img
+                src="./img/Terminal.jpg"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Terminal</span>
+            </div>
+            <div class="trashcan-buttons">
+              <button class="minimize min-terminal"></button>
+              <button class="enlarge enl-terminal"></button>
+              <button class="close clo-terminal"></button>
+            </div>
+          </div>
+
+          <div class="terminal">
+            <div class="terminal-body">
+              <div class="terminal-prompt">
+                <div class="terminal-flex">
+                  <span class="terminal-prompt-user">0x398fa</span>
+                  <span class="terminal-prompt-path">~ $</span>
+                  <input type="text" class="terminal-input" />
+                </div>
+                <div class="redirect-socials hidden">
+                  <span>Speading love...</span>
+                  <span class="spinner"></span>
+                </div>
+                <div class="terminal-output"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Lottery modal -->
+        <div class="lottery-modal hidden">
+          <div class="lottery-row program-row">
+            <div class="left-block">
+              <img
+                src="./img/Lottery.png"
+                alt="Sicarius Lottery"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Sicarius Lottery</span>
+            </div>
+            <div class="trashcan-buttons">
+              <button class="minimize min-pad min-lottery"></button>
+              <button class="close clo-lottery"></button>
+            </div>
+          </div>
+
+          <div class="lottery-unlocks"></div>
+
+          <div class="lottery-metamask-box">
+            <button class="lott-metamask-connect">Connect Metamask</button>
+          </div>
+
+          <div class="lottery-inner hidden">
+            <div class="lottery-loading hidden"></div>
+            <div class="lottery-scrollbox">
+              <div class="animated-bar">
+                <marquee class="marquee" behavior="scroll" direction="left">
+                  <span class="purp">$$$ </span>Sicarius Lottery
+                  <span class="purp">$$$</span> Weekly Stake:
+                  <span class="greeny">0</span> SCRS<span class="purp">
+                    $$$</span
+                  >
+                  Entry is only 100K <span class="purp">$</span>SCRS<span
+                    class="purp"
+                  >
+                    $$$</span
+                  >
+                </marquee>
+              </div>
+            </div>
+            <div class="lottery-midbox">
+              <div class="lottery-player-stats">
+                <span class="lottery-hero">Player Stats</span>
+                <div class="lottery-slot lott-wallet">
+                  Wallet:<br />
+                  0x1f65a...
+                </div>
+                <div class="lottery-slot lott-tokencount">
+                  $SCRS Balance: <br />730,551
+                </div>
+                <div class="lottery-slot lott-approved-count">
+                  $SCRS Approved: <br />400,000
+                </div>
+                <div class="lottery-slot lott-player-entrycount"></div>
+                <div class="lottery-slot lott-probability">
+                  Probability:<br />
+                  5%
+                </div>
+              </div>
+              <div class="lottery-game-stats">
+                <span class="lottery-title">Sicarius Lottery</span>
+                <span class="lottery-copy lottery-winpot"
+                  >Enter for a chance at:<br />
+                  6,200,000 $SCRS</span
+                >
+              </div>
+              <div class="lottery-stats-stats">
+                <span class="lottery-hero">Lottery Stats</span>
+                <div class="lottery-slot lott-total-players">
+                  Total Players:<br />20
+                </div>
+                <div class="lottery-slot lott-total-entries">
+                  Total Entries:<br />100
+                </div>
+                <div class="lottery-slot">Pot in USD:<br />N/A$</div>
+                <div class="lottery-slot">Entry price in USD:<br />N/A$</div>
+                <div class="lottery-slot">Draw:<br />Friday</div>
+              </div>
+            </div>
+            <div class="lottery-ctas">
+              <div class="ticketcount lot-box">
+                <span class="ticket-title">Ticketcount</span>
+                <div class="ticket-btns">
+                  <button class="old-btns dec-ticket">-</button>
+                  <span class="ticket-count">0</span>
+                  <button class="old-btns inc-ticket">+</button>
                 </div>
               </div>
 
-            </div>
-            <div class="bdr-long">
-              <div class="staker-btn-row">
-                <button class="old-btn left-xl stake-batch">Stake Batch ==></button>
-                <button class="old-btn left stake-single">Stake Single =></button>
-                <button class="old-btn green claim-rewards">Claim Rewards</button>
-                <button class="old-btn right unstake-single">
-                  <= Unstake Single</button>
-                    <button class="old-btn right-xl unstake-batch">
-                      <== Unstake Batch</button>
+              <span>==></span>
+
+              <div class="approvecount lot-box">
+                <span class="ticket-title">Approve Tokens</span>
+                <button class="old-btnss approve-lottery">Approve</button>
+                <span class="approved-tokens">0K</span>
               </div>
+
+              <span>==></span>
+
+              <div class="enter-lottery lot-box">
+                <span class="ticket-title">Enter Lottery</span>
+                <button class="old-btnss entr">Enter</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Shadow Staker -->
+        <div class="staker-modal hidden">
+          <div class="program-row">
+            <div class="left-block">
+              <img
+                src="./img/staker-icon.png"
+                alt="recycle bin"
+                class="mini-logo"
+              />
+              <span class="program-row-text">Shadow Staker</span>
+            </div>
+            <div class="trashcan-button">
+              <button class="close clo-staker"></button>
+            </div>
+          </div>
+          <div class="staker-unlocks"></div>
+          <div class="staker-loading hidden">Loading...</div>
+          <div class="staker-tabs">
+            <div class="tab1 connect-tab">
+              <button class="connect-meta-stake">Connect Metamask</button>
+            </div>
+
+            <div class="tab2 approve-tab hidden">
+              <div class="approve-top">
+                <span class="approve-txt"
+                  >In order to stake your Sicarius NFT(s) you need approval from
+                  the Sicarius NFT contract,<br />
+                  to transfer your NFT(s) on your behalf to the staking
+                  contract.</span
+                >
+              </div>
+              <div class="approve-bot">
+                <button class="approval-btn">Approve Contract</button>
+              </div>
+            </div>
+
+            <div class="stake-interface tab3 hidden">
+              <div class="stake-top-wrapper">
+                <div class="wrap">
+                  <div class="staker-info-top">
+                    <span class="box-title">Staker Info</span>
+                    <div class="staker-info-box">
+                      <span class="staker-wallet">Wallet: </span>
+                      <span class="staker-staked-count"
+                        >Staked NFT Count:
+                      </span>
+                      <span class="staked-unstaked-count"
+                        >Unstaked NFT Count:
+                      </span>
+                      <span class="staked-unclaimed-rewards"
+                        >Unclaimed Rewards:
+                      </span>
+                      <span class="staker-total-accumulated"
+                        >Total Accumulated:
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap">
+                  <div class="staker-info-top">
+                    <span class="box-title">Vault Stats</span>
+                    <div class="staker-info-box">
+                      <span class="total-stakers">Total Stakers: 0</span>
+                      <span class="total-nfts-staked"
+                        >Total NFTs Staked: 0
+                      </span>
+                      <span class="total-vault-claimed"
+                        >Total Accumulated Rewards:</span
+                      >
+                      <span class="vault-total-balance"
+                        >Current Vault Balance:</span
+                      >
+                      <span class="staking-duration"
+                        >Staking Duration: 0/100%
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="staker-info-bot">
+                <div class="bdr">
+                  <div class="staker-bot-left">
+                    <span class="box-title stickyy">Wallet</span>
+                    <div class="wallet-nfts"></div>
+                  </div>
+                </div>
+
+                <div class="bdr">
+                  <div class="staker-bot-right">
+                    <span class="box-title stickyy">Vault</span>
+                    <div class="vault-nfts"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="bdr-long">
+                <div class="staker-btn-row">
+                  <button class="old-btn left-xl stake-batch">
+                    Stake Batch ==>
+                  </button>
+                  <button class="old-btn left stake-single">
+                    Stake Single =>
+                  </button>
+                  <button class="old-btn green claim-rewards">
+                    Claim Rewards
+                  </button>
+                  <button class="old-btn right unstake-single">
+                    <= Unstake Single
+                  </button>
+                  <button class="old-btn right-xl unstake-batch">
+                    <== Unstake Batch
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sicarius: Bloodshed I -->
+        <div class="crier-modal hidden">
+          <div class="program-row">
+            <div class="left-block">
+              <img src="./img/Crier.png" alt="recycle bin" class="mini-logo" />
+              <span class="program-row-text">Sicari's Revenge I</span>
+            </div>
+            <div class="trashcan-buttons">
+              <button class="minimize min-crier"></button>
+              <!-- <button class="enlarge enl-crier"></button> -->
+              <button class="close clo-crier"></button>
+            </div>
+          </div>
+
+          <div class="crier-inner">
+            <div class="gamewrapper">
+              <img
+                src="./PVP/Keyboard.png"
+                alt="Keyboard highlighted buttons"
+                class="keyboard"
+              />
+              <div class="game-intro">
+                <img
+                  src="./img/sicarius.png"
+                  alt="Sicarius logo"
+                  class="logo-sic dropDown"
+                />
+                <img
+                  src="./img/Assassins.png"
+                  alt="Sicarius logo"
+                  class="logo-ass dropDown2"
+                />
+              </div>
+              <div id="displayText">Tie</div>
+              <div class="game-buttons">
+                <button class="restart-btn">R</button>
+                <button class="keyboard-btn">?</button>
+              </div>
+              <div class="statswrapper">
+                <!-- Player Health-->
+                <div class="playerhealth">
+                  <div class="healthbar1"></div>
+                  <div id="playerHealth"></div>
+                </div>
+                <!-- Timer -->
+                <div id="timer">60</div>
+                <!-- Enemy Health-->
+                <div class="enemyhealth">
+                  <div class="healthbar2"></div>
+                  <div id="enemyHealth"></div>
+                </div>
+                <div></div>
+              </div>
+
+              <audio
+                src="./PVPTrack.mp3"
+                loop
+                autoplay
+                muted
+                controls
+                class="soundtrack"
+              ></audio>
+              <canvas id="pvp"></canvas>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Sicarius: Bloodshed I -->
-      <div class="crier-modal hidden">
-        <div class="program-row">
-          <div class="left-block">
-            <img src="./img/Crier.png" alt="recycle bin" class="mini-logo" />
-            <span class="program-row-text">Sicari's Revenge I</span>
-          </div>
-          <div class="trashcan-buttons">
-            <button class="minimize min-crier"></button>
-            <!-- <button class="enlarge enl-crier"></button> -->
-            <button class="close clo-crier"></button>
-          </div>
+      <div class="main-program">
+        <!-- Sicarius Lottery -->
+        <div class="desktop-icon lottery-icon">
+          <img
+            src="./img/Lottery.png"
+            alt="Sicarius Lottery"
+            class="desktop-logo"
+          />
+          <span class="icon-text">Sicarius Lottery</span>
         </div>
 
-        <div class="crier-inner">
-          <div class="gamewrapper">
-            <img src="./PVP/Keyboard.png" alt="Keyboard highlighted buttons" class="keyboard" />
-            <div class="game-intro">
-              <img src="./img/sicarius.png" alt="Sicarius logo" class="logo-sic dropDown" />
-              <img src="./img/Assassins.png" alt="Sicarius logo" class="logo-ass dropDown2" />
-            </div>
-            <div id="displayText">Tie</div>
-            <div class="game-buttons">
-              <button class="restart-btn">R</button>
-              <button class="keyboard-btn">?</button>
-            </div>
-            <div class="statswrapper">
-              <!-- Player Health-->
-              <div class="playerhealth">
-                <div class="healthbar1"></div>
-                <div id="playerHealth"></div>
-              </div>
-              <!-- Timer -->
-              <div id="timer">60</div>
-              <!-- Enemy Health-->
-              <div class="enemyhealth">
-                <div class="healthbar2"></div>
-                <div id="enemyHealth"></div>
-              </div>
-              <div></div>
-            </div>
+        <!-- Trash Can -->
+        <div class="desktop-icon trash-icon">
+          <img
+            src="./img/Recycle Bin.png"
+            alt="Recycle Bin"
+            class="desktop-logo"
+          />
+          <span class="icon-text">Recycle Bin</span>
+        </div>
 
-            <audio src="./PVPTrack.mp3" loop autoplay muted controls class="soundtrack"></audio>
-            <canvas id="pvp"></canvas>
+        <!-- Shadow Minter -->
+        <div class="desktop-icon shadow-minter">
+          <img
+            src="./img/Shadow Minter.png"
+            alt="Shadow Minter"
+            class="desktop-logo"
+          />
+          <span class="icon-text">Shadow Minter v0.32</span>
+        </div>
+
+        <!-- Terminal -->
+        <div class="desktop-icon desk-terminal">
+          <img src="./img/Terminal.jpg" alt="Terminal" class="desktop-logo" />
+          <span class="icon-text">Terminal</span>
+        </div>
+
+        <!-- Sicari's Revenge I -->
+        <div class="desktop-icon desk-crier">
+          <img
+            src="./img/Crier.png"
+            alt="Town Crier"
+            class="desktop-logo rounded"
+          />
+          <span class="icon-text">Sicari's Revenge I</span>
+        </div>
+
+        <!-- Open Sea -->
+        <div class="desktop-icon desk-opensea">
+          <img
+            src="./img/Opensea.svg"
+            alt="Open Sea"
+            class="desktop-logo rounded"
+          />
+          <span class="icon-text">OpenSea</span>
+        </div>
+
+        <!-- Shadow Staker -->
+        <div class="desktop-icon desk-staker">
+          <img
+            src="./img/staker-icon.png"
+            alt="Shadow Staker"
+            class="desktop-logo rounded"
+          />
+          <span class="icon-text">Shadow Staker v0.88</span>
+        </div>
+
+        <div class="start-bar">
+          <button class="start-button">
+            <img src="./img/Start Main.png" class="start-img" />
+          </button>
+
+          <div class="active-programs">
+            <div class="act-lottery active-program maximized hidden">
+              <img
+                src="./img/Lottery.png"
+                alt="Sicarius lottery"
+                class="act-lottery mini-logo"
+              /><span class="act-lottery program-text">Sicarius Lottery</span>
+            </div>
+            <div class="act-shadow active-program maximized hidden">
+              <img
+                src="./img/Shadow Minter.png"
+                alt="Shadow Minter"
+                class="act-shadow mini-logo"
+              /><span class="act-shadow program-text">Shadow Minter v.032</span>
+            </div>
+            <div class="act-bin active-program maximized hidden">
+              <img
+                src="./img/Recycle Bin.png"
+                alt="Recycle Bin"
+                class="act-bin mini-logo"
+              /><span class="act-bin program-text">Recycle Bin</span>
+            </div>
+            <div class="act-terminal active-program maximized hidden">
+              <img
+                src="./img/Terminal.jpg"
+                alt="Terminal"
+                class="act-terminal mini-logo"
+              /><span class="act-terminal program-text">Terminal</span>
+            </div>
+            <div class="act-crier active-program maximized hidden">
+              <img
+                src="./img/Crier.png"
+                alt="Town Crier"
+                class="act-crier mini-logo"
+              /><span class="act-crier program-text">Sicari's Revenge I</span>
+            </div>
+            <div class="act-staker active-program maximized hidden">
+              <img
+                src="./img/staker-icon.png"
+                alt="Shadow Staker"
+                class="act-staker mini-logo"
+              /><span class="act-staker program-text">Shadow Staker v0.88</span>
+            </div>
+          </div>
+
+          <div class="time-box">
+            <img
+              src="./img/devices_alpha.png"
+              alt="config logo"
+              class="config-logo"
+            />
+            <span class="current-time"></span>
           </div>
         </div>
       </div>
     </div>
-
-    <div class="main-program">
-      <!-- Sicarius Lottery -->
-      <div class="desktop-icon lottery-icon">
-        <img src="./img/Lottery.png" alt="Sicarius Lottery" class="desktop-logo" />
-        <span class="icon-text">Sicarius Lottery</span>
-      </div>
-
-      <!-- Trash Can -->
-      <div class="desktop-icon trash-icon">
-        <img src="./img/Recycle Bin.png" alt="Recycle Bin" class="desktop-logo" />
-        <span class="icon-text">Recycle Bin</span>
-      </div>
-
-      <!-- Shadow Minter -->
-      <div class="desktop-icon shadow-minter">
-        <img src="./img/Shadow Minter.png" alt="Shadow Minter" class="desktop-logo" />
-        <span class="icon-text">Shadow Minter v0.32</span>
-      </div>
-
-      <!-- Terminal -->
-      <div class="desktop-icon desk-terminal">
-        <img src="./img/Terminal.jpg" alt="Terminal" class="desktop-logo" />
-        <span class="icon-text">Terminal</span>
-      </div>
-
-      <!-- Sicari's Revenge I -->
-      <div class="desktop-icon desk-crier">
-        <img src="./img/Crier.png" alt="Town Crier" class="desktop-logo rounded" />
-        <span class="icon-text">Sicari's Revenge I</span>
-      </div>
-
-      <!-- Open Sea -->
-      <div class="desktop-icon desk-opensea">
-        <img src="./img/Opensea.svg" alt="Open Sea" class="desktop-logo rounded" />
-        <span class="icon-text">OpenSea</span>
-      </div>
-
-      <!-- Shadow Staker -->
-      <div class="desktop-icon desk-staker">
-        <img src="./img/staker-icon.png" alt="Shadow Staker" class="desktop-logo rounded" />
-        <span class="icon-text">Shadow Staker v0.88</span>
-      </div>
-
-      <div class="start-bar">
-        <button class="start-button">
-          <img src="./img/Start Main.png" class="start-img" />
-        </button>
-
-        <div class="active-programs">
-          <div class="act-lottery active-program maximized hidden">
-            <img src="./img/Lottery.png" alt="Sicarius lottery" class="act-lottery mini-logo" /><span
-              class="act-lottery program-text">Sicarius Lottery</span>
-          </div>
-          <div class="act-shadow active-program maximized hidden">
-            <img src="./img/Shadow Minter.png" alt="Shadow Minter" class="act-shadow mini-logo" /><span
-              class="act-shadow program-text">Shadow Minter v.032</span>
-          </div>
-          <div class="act-bin active-program maximized hidden">
-            <img src="./img/Recycle Bin.png" alt="Recycle Bin" class="act-bin mini-logo" /><span
-              class="act-bin program-text">Recycle Bin</span>
-          </div>
-          <div class="act-terminal active-program maximized hidden">
-            <img src="./img/Terminal.jpg" alt="Terminal" class="act-terminal mini-logo" /><span
-              class="act-terminal program-text">Terminal</span>
-          </div>
-          <div class="act-crier active-program maximized hidden">
-            <img src="./img/Crier.png" alt="Town Crier" class="act-crier mini-logo" /><span
-              class="act-crier program-text">Sicari's Revenge I</span>
-          </div>
-          <div class="act-staker active-program maximized hidden">
-            <img src="./img/staker-icon.png" alt="Shadow Staker" class="act-staker mini-logo" /><span
-              class="act-staker program-text">Shadow Staker v0.88</span>
-          </div>
-        </div>
-
-        <div class="time-box">
-          <img src="./img/devices_alpha.png" alt="config logo" class="config-logo" />
-          <span class="current-time"></span>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-
+  </body>
 </html>
